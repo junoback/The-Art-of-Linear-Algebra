@@ -82,10 +82,11 @@
 
 **規則：** 開新術語段、跨地區用詞分歧的詞（行/列、欄/列、矩陣分解等）下筆前，先 `grep` 全 `docs/book` 確認用詞一致性。
 
-### 2.5 不修改原 repo
+### 2.5 不修改原 repo + push 規則（S03 末更新）
 - `docs/book/` 是新增層，原 `figs/` `*.tex` `*.pdf` 一律不動
-- 原 repo `origin` 仍指向上游（junoback），收工 commit 留本地，不可 push 到上游
-- 建議使用者下個 session 改 remote（自己 fork 或建獨立 repo），或將 `docs/` 抽到獨立 git repo
+- `origin` 指向 `junoback/The-Art-of-Linear-Algebra`，**即為使用者本人（Back Kuo）的 fork**，push 安全
+- **S03 末確認：可直接 `git push origin main`，不需再問**（S02 + S03 commit 於 2026-05-12 push 完成）
+- session 管理檔（`docs/dev/`）公開可見，撰寫時避免寫入敏感資訊（金鑰、私人連絡等）
 
 ### 2.6 章節 session 撰寫流程（S02 驗證 OK）
 

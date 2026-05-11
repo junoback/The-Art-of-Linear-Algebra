@@ -1,0 +1,25 @@
+# Session Log (即時記錄)
+# Session: S00
+# Started: 2026-05-11
+# ---
+[2026-05-11 S00] Clone junoback/The-Art-of-Linear-Algebra 到工作目錄
+[2026-05-11 S00] 確認 repo 性質：LaTeX 文檔 + 內建 PDF + PowerPoint 圖檔原稿
+[2026-05-11 S00] 開啟 The-Art-of-Linear-Algebra.pdf 確認內容
+[2026-05-11 S00] 使用者確認專案目標：把書變成互動式 Python 視覺化教材，跨多 session
+[2026-05-11 S00] 初始化 session 管理系統（docs/dev/ 結構建立）
+
+# Session: S01
+# Started: 2026-05-12
+# ---
+[2026-05-12 S01] 使用者確認整體規劃：10 session 路線圖、繁中描述+英文括號、英+簡中雙語
+[2026-05-12 S01] 工具檢查：pandoc/gs/epstopdf 已有；poppler 透過 brew 補裝完成
+[2026-05-12 S01] pandoc 英文 .tex → docs/book/from-tex/en.md（624 行）
+[2026-05-12 S01] pandoc 簡中 .tex → docs/book/from-tex/zh.md（601 行）
+[2026-05-12 S01] ghostscript 批次 EPS → PNG 50 張 → docs/book/figs-png/（888KB）
+[2026-05-12 S01] gs txtwrite 抽 PDF 文字 → docs/book/from-pdf/{en,zh}-gs.txt
+[2026-05-12 S01] pdftotext 抽 PDF 文字 → docs/book/from-pdf/{en,zh}.txt（更高品質版本）
+[2026-05-12 S01] 撰寫 docs/book/SCHEMA.md（章節格式 + 四欄位圖片描述規範）
+[2026-05-12 S01] 撰寫 docs/book/_merged.md（章節進度追蹤 + 圖檔對映表）
+[2026-05-12 S01] 更新 HANDOFF.md / SESSION_INDEX.md 標記 S01 完成
+[2026-05-12 S01] S01 收尾，下次 S02 從 §1 Viewing a Matrix - 4 Ways 開始
+[2026-05-12 S01] Session 結束

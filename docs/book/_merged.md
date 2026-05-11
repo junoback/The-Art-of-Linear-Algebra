@@ -10,7 +10,7 @@
 
 | Session | 章節 | md 檔 | 描述 | VizMark | VizScript | 狀態 |
 |---|---|---|---|---|---|---|
-| S02 | §1 Viewing a Matrix - 4 Ways | `ch01-viewing-matrix.md` | [ ] | / / / | [ ] | [ ] |
+| S02 | §1 Viewing a Matrix - 4 Ways | `ch01-viewing-matrix.md` | [x] | 1 / 1 / 0 | [x] | [x] |
 | S03 | §2 Vector × Vector - 2 Ways | `ch02-vec-vec.md` | [ ] | / / / | [ ] | [ ] |
 | S04 | §3 Matrix × Vector - 2 Ways（含 4-Subspaces） | `ch03-mat-vec.md` | [ ] | / / / | [ ] | [ ] |
 | S05 | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` | [ ] | / / / | [ ] | [ ] |

@@ -35,3 +35,20 @@
 [2026-05-12 S01.5] 更新 docs/dev/HANDOFF.md（補規劃決策、新工件清單、修訂路線圖）
 [2026-05-12 S01.5] S01.5 收尾，下次 S02 從 §1 開始（同時驗證 SCHEMA + VIZ_SCHEMA 雙規範）
 [2026-05-12 S01.5] Session 結束
+
+# Session: S02
+# Started: 2026-05-12
+# git HEAD: c56338e (main)
+# worktree: 乾淨，只有 main repo working dir（無多餘 worktree）
+# 任務: §1 Viewing a Matrix - 4 Ways（驗證 SCHEMA + VIZ_SCHEMA 雙規範）
+# ---
+[2026-05-12 S02] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢
+[2026-05-12 S02] 撰寫 docs/book/ch01-viewing-matrix.md 初版（B 派 / 台灣傳統慣用：column = 行、row = 列）— 418 行，2 VizMark + 2 VizScript
+[2026-05-12 S02] 使用者決策變更：術語慣例改採華文主流 A 派（column = 列、row = 行）
+[2026-05-12 S02] 更新 docs/book/SCHEMA.md §3.1 對照表（A 派 + 補 column vector/space 翻譯）
+[2026-05-12 S02] 整檔重寫 ch01-viewing-matrix.md 為 A 派版本（全文「行/列」雙向換位，column vector → 列向量、row vector → 行向量、column space → 列空間、row space → 行空間）
+[2026-05-12 S02] 更新 docs/book/_merged.md：§1 完成標記 [x]，VizMark 計數 1/1/0
+[2026-05-12 S02] 修正 ch01 UI 描述「視角切換列 → 視角切換條」避免與 A 派「列 = column」術語衝突
+[2026-05-12 S02] 收工更新 SOP_DRAFT.md（§2.3 升級 VizMark / §2.4 改 A 派 + 補教訓 / 新增 §2.6 章節 session 流程）
+[2026-05-12 S02] 收工更新 HANDOFF.md + SESSION_INDEX.md
+[2026-05-12 S02] Session 結束 — 下次 S03 §2 Vector × Vector，從 0 寫 ch02（真正驗證雙 Schema 是否好用）

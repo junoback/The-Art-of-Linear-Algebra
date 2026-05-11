@@ -144,7 +144,9 @@ $$
 - **核心術語對照（永久保留中英並列）：**
   - matrix 矩陣
   - vector 向量
-  - row 列 / column 行（**注意：中文「行」「列」與英文 row/column 翻譯習慣相反，本專案採台灣慣用：column = 行（直的）、row = 列（橫的）**）
+  - row 行 / column 列（**注意：中文「行」「列」與英文 row/column 翻譯方向不唯一。本專案採華文主流慣用（含中國大陸、日本、多數 Python / 線代中文文件）：column = 列（直立）、row = 行（橫躺）。台灣本土數學教科書傳統採相反方向（column = 行、row = 列），讀者若來自此背景請花一兩分鐘調整。**）
+  - column vector 列向量（直立）/ row vector 行向量（橫躺）
+  - column space 列空間 $\mathbf{C}(A)$ / row space 行空間 $\mathbf{C}(A^{\mathrm{T}})$
   - rank 秩
   - subspace 子空間
   - basis 基底

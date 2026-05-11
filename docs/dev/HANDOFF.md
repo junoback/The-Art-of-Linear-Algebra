@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S01 + S01.5 補規劃（完成）
+- **Session:** S02（§1 完成）
 - **日期:** 2026-05-12
-- **狀態:** 機械轉換 + 雙 Schema（章節 / 視覺化）+ 新版 10-session 路線圖全部就緒，下次 S02 開始 §1 章節撰寫（含 VizMark + VizScript）
+- **狀態:** `ch01-viewing-matrix.md` 完成（418 行，1 圖描述 + 2 VizMark + 2 VizScript 13 段 A-M）；全書術語慣例切換至 A 派（column = 列直立 / row = 行橫躺）；下次 S03 從 §2 Vector × Vector 開始
 
 ---
 
@@ -34,9 +34,12 @@
 - [x] **S01** 撰寫 `docs/book/SCHEMA.md`（章節格式 + 四欄位圖片描述規範）
 - [x] **S01** 撰寫 `docs/book/_merged.md`（進度追蹤表 + 章節↔圖檔對映）
 - [x] **S01** 工具備齊：pandoc 3.8.3、pdftotext (poppler) 26.04、ghostscript 10.0、epstopdf
+- [x] **S01.5** 補規劃：撰寫 `VIZ_SCHEMA.md`（VizMark 5 型 + VizScript 13 段 A-M 格式，含 800 字範例）+ 修訂 SCHEMA.md + 重寫 `_merged.md` 路線圖（S02-S11）
+- [x] **S02** §1 Viewing a Matrix - 4 Ways：`ch01-viewing-matrix.md`（418 行）— 1 圖描述 + 2 VizMark + 2 VizScript（VizScript-01 ⭐⭐⭐ + VizScript-02 ⭐⭐，各 13 段 A-M 完整）
+- [x] **S02** 全書術語慣例 B 派 → A 派切換（**column = 列直立 / row = 行橫躺**，與華文主流一致）+ `SCHEMA.md` §3.1 規範更新 + SOP_DRAFT.md §2.4 教訓記錄
 
 ### 進行中
-- 無，S01 已收尾
+- 無，S02 已收尾
 
 ### 待辦（多 session 路線圖 v2 — 方案 A 整合 VizMark+VizScript）
 
@@ -45,8 +48,8 @@
 | Session | 主題 | 預期產出 |
 |---|---|---|
 | ✅ S01 + S01.5 | 機械轉換 + 雙 Schema（章節 / 視覺化）+ 路線圖補規劃 | `from-tex/`、`from-pdf/`、`figs-png/`、`SCHEMA.md`、`VIZ_SCHEMA.md`、`_merged.md` |
-| S02 | §1 Viewing a Matrix - 4 Ways（驗證雙 Schema） | `ch01-viewing-matrix.md`（含描述 + 2–3 VizMark + 對應 VizScript） |
-| S03 | §2 Vector × Vector - 2 Ways | `ch02-vec-vec.md` |
+| ✅ S02 | §1 Viewing a Matrix - 4 Ways（驗證雙 Schema + A 派術語切換） | `ch01-viewing-matrix.md`（418 行，2 VizMark + 2 VizScript） |
+| **→ S03** | §2 Vector × Vector - 2 Ways | `ch02-vec-vec.md` |
 | S04 | §3 Matrix × Vector - 2 Ways（含 4-Subspaces） | `ch03-mat-vec.md` |
 | S05 | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` |
 | S06 | §5 Practical Patterns | `ch05-patterns.md` |
@@ -57,13 +60,23 @@
 | S11 | 整合 + 校對 + 統一 + `BOOK.md` + `VIZ-CATALOG.md` | 合併版書 + 視覺化候選池目錄 |
 | S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （延後到 S11 後再細規劃，預估 ~20 session）|
 
-### 工件清單（S02+ 撰寫前必讀）
+### S03 起步建議
+
+1. **先讀 `docs/book/SCHEMA.md` + `docs/book/VIZ_SCHEMA.md` 複習雙規範**（5 分鐘）
+2. **先讀 `ch01-viewing-matrix.md` 抓 A 派術語慣例**（不要回到 B 派寫法）
+3. 從 `from-tex/en.md` 抓 §2 部分（line 49-67 附近）+ `from-pdf/en.txt`
+4. 看 `figs-png/VectorTimesVector.png`（用 Read tool 多模態直接讀）
+5. 寫 `ch02-vec-vec.md`：v1（點積）+ v2（外積，rank 1 矩陣）兩種視角
+6. VizMark 預估：2-3 個，⭐⭐⭐ × 1（外積→秩 1 矩陣的視覺化是核心）
+
+### 工件清單（S03+ 撰寫前必讀）
 
 | 檔案 | 用途 |
 |---|---|
-| `docs/book/SCHEMA.md` | 章節 md 結構 + 圖片四欄描述格式 |
-| `docs/book/VIZ_SCHEMA.md` | VizMark 標記 + VizScript 13 段細緻劇本格式（含 800 字範例）|
+| `docs/book/SCHEMA.md` | 章節 md 結構 + 圖片四欄描述格式（A 派術語） |
+| `docs/book/VIZ_SCHEMA.md` | VizMark 標記 + VizScript 13 段 A-M 格式（含 800 字範例） |
 | `docs/book/_merged.md` | 章節進度追蹤 + 章節↔圖檔對映表 + VizMark 計數 |
+| `docs/book/ch01-viewing-matrix.md` | **S02 成稿，A 派術語的參考範本** |
 | `docs/book/from-tex/{en,zh}.md` | pandoc 轉換結果（含 LaTeX 公式原文）|
 | `docs/book/from-pdf/{en,zh}.txt` | pdftotext 純文字（補 pandoc 缺漏）|
 | `docs/book/figs-png/*.png` | 50 張 PNG 圖檔（vision-ready）|
@@ -77,14 +90,16 @@
 | 2026-05-11 | 啟用跨 session 管理系統 | 使用者明確表示這是長期跨多 session 專案 |
 | 2026-05-11 | 不修改原 repo 的 LaTeX/PPT 檔案 | 原檔是書的成品，互動式版本應該是新增層而非取代 |
 | 2026-05-12 | 全書 md 化路線：機械轉換 + 圖片詳細描述 | 原書本質是圖解，純文字 md 無法傳達內容，需逐圖寫描述 |
-| 2026-05-12 | 描述語言：繁體中文，術語括號保留英文（例：行空間 (column space)） | 使用者偏好繁中，但保留英文術語便於對照原書與通用文獻 |
+| 2026-05-12 | 描述語言：繁體中文，術語括號保留英文（例：列空間 (column space)） | 使用者偏好繁中，但保留英文術語便於對照原書與通用文獻 |
 | 2026-05-12 | 範圍：英文版 + 簡中版兩語並做，跳過日文版 | 使用者選擇方案 2（雙語），日文版主要差異是翻譯不影響視覺化 |
 | 2026-05-12 | 圖片描述格式採四欄位 schema：視覺結構/數學內容/直覺解讀/視覺化機會（VizMark） | 後三欄位對應未來 Python 視覺化的圖形、計算、互動三層 |
 | 2026-05-12 | **S01.5 補規劃**：方案 A — 章節 session 整合「描述 + VizMark + VizScript」三類工作 | 視覺化劇本品質強烈依賴對圖的深度理解，分離反而會浪費；+3 session 屬可接受比例 |
-| 2026-05-12 | **VizScript 細緻度：細版 ~800 字 / 個（13 段固定格式）** | 目標是直接餵 LLM 生 Python 程式不需補充細節，避免 S12+ 實作時來回問細節 |
+| 2026-05-12 | **VizScript 細緻度：細版 ~800 字 / 個（13 段 A-M 固定格式）** | 目標是直接餵 LLM 生 Python 程式不需補充細節，避免 S12+ 實作時來回問細節 |
 | 2026-05-12 | 新增 `VIZ_SCHEMA.md` + `VIZ-CATALOG.md`（S11 產出） | VizMark 散在各章便於閱讀；VIZ-CATALOG 集中彙整供 S12+ 挑題目實作 |
 | 2026-05-12 | 章節切分微調：§5 獨立 1 session、§6 拆 3 session（總覽+CR / LU+QR / QΛQᵀ+UΣVᵀ）| 視覺化工作量讓每 session 章節密度降為 ~0.7 章 |
 | 2026-05-12 | git origin 是上游 junoback repo，**收工 commit 留本地不 push** | 防誤推到別人 repo；建議 fork 或抽出獨立 repo 後再 push |
+| 2026-05-12 | **S02 中途決策變更：術語慣例改採華文主流 A 派（column = 列直立 / row = 行橫躺）** | 與中國大陸、日本、多數 Python 中文文件、本書簡中譯本一致；台灣本土教科書傳統採 B 派正好相反，本書讀者若來自此背景需校準。`SCHEMA.md` §3.1 + `ch01` 全部已對齊 A 派；後續 S03+ 章節直接照 A 派寫 |
+| 2026-05-12 | SOP_DRAFT.md 新增「術語慣例必須在 S01 鎖死」教訓條 | S02 中途改 A 派付出整檔重寫 0.5h 成本；若拖到 S05+ 全書反轉成本會幾何級數膨脹 |
 
 ---
 
@@ -114,6 +129,16 @@
 | docs/dev/RETROSPECTIVE.md | 新增 | 對話反思（S00-S01） |
 | docs/dev/sop/SOP_DRAFT.md | 修改 | 第二章新增工具鏈替代方案、雙語處理、不修改原 repo 規範 |
 
+### S02 新增/修改的檔案
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/ch01-viewing-matrix.md | 新增 | **§1 章節 md：418 行**，含 1 圖描述 + 2 VizMark + 2 VizScript（13 段 A-M 各完整）；A 派術語 |
+| docs/book/SCHEMA.md | 修改 | §3.1 術語對照表方向反轉（B 派 → A 派）+ 補 column vector / column space / row space 翻譯規則 |
+| docs/book/_merged.md | 修改 | S02 標記 `[x]` 完成，VizMark 計數 `1 / 1 / 0` |
+| docs/dev/sop/SOP_DRAFT.md | 修改 | §2.3 升級 VizMark 引用 / §2.4 改 A 派 + 補教訓 / 新增 §2.6 章節 session 流程 + §2.7 收工流程 |
+| docs/dev/CURRENT_SESSION.log | 修改 | S02 即時記錄 + 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S02 一行 |
+
 ---
 
 ## 技術筆記
@@ -124,20 +149,37 @@
 - **圖檔來源**：`Illustrations.pptx`（PowerPoint），透過 makefile 流程印成 PS → EPS → 嵌入 LaTeX
 - **編譯需求**（如需重編 PDF）：MacTeX（uplatex + dvipdfmx）、psutils（psselect）、ps2eps、PowerPoint（印 PS）
 
-### 互動式版本可能的技術選項（待 S01 決策）
+### 互動式版本技術選項（S12+ 決策，目前傾向）
 | 方案 | 優點 | 缺點 |
 |------|------|------|
+| **Marimo + matplotlib + marimo.ui**（S02 ch01 VizScript-01 §K 首選） | 反應式 notebook、純 Python、可匯出 HTML | 較新生態系較小 |
+| Streamlit + Plotly | 部署成網頁簡單、互動流暢 | 不適合 notebook 形式閱讀 |
 | Jupyter + ipywidgets + matplotlib | 標準、容易分享 .ipynb | 互動效能一般、需要 kernel |
-| Marimo | 反應式 notebook、純 Python、可匯出 HTML | 較新生態系較小 |
-| Streamlit | 部署成網頁簡單、互動流暢 | 不適合 notebook 形式閱讀 |
 | Plotly + Dash | 視覺化品質最高 | 學習曲線較陡 |
 | Manim | 動畫效果最好（3Blue1Brown 同款） | 不互動、是動畫腳本 |
 | 純 HTML + JS（D3 / Three.js） | 任何瀏覽器可開 | 跳脫 Python 生態 |
 
-### 不需立刻決定但需考量
-- 是否做中文化版本（原書有日文/簡中翻譯）
-- 是否包含習題 / 自我測驗
-- 是否包含原書 Strang 演講影片連結
+### 全書術語慣例（A 派 — 華文主流）
+
+| 英文 | 中文 | 視覺方向 |
+|---|---|---|
+| matrix | 矩陣 | — |
+| row | 行 | 橫躺 |
+| column | 列 | 直立 |
+| row vector | 行向量 | 橫躺 |
+| column vector | 列向量 | 直立 |
+| row space | 行空間 $\mathbf{C}(A^{\mathrm{T}})$ | — |
+| column space | 列空間 $\mathbf{C}(A)$ | — |
+| rank | 秩 | — |
+| subspace | 子空間 | — |
+| basis | 基底 | — |
+| linear combination | 線性組合 | — |
+| dot product / inner product | 點積 / 內積 | — |
+| factorization | 分解 | — |
+| eigenvalue / eigenvector | 特徵值 / 特徵向量 | — |
+| singular value | 奇異值 | — |
+
+**矩陣尺寸：** $A \in \mathbb{R}^{m \times n}$ 表示 **$m$ 行 $n$ 列**（$m$ rows, $n$ columns）。$m$ = 行數、$n$ = 列數。
 
 ---
 
@@ -148,5 +190,7 @@
 1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔）
 2. docs/dev/SESSION_INDEX.md — 歷史 session 列表
 3. docs/dev/CURRENT_SESSION.log — 上一次 session 即時記錄
-然後繼續「待辦」中的第一項任務。
+4. docs/book/SCHEMA.md + docs/book/VIZ_SCHEMA.md — 雙 Schema 規範（A 派術語）
+5. docs/book/ch01-viewing-matrix.md — A 派術語的成稿範本（S02 產出）
+然後繼續「待辦」中的第一項任務（S03 §2 Vector × Vector）。
 ```

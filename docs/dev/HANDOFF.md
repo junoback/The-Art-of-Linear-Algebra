@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S02（§1 完成）
+- **Session:** S03（§2 完成）
 - **日期:** 2026-05-12
-- **狀態:** `ch01-viewing-matrix.md` 完成（418 行，1 圖描述 + 2 VizMark + 2 VizScript 13 段 A-M）；全書術語慣例切換至 A 派（column = 列直立 / row = 行橫躺）；下次 S03 從 §2 Vector × Vector 開始
+- **狀態:** `ch02-vec-vec.md` 完成（497 行，1 圖描述 + 2 VizMark + 2 VizScript 13 段 A-M）；驗證 ch01 範本可複用、撰寫速度穩定在 ~1h / 章；SOP_DRAFT.md 新增 §2.8「對比 / 對偶結構章節寫作模式」+ 全書視覺一致性錨點；下次 S04 從 §3 Matrix × Vector 開始（含 4-Subspaces）
 
 ---
 
@@ -37,9 +37,11 @@
 - [x] **S01.5** 補規劃：撰寫 `VIZ_SCHEMA.md`（VizMark 5 型 + VizScript 13 段 A-M 格式，含 800 字範例）+ 修訂 SCHEMA.md + 重寫 `_merged.md` 路線圖（S02-S11）
 - [x] **S02** §1 Viewing a Matrix - 4 Ways：`ch01-viewing-matrix.md`（418 行）— 1 圖描述 + 2 VizMark + 2 VizScript（VizScript-01 ⭐⭐⭐ + VizScript-02 ⭐⭐，各 13 段 A-M 完整）
 - [x] **S02** 全書術語慣例 B 派 → A 派切換（**column = 列直立 / row = 行橫躺**，與華文主流一致）+ `SCHEMA.md` §3.1 規範更新 + SOP_DRAFT.md §2.4 教訓記錄
+- [x] **S03** §2 Vector × Vector - 2 Ways：`ch02-vec-vec.md`（497 行）— 1 圖描述 + 2 VizMark + 2 VizScript（VizScript-01 ⭐⭐⭐ 外積→秩 1 矩陣 + VizScript-02 ⭐⭐ v1↔v2 對偶切換）；驗證 ch01 範本可複用、撰寫穩定 ~1h
+- [x] **S03** SOP_DRAFT.md 新增 §2.8「對比 / 對偶結構章節寫作模式」+ 全書視覺一致性錨點（配色 hex / cell 尺寸 / 動畫時間統一化）+ 版本 0.4
 
 ### 進行中
-- 無，S02 已收尾
+- 無，S03 已收尾
 
 ### 待辦（多 session 路線圖 v2 — 方案 A 整合 VizMark+VizScript）
 
@@ -49,8 +51,8 @@
 |---|---|---|
 | ✅ S01 + S01.5 | 機械轉換 + 雙 Schema（章節 / 視覺化）+ 路線圖補規劃 | `from-tex/`、`from-pdf/`、`figs-png/`、`SCHEMA.md`、`VIZ_SCHEMA.md`、`_merged.md` |
 | ✅ S02 | §1 Viewing a Matrix - 4 Ways（驗證雙 Schema + A 派術語切換） | `ch01-viewing-matrix.md`（418 行，2 VizMark + 2 VizScript） |
-| **→ S03** | §2 Vector × Vector - 2 Ways | `ch02-vec-vec.md` |
-| S04 | §3 Matrix × Vector - 2 Ways（含 4-Subspaces） | `ch03-mat-vec.md` |
+| ✅ S03 | §2 Vector × Vector - 2 Ways（驗證 ch01 範本可複用 + 對比結構寫作模式） | `ch02-vec-vec.md`（497 行，2 VizMark + 2 VizScript） |
+| **→ S04** | §3 Matrix × Vector - 2 Ways（含 4-Subspaces） | `ch03-mat-vec.md` |
 | S05 | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` |
 | S06 | §5 Practical Patterns | `ch05-patterns.md` |
 | S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`、`ch06b-CR.md` |
@@ -60,26 +62,33 @@
 | S11 | 整合 + 校對 + 統一 + `BOOK.md` + `VIZ-CATALOG.md` | 合併版書 + 視覺化候選池目錄 |
 | S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （延後到 S11 後再細規劃，預估 ~20 session）|
 
-### S03 起步建議
+### S04 起步建議
 
-1. **先讀 `docs/book/SCHEMA.md` + `docs/book/VIZ_SCHEMA.md` 複習雙規範**（5 分鐘）
-2. **先讀 `ch01-viewing-matrix.md` 抓 A 派術語慣例**（不要回到 B 派寫法）
-3. 從 `from-tex/en.md` 抓 §2 部分（line 49-67 附近）+ `from-pdf/en.txt`
-4. 看 `figs-png/VectorTimesVector.png`（用 Read tool 多模態直接讀）
-5. 寫 `ch02-vec-vec.md`：v1（點積）+ v2（外積，rank 1 矩陣）兩種視角
-6. VizMark 預估：2-3 個，⭐⭐⭐ × 1（外積→秩 1 矩陣的視覺化是核心）
+1. **先讀 `docs/book/SCHEMA.md` + `docs/book/VIZ_SCHEMA.md`** 複習雙規範（3 分鐘，已 internalize 可跳過）
+2. **掃 `ch02-vec-vec.md` §2 對偶段 + VizScript-02 動畫腳本**抓「對比結構章節」的格式（直接複用到 §3 dot-way vs combination-way）
+3. **遵 SOP §2.8 全書視覺錨點**：配色 hex 沿用（綠 `#2ca02c` / 粉紅 `#d62728` / 藍 `#1f77b4`）、cell 60×60 px、動畫 400–700ms，不要重發明
+4. 從 `from-tex/en.md` 抓 §3 部分（line 69–103 附近，含 MatrixTimesVector + VectorTimesMatrix + 4-Subspaces 三張圖）+ `from-pdf/en.txt`
+5. 看三張 PNG（`MatrixTimesVector.png` / `VectorTimesMatrix.png` / `4-Subspaces.png`），用 Read tool 多模態直接讀
+6. 寫 `ch03-mat-vec.md`：
+   - (Mv1) 行向量 × 列 = 點積方式
+   - (Mv2) 列向量的線性組合方式
+   - (vM1) (vM2) 左乘對偶
+   - 4-Subspaces 概念引入（C(A) / N(A) / C(Aᵀ) / N(Aᵀ)）— **這是本書最重要的概念之一，可能 ⭐⭐⭐ × 2**
+7. VizMark 預估：3-5 個，⭐⭐⭐ × 2（線性組合動畫 + 4-Subspaces 空間幾何）
 
-### 工件清單（S03+ 撰寫前必讀）
+### 工件清單（S04+ 撰寫前必讀）
 
 | 檔案 | 用途 |
 |---|---|
 | `docs/book/SCHEMA.md` | 章節 md 結構 + 圖片四欄描述格式（A 派術語） |
 | `docs/book/VIZ_SCHEMA.md` | VizMark 標記 + VizScript 13 段 A-M 格式（含 800 字範例） |
 | `docs/book/_merged.md` | 章節進度追蹤 + 章節↔圖檔對映表 + VizMark 計數 |
-| `docs/book/ch01-viewing-matrix.md` | **S02 成稿，A 派術語的參考範本** |
+| `docs/book/ch01-viewing-matrix.md` | **S02 成稿，A 派術語的參考範本**（單視角章節） |
+| `docs/book/ch02-vec-vec.md` | **S03 成稿，對比 / 對偶結構章節範本**（多視角章節，§3 §4 §6 可複用） |
 | `docs/book/from-tex/{en,zh}.md` | pandoc 轉換結果（含 LaTeX 公式原文）|
 | `docs/book/from-pdf/{en,zh}.txt` | pdftotext 純文字（補 pandoc 缺漏）|
 | `docs/book/figs-png/*.png` | 50 張 PNG 圖檔（vision-ready）|
+| `docs/dev/sop/SOP_DRAFT.md` | §2.8 全書視覺一致性錨點（配色 / 尺寸 / 動畫時間）— **S04+ 直接沿用，不重發明** |
 
 ---
 
@@ -100,6 +109,8 @@
 | 2026-05-12 | git origin 是上游 junoback repo，**收工 commit 留本地不 push** | 防誤推到別人 repo；建議 fork 或抽出獨立 repo 後再 push |
 | 2026-05-12 | **S02 中途決策變更：術語慣例改採華文主流 A 派（column = 列直立 / row = 行橫躺）** | 與中國大陸、日本、多數 Python 中文文件、本書簡中譯本一致；台灣本土教科書傳統採 B 派正好相反，本書讀者若來自此背景需校準。`SCHEMA.md` §3.1 + `ch01` 全部已對齊 A 派；後續 S03+ 章節直接照 A 派寫 |
 | 2026-05-12 | SOP_DRAFT.md 新增「術語慣例必須在 S01 鎖死」教訓條 | S02 中途改 A 派付出整檔重寫 0.5h 成本；若拖到 S05+ 全書反轉成本會幾何級數膨脹 |
+| 2026-05-12 | **S03 確立「全書視覺一致性錨點」（SOP §2.8）：配色 hex / cell 尺寸 / 動畫時間統一化** | S04+ 撰寫 VizScript 時直接套用，不重新發明，除非特殊章節（如 SVD 需要 colormap 表達 σ 大小）才允許偏離 |
+| 2026-05-12 | **S03 確立「對比 / 對偶結構章節寫作模式」：§ 數學要點 加對比段 + 直覺段提煉記憶口訣** | §3（dot way vs combination way）、§4（4 ways）、§6（5 大分解）均適用同一格式，減少每章設計成本 |
 
 ---
 
@@ -139,6 +150,15 @@
 | docs/dev/CURRENT_SESSION.log | 修改 | S02 即時記錄 + 結束記錄 |
 | docs/dev/SESSION_INDEX.md | 修改 | 追加 S02 一行 |
 
+### S03 新增/修改的檔案
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/ch02-vec-vec.md | 新增 | **§2 章節 md：497 行**，含 1 圖描述 + 2 VizMark + 2 VizScript（13 段 A-M 各完整）；A 派術語；新增「對偶關係段」格式 |
+| docs/book/_merged.md | 修改 | S03 標記 `[x]` 完成，VizMark 計數 `1 / 1 / 0` |
+| docs/dev/sop/SOP_DRAFT.md | 修改 | §2.6 補 §2 耗時資料點 + 新增 §2.8「對比 / 對偶結構章節寫作模式」+ 全書視覺一致性錨點 + 版本 0.4 |
+| docs/dev/CURRENT_SESSION.log | 修改 | S03 啟動 + 即時記錄 + 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S03 一行 |
+
 ---
 
 ## 技術筆記
@@ -152,7 +172,7 @@
 ### 互動式版本技術選項（S12+ 決策，目前傾向）
 | 方案 | 優點 | 缺點 |
 |------|------|------|
-| **Marimo + matplotlib + marimo.ui**（S02 ch01 VizScript-01 §K 首選） | 反應式 notebook、純 Python、可匯出 HTML | 較新生態系較小 |
+| **Marimo + matplotlib + marimo.ui**（S02/S03 VizScript 首選） | 反應式 notebook、純 Python、可匯出 HTML | 較新生態系較小 |
 | Streamlit + Plotly | 部署成網頁簡單、互動流暢 | 不適合 notebook 形式閱讀 |
 | Jupyter + ipywidgets + matplotlib | 標準、容易分享 .ipynb | 互動效能一般、需要 kernel |
 | Plotly + Dash | 視覺化品質最高 | 學習曲線較陡 |
@@ -175,11 +195,25 @@
 | basis | 基底 | — |
 | linear combination | 線性組合 | — |
 | dot product / inner product | 點積 / 內積 | — |
+| outer product | 外積（→ 秩 1 矩陣）| — |
 | factorization | 分解 | — |
 | eigenvalue / eigenvector | 特徵值 / 特徵向量 | — |
 | singular value | 奇異值 | — |
 
 **矩陣尺寸：** $A \in \mathbb{R}^{m \times n}$ 表示 **$m$ 行 $n$ 列**（$m$ rows, $n$ columns）。$m$ = 行數、$n$ = 列數。
+
+### 全書視覺一致性錨點（S03 確立，S04+ 直接沿用）
+
+- **配色 hex：** 綠（列 / 直立）`#2ca02c`、粉紅 / 紅（行 / 橫躺）`#d62728`、藍點（個別數字）`#1f77b4`、灰填充 `#eeeeee` / 框 `#333333`
+- **cell 尺寸：** 預設 60×60 px，極小 80×80（$m=n=2$）、極大 48×48（$m=n=6$）
+- **動畫時間：** 視角切換 400–700ms、平行性高亮淡入 200ms、緩動 ease-in-out
+- **數值範圍：** $a_{ij} \in [-9, 9]$ 步進 1，維度 $m, n \in [2, 6]$
+
+### S03 撰寫速度資料點
+
+- **S02 §1（含 A 派切換重寫 0.5h）：** 1.5h / 418 行
+- **S03 §2（ch01 範本可複用）：** 1h / 497 行
+- **預估後續 §3-§6：** 每章 1–2h（§3 含 4-Subspaces / §6 各分解可能偏 2h）
 
 ---
 
@@ -191,6 +225,7 @@
 2. docs/dev/SESSION_INDEX.md — 歷史 session 列表
 3. docs/dev/CURRENT_SESSION.log — 上一次 session 即時記錄
 4. docs/book/SCHEMA.md + docs/book/VIZ_SCHEMA.md — 雙 Schema 規範（A 派術語）
-5. docs/book/ch01-viewing-matrix.md — A 派術語的成稿範本（S02 產出）
-然後繼續「待辦」中的第一項任務（S03 §2 Vector × Vector）。
+5. docs/book/ch01-viewing-matrix.md（單視角範本）+ docs/book/ch02-vec-vec.md（對比結構範本）
+6. docs/dev/sop/SOP_DRAFT.md §2.8 — 全書視覺一致性錨點（配色 / 尺寸 / 動畫）
+然後繼續「待辦」中的第一項任務（S04 §3 Matrix × Vector，含 4-Subspaces）。
 ```

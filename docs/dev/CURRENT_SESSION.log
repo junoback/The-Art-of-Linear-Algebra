@@ -52,3 +52,18 @@
 [2026-05-12 S02] 收工更新 SOP_DRAFT.md（§2.3 升級 VizMark / §2.4 改 A 派 + 補教訓 / 新增 §2.6 章節 session 流程）
 [2026-05-12 S02] 收工更新 HANDOFF.md + SESSION_INDEX.md
 [2026-05-12 S02] Session 結束 — 下次 S03 §2 Vector × Vector，從 0 寫 ch02（真正驗證雙 Schema 是否好用）
+
+# Session: S03
+# Started: 2026-05-12
+# git HEAD: c497388 (main)
+# worktree: 乾淨，只有 main repo working dir
+# 任務: §2 Vector × Vector - 2 Ways（v1 點積 / v2 外積 → rank 1 矩陣），撰寫 ch02-vec-vec.md
+# ---
+[2026-05-12 S03] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；worktree 乾淨
+[2026-05-12 S03] 平行抓素材：SCHEMA.md / VIZ_SCHEMA.md / ch01 範本 / from-tex en+zh §2 / from-pdf en.txt §2 / VectorTimesVector.png（多模態讀圖確認 v1 v2 視覺結構）
+[2026-05-12 S03] 撰寫 docs/book/ch02-vec-vec.md（497 行）— 一氣完成標頭 + 摘要 + 數學要點（含 v1/v2 對偶段）+ Figure 2.1 四欄描述 + 2 VizMark + 2 VizScript（13 段 A-M 完整）+ 章末延伸
+[2026-05-12 S03] VizMark-01 ⭐⭐⭐ [拉桿調參] 外積→秩 1 矩陣 + 列/行平行性視覺化；VizMark-02 ⭐⭐ [切換視角] v1↔v2 對偶切換動畫（向量旋轉 90° 換色，700ms）
+[2026-05-12 S03] 更新 docs/book/_merged.md：§2 完成標記 [x]，VizMark 計數 1/1/0
+[2026-05-12 S03] 收工更新 SOP_DRAFT.md：§2.6 補 §2 耗時資料點（1h / 497 行，驗證 ch01 範本可複用）+ 新增 §2.8「對比 / 對偶結構章節寫作模式」+ 全書視覺一致性錨點（配色 hex / cell 尺寸 / 動畫時間）+ 版本記錄追加 0.4
+[2026-05-12 S03] 收工更新 SESSION_INDEX.md（追加 S03 一行）+ HANDOFF.md（整檔覆寫）
+[2026-05-12 S03] Session 結束 — 下次 S04 §3 Matrix × Vector - 2 Ways（含 4-Subspaces 概念引入）

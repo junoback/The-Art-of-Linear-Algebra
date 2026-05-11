@@ -23,3 +23,15 @@
 [2026-05-12 S01] 更新 HANDOFF.md / SESSION_INDEX.md 標記 S01 完成
 [2026-05-12 S01] S01 收尾，下次 S02 從 §1 Viewing a Matrix - 4 Ways 開始
 [2026-05-12 S01] Session 結束
+
+# Session: S01.5 補規劃（接續 S01 同一對話）
+# Resumed: 2026-05-12
+# ---
+[2026-05-12 S01.5] 使用者要求重新規劃：每章節同時做 VizMark + VizScript（視覺化劇本）
+[2026-05-12 S01.5] 使用者確認：方案 A（整合 + 拉長到 S02-S11）、VizScript 細緻度提升一級至 ~800 字
+[2026-05-12 S01.5] 撰寫 docs/book/VIZ_SCHEMA.md（VizMark 5 型 + VizScript 13 段格式 + 800 字範例）
+[2026-05-12 S01.5] 微調 docs/book/SCHEMA.md（章節結構新增「視覺化劇本」段；圖描述四欄第四欄升級為 VizMark 引用）
+[2026-05-12 S01.5] 重寫 docs/book/_merged.md（新 S02-S11 路線圖、新增 VizMark 計數欄、章節密度調整 §5 獨立 / §6 拆 3 session）
+[2026-05-12 S01.5] 更新 docs/dev/HANDOFF.md（補規劃決策、新工件清單、修訂路線圖）
+[2026-05-12 S01.5] S01.5 收尾，下次 S02 從 §1 開始（同時驗證 SCHEMA + VIZ_SCHEMA 雙規範）
+[2026-05-12 S01.5] Session 結束

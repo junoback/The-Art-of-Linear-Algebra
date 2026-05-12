@@ -11,3 +11,4 @@
 | S03 | 2026-05-12 | §2 Vector × Vector - 2 Ways（ch02 497 行 + 2 VizMark + 2 VizScript）；驗證 ch01 範本可複用 + SOP §2.8 新增「對比結構章節」寫作模式 + 全書視覺錨點 | ✅ 完成 | CURRENT_SESSION.log |
 | S04 | 2026-05-12 | §3 Matrix × Vector - 2 Ways + 4-Subspaces（ch03 935 行 + 4 VizMark + 4 VizScript，含 ⭐⭐⭐ × 2 / ⭐⭐ × 1 / ⭐ × 1）；SOP §2.9 新增「多 VizMark 分級寫作策略」 | ✅ 完成 | CURRENT_SESSION.log |
 | S05 | 2026-05-12 | §4 Matrix × Matrix - 4 Ways（ch04 849 行 + 4 VizMark + 4 VizScript：⭐⭐⭐ Tier 2 四視角切換 / ⭐⭐⭐ Tier 3 MM4 秩 1 累加 + Mona Lisa SVD demo / ⭐⭐ Tier 1 維度檢核 / ⭐ Tier 1 MM1 walkthrough）；SOP §2.6 新增「N-way 單圖章節」觀察 + ⭐⭐⭐ 劇本可選 Tier 2/3 | ✅ 完成 | CURRENT_SESSION.log |
+| S06 | 2026-05-12 | §5 Practical Patterns（ch05 830 行 + 6 Pattern P1/P2/P1'/P2'/P3/P4 + 4 圖 + 4 VizMark + 4 VizScript：⭐⭐⭐ Tier 2 對角矩陣統一互動 / ⭐⭐⭐ Tier 2 P3 動態系統軌跡 連通 §6.4 / ⭐⭐ Tier 1 + pointer P4 三明治指 ch04 / ⭐ Tier 1 P1' walkthrough）；HANDOFF 漏 P4 教訓；SOP §2.6 新增「Tier 1 + pointer」策略 + 對偶 Pattern 用總表節省篇幅 | ✅ 完成 | CURRENT_SESSION.log |

@@ -97,3 +97,20 @@
 [2026-05-12 S05] 收工更新 SOP_DRAFT.md：§2.6 補 §4 耗時資料點（1h / 849 行）+ 新增「N-way 單圖章節」觀察 + ⭐⭐⭐ 劇本 Tier 2/3 選擇權 + 版本記錄追加 0.6
 [2026-05-12 S05] 收工更新 SESSION_INDEX.md（追加 S05 一行）+ HANDOFF.md（整檔覆寫）+ commit + push origin main
 [2026-05-12 S05] Session 結束 — 下次 S06 §5 Practical Patterns（P1/P2/P1'/P2'/P3，是 §4 (MM2)/(MM3)/(MM4) 的特殊配置，可複用本章視角結構）
+
+# Session: S06
+# Started: 2026-05-12
+# git HEAD: 3f9dbe2 (main)
+# worktree: 乾淨，只有 main repo working dir（無 auto-spawn 殘留）
+# 任務: §5 Practical Patterns（P1 / P2 / P1' / P2' / P3 — 對角矩陣 column/row scaling + XDX⁻¹ 譜分解，§6.4 鋪陳），撰寫 ch05-patterns.md
+# ---
+[2026-05-12 S06] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；worktree 乾淨（1 個 main repo working dir，無 auto-spawn 殘留）
+[2026-05-12 S06] 平行抓素材：from-tex en+zh §5（line 127–203 / 122–196）+ from-pdf en.txt §5（line 264–388）+ Pattern12 / Pattern11-22 / Pattern3 / Pattern4 4 張 PNG 多模態讀圖
+[2026-05-12 S06] 重要發現：原書 §5 實際有 6 個 Pattern（P1/P2/P1'/P2'/P3/P4）+ 4 張獨立圖，HANDOFF 預估漏掉 P4（$U\Sigma V^{\mathrm{T}}$ 三明治結構，§6.4/§6.5 共骨架）
+[2026-05-12 S06] 撰寫 docs/book/ch05-patterns.md（830 行）一氣完成：標頭 + 摘要 + 數學要點（6 Pattern + Pattern↔§4 視角總表 + (P1)(P2) 對偶 + (P1')(P2') 對偶 + (P3)(P4) 對偶升級 + §6.4 微分方程通解推導）+ 4 張圖各四欄描述 + 4 個 VizMark + 4 個 VizScript（全 13 段 A-M）+ 章末延伸 + 來源對照
+[2026-05-12 S06] VizMark 分級：⭐⭐⭐ × 2（VizScript-01 對角矩陣統一互動 P1/P2/P1'/P2' Tier 2 / VizScript-02 P3 動態系統 軌跡演化 Tier 2 連通 §6.4）+ ⭐⭐ × 1（VizScript-03 P4 三明治 Tier 1 + pointer 到 ch04 VizScript-02）+ ⭐ × 1（VizScript-04 P1' 數值 walkthrough 輕量）
+[2026-05-12 S06] 「Tier 1 + pointer」策略首次採用：VizScript-03 因為 ch04 VizScript-02 已實作秩 1 累加 / SVD 影像 demo，本章只寫 Tier 1 三明治結構互動 + 跳轉按鈕；節省 ~200 行 + S12+ 工時
+[2026-05-12 S06] 更新 docs/book/_merged.md：§5 完成標記 [x]，VizMark 計數 2/1/1
+[2026-05-12 S06] 收工更新 SOP_DRAFT.md：§2.6 補 §5 耗時資料點（1h / 830 行）+ 4 觀察（HANDOFF Pattern 數量需對 PNG 重核 / 多圖小章節 vs N-way 單圖章節耗時相當 / Tier 1 + pointer 策略 / 對偶 Pattern 用總表節省篇幅）+ 版本記錄追加 0.7
+[2026-05-12 S06] 收工更新 SESSION_INDEX.md（追加 S06 一行）+ HANDOFF.md（整檔覆寫，更新關鍵決策 + 檔案變更追蹤 + 技術筆記 + 視覺錨點補紫色 / 對角矩陣 / 動態系統軌跡 + S07 起步建議）
+[2026-05-12 S06] Session 結束 — 下次 S07 §6 五大分解總覽 + §6.1 A=CR（兩章 session，採「Tier 1 + pointer」策略，(MM4) 累加 demo 全部指向 ch04 VizScript-02）

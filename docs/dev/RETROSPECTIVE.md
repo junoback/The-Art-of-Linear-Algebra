@@ -110,3 +110,29 @@ Back 開「依照建議順序」執行 S11 整合 session：(3) anchor 校驗 �
 - **設計問題先給推薦再列選項**：當 Back 問「A vs B 哪個對 X 較容易」時，先給推薦理由 + 點出 A/B 是補充而非替代（如果是）+ 列選項，比純列選項更高效；S11 VIZ-CATALOG 那輪我做了，但 BOOK.md a/b/c 選項那輪我列了 3 個沒先點出推薦，Back 還是選了 a（推薦項）— 表明推薦是有用的訊號。
 
 ---
+
+## S12 — 背後觀念層啟動：22 條 Q&A 規劃 + Q09 PoC + 批量 Q01-Q08 + 4 主章 callout（2026-05-13）
+
+### 本 session 主軸
+
+Back 提出全書缺一個系統性「為什麼這條規則長這樣」維度（13 個主章只講「怎麼算」缺「為什麼這樣算」），用 Cayley 1858 矩陣乘法為什麼是「列乘行」的 Q&A 範例展示 3-layer 模板。S12 完成方案 D（主章 callout + 附錄 D 詳盡 Q&A）確立 + 22 條 Q&A 全書清單 + Q09 PoC + 批量 Q01-Q08 + 4 主章 callout 插入 + memory feedback_why_layer.md 規範化。最終達成 appendix-D-why.md 1175 行 / 9 Q&A（41% 進度）+ 4 callout / 8 links + 1 memory。
+
+### 對話低效時刻（具體事件 + 為什麼）
+
+- **SESSION_INDEX.md S12 行插入位置錯誤**：執行收工 Step 4 時 Claude 用「S11 行」作 Edit anchor，把 S12 行插在 S11 **之前**（時序錯）。原因：**Edit 操作沒驗證表格末尾位置**就直接 anchor 在 S11 行。發現後用「Edit 還原 S11 行 + Bash cat >> 追加 S12 在末尾」修復 → **教訓：表格追加行應該用 Bash `cat >> file` append 而不是 Edit anchor 中間行，避免插入位置錯誤**。
+
+- **Q04 Markdown 表格中 `|` 符號未跳脫造成 anchor 不 unique**：S12 第一次 Edit 目錄表狀態時，old_string 用半形 `?` 結尾但檔案實際是全形「？」— 一輪 Edit failed。**原因：Claude 鍵入時習慣半形 `?` 但檔案是中文全形「？」**。Re-read 檔案實際內容後修正成功 → **教訓：Edit 帶中文標點符號時，先 Read 一次原檔對照 unicode 字元，不要憑記憶輸入**。
+
+### 建議 Back 下次這樣問會更快
+
+- **「先草擬一條 Q09」這類精準指令很高效** — Back 在我給 22 條清單 + 7 個 review 問題時直接回「先草擬一條 Q09」（PoC 優先），讓 Claude 不必先逐條對齊清單；風格鎖定後一句「若風格 OK」直接觸發 Q01-Q08 批量寫。**未來類似多 session 任務可沿用此 pattern**：先 1 條 PoC 對齊風格 → 確認後批量 → 不必每條 review。
+- **「S12 是否繼續做 callout」這種 yes/no 問題比「下一步建議」更精準** — Claude 給三選項（繼續 / 收工 / 中間方案）時，Back 用最短回答「是否繼續做 callout」直接觸發動作，避免 Claude 過度展開選項解釋。
+
+### Claude 自我提醒（不需 Back 督促也該做的事）
+
+- **表格追加用 Bash `cat >> file` 而非 Edit anchor**：本 session SESSION_INDEX.md 已踩這個雷一次 — 表格末尾追加應該 `cat >> file << 'EOF' ... EOF` 直接 append，比 Edit「某行之後」更安全（不會插錯位置）。
+- **Edit old_string 含中文標點時先 Read 對照**：別憑記憶輸入「？」、「，」、「：」等，可能是全形也可能是半形。Read 一次原檔取得精確字元再 Edit。
+- **memory + SOP 是互補不是替代**：feedback_why_layer.md（memory）= Claude 跨 session 自動套用的個人規範 / SOP §2.13 = 專案級別 process discipline（人類審閱）/ HANDOFF = 當下 session 的工作狀態。三者各司其職不要混。本 session 同時更新 3 處保證下次 S13 Claude 不論從哪個入口都能恢復 context。
+- **批量寫長文時，每條條目寫完立即記憶大綱要點到 log**：S12 批量 Q01-Q08 8 條約 865 行，最後寫 HANDOFF / SOP 時要 cross-ref 各條重點（行數 / 3-layer 涵蓋 / 經典引用），若沒在每條寫完當下記到 CURRENT_SESSION.log，最後要再 grep 各檔案統計 — 浪費 cache。**未來批量寫多條 Q&A 時，每完成一條立即在 log 追加一行 metadata（標題 / 行數 / 3-layer / 關鍵亮點）**。
+
+---

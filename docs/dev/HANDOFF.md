@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S11（**S11 整合 + 校對 + 統一 5 項任務 100% 完成**，下階段 S12+ 進入 Python 視覺化實作）
+- **Session:** S12（**背後觀念層啟動，appendix-D-why.md 9/22 Q&A 完成 + 4 主章 callout 插入**，S13–S15 路線繼續補完剩餘 13 條 Q&A）
 - **日期:** 2026-05-13
-- **狀態:** **S11 全 5 項任務完成：** (3) 跨檔 anchor 校驗 — 39 處 `#vizscript-NN` 連結邏輯全對 + 修復 9 處 broken `#N` 短 anchor（方案 B 重指 ch06f vizscript-01/03）；(5) 資料一致性校驗 — VizScript 36 / `using XX` 地圖與 HANDOFF 一致 / Tier 統計表 6 處校正（總數 33→36、Matrix World Tier 2 旗艦補入、ch06a 改 Tier 1+pointer、附錄 3 個列入）+ S12+ 三批排程連動修正；(1) BOOK.md 完整合併 — 8650 行單檔 / fence-code-aware awk 降一級避開 Python code block 內 `#` 註解 / 含全書目錄 + 統計表 + 視覺錨點段；(2) [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 抽取 — 241 行純 metadata 索引 / 36 條目（首批 2 + 次批 9 + 末批 A 7 + B 3 + C 15）+ 全章節順序總覽表 + 跨章 pointer ASCII 連動圖 + 進度追蹤段；(4) 風格統一檢查 — SCHEMA.md 新增 §3.5「全書視覺錨點」（配色 6 主色 + 輔助色階 + cell + 動畫 + **3D 視角預設 elevation=25° azimuth=-60°**）+ VIZ_SCHEMA.md cross-reference + 23 處 sed 修正（13 處 X ms→Xms / 10 處 px 空格）；**額外**：Back 提供 8 本 Strang 版權 PDF 至 docs/book/，.gitignore 雙保險防護（pattern + 5 白名單）+ memory feedback_private_pdfs.md（PDF 不 push / md 內可大段引用原文兩層級分開）；back-conclusion.md root heading「33→36」修正。**全書整合完成，S12+ 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 + ch06f V-01）開始 Python 視覺化實作。**
+- **狀態:** **S12 完成：** Back 提出全書缺一個系統性「**為什麼這條規則長這樣**」維度（現有 13 個主章只講「怎麼算」缺「為什麼這樣算」），用 Cayley 1858 矩陣乘法為什麼是「列乘行」的 Q&A 範例展示「**① 歷史 + ② 推導 + ③ 昇華**」3-layer 模板；確立**方案 D（主章短摘 callout + 附錄 D 詳盡 Q&A 雙層落點）**；S12 完成：4-session 路線圖（S12-S15）+ 22 條 Q&A 清單 + Q09 PoC（矩陣乘法為什麼列乘行，2500 字含九章算術原文 + Cayley 1858 + 2×2 例題雙路驗證 + Strang LAFE §1.4 引言）+ **批量 Q01-Q08（Foreword + §1 + §2 + §3 共 8 條，合計 865 行）** + 4 主章 callout 客製化（foreword Q01 / ch01 Q02+Q03 / ch02 Q04+Q05 / ch03 Q06+Q07+Q08）+ foreword「23 個 VizScript」→「36 個 VizScript」舊數字 bug 修正；總產出 [appendix-D-why.md](../book/appendix-D-why.md) **1175 行 / 67.7 KB / 9 Q&A（9/22 = 41%）** + 4 主章 callout / 8 Q&A links + memory `feedback_why_layer.md`（3-layer 框架明文化）+ MEMORY.md index 補一行。**下次 S13 從 Q10（§4 不可交換）+ Q11-Q13（§5 對角 / P3 / P4）開始**，預估 ~2h。
 
 ---
 
@@ -71,9 +71,26 @@
 - [x] **S11 任務 (2) [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 抽取：** 241 行純 metadata 索引（不複製內容）/ 36 條目（首批 2 + 次批 9 + 末批 A 7 + B 3 + C 15）+ 全章節順序總覽 + 跨章 pointer ASCII 連動圖 + 進度追蹤段（⏳/🔨/✅/⚠️/🔄 五狀態）/ 每行 7 欄位 metadata（連結 + Tier + 批次 + 估時 + 互動類型 + 數學基底 + 跨章 pointer + 狀態）
 - [x] **S11 任務 (4) 風格統一檢查：** SCHEMA.md 新增 §3.5「全書視覺錨點」（4 子節：配色 hex+RGB+輔助色階 / cell 寫法 / 動畫時間錨點 / 3D 視角預設）+ 版本 0.2；VIZ_SCHEMA.md §2.2 寫作要點補 cross-reference + 新增 §2.3 對照表 + 版本 0.2；sed 修空格不一致 13 處 X ms → Xms（macOS sed `\b` 不支援，改用無 boundary）+ 10 處 px 空格統一；BOOK.md 重新生成同步全部 S11 修正
 - [x] **S11 額外處理 — Strang 8 本版權 PDF 防護：** Back 提供 Linear Algebra for Everyone / Intro to LA / LA and Learning from Data / Diff Eq + LA / CSE / Calculus Vol 1-3 至 docs/book/ 私人參考用；.gitignore 雙保險（`docs/book/*.pdf` pattern + 5 白名單反白）；memory feedback_private_pdfs.md 兩層級分開（PDF 檔本身絕對不 push / md 檔內可大段引用原文以提升完整性，Back 明確授權）+ back-conclusion.md root heading「33→36」修正
+- [x] **S12 啟動「背後觀念層」開發階段** — Back 提出全書缺「為什麼這條規則長這樣」維度（現有 13 主章只「怎麼算」缺「為什麼這樣算」），確立 3-layer 框架（① 歷史 + ② 推導 + ③ 昇華）+ 方案 D 雙層落點（主章 callout + 附錄 D 詳盡 Q&A）+ 4-session 路線（S12-S15）+ 22 條 Q&A 全書清單
+- [x] **S12 Q09 PoC**：[appendix-D-why.md](../book/appendix-D-why.md) 骨架建立（root + 簡介 + 3-layer 框架 + 22 條目錄表 + 術語提醒）+ Q09 完整 PoC（矩陣乘法為什麼「行乘列」？2500 字含九章算術方程章原文 + Sylvester 1850 / Cayley 1858 / Cayley 原論文引言 + 兩組線性變換代入展開逐步推導 + 觀察規律 3 欄表 + 一般化 boxed 定義 + 2×2 小例題雙路驗證 = $\begin{bmatrix}19&22\\43&50\end{bmatrix}$ + 5 條矩陣現象 ↔ 函數合成本質對照表 + Strang LAFE §1.4「點積規則不是核心、秩 1 分解才是」引言 + 12 條延伸閱讀）；Back review 確認風格 OK 直接批量寫
+- [x] **S12 批量寫 Q01-Q08（Foreword + §1 + §2 + §3 共 8 條 / 865 行）**：
+  - **Q01 為什麼線性代數要從圖解開始學？**（~56 行）— Strang 1976→2003→2020 五十年漸進反思 + Hiranabe 2021 譜系 + 「圖→直覺→符號→推導→**互動 = do**」5 階學習階梯 + Confucius "I do and I understand"
+  - **Q02 矩陣為什麼存在？「把表格看成單一物件」是什麼躍進？**（~78 行）— 7 時代里程碑表（《九章算術》→ 關孝和 1683 → Leibniz 1693 → Cramer 1750 → Sylvester 1850 → Cayley 1858 → Frobenius 1878）+ 100 元方程「方程組視角 vs 矩陣物件視角」對比 + 6 條物件化代數紅利 + 「抽象階層提升」原則（標量 → 向量 → 矩陣 → 張量類比 OOP / 物理 / 生物）
+  - **Q03 為什麼同一個矩陣要看成 4 種視角？**（~85 行）— V1-V4 4 視角分工總表 + **三角形面積公式類比**（基×高 / 海倫 / $\frac{1}{2}ab\sin C$ / $\frac{abc}{4R}$，公式不同三角形同一個）+ 3 個案例對比視角效率（$\mathbf{b} \in \mathbf{C}(A)$ 判斷、列秩=行秩、$AB$ 4 種讀法）
+  - **Q04 點積為什麼是「分量相乘再相加」？**（~140 行）— 三條獨立動機殊途同歸：① 幾何（餘弦定理 boxed 推導 $\sum u_i v_i = \|\mathbf{u}\|\|\mathbf{v}\|\cos\theta$）+ ② 物理（功 = 各軸獨立做功之和）+ ③ 代數（內積 4 公理 + 標準基底正交 $\delta_{ij}$）+ 12 個衍生概念表（norm / 正交 / 投影 / Cauchy-Schwarz / QR / SVD / 最小平方法）
+  - **Q05 外積為什麼是「列 × 行 = 秩 1 矩陣」？**（~108 行）— 點積外積對偶設計表（矩陣乘法形狀規則自動決定，中間維 $k$ 大→標量、$k$ 小→矩陣）+ 列/行視角秩 1 雙證明 + 3×2 小例題秩驗證 + 「秩 1 是線代原子」三大秩 1 之和結構表（MM4 / CR / SVD）+ SVD 壓縮率 $\frac{m+n}{mn}$ 應用根源
+  - **Q06 $A\mathbf{x}$ 為什麼這樣定義？**（~141 行）— 從 $m$ 個方程濃縮為 $A\mathbf{x}=\mathbf{b}$ 的 4 步驟設計過程（拆 $A,\mathbf{x},\mathbf{b}$ → 要求結果 → 觀察規律 → 兩讀法等價）+ 讀法 A 點積 / 讀法 B 線組合 + $2 \times 3 \cdot 3 \times 1$ 小例題雙路驗證 → $\begin{bmatrix}50\\122\end{bmatrix}$ + 「動詞 + 受詞」最小單位昇華 + 矩陣兩角色（係數表 vs 變換）
+  - **Q07 為什麼要有 2 個視角（點積 + 線性組合）？**（~95 行）— 7 欄視角分工總表 + 關鍵案例「$A\mathbf{x}=\mathbf{b}$ 有解嗎」(Mv1) vs (Mv2) 對比（一秒判斷 vs 跑完高斯）+ Strang 原話兩段引用（"the heart of linear algebra"）+ 7 條任務 × 視角配對表
+  - **Q08 四個基本子空間為什麼會自然冒出？**（~156 行）— **2 方向（右乘 vs 左乘）× 2 概念（像 vs 核）= 4 組合必然產物** + $\mathbf{N}(A) = \mathbf{C}(A^{\mathrm{T}})^{\perp}$ 完整證明（$A\mathbf{x}=\mathbf{0}$ 用 (Mv1) 點積視角展開 → 每橫躺行垂直）+ rank-nullity 兩 boxed 等式 + Strang Big Picture ASCII 圖 + 7 條「4 子空間怎麼把線代組織起來」應用表（解 $A\mathbf{x}=\mathbf{b}$ / 最小平方法 / SVD 構造 4 子空間正交基底 / 偽反 $A^{+}$）
+- [x] **S12 主章 callout 批量插入**：4 個檔案的「章節摘要」段末（術語提醒 ⚠ 之後、`---`「數學要點」段之前）插入客製化 callout，採短摘要列表式（~150-300 字 hook + 連結附錄 D）格式：
+  - [front-foreword.md](../book/front-foreword.md)（1 callout / 1 link Q01）+ 順手修「23 個 VizScript」→「36 個 VizScript（主章 33 + 附錄 3）」舊數字 bug
+  - [ch01-viewing-matrix.md](../book/ch01-viewing-matrix.md)（1 callout / 2 links Q02 + Q03）
+  - [ch02-vec-vec.md](../book/ch02-vec-vec.md)（1 callout / 2 links Q04 + Q05）
+  - [ch03-mat-vec.md](../book/ch03-mat-vec.md)（1 callout / 3 links Q06 + Q07 + Q08）
+- [x] **S12 memory 新增** — feedback_why_layer.md 明文化「全書每個運算規則需附『背後觀念』3-layer」規範（① 歷史 / ② 設計過程還原 / ③ 概念昇華 必有的層級規則 + 落點方案 D + 篇幅指南 + 觸發時機 + 自驗檢查）；MEMORY.md index 補一行指向新 memory
 
 ### 進行中
-- 無，S11 已收尾，**整合 + 校對 + 統一 5 項任務 100% 完成 + Strang 版權 PDF 防護 + memory 更新**
+- 無，S12 已收尾，**Foreword + §1 + §2 + §3 共 9 條 Q&A + 4 主章 callout + memory 全部完成**
 
 ### 待辦（多 session 路線圖 v3 — S11 整合 + S12+ 視覺化實作）
 
@@ -92,8 +109,12 @@
 | ✅ S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`（695 行）+ `ch06f-USV.md`（**934 行，全書最長**） |
 | ✅ S10 | Foreword + Conclusion + 3 附錄 | `front-foreword.md`（158）+ `back-conclusion.md`（198）+ `appendix-map-eigenvalues.md`（272）+ `appendix-matrix-world.md`（**328 旗艦**）+ `appendix-four-subspaces.md`（334）= **1290 行 + 3 VizMark** |
 | ✅ S11 | 整合 + 校對 + 風格統一 + `BOOK.md` + `VIZ-CATALOG.md` + Strang PDF 防護 | [BOOK.md](../book/BOOK.md)（8650 行）+ [VIZ-CATALOG.md](../book/VIZ-CATALOG.md)（241 行 metadata）+ SCHEMA.md §3.5 全書視覺錨點 + 9 處 anchor 修復 + Tier 表 6 處校正 + 23 處風格 sed 修正 + .gitignore PDF 防護 |
-| **→ S12** | **Python 視覺化技術棧 PoC + 首批 Tier 3 旗艦實作起步** | 技術棧決策（推薦 Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）+ 從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 首批挑題：ch04 V-02 (MM4 + Mona Lisa) 或 ch06f V-01 (SVD Master) 開始 PoC，預估各 3 session |
-| S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （延後到 S11 後再細規劃，預估 ~28–30 session）|
+| ✅ S12 | **背後觀念層啟動：Foreword + §1 + §2 + §3 共 9 Q&A + 4 主章 callout** | [appendix-D-why.md](../book/appendix-D-why.md)（1175 行 / 9 Q&A，含 Q09 PoC + Q01-Q08 批量）+ 4 主章 callout（foreword / ch01 / ch02 / ch03 共 8 Q&A links）+ memory feedback_why_layer.md（3-layer 框架）+ foreword「23→36」舊數字 bug 修 |
+| **→ S13** | **§4 + §5：Q10–Q13（4 條 Q&A）+ ch04 / ch05 主章 callout** | Q10（§4 不可交換）+ Q11（§5 對角矩陣為什麼這麼特別）+ Q12（P3 動態系統用特徵值預測長期）+ Q13（P4 三明治為什麼是線代核心）；ch04 / ch05 主章 callout 各 1 個；預估 ~2h |
+| S14 | **§6 五大分解：Q14–Q19（6 條 Q&A）+ ch06a–ch06f 主章 callout** | Q14（為什麼要分解）+ Q15（A=CR 列秩=行秩）+ Q16（A=LU 高斯消去法本質）+ Q17（A=QR Gram-Schmidt 動機）+ Q18（譜定理對稱矩陣特徵向量正交）+ Q19（SVD 為什麼對任何矩陣存在）；ch06a-ch06f 主章 callout；預估 ~2.5h |
+| S15 | **附錄 + 整合收尾：Q20–Q22（3 條）+ 3 附錄 callout + BOOK.md 重新生成 + VIZ-CATALOG.md 補引 + SCHEMA / VIZ_SCHEMA callout 規範 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批** | Q20（特徵值地圖怎麼畫得出來）+ Q21（Matrix World 同心橢圓 vs 樹狀）+ Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼是線代核心問題）+ 3 附錄 callout + 整合收尾；預估 ~1.5h |
+| S16+ | Python 視覺化技術棧 PoC + 首批 Tier 3 旗艦實作（延後至背後觀念層完成後） | 技術棧 PoC（Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）+ 從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 首批挑題：ch04 V-02 (MM4 + Mona Lisa) 或 ch06f V-01 (SVD Master) 開始 PoC，預估各 3 session |
+| S16+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （預估 ~28–30 session，背後觀念層 S12-S15 完成後啟動）|
 
 ### S12+ 起步建議（S11 已完成，本段為下一階段路線）
 
@@ -250,6 +271,13 @@
 | 2026-05-13 | **S11 確立「動畫時間 / px 寫法強制統一無空格 `Xms` / `AAxBB px`」** | 全書 X ms (16) vs Xms (38) 不一致，sed 統一為無空格 ms；px 統一中間 × 兩側無空格、px 前 1 空格；macOS BSD sed 不支援 `\b` word boundary 需注意 |
 | 2026-05-13 | **S11 確立「Strang 版權 PDF 兩層級分開處理」** | PDF 檔本身絕對不 push GitHub（.gitignore pattern + 5 白名單反白）；md 檔內可大段引用原文（Back 明確授權「重點是 md 完整性」）— S12+ 撰寫補充章節可直接引 Strang 原始定義/例題 |
 | 2026-05-13 | **S11 確立「back-conclusion.md Tier 統計表是 VIZ-CATALOG.md 的單一真相來源」** | S11 把 conclusion 表從「主章 33 個」校為「全書 36 個」+ 加入 Matrix World Tier 2 旗艦 + ch06a 改 Tier 1+pointer + 附錄 3 個列入 — VIZ-CATALOG.md 直接引此表為統計基礎 |
+| 2026-05-13 | **S12 啟動「背後觀念層」開發階段** | Back 發現全書缺一個系統性「為什麼這條規則長這樣」維度（13 個主章只講「怎麼算」缺「為什麼這樣算」）— 用 Cayley 1858 矩陣乘法為什麼是「列乘行」的 Q&A 範例（變數連續代換還原 + Cayley 原文初心 + 高階語言）展示完整 3-layer 模板 |
+| 2026-05-13 | **S12 確立「3-layer 框架」（① 歷史 + ② 設計過程還原 + ③ 概念昇華）** | 每條 Q&A 採固定 3-layer 結構（含經典出處引用 + 完整推導 + 小例題 + 1 句昇華）；3-layer 不全有時 ① / ② 可彈性略過但 ③ 必有；自驗檢查「為什麼這條規則長這樣？讀者讀完知道嗎？」答不出就補 callout |
+| 2026-05-13 | **S12 確立「方案 D 雙層落點」** | 主章 callout（▶ 💡 背後觀念 ◀ 短摘要 ~200 字 + 連結附錄 D）+ 全書集中附錄 D Q&A（~600-2000 字詳盡版 3-layer + 例題 + 推導 + Strang 經典引用）；callout 不複製內容只給 hook + cross-ref，避免重複 |
+| 2026-05-13 | **S12 確立「22 條 Q&A 全書清單 + 4-session 路線」** | S12（Foreword + §1 + §2 + §3 = 9 Q&A）→ S13（§4 + §5 = 5 Q&A）→ S14（§6 五大分解 = 6 Q&A）→ S15（附錄 + 整合收尾 = 3 Q&A + BOOK.md 重新生成）；總 22 條 = 21 必要 + 1 可選（Q21 Matrix World 為什麼同心橢圓） |
+| 2026-05-13 | **S12 確立「Q09 PoC → 風格鎖定 → 批量寫」流程** | 先草擬 Q09（最關鍵的矩陣乘法為什麼列乘行）給 Back review 確認風格 OK → 直接批量寫 Q01-Q08 8 條；避免清單批量寫完才發現方向不對 — PoC 投入 ~30 min 換來批量寫 ~2h 風格一致 |
+| 2026-05-13 | **S12 確立「主章 callout 統一落點：章節摘要末 / 數學要點前」** | callout 放在「術語提醒 ⚠」之後、`---`「數學要點」段之前 — 讀者讀完章節摘要、進入正式內容前先看到動機指引，不打斷主章節奏；每章 callout 對應 1-3 條 Q&A 的列表式短摘要 + 直接連結附錄 |
+| 2026-05-13 | **S12 確立「Q&A 內容詳盡度標準：詳盡優先 + 經典引用」** | 篇幅約 1000-2500 字含舉例 + 推導 + 經典出處（《九章算術》原文、Cayley 1858 原論文題名 + 期刊頁碼、Strang LAFE / ILA / LAaLD 章節 + 原話引用、Grassmann 1844 / Gibbs 1881 等）；Q&A 之間大量 cross-link 形成知識網路（Q06 ↔ Q07 ↔ Q08 / Q04 ↔ Q05 / Q01 ↔ Q09 ↔ Q19） |
 
 ---
 
@@ -292,6 +320,23 @@
 | docs/dev/RETROSPECTIVE.md | 修改 | S11 對話反思追加（session-end Step 6 處理）|
 | ~/.claude/projects/.../memory/feedback_private_pdfs.md | 新增（memory）| Strang 8 本版權 PDF 兩層級處理規範（PDF 不 push / md 內可大段引用原文，Back 授權）|
 | ~/.claude/projects/.../memory/MEMORY.md | 修改（memory）| 補一行 index 指向 feedback_private_pdfs.md |
+
+### S12 新增/修改的檔案
+
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/appendix-D-why.md | **新增** | **1175 行 / 67.7 KB / 9 Q&A（9/22 = 41%）** — 全書背後觀念 Q&A 附錄；含 root + 簡介 + 3-layer 框架說明 + 22 條目錄表（含 [Q](#) 錨點連結 + 狀態追蹤） + 術語提醒 + Q01-Q09 完整內容 + 末尾 S13-S15 路線 + 時間戳 |
+| docs/book/front-foreword.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q01 圖解優先 + Strang 50 年反思 + 5 階學習階梯）+ **順手修「23 個 VizScript」→「36 個 VizScript（主章 33 + 附錄 3）」舊數字 bug**（S10 校正後遺漏的不一致）|
+| docs/book/ch01-viewing-matrix.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q02 矩陣物件化躍進 + Q03 4 視角設計原則，含「三角形面積公式類比」hook）|
+| docs/book/ch02-vec-vec.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q04 點積三動機殊途同歸 + Q05 外積秩 1 原子，含「秩 1 是線代原子」hook）|
+| docs/book/ch03-mat-vec.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q06 $A\mathbf{x}$ 定義浮現 + Q07 2 視角必要性 + Q08 4 子空間自然冒出，含「2 方向 × 2 概念 = 4 不可避免」hook + Strang「線性代數的地理」原話）|
+| docs/dev/sop/SOP_DRAFT.md | 修改 | （pending — session-end Step 5b 處理）S12 補 §2.13「背後觀念 3-layer 框架」+ §2.6 補 S12 耗時資料點 + 版本記錄 0.13 |
+| docs/dev/CURRENT_SESSION.log | 修改 | S12 啟動 + 即時記錄（含 Back 拍板過程 + Q09 PoC + Q01-Q08 批量 + 4 callout）+ 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S12 一行 |
+| docs/dev/HANDOFF.md | 修改 | 整檔覆寫（最後更新 / 已完成 / 進行中 / 待辦 → S13 / 關鍵決策追加 7 條 / 檔案變更追蹤追加 S12 區 / 技術筆記追加 S12 / 新 Session 指令更新到 S13）|
+| docs/dev/RETROSPECTIVE.md | 修改 | （pending — session-end Step 6 處理）S12 對話反思追加 |
+| ~/.claude/projects/.../memory/feedback_why_layer.md | **新增（memory）** | **全書每個運算規則需附「背後觀念」3-layer 規範**（① 歷史 / ② 設計過程還原 / ③ 概念昇華 + 落點方案 D + 篇幅指南 + 觸發時機 + 自驗檢查）|
+| ~/.claude/projects/.../memory/MEMORY.md | 修改（memory）| 補一行 index 指向 feedback_why_layer.md |
 
 ---
 
@@ -401,6 +446,25 @@
 - **S10 Foreword + Conclusion + 3 附錄（散文 + 附錄混合 session）：** **~2.5h / 1290 行（158 + 198 + 272 + 328 + 334）/ 3 VizMark（1 Tier 2 旗艦 + 2 Tier 1 + pointer）— 附錄重整合 vs 主章重教學雙模式確立 + Matrix World 升級 Tier 2 旗艦（S12+ 全書首頁）**
 - **S11 預估：** **~1.5h / 整合工作（不新撰寫）**：BOOK.md 合併（13 個 md 檔依順序串接 + 重新編號）+ VIZ-CATALOG.md 抽取（36 個 VizScript 索引）+ 跨檔 anchor link grep 校驗 + 風格 / 配色 / 術語統一檢查 + 資料一致性校驗（VizScript 總數 36、`using XX` 標記譜系、雙 pointer / 單 pointer 分佈）
 - **S11 實際：** **~2h / 整合 + 校對 + 統一 5 項任務 + Strang PDF 防護**：(3) anchor 校驗 9 處 broken 修復 / (5) 一致性 Tier 表 6 處校正 / (1) BOOK.md 8650 行（**含 fence-code-aware awk 教訓**：第一輪 sed `g/^#/##/` 誤把 ch06e Python code block 內 `# 參數化單位球` 等註解改為 ## heading，重生用 awk 解決）/ (2) VIZ-CATALOG.md 241 行 / (4) SCHEMA §3.5 新增 + 23 處 sed 修正（**macOS BSD sed 不支援 `\b` word boundary，需改用 `([0-9]) ms` 不帶 boundary**）+ 額外 Strang 版權 PDF 雙保險 .gitignore 防護 + memory feedback 兩層級分開記憶
+- **S12 實際：** **~2.5h / 背後觀念層啟動 9/22 Q&A + 4 主章 callout 插入 + memory 新增**：規劃階段（4-session 路線圖 + 22 條 Q&A 清單）~30 min + Q09 PoC（2500 字 / 含九章算術原文 / Cayley 1858 / 2×2 例題雙路驗證）~30 min + Q01-Q08 批量寫（865 行 / 8 條 / 含 3 動機殊途同歸推導等深度版本）~1.5h + 4 主章 callout 客製化 + foreword 23→36 bug 修 ~15 min + memory feedback_why_layer.md 新增（3-layer 框架明文化） ~10 min。**Q&A 內容篇幅分佈：** Q01 最短 56 行（散文章節無需推導）/ Q08 最長 156 行（含 Big Picture ASCII 圖 + 完整正交補餘證明）/ 平均 ~108 行 / Q&A。**每條 Q&A 平均 ~1200-2500 字含 1-3 段歷史 + 1 段完整推導 + 1 個小例題 + 1 段昇華 + 5-15 條延伸閱讀**。
+
+### 背後觀念層撰寫資料點（S12 確立，S13-S15 沿用）
+
+| 指標 | 數值 |
+|---|---|
+| 每條 Q&A 平均行數 | ~108 行（最短 56 / 最長 156）|
+| 每條 Q&A 平均字數 | ~1500 字（最短 800 / 最長 2500）|
+| 每條 Q&A 平均寫作時間 | ~12 min |
+| Q01-Q08 batch 整體 | 865 行 / ~1.5h / 8 條 |
+| Q09 PoC（含 review 對齊風格）| 2500 字 / ~30 min |
+| 主章 callout 插入 | ~150-300 字 / 1-3 links / ~5 min / 處 |
+| memory 規範記憶 | feedback_why_layer.md ~80 行 / 10 min |
+
+**S13-S15 預估：**
+- **S13**（§4 + §5 = Q10-Q13 共 4 條 + ch04 / ch05 callout）：~2h
+- **S14**（§6 五大分解 = Q14-Q19 共 6 條 + ch06a-ch06f callout）：~2.5h
+- **S15**（附錄 = Q20-Q22 共 3 條 + 3 附錄 callout + BOOK.md 重新生成 + VIZ-CATALOG / SCHEMA / VIZ_SCHEMA callout 規範 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批收尾）：~1.5h
+- **總 S13-S15 預估：** ~6h 完成全 22 條 Q&A + 11 章 callout（剩 7 章）+ 整合收尾
 
 **§1–§6 + 序言 + 結論 + 3 附錄累計（S10 收尾）：** 共 **13 個 md 檔（ch01–ch06f 9 個主章 + front-foreword + back-conclusion + 3 附錄）= 總計 ~8100 行**（主章 6824 行 + S10 散文/附錄 1290 行）+ **36 個 VizScript**（4 個 Tier 3：[ch04 V-02](../book/ch04-mat-mat.md#vizscript-02) + [ch06f V-01](../book/ch06f-USV.md#vizscript-01) 兩支主旗艦 + ch04 V-01（Tier 2）+ ch06f V-02（Tier 2）；多支 Tier 2 含 [appendix-matrix-world V-01](../book/appendix-matrix-world.md#vizscript-01) 旗艦 + 多支 Tier 1）。**§1–§6 全書內容 100% 完成**，下階段轉入「校對 + 整合 + 風格統一」（S11）。
 
@@ -437,14 +501,18 @@
 
 ```
 請先讀取以下檔案恢復 context：
-1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔，S11 收工版）
-2. docs/dev/SESSION_INDEX.md — 歷史 session 列表（含 S11）
+1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔，S12 收工版）
+2. docs/dev/SESSION_INDEX.md — 歷史 session 列表（含 S12）
 3. docs/dev/CURRENT_SESSION.log — 上一次 session 即時記錄
-4. docs/book/VIZ-CATALOG.md — **S12+ 開工首要檔（入口 metadata 索引，挑題目用）**
-5. docs/book/BOOK.md — 全書合併單檔（8650 行，整本書離線閱讀版）
-6. docs/book/SCHEMA.md（§3.5 全書視覺錨點 — 配色 / cell / 動畫 / 3D 視角預設）+ docs/book/VIZ_SCHEMA.md（§2.3 cross-reference）
-7. docs/book/ch01–ch05 + ch06a–ch06f（9 主章）+ front-foreword + back-conclusion + 3 附錄 = 16 個 md 範本（VizScript 13 段 A-M 完整劇本）
-8. docs/dev/sop/SOP_DRAFT.md（含 S00–S10 全部章節寫作策略；S11 整合教訓待 session-end 時補）
-9. docs/dev/RETROSPECTIVE.md — Session 對話反思（S11 收工版含 1 條反思條目）
-然後從「S12+ 起步建議」決定本次任務：技術棧 PoC + 首批 Tier 3 旗艦選 ch04 V-02 (MM4 + Mona Lisa，母模板，推薦先做) 或 ch06f V-01 (SVD Master，全書最強規格)。可參考 Strang 版權 PDF（docs/book/*.pdf，已 .gitignore 不 push）補完數學推導與例題。
+4. **docs/book/appendix-D-why.md — S13 開工首要檔（背後觀念 Q&A 附錄，目前 9/22 完成；S13 從 Q10 §4 不可交換開始批量寫 Q10-Q13）**
+5. docs/book/VIZ-CATALOG.md — 全書 36 個 VizScript metadata 索引（S16+ 視覺化階段用）
+6. docs/book/BOOK.md — 全書合併單檔（8650 行，整本書離線閱讀版；S15 整合收尾需重新生成含 appendix-D-why.md）
+7. docs/book/SCHEMA.md（§3.5 全書視覺錨點）+ docs/book/VIZ_SCHEMA.md（§2.3 cross-reference）
+8. docs/book/ch01-ch05 + ch06a-ch06f + front-foreword + back-conclusion + 3 附錄 + **appendix-D-why** = 17 個 md 範本（ch01-ch03 + foreword 已含「💡 背後觀念」callout 範本）
+9. docs/dev/sop/SOP_DRAFT.md（含 S00-S12 全部章節寫作策略 + 背後觀念層 3-layer 框架）
+10. docs/dev/RETROSPECTIVE.md — Session 對話反思（含 S12 條目）
+然後從「S13 起步建議」決定本次任務：
+- **首選：S13 §4 + §5 = Q10-Q13 共 4 條 Q&A 批量寫**（Q10 矩陣乘法為什麼不可交換 / Q11 對角矩陣為什麼這麼特別 / Q12 P3 動態系統為什麼能用特徵值預測長期 / Q13 P4 三明治為什麼是線代核心）+ ch04 / ch05 主章「💡 背後觀念」callout 插入；預估 ~2h
+- **Q&A 寫作 schema：** 沿用 Q01-Q09 風格（觸發問題 + 3-layer ①歷史 / ②推導 / ③昇華 + 延伸閱讀含本書 cross-ref + 歷史原典 + 現代教科書），可大段引用 Strang《Linear Algebra for Everyone》/ 《Introduction to LA》/《LA and Learning from Data》/ Calculus Vol 1-3 等 docs/book/*.pdf 私人參考（已 .gitignore 不 push）
+- **callout schema：** 沿用 S12 ch01-ch03 範本（章節摘要末 + 術語提醒 ⚠ 後 + `---` 數學要點前；列表式 1-N 條 hook + 連結附錄 D）
 ```

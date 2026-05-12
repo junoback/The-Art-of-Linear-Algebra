@@ -10,7 +10,13 @@
 
 ## 章節摘要
 
-《The Art of Linear Algebra》是日本敏捷顧問 Kenji Hiranabe（平鍋健兒）為 Gilbert Strang 的《Linear Algebra for Everyone》撰寫的圖解筆記。書首 Hiranabe 引用 Strang 親筆推薦序，Strang 在序中明確指出：「**圖解（pictures）是展示代數的絕佳方式**」，並強調除了「**行 · 列 點積**」之外，「**線性組合**」與「**秩 1 矩陣**」才是「**完成代數與藝術**」的關鍵。這短短一句話奠定了全書的兩大主軸 — 後續 §1–§6 的所有圖解，本質上都是「線性組合 + 秩 1 矩陣」這兩個概念的視覺呈現。本互動式版本（S02–S11 開發）把書中 50 張靜態圖轉成可調參即時看結果的 Python 視覺化，並補上 23 個 VizScript 細緻劇本，把 Strang/Hiranabe 的「直覺優先教學風格」推進到「可手動互動體驗」的下一階段。
+《The Art of Linear Algebra》是日本敏捷顧問 Kenji Hiranabe（平鍋健兒）為 Gilbert Strang 的《Linear Algebra for Everyone》撰寫的圖解筆記。書首 Hiranabe 引用 Strang 親筆推薦序，Strang 在序中明確指出：「**圖解（pictures）是展示代數的絕佳方式**」，並強調除了「**行 · 列 點積**」之外，「**線性組合**」與「**秩 1 矩陣**」才是「**完成代數與藝術**」的關鍵。這短短一句話奠定了全書的兩大主軸 — 後續 §1–§6 的所有圖解，本質上都是「線性組合 + 秩 1 矩陣」這兩個概念的視覺呈現。本互動式版本（S02–S11 開發）把書中 50 張靜態圖轉成可調參即時看結果的 Python 視覺化，並補上 36 個 VizScript 細緻劇本（主章 33 + 附錄 3），把 Strang/Hiranabe 的「直覺優先教學風格」推進到「可手動互動體驗」的下一階段。
+
+> ### 💡 背後觀念：為什麼線性代數要從「圖解」開始學？
+>
+> 本書「**圖解優先**」的設計策略不是裝飾，而是 Strang 在 MIT 教線代五十年中**漸進完成的教學革命**。1976 年第一版教科書他仍用傳統「行列式 → 求逆 → 特徵值」順序；2003 年 MIT OCW 18.06 上線時改第一堂課就畫「行視角 vs 列視角」雙視角圖；2020 年《Linear Algebra for Everyone》把「**列空間 + 線性組合**」推到開門位置，行列式被推到第 5 章才出現（傳統書通常在第 2 章）。Strang 名言：「**I want students to see linear algebra, not just compute it.**」本書再加一階「**互動 = do**」（呼應 Confucius "I do and I understand"），用 36 個 VizScript 把「直覺優先」推到「動手做」的下一階段。
+>
+> → 完整 Strang 1976→2020 五十年反思歷程 + Hiranabe 譜系 + 5 階學習階梯（圖→直覺→符號→推導→互動），詳見 [Appendix D Q01](appendix-D-why.md#q01)。
 
 ---
 

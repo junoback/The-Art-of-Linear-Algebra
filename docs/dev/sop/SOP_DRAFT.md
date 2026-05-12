@@ -189,6 +189,38 @@ Back 提供 8 本 Strang 版權 PDF 至 docs/book/ 私人參考用，明確區�
 
 **關鍵教訓：** Claude 不要自行限縮引用幅度（fair use 短句策略過保守會使 md 失去完整性）；Back 為 fork 法律主體，引用判斷以 Back 授權為準。
 
+### 2.13 背後觀念 3-layer 框架（S12 確立）
+
+S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章只講「**怎麼算**」缺「**為什麼這樣算**」維度。為每條運算規則 / 定理 / 矩陣分解補上「**為什麼這條規則長這樣**」的設計動機說明，需採固定 3-layer 結構：
+
+| Layer | 內容 | 範例（Q09 矩陣乘法為什麼列乘行）|
+|---|---|---|
+| **① 歷史脈絡** | 何時 / 由誰 / 為了什麼問題而生（含經典出處與年代）| 《九章算術》方程章（西元前 1 世紀劉徽 263 年注本，原文）→ Sylvester 1850 命名 → **Cayley 1858 《A Memoir on the Theory of Matrices》正式定義矩陣代數**（附 Cayley 原論文初心引言「composition or multiplication of two operations」）|
+| **② 設計過程還原** | 從問題出發逆向推導出規則（含完整代數推導 + 1 個小例題）| 兩組線性變換 $\mathbf{y}=A\mathbf{u}$、$\mathbf{u}=B\mathbf{x}$ → 代入展開 $y_1$ → 觀察規律「$A$ 第 $i$ 行 · $B$ 第 $j$ 列」自然冒出 → 一般化定義 → 2×2 小例題雙路驗證 |
+| **③ 概念昇華** | 一句話收尾，把規則昇華為更高階概念 | 矩陣乘法 = 函數合成 $(A\circ B)$ + 5 條矩陣現象（不可交換 / 結合律 / $AI=A$ / 反矩陣順序顛倒）對照表 + Strang LAFE §1.4「秩 1 分解才是矩陣乘法核心」引言 |
+
+**3-layer 規則：**
+- **③ 概念昇華必有** — 不能寫完不收尾
+- **① 歷史層彈性** — 純概念類（如「為什麼有 4 種視角」）可略過 ①；純歷史類（如「矩陣何時被發明」）可略過 ②
+- **延伸閱讀必有** — 本書 cross-ref + 歷史原典 + 現代教科書三類
+
+**方案 D 雙層落點：**
+
+| 落點 | 篇幅 | 用途 |
+|---|---|---|
+| **主章 callout（💡 背後觀念）** | ~150-300 字 | 短摘要 hook + 連結附錄 D；放在「章節摘要」段末（術語提醒 ⚠ 後、`---`「數學要點」前）|
+| **附錄 D（appendix-D-why.md）** | 1000-2500 字 / 條 | 詳盡 3-layer + 完整推導 + 例題 + 經典引用；採客製化列表式（一章對應多 Q 時用列表 + 不重複內容只給連結）|
+
+**Q&A 之間 cross-link 形成知識網路** — 例 §3 三條互相 reference（Q06 ↔ Q07 ↔ Q08 形成三角）、§2 兩條互相 reference（Q04 ↔ Q05 點積外積對偶）、§1 ↔ §4 ↔ §6 三條互相 reference（Q01 圖解優先 ↔ Q09 矩陣乘法 ↔ Q19 SVD）。
+
+**§2.6 S12 耗時資料點：** ~2.5h / 規劃（30 min）+ Q09 PoC（30 min）+ Q01-Q08 批量（1.5h，平均 ~12 min / 條）+ 4 主章 callout（15 min）+ memory 新增（10 min）；產出 [appendix-D-why.md](../book/appendix-D-why.md) **1175 行 / 67.7 KB / 9 Q&A（9/22 = 41%）** + 4 主章 callout / 8 Q&A links + memory `feedback_why_layer.md`。
+
+**S12 教訓：**
+- **「PoC → 風格鎖定 → 批量寫」流程**有效：Q09 PoC 投入 30 min 換來 Q01-Q08 批量 1.5h 風格一致；若直接批量寫完才發現方向不對，浪費更多
+- **客製化 callout 比 boilerplate 好**：每章 callout 對應 1-3 條 Q&A，列表式短摘要 + 連結，不複製內容避免重複；每章 hook 圍繞該章節特定動機問題客製化（如 ch01 用「三角形面積公式類比」、ch02 用「秩 1 是線代原子」、ch03 用「Strang 線代地理」）
+- **順手修舊 bug**：插入 foreword callout 時順手把「23 個 VizScript」（S10 之前的舊數字）改為「36 個 VizScript（主章 33 + 附錄 3）」— 跨 session 數字一致性問題在這次又現一次（S10 已校正但 foreword 章節摘要遺漏）
+- **Memory 規範記憶配合 SOP** — feedback_why_layer.md 是 Claude 個人記憶（跨 session 自動套用）+ SOP §2.13 是專案文件（人類審閱用），兩者互補
+
 ### 2.7 收工流程（每 session 結束）
 
 依 CLAUDE.md 規範三層防呆：
@@ -219,3 +251,4 @@ Back 提供 8 本 Strang 版權 PDF 至 docs/book/ 私人參考用，明確區�
 | 0.10 | 2026-05-12 | S09：§2.6 補 §6.4 EVD + §6.5 SVD 耗時資料點（3h / **1629 行**，**SVD 章 934 行為全書最長**）+ 6 觀察：(1) **「雙 pointer 復活」判準明文化** — 雙條件「PNG 標記 + 內容旗艦同根」雙成立才升級雙 pointer（SVD 例：標 P4 + 內容與 ch04 Mona Lisa 同根 → 雙 pointer 主 ch04 + 副 ch05）/ (2) **§6.x 章節 PNG `using XX` 標記最終地圖（S07-S09 累積）：** CR1=P1 / CR2=P2 / LU1=無 / LU2=MM4 / QR=P1 / EVD=P4 / SVD=P4（共 7 圖、5 種標記）/ (3) Tier 3 主 VizScript 首次出現在 §6（SVD VizScript-01 是全書第二支 Tier 3，與 ch04 VizScript-02 並列「核心骨架雙旗艦」）/ (4) 分解章「應用面廣度」規律進一步驗證 — SVD 五層內容（4 應用 + Eckart-Young + 4 子空間 + 雙 pointer + Tier 3）使 934 行為全書最長 / (5) §6 主章序列篇幅比例 1.0:1.20:0.99:1.28:**1.71** — SVD 是「§1–§6 全書集大成終章」/ (6) §6 章節雙 pointer 設計地圖規律：對偶兩張圖（CR）+ 集大成章（SVD）採雙 pointer，單張圖且非集大成章採單 pointer |
 | **0.11** | 2026-05-12 | **S10 §1–§6 全書內容 100% 完成，附錄 + 散文章節收尾**：§2.6 補 S10 耗時資料點（**~2.5h / 1290 行 / 5 個檔案（Foreword 158 + Conclusion 198 + Map of Eigenvalues 272 + Matrix World 328 + Four Subspaces 334）/ 3 VizMark（1 Tier 2 旗艦 + 2 Tier 1）**）+ 7 觀察：(1) **附錄 PNG 重核發現新規律：3 張附錄 PNG（MapofEigenvalues / MatrixWorld / 4-Subspaces）皆無 `using XX` 標記** — HANDOFF 預估「MapofEigenvalues 可能標 P3」推翻；附錄 PNG 是「**地圖層級 / 基本概念圖**」非「Pattern 套用層級」，標記譜系與主章 §6.x 不同 / (2) **「附錄重整合 vs 主章重教學」雙模式確立** — 附錄 3 個 VizMark 都採「pointer 到主章 VizScript」策略，不重複實作（map → ch06e、4-subspaces → ch03 V-02 + ch06f V-03、Matrix World 旗艦 → 跨全書索引）/ (3) **「Matrix World 互動式索引地圖」首次升級為 Tier 2 旗艦** — appendix-matrix-world V-01 設計為「全書互動式教材的首頁」（S12+ 完成後讀者進入教材的標準入口），與 [ch06a V-01](docs/book/ch06a-five.md#vizscript-01) 五分解 dashboard 互補（前者分類學索引、後者分解視覺索引）/ (4) **back-conclusion.md 新增「全書 33 個 VizScript 總覽」段**（原書無此章）— S11 整合 BOOK.md / VIZ-CATALOG.md 的橋樑；§1–§6 主章 33 + 3 附錄 = 全書 36 個 VizScript / (5) **VizScript 數誤算發現** — HANDOFF 多 session 累積寫「23 VizScript」實為 33（漏算 ch03/ch04/ch05 各 4 個 = 12 個，少數 ~10）；S10 校正並寫進 conclusion.md。**教訓：HANDOFF 數字一致性需 S11 整合時 grep 校驗** / (6) **散文章節耗時規律：兩個散文檔（Foreword 158 行 + Conclusion 198 行）共 ~0.6h** — 主要工時在 Conclusion 的 33 VizScript 總覽表，Foreword 純翻譯 + 導讀很快 / (7) **附錄章節耗時規律：3 個附錄共 ~1.5h / 934 行**（map 272 + matrix-world 328 + 4-subspaces 334），其中 Matrix World 旗艦 VizScript（13 段 A-M）吃 ~0.5h；附錄「重整合 vs 主章重教學」模式讓篇幅 / 工時比主章節省 ~30%；3 附錄平均 311 行 / 50 min，比主章節 ~700 行 / 1.5h 高效。**S10 對 S11 影響：** §1–§6 全書內容章節 100% 完成（13 個 md 檔 + 36 個 VizScript + ~8100 行），下階段轉入「校對 + 整合 + 風格統一」（S11 預估 1.5h，主要工作是寫 BOOK.md + VIZ-CATALOG.md + 跨檔案 anchor link 校驗）|
 | **0.12** | 2026-05-13 | **S11 整合 + 校對 + 統一 5 項任務完成**：耗時 ~2h / 產出 BOOK.md 8650 行 + VIZ-CATALOG.md 241 行 + SCHEMA §3.5 全書視覺錨點段 + 23 處 sed 修正 + .gitignore 防護；**新增 §2.10「整合 session 流程」**（5 任務順序 + 教訓含 fence-code-aware awk + macOS sed `\b` 不支援 + 3D 視角預設規範補入）+ **§2.11「跨 session 大數字一致性校驗」**（HANDOFF 23→36 + conclusion 33→36 教訓融合）+ **§2.12「兩層級版權檔管理」**（PDF 不 push + md 內可大段引用）|
+| **0.13** | 2026-05-13 | **S12 背後觀念層啟動 — appendix-D-why.md 9/22 Q&A 完成 + 4 主章 callout + memory feedback_why_layer.md**：耗時 ~2.5h / 產出 appendix-D-why.md 1175 行（9 Q&A 含 Q01-Q08 批量 865 行 + Q09 PoC 310 行）+ 4 主章 callout（foreword / ch01 / ch02 / ch03，共 8 Q&A links）+ memory + foreword 23→36 bug 修；**新增 §2.13「背後觀念 3-layer 框架」**（① 歷史 + ② 設計過程還原 + ③ 概念昇華 規範 + 方案 D 雙層落點 + Q&A 間 cross-link 知識網路 + S12 4 條教訓含「PoC → 風格鎖定 → 批量寫」流程 + 「客製化 callout 優於 boilerplate」+ 「順手修舊 bug」+ 「memory + SOP 互補」）+ §2.6 補 S12 耗時資料點 |

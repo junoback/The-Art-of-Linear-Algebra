@@ -47,3 +47,21 @@ S01 收工後，使用者提出新需求「閱讀章節時同步標記視覺化�
 - **「方案 A」推薦不能變成「不容質疑」**：S02 第一章結束後若實作起來不順，要主動提「方案 B / C 是否更合適」，不要因為已寫進 HANDOFF 就堅守。
 
 ---
+
+## S06 — §5 實用模式 + Tier1+pointer 省篇幅策略首例（2026-05-12）
+
+### 本 session 主軸
+Back 開場 `開始`，session-init 後直接 `直接動手寫 ch05`。Claude 平行抓 §5 素材（en/zh + 4 張 PNG）發現 HANDOFF 列的「5 個 Pattern」漏掉 P4（$U\Sigma V^{\mathrm{T}}$ 三明治），改為 6 Pattern + 4 圖一氣寫成 830 行；驗證「Tier 1 + pointer」省篇幅策略（VizScript-03 指向 ch04 VizScript-02）。
+
+### 對話低效時刻
+- **起手沒對 PNG 重核 Pattern 數**：S06 起步時若先 grep `Figure` 數量或先讀 4 張 PNG 再開寫，會更早發現 P4，不會在心中先按 5-Pattern 結構暫存後再改 6-Pattern。實際影響不大（讀素材階段就修正了），但這是「先讀 HANDOFF 就動工 vs 先驗 HANDOFF 對 PNG 再動工」的取捨。SOP §2.6 已寫進「HANDOFF 章節描述需對 PNG 重核」當作 S07+ 鐵則。原因：信任前 session 的記憶 > 直接看原檔，這個信任默認應該倒過來。
+
+### 建議 Back 下次這樣問會更快
+- 無建議 — 本 session Back 三句指令（`開始` / `直接動手寫 ch05` / `commit + push origin main`）都極精準，無歧義空間。
+
+### Claude 自我提醒
+- **章節 session 起手第一步**：`ls figs-png/ | grep <主題>` + 多模態讀全部相關 PNG，**先確認 figure 數與內容**，再開始套 HANDOFF 預估的結構 — HANDOFF 是「上次 session 結束時的快照」，原書是「ground truth」，衝突時信原書。
+- **「Tier 1 + pointer」策略**現已驗證可行（VizScript-03 約 100 行 vs Tier 3 估 200+ 行）。S07–S09 §6 五大分解每章都該主動套用此策略：(MM4) 累加 demo 統一指向 ch04 VizScript-02、(P4) 三明治結構統一指向 ch05 VizScript-03，章內只寫各分解的「特殊性質」demo。不要因為「想顯得章節 self-contained」而重做累加動畫。
+- **對偶 Pattern / 對偶結構優先用對偶總表**（3 列 × 4 欄）而非兩兩獨立寫描述 — 節省篇幅且讀者對照更直觀，§6 5 大分解若出現對偶（如 $A=LU$ 與 $A=L^{\mathrm{T}}DL$）即套用。
+
+---

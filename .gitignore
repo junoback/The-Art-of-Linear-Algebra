@@ -1,1 +1,12 @@
 .DS_Store
+
+# === Strang 私人參考 PDF — 版權書籍，絕對不 push GitHub ===
+# (S11 2026-05-12 新增規則)
+# 預設 ignore docs/book/ 下所有 PDF（含未來新增的版權參考書）
+docs/book/*.pdf
+# 例外：原 repo 已 commit 的公開圖示 / Hiranabe 原書 PDF（白名單）
+!docs/book/The-Art-of-Linear-Algebra.pdf
+!docs/book/The-Art-of-Linear-Algebra-j.pdf
+!docs/book/The-Art-of-Linear-Algebra-zh-CN.pdf
+!docs/book/MapofEigenvalues.pdf
+!docs/book/MatrixWorld.pdf

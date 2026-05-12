@@ -156,6 +156,39 @@ S04+ 撰寫 VizScript 時直接套用上述錨點，**不要重新發明配色 /
 
 **S04 實踐：** ch03 4 個 VizMark 分級為 ⭐⭐⭐(2) / ⭐⭐(1) / ⭐(1)，章節總長 935 行可控；若 4 個都寫 800 字會膨脹到 1300+ 行失焦。
 
+### 2.10 整合 session 流程（S11 確立）
+
+**S11 是「不新撰寫，純整合 / 校對 / 統一」session**，與前 S02–S10「逐章寫」session 工作流不同。整合 session 5 項標準任務按順序執行：
+
+1. **(3) 跨檔 anchor link 校驗** — `grep -nE "\]\([a-zA-Z0-9_-]+\.md#" docs/book/*.md` 抓所有跨檔連結 + 對照每個檔案內 `grep -nE "^### VizScript-"` heading 是否實際存在。**S11 教訓：** 邏輯級 `#vizscript-NN` 連結全對（39 處）但發現 9 處 broken `#N` 短 anchor（指 ch06f §N 段落而非 VizScript），用方案 B 修復（重指 `#vizscript-01/03` 符合附錄「pointer 哲學」）
+2. **(5) 資料一致性校驗** — VizScript 總數 + `using XX` 標記地圖 + Tier 統計表三項對照。**S11 教訓：** Tier 統計表 6 處需校正（HANDOFF 累積總數 33→36、Matrix World 旗艦補入、ch06a 改 Tier 1+pointer、附錄 3 個列入、Tier 2 從~10 改 14 + 1 旗艦、Tier 1 拆 +pointer 3 個與精簡 15 個）+ S12+ 三批排程連動修正
+3. **(1) BOOK.md 完整合併** — 16 個原 md 檔依序串接（front-foreword → ch01–ch06f → back-conclusion → 3 附錄）+ root heading + 全書目錄 + 統計表。**S11 教訓：** 用 sed `s/^#/##/` 第一輪會誤改 Python code block 內的 `# 註解` 為 `## heading`；改用 **fence-code-aware awk**（追蹤 ``` ``` 狀態，code block 內保留原樣）解決
+4. **(2) VIZ-CATALOG.md 抽取** — 純 metadata 索引（**不複製內容**），每行 7 欄位（連結 + Tier + 批次 + 估時 + 互動類型 + 數學基底 + 跨章 pointer + 狀態）+ 三批排程 + 跨章 pointer ASCII 連動圖 + 進度追蹤 5 狀態。**設計哲學：** BOOK.md（離線閱讀）+ VIZ-CATALOG.md（入口索引）+ 原章節 md（實作詳情）= 三檔組合
+5. **(4) 風格 / 配色 / 術語統一檢查** — grep hex 配色出現位置 / A 派列行慣例 / cell 像素 / 動畫時間 / 3D 視角。**S11 教訓：**
+   - **macOS BSD sed 不支援 `\b` word boundary**，要用 `([0-9]) ms` 不帶 boundary 解；用 `LC_ALL=en_US.UTF-8 sed -E` 處理 UTF-8 多字節字符（如 `×`）
+   - **3D 視角預設規範**是被忽視的全書錨點 — 109 次 3D 提及但只 1 處明確聲明 → S11 補 SCHEMA.md §3.5「全書視覺錨點」段（**elevation=25° azimuth=-60°**）讓 S12+ 各 3D VizScript 有共同錨點
+
+**整合 session 耗時資料點：** S11 ~2h / 8650 行 BOOK.md 合併 + 241 行 catalog 抽取 + 23 處 sed 修正 + SCHEMA §3.5 新增 ~80 行 + .gitignore 防護 + memory 更新。
+
+### 2.11 跨 session 大數字一致性校驗 SOP（S10 + S11 教訓融合）
+
+HANDOFF.md 累積寫的「全書 VizScript 數 23」實為 36（S10 發現漏算 ch03/ch04/ch05 各 4 個共 12，少數 ~10）+ S11 conclusion 表「總計 33」也應為 36（附錄 3 漏列）— **跨 session 大數字累積誤差是常見問題**。建議規範：
+
+1. **每個整合 session 必做 grep 校驗** — `for f in ch*.md appendix-*.md; do grep -cE "^### VizScript-" "$f"; done` 即時 grep + sum，與 HANDOFF / conclusion / catalog 三處數字對照
+2. **單一真相來源確立** — conclusion.md Tier 統計表是 VIZ-CATALOG.md 的單一真相，校正一處後其他檔案隨之更新
+3. **數字校正連動修正** — 例：S11 把 conclusion 33→36 也連帶修 root heading「33 個 VizScript 總覽」→ 36 + S12+ 排程「ch06b/c/d/e 5 個」→ 4 個
+
+### 2.12 兩層級版權檔管理（S11 確立）
+
+Back 提供 8 本 Strang 版權 PDF 至 docs/book/ 私人參考用，明確區分兩層級：
+
+| 層級 | 規則 | 操作 |
+|---|---|---|
+| **PDF 檔本身** | 絕對不 push GitHub | `.gitignore` 雙保險：`docs/book/*.pdf` pattern + 5 白名單反白（已 commit 的原 repo 公開 PDF）|
+| **md 檔內引用原文** | 可大段引用（Back 授權「重點是 md 完整性」）| 引 Strang 經典定義 / 證明 / 例題段落整段複製到自家 ch0X / appendix-X md，標出處（書名 + 章節 + 頁碼）|
+
+**關鍵教訓：** Claude 不要自行限縮引用幅度（fair use 短句策略過保守會使 md 失去完整性）；Back 為 fork 法律主體，引用判斷以 Back 授權為準。
+
 ### 2.7 收工流程（每 session 結束）
 
 依 CLAUDE.md 規範三層防呆：
@@ -185,3 +218,4 @@ S04+ 撰寫 VizScript 時直接套用上述錨點，**不要重新發明配色 /
 | 0.9 | 2026-05-12 | S08：§2.6 補 §6.2 LU + §6.3 QR 耗時資料點（2.5h / 1195 行 / 主章 + 主章模式）+ 5 觀察：`using XX` 標記譜系擴大至 MM4（LU2 標 MM4、QR 標 P1、LU1 無標）/ 「單 pointer」設計比「雙 pointer」更常見（PNG 標什麼就指什麼）/ 分解章篇幅由「應用面廣度」決定（LU 解方程 + QR 最小平方使 LU > CR > QR）/ 3D 投影視覺是 QR 章獨有需求（matplotlib 3D / plotly 3D 必備）/ 「主章 + 主章」模式驗證可行（2.5h / 1195 行，比兩 session 省 0.5h）|
 | 0.10 | 2026-05-12 | S09：§2.6 補 §6.4 EVD + §6.5 SVD 耗時資料點（3h / **1629 行**，**SVD 章 934 行為全書最長**）+ 6 觀察：(1) **「雙 pointer 復活」判準明文化** — 雙條件「PNG 標記 + 內容旗艦同根」雙成立才升級雙 pointer（SVD 例：標 P4 + 內容與 ch04 Mona Lisa 同根 → 雙 pointer 主 ch04 + 副 ch05）/ (2) **§6.x 章節 PNG `using XX` 標記最終地圖（S07-S09 累積）：** CR1=P1 / CR2=P2 / LU1=無 / LU2=MM4 / QR=P1 / EVD=P4 / SVD=P4（共 7 圖、5 種標記）/ (3) Tier 3 主 VizScript 首次出現在 §6（SVD VizScript-01 是全書第二支 Tier 3，與 ch04 VizScript-02 並列「核心骨架雙旗艦」）/ (4) 分解章「應用面廣度」規律進一步驗證 — SVD 五層內容（4 應用 + Eckart-Young + 4 子空間 + 雙 pointer + Tier 3）使 934 行為全書最長 / (5) §6 主章序列篇幅比例 1.0:1.20:0.99:1.28:**1.71** — SVD 是「§1–§6 全書集大成終章」/ (6) §6 章節雙 pointer 設計地圖規律：對偶兩張圖（CR）+ 集大成章（SVD）採雙 pointer，單張圖且非集大成章採單 pointer |
 | **0.11** | 2026-05-12 | **S10 §1–§6 全書內容 100% 完成，附錄 + 散文章節收尾**：§2.6 補 S10 耗時資料點（**~2.5h / 1290 行 / 5 個檔案（Foreword 158 + Conclusion 198 + Map of Eigenvalues 272 + Matrix World 328 + Four Subspaces 334）/ 3 VizMark（1 Tier 2 旗艦 + 2 Tier 1）**）+ 7 觀察：(1) **附錄 PNG 重核發現新規律：3 張附錄 PNG（MapofEigenvalues / MatrixWorld / 4-Subspaces）皆無 `using XX` 標記** — HANDOFF 預估「MapofEigenvalues 可能標 P3」推翻；附錄 PNG 是「**地圖層級 / 基本概念圖**」非「Pattern 套用層級」，標記譜系與主章 §6.x 不同 / (2) **「附錄重整合 vs 主章重教學」雙模式確立** — 附錄 3 個 VizMark 都採「pointer 到主章 VizScript」策略，不重複實作（map → ch06e、4-subspaces → ch03 V-02 + ch06f V-03、Matrix World 旗艦 → 跨全書索引）/ (3) **「Matrix World 互動式索引地圖」首次升級為 Tier 2 旗艦** — appendix-matrix-world V-01 設計為「全書互動式教材的首頁」（S12+ 完成後讀者進入教材的標準入口），與 [ch06a V-01](docs/book/ch06a-five.md#vizscript-01) 五分解 dashboard 互補（前者分類學索引、後者分解視覺索引）/ (4) **back-conclusion.md 新增「全書 33 個 VizScript 總覽」段**（原書無此章）— S11 整合 BOOK.md / VIZ-CATALOG.md 的橋樑；§1–§6 主章 33 + 3 附錄 = 全書 36 個 VizScript / (5) **VizScript 數誤算發現** — HANDOFF 多 session 累積寫「23 VizScript」實為 33（漏算 ch03/ch04/ch05 各 4 個 = 12 個，少數 ~10）；S10 校正並寫進 conclusion.md。**教訓：HANDOFF 數字一致性需 S11 整合時 grep 校驗** / (6) **散文章節耗時規律：兩個散文檔（Foreword 158 行 + Conclusion 198 行）共 ~0.6h** — 主要工時在 Conclusion 的 33 VizScript 總覽表，Foreword 純翻譯 + 導讀很快 / (7) **附錄章節耗時規律：3 個附錄共 ~1.5h / 934 行**（map 272 + matrix-world 328 + 4-subspaces 334），其中 Matrix World 旗艦 VizScript（13 段 A-M）吃 ~0.5h；附錄「重整合 vs 主章重教學」模式讓篇幅 / 工時比主章節省 ~30%；3 附錄平均 311 行 / 50 min，比主章節 ~700 行 / 1.5h 高效。**S10 對 S11 影響：** §1–§6 全書內容章節 100% 完成（13 個 md 檔 + 36 個 VizScript + ~8100 行），下階段轉入「校對 + 整合 + 風格統一」（S11 預估 1.5h，主要工作是寫 BOOK.md + VIZ-CATALOG.md + 跨檔案 anchor link 校驗）|
+| **0.12** | 2026-05-13 | **S11 整合 + 校對 + 統一 5 項任務完成**：耗時 ~2h / 產出 BOOK.md 8650 行 + VIZ-CATALOG.md 241 行 + SCHEMA §3.5 全書視覺錨點段 + 23 處 sed 修正 + .gitignore 防護；**新增 §2.10「整合 session 流程」**（5 任務順序 + 教訓含 fence-code-aware awk + macOS sed `\b` 不支援 + 3D 視角預設規範補入）+ **§2.11「跨 session 大數字一致性校驗」**（HANDOFF 23→36 + conclusion 33→36 教訓融合）+ **§2.12「兩層級版權檔管理」**（PDF 不 push + md 內可大段引用）|

@@ -199,9 +199,9 @@ $$
 
 #### F. 動畫節奏
 
-- **Grid view → Zoom view 切換：** 該格放大 600 ms 緩動 ease-in-out，其他 11 格淡出 300 ms
-- **拉桿即時更新：** 每次值改變，特徵值橙點以 200 ms 平滑移動到新位置（matplotlib `FuncAnimation` 或 plotly transition）
-- **Markov 機率歸一動畫：** 拉桿後 softmax 後 400 ms 顯示「機率箭頭」表達向歸一收斂
+- **Grid view → Zoom view 切換：** 該格放大 600ms 緩動 ease-in-out，其他 11 格淡出 300ms
+- **拉桿即時更新：** 每次值改變，特徵值橙點以 200ms 平滑移動到新位置（matplotlib `FuncAnimation` 或 plotly transition）
+- **Markov 機率歸一動畫：** 拉桿後 softmax 後 400ms 顯示「機率箭頭」表達向歸一收斂
 
 #### G. 公式同步顯示
 
@@ -213,7 +213,7 @@ $$
 
 #### H. 驗收標準
 
-1. **拉桿同步性：** 任一拉桿改變後，矩陣 / 多項式 / 特徵值 / 散點位置應 < 300 ms 完成同步
+1. **拉桿同步性：** 任一拉桿改變後，矩陣 / 多項式 / 特徵值 / 散點位置應 < 300ms 完成同步
 2. **跨類別對比：** Grid view 12 格中至少 3 對「對偶類」（對稱 vs 反對稱 / 投影 vs 冪零 / Markov vs Singular）視覺差異一眼可辨
 3. **跳轉準確：** 「→ 看 EVD 詳解」按鈕跳轉到 ch06e VizScript-01 並把當前對稱矩陣 $S$ 帶入作為 EVD 範例輸入
 4. **常數類別處理：** $O$、$I$ 兩類無拉桿（特徵值固定），只顯示說明文字「特徵值為常數，無互動」

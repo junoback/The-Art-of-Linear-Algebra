@@ -83,3 +83,30 @@ Back 開場 `開始`，session-init 後 `依照順序開始 S10`。Claude 按 HA
 - **附錄章節 PNG 標記譜系與主章不同**：S10 確認 3 張附錄 PNG 皆無 `using XX` 標記（HANDOFF 預估 MapofEigenvalues 標 P3 推翻）— 附錄是「地圖層級 / 基本概念圖」非 Pattern 套用層級。未來其他類「整合 / 概覽 / 索引」附錄起手前也該預期「無 using 標」為常規。
 
 ---
+
+## S11 — 整合 + 校對 + 統一 session 5 項任務 100% 完成（2026-05-13）
+
+### 本 session 主軸
+Back 開「依照建議順序」執行 S11 整合 session：(3) anchor 校驗 → (5) 一致性 → (1) BOOK.md → (2) VIZ-CATALOG.md → (4) 風格統一。最後達成全 5 項任務 + 額外處理 Strang 8 本版權 PDF 防護 + memory feedback。
+
+### 對話低效時刻（具體事件 + 為什麼）
+
+- **BOOK.md 第一輪生成誤改 Python code block 內 `# 註解` 為 `## heading`**：Claude 第一輪用 `sed 's/^#/##/'` 對 16 個 md 統一降一級，沒考慮到 ch06e 有 Python code block 內含 `# 參數化單位球` / `# plotly Surface 渲染` 等註解，造成 BOOK.md 出現 4 個錯誤的一級 heading（root + 3 個 Python 註解）。原因：**Claude 假設 markdown 工具一律安全，沒先想到 sed 不認 fence code block**。發現後馬上用 awk fence-aware 重做就解了，但浪費 1 輪生成 + 驗證 → 教訓進 SOP §2.10。
+
+- **macOS BSD sed 不支援 `\b` word boundary**：Claude 第一輪 sed 用 `s/([0-9]) ms\b/\1ms/g` 處理空格不一致，結果只清了一半（ch*.md 部分 OK 但 appendix-*.md 13 處仍在）。原因：**Claude 用 GNU sed 習慣寫 `\b`，沒驗證 macOS BSD sed 是否支援**。改用無 boundary 的 `([0-9]) ms` 就解了 → 教訓進 SOP §2.10 第 5 點。
+
+- **VIZ-CATALOG 設計問 Back「抽取 vs 留原處」**：Back 問「抽取出來跟放在原處，哪樣對後續視覺化比較容易對上位置？」Claude 回得不錯（兩個都需要 + 角色不同），但其實這個問題的答案在 HANDOFF S11 起步建議裡已暗示（catalog 是「metadata 索引」+ 原 md 是「實作詳情」），Claude 應主動先點出此設計再問選項。
+
+### 建議 Back 下次這樣問會更快
+
+- **複雜 schema / 大檔合併任務**：之前 Back 說「(1) BOOK.md 合併，從 a（完整合併單檔）」很精準，沒可改善處。但若想避免 Claude 用 sed 踩 code block 坑，可預先說「合併時注意 ch06e 內有 Python code block，不要誤改 `# 註解`」— 但這是 Claude 本應預想到的，不該 Back 提醒。
+- **數字一致性校驗**：S10 + S11 連兩次發現 HANDOFF 累積數字錯誤（23→33→36 + 33→36），下次可在 session 啟動時主動跟 Claude 說「先 grep 一次 VizScript 計數」當作 warm-up — 但這也已寫進 SOP §2.11，Claude 應自動做。
+
+### Claude 自我提醒（不需 Back 督促也該做的事）
+
+- **markdown 大規模處理前先 fence-aware**：BOOK.md 合併 / 跨檔 sed 修正類任務，**第一輪就用 awk 追蹤 ``` fence 狀態**，不要先用 sed `^#` 圖方便；發現問題回頭重做浪費 cache + 時間。
+- **macOS BSD sed 不認 GNU 擴展 (`\b` / `\w` / `\s` 等)**：寫 sed 前先確認 OS + sed 版本；複雜 pattern 用 `LC_ALL=en_US.UTF-8 sed -E` 處理 UTF-8 多字節字符。或乾脆用 Python 替代 sed 做大規模修改。
+- **整合 session 一律 grep 驗證大數字**：HANDOFF 寫的「~8100 行 / 36 VizScript / 16 個 md 檔」等不要當作真實，session 起步 5 秒 grep 驗證一次（`grep -cE "^### VizScript-" docs/book/*.md` + `wc -l`）。
+- **設計問題先給推薦再列選項**：當 Back 問「A vs B 哪個對 X 較容易」時，先給推薦理由 + 點出 A/B 是補充而非替代（如果是）+ 列選項，比純列選項更高效；S11 VIZ-CATALOG 那輪我做了，但 BOOK.md a/b/c 選項那輪我列了 3 個沒先點出推薦，Back 還是選了 a（推薦項）— 表明推薦是有用的訊號。
+
+---

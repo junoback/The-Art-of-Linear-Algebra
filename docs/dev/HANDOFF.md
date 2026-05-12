@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S10（**§1–§6 全書內容章節 100% 完成 + 附錄 + 散文章節收尾**，下階段轉入「校對 + 整合」）
-- **日期:** 2026-05-12
-- **狀態:** Foreword（[front-foreword.md](../book/front-foreword.md)，158 行，含 Strang 推薦序英中對照 + 三大主題導讀 + 1920-2026 緣起時間線 + 路線 A/B/C 三條閱讀路線）+ Conclusion（[back-conclusion.md](../book/back-conclusion.md)，198 行，含 Hiranabe 結論英中對照 + **全書 33 個 VizScript 總覽表（S11 整合橋樑）+ Tier 分佈統計（Tier 3 旗艦 2 + Tier 2 ~10 + Tier 1 多支）+ S12+ 實作優先順序三批排程 + 全書里程碑回顧 S00–S10**）+ 3 附錄：[Map of Eigenvalues](../book/appendix-map-eigenvalues.md)（272 行，⭐⭐ Tier 1 + pointer 指 ch06e，12 類矩陣完整表 + 對應 §6.4 EVD 三層遞進）/ [Matrix World](../book/appendix-matrix-world.md)（**328 行，⭐⭐⭐ Tier 2 旗艦 — S12+ 全書互動式教材首頁**，11 層同心橢圓繼承樹 + 偽反矩陣統一 + 兩條軸線設計 + 13 段 A-M dashboard 完整劇本）/ [The Four Subspaces](../book/appendix-four-subspaces.md)（334 行，⭐⭐ Tier 1 + pointer 指 ch03 V-02 + ch06f V-03，含 Strang 正交分解定理 + SVD 構造 4 基底 + **新增「解 $A\mathbf{x}=\mathbf{b}$ 完整解空間結構視覺」**段：特解 + 零空間平移仿射子空間 + 最小範數最優解 $\mathbf{x}^* = A^{+}\mathbf{b}$）；**S10 重大發現：3 張附錄 PNG（MapofEigenvalues / MatrixWorld / 4-Subspaces）皆無 `using XX` 標記**（HANDOFF 預估「MapofEigenvalues 可能標 P3」推翻）— 附錄是「地圖層級 / 基本概念圖」非 Pattern 套用層級，標記譜系與主章 §6.x 不同；**HANDOFF 累積錯誤校正：全書 VizScript 數從 23 校正為 36（主章 33 + 附錄 3）**；SOP §2.6 補 S10 7 觀察 + 版本 0.11；**§1–§6 全書內容 100% 完成 — 13 個 md 檔，~8100 行，36 個 VizScript**，下次 S11 進入「校對 + 整合 + 風格統一 + BOOK.md + VIZ-CATALOG.md」階段。
+- **Session:** S11（**S11 整合 + 校對 + 統一 5 項任務 100% 完成**，下階段 S12+ 進入 Python 視覺化實作）
+- **日期:** 2026-05-13
+- **狀態:** **S11 全 5 項任務完成：** (3) 跨檔 anchor 校驗 — 39 處 `#vizscript-NN` 連結邏輯全對 + 修復 9 處 broken `#N` 短 anchor（方案 B 重指 ch06f vizscript-01/03）；(5) 資料一致性校驗 — VizScript 36 / `using XX` 地圖與 HANDOFF 一致 / Tier 統計表 6 處校正（總數 33→36、Matrix World Tier 2 旗艦補入、ch06a 改 Tier 1+pointer、附錄 3 個列入）+ S12+ 三批排程連動修正；(1) BOOK.md 完整合併 — 8650 行單檔 / fence-code-aware awk 降一級避開 Python code block 內 `#` 註解 / 含全書目錄 + 統計表 + 視覺錨點段；(2) [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 抽取 — 241 行純 metadata 索引 / 36 條目（首批 2 + 次批 9 + 末批 A 7 + B 3 + C 15）+ 全章節順序總覽表 + 跨章 pointer ASCII 連動圖 + 進度追蹤段；(4) 風格統一檢查 — SCHEMA.md 新增 §3.5「全書視覺錨點」（配色 6 主色 + 輔助色階 + cell + 動畫 + **3D 視角預設 elevation=25° azimuth=-60°**）+ VIZ_SCHEMA.md cross-reference + 23 處 sed 修正（13 處 X ms→Xms / 10 處 px 空格）；**額外**：Back 提供 8 本 Strang 版權 PDF 至 docs/book/，.gitignore 雙保險防護（pattern + 5 白名單）+ memory feedback_private_pdfs.md（PDF 不 push / md 內可大段引用原文兩層級分開）；back-conclusion.md root heading「33→36」修正。**全書整合完成，S12+ 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 + ch06f V-01）開始 Python 視覺化實作。**
 
 ---
 
@@ -65,9 +65,15 @@
 - [x] **S10 PNG 重核重大發現：3 張附錄 PNG 皆無 `using XX` 標記** — HANDOFF 預估「MapofEigenvalues 可能標 P3」推翻；附錄 PNG 是「**地圖層級 / 基本概念圖**」非「Pattern 套用層級」，標記譜系與主章 §6.x 不同
 - [x] **S10 HANDOFF 累積錯誤校正：全書 VizScript 數從 23 校正為 36**（主章 33 + 附錄 3）— 前 session 多次累積寫 23 是漏算（ch03/ch04/ch05 各 4 VizScript = 12 個，多算少數 ~10）
 - [x] **S10** SOP_DRAFT.md §2.6 補 S10 7 觀察 + 版本 0.11
+- [x] **S11 任務 (3) 跨檔 anchor 校驗：** grep 全書 39 處 `#vizscript-NN` 連結邏輯全對 + 發現 9 處 broken `#N` 短 anchor 全部在 appendix-matrix-world.md (3) + appendix-four-subspaces.md (6)，方案 B 修復（重指 ch06f-USV.md#vizscript-01 或 #vizscript-03，符合附錄「pointer 哲學」）
+- [x] **S11 任務 (5) 資料一致性校驗：** VizScript 36 ✓ / `using XX` 標記地圖（CR1=P1, CR2=P2, LU1=無, LU2=MM4, QR=P1, EVD=P4, SVD=P4, 附錄 3 張無）與 HANDOFF 完全一致 / Tier 統計表 6 處校正（總數 33→36、Matrix World V-01 補入 Tier 2 旗艦獨立分類、ch06a V-01 從 Tier 2 改 Tier 1+pointer、附錄 3 個列入、Tier 2 從~10 改 14 主章+1 旗艦、Tier 1 拆 Tier 1+pointer 3 個與 Tier 1 精簡 15 個）+ S12+ 三批排程連動修正（次批新增 Matrix World 旗艦 + 修「ch06b/c/d/e 5 個」→ 4 個）
+- [x] **S11 任務 (1) BOOK.md 完整合併：** [BOOK.md](../book/BOOK.md) 8650 行單檔 / 16 個 md 依序串接（front-foreword → ch01–ch06f → back-conclusion → 3 附錄）/ fence-code-aware awk 降一級避開 Python code block 內 `#` 註解 / 含 root heading + 全書目錄 + Tier 統計 + `using XX` 標記地圖 + §6 篇幅比例 + S11 新增「全書視覺錨點」段（3D 視角預設 elevation=25° azimuth=-60° 等）
+- [x] **S11 任務 (2) [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 抽取：** 241 行純 metadata 索引（不複製內容）/ 36 條目（首批 2 + 次批 9 + 末批 A 7 + B 3 + C 15）+ 全章節順序總覽 + 跨章 pointer ASCII 連動圖 + 進度追蹤段（⏳/🔨/✅/⚠️/🔄 五狀態）/ 每行 7 欄位 metadata（連結 + Tier + 批次 + 估時 + 互動類型 + 數學基底 + 跨章 pointer + 狀態）
+- [x] **S11 任務 (4) 風格統一檢查：** SCHEMA.md 新增 §3.5「全書視覺錨點」（4 子節：配色 hex+RGB+輔助色階 / cell 寫法 / 動畫時間錨點 / 3D 視角預設）+ 版本 0.2；VIZ_SCHEMA.md §2.2 寫作要點補 cross-reference + 新增 §2.3 對照表 + 版本 0.2；sed 修空格不一致 13 處 X ms → Xms（macOS sed `\b` 不支援，改用無 boundary）+ 10 處 px 空格統一；BOOK.md 重新生成同步全部 S11 修正
+- [x] **S11 額外處理 — Strang 8 本版權 PDF 防護：** Back 提供 Linear Algebra for Everyone / Intro to LA / LA and Learning from Data / Diff Eq + LA / CSE / Calculus Vol 1-3 至 docs/book/ 私人參考用；.gitignore 雙保險（`docs/book/*.pdf` pattern + 5 白名單反白）；memory feedback_private_pdfs.md 兩層級分開（PDF 檔本身絕對不 push / md 檔內可大段引用原文以提升完整性，Back 明確授權）+ back-conclusion.md root heading「33→36」修正
 
 ### 進行中
-- 無，S10 已收尾，**§1–§6 + 序言 + 結論 + 3 附錄 = 全書 md 化 100% 完成**
+- 無，S11 已收尾，**整合 + 校對 + 統一 5 項任務 100% 完成 + Strang 版權 PDF 防護 + memory 更新**
 
 ### 待辦（多 session 路線圖 v3 — S11 整合 + S12+ 視覺化實作）
 
@@ -85,10 +91,33 @@
 | ✅ S08 | §6.2 A=LU + §6.3 A=QR | `ch06c-LU.md`（654 行）+ `ch06d-QR.md`（541 行） |
 | ✅ S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`（695 行）+ `ch06f-USV.md`（**934 行，全書最長**） |
 | ✅ S10 | Foreword + Conclusion + 3 附錄 | `front-foreword.md`（158）+ `back-conclusion.md`（198）+ `appendix-map-eigenvalues.md`（272）+ `appendix-matrix-world.md`（**328 旗艦**）+ `appendix-four-subspaces.md`（334）= **1290 行 + 3 VizMark** |
-| **→ S11** | 整合 + 校對 + 風格統一 + `BOOK.md` + `VIZ-CATALOG.md` | 合併版書 + 視覺化候選池目錄 + 跨檔 anchor link 校驗 |
+| ✅ S11 | 整合 + 校對 + 風格統一 + `BOOK.md` + `VIZ-CATALOG.md` + Strang PDF 防護 | [BOOK.md](../book/BOOK.md)（8650 行）+ [VIZ-CATALOG.md](../book/VIZ-CATALOG.md)（241 行 metadata）+ SCHEMA.md §3.5 全書視覺錨點 + 9 處 anchor 修復 + Tier 表 6 處校正 + 23 處風格 sed 修正 + .gitignore PDF 防護 |
+| **→ S12** | **Python 視覺化技術棧 PoC + 首批 Tier 3 旗艦實作起步** | 技術棧決策（推薦 Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）+ 從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 首批挑題：ch04 V-02 (MM4 + Mona Lisa) 或 ch06f V-01 (SVD Master) 開始 PoC，預估各 3 session |
 | S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （延後到 S11 後再細規劃，預估 ~28–30 session）|
 
-### S11 起步建議
+### S12+ 起步建議（S11 已完成，本段為下一階段路線）
+
+1. **S12+ 「技術棧 PoC + 首批旗艦 PoC」session**（預估 ~3 session 技術棧 + 各 3 session 旗艦）：
+   - **技術棧 PoC：** Marimo notebook + plotly 3D + matplotlib + scikit-learn + Pillow（圖像 / Mona Lisa demo）+ scipy（pinv / eig 等）—  跑通 hello world + 1 個簡單 widget
+   - **首批 Tier 3 旗艦 PoC：** 從 [VIZ-CATALOG.md 首批](../book/VIZ-CATALOG.md#-首批--核心骨架旗艦2-個-tier-3-旗艦6-session) 挑：
+     - **選項 A：** [ch04 V-02 MM4 + Mona Lisa](../book/ch04-mat-mat.md#vizscript-02) — 母模板，後續所有 §6 五分解都 pointer 到此
+     - **選項 B：** [ch06f V-01 SVD Master](../book/ch06f-USV.md#vizscript-01) — 全書最強規格 + 4 應用切換 + 雙 pointer 設計
+   - 推薦 A 先做（母模板優勢 + 完成後 §6 五分解 pointer 全部解鎖）
+
+2. **依賴鏈考量：** ch04 V-02 完成後解鎖：ch06b/c/d V-01 全部 pointer / ch06a V-01 dashboard 控制器 / ch06f V-01（雙 pointer 主指向）
+
+3. **參考工件：**
+   - [BOOK.md](../book/BOOK.md) — 整本書離線閱讀版（8650 行）
+   - [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) — 入口 metadata 索引（**S12+ 開工每天用此檔挑題目**）
+   - [SCHEMA.md §3.5](../book/SCHEMA.md#35-全書視覺錨點s11-規範化) — 全書視覺錨點規範（配色 / cell / 動畫 / 3D 視角）
+   - [VIZ_SCHEMA.md §2.3](../book/VIZ_SCHEMA.md#23-全書視覺錨點-cross-references11-規範化) — VizScript 撰寫時的視覺錨點 cross-reference
+   - [docs/dev/sop/SOP_DRAFT.md](sop/SOP_DRAFT.md) — 累積 11 個 session 寫作經驗 + S11 整合教訓
+
+4. **Strang 8 本版權 PDF 已備齊：**（私人參考，不 push GitHub）
+   - 寫互動式劇本時可引 Linear Algebra for Everyone Ch.7（SVD）/ Linear Algebra and Learning from Data Ch.1（Mona Lisa 原型）等補完數學推導與例題
+   - md 內**可大段引用原文**（Back 明確授權，提升 md 完整性）— PDF 檔本身不 push 即可
+
+### S11 起步建議（已完成，保留歷史）
 
 1. **S11 是「整合 / 校對 / 統一 session」** — 預估 1.5h，主要工作不是新撰寫而是合併 + 校驗
 2. **核心產出 1：`BOOK.md`** — 把 13 個 md 檔（ch01 + ch02 + ch03 + ch04 + ch05 + ch06a + ch06b + ch06c + ch06d + ch06e + ch06f + front-foreword + back-conclusion + 3 附錄）依正確順序合併為單一檔案：
@@ -214,6 +243,13 @@
 | 2026-05-12 | **S10 確立「全書 33 個 VizScript 總覽段是 S11 整合的橋樑」** | back-conclusion.md 新增此段（原書無）讓 S11 BOOK.md / VIZ-CATALOG.md 整合直接抽取，省 0.5 session 額外整理 |
 | 2026-05-12 | **S10 校正「HANDOFF 累積錯誤 — VizScript 數從 23 校為 36」** | 前 session 累積寫 23 是漏算 ch03/ch04/ch05 各 4 = 12 個；S11 整合時 grep 校驗為共識統計值的標準步驟 |
 | 2026-05-12 | **S10 確立「四子空間附錄新增『解 $A\mathbf{x}=\mathbf{b}$ 完整解空間結構視覺』」** | 與 [appendix-matrix-world.md](../book/appendix-matrix-world.md) 底部偽反公式 $A^{+} = V\Sigma^{+}U^{\mathrm{T}}$ 對應，把「解方程」完整結構（特解 + 零空間 + 仿射子空間 + 最小範數最優解）整合進附錄；§6.5 SVD 章未深入此面 |
+| 2026-05-13 | **S11 確立「broken anchor 修復方案 B：重指 VizScript 級 anchor」** | 附錄本來就是「重整合 → pointer 到主章 VizScript」設計，9 處 broken `#N` 短 anchor 改指 `#vizscript-01/03` 比指 `§N` 段落更符合附錄哲學 |
+| 2026-05-13 | **S11 確立「BOOK.md vs VIZ-CATALOG.md 雙檔組合最有效」** | BOOK.md = 整本書下載/離線閱讀（8650 行）；VIZ-CATALOG.md = 入口 metadata 索引（241 行純連結 + 7 欄位）— 兩個不是替代而是補充，S12+ 開工先看 catalog 挑題再跳原章節讀 13 段 A-M 劇本 |
+| 2026-05-13 | **S11 確立「fence-code-aware awk 降一級策略」** | sed `g/^#/##/` 第一輪會誤把 ch06e Python code block 內「# 參數化單位球」「# plotly Surface 渲染」等註解改為 ## heading；改用 awk + ``` fence 追蹤狀態解 — 未來 BOOK.md 重新生成都用此邏輯 |
+| 2026-05-13 | **S11 確立「全書 3D 視角預設規範 elevation=25° azimuth=-60°」** | 全書 109 次 3D 提及但 S11 前只 1 處明確聲明（ch03 V-02）；補規範後 ch06d/06e/06f/App C 等 3D VizScript 有共同錨點，S12+ 實作渲染風格一致 |
+| 2026-05-13 | **S11 確立「動畫時間 / px 寫法強制統一無空格 `Xms` / `AAxBB px`」** | 全書 X ms (16) vs Xms (38) 不一致，sed 統一為無空格 ms；px 統一中間 × 兩側無空格、px 前 1 空格；macOS BSD sed 不支援 `\b` word boundary 需注意 |
+| 2026-05-13 | **S11 確立「Strang 版權 PDF 兩層級分開處理」** | PDF 檔本身絕對不 push GitHub（.gitignore pattern + 5 白名單反白）；md 檔內可大段引用原文（Back 明確授權「重點是 md 完整性」）— S12+ 撰寫補充章節可直接引 Strang 原始定義/例題 |
+| 2026-05-13 | **S11 確立「back-conclusion.md Tier 統計表是 VIZ-CATALOG.md 的單一真相來源」** | S11 把 conclusion 表從「主章 33 個」校為「全書 36 個」+ 加入 Matrix World Tier 2 旗艦 + ch06a 改 Tier 1+pointer + 附錄 3 個列入 — VIZ-CATALOG.md 直接引此表為統計基礎 |
 
 ---
 
@@ -236,6 +272,26 @@
 | docs/dev/sop/SOP_DRAFT.md | 修改 | §2.6 補 S10 耗時資料點（~2.5h / 1290 行 / 5 個檔案 / 3 VizMark = 1 Tier 2 旗艦 + 2 Tier 1）+ 7 觀察（附錄 PNG 無標記新規律 / 附錄重整合 vs 主章重教學雙模式 / Matrix World Tier 2 旗艦首次出現 / Conclusion 33 VizScript 總覽段是 S11 橋樑 / HANDOFF 累積錯誤校正 23→36 / 散文章節耗時規律 / 附錄章節耗時規律）+ 版本記錄追加 0.11 |
 | docs/dev/CURRENT_SESSION.log | 修改 | S10 啟動 + 即時記錄 + 結束記錄 |
 | docs/dev/SESSION_INDEX.md | 修改 | 追加 S10 一行 |
+
+### S11 新增/修改的檔案
+
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/BOOK.md | 新增 | **8650 行全書合併單檔** — 16 個 md 依序串接（front-foreword → ch01–ch06f → back-conclusion → 3 附錄）+ root heading + 全書目錄 + Tier 統計表 + using XX 標記地圖 + §6 篇幅比例 + S11 新增「全書視覺錨點」段；採 fence-code-aware awk 降一級避開 Python code block 內 `#` 註解 |
+| docs/book/VIZ-CATALOG.md | 新增 | **241 行純 metadata 索引** — 36 個 VizScript 三批排程（首批 2 + 次批 9 + 末批 A 7 + B 3 + C 15）+ 全章節順序總覽 + 跨章 pointer ASCII 連動圖 + 進度追蹤（⏳/🔨/✅/⚠️/🔄 五狀態）+ 每行 7 欄位 metadata（連結 + Tier + 批次 + 估時 + 互動類型 + 數學基底 + 跨章 pointer + 狀態）|
+| docs/book/SCHEMA.md | 修改 | 新增 §3.5「全書視覺錨點」段（4 子節：3.5.1 配色 6 主色 hex+RGB+輔助色階兩變形+灰階補助 / 3.5.2 cell 像素尺寸規範 / 3.5.3 動畫時間錨點 + 無空格寫法 / 3.5.4 **3D 視角預設 elevation=25° azimuth=-60°**）+ 版本記錄追加 0.2 |
+| docs/book/VIZ_SCHEMA.md | 修改 | §2.2 寫作要點 3/4 補 SCHEMA.md §3.5 cross-reference + 新增 §2.3「全書視覺錨點 cross-reference」對照表（4 項）+ 版本記錄追加 0.2 |
+| docs/book/back-conclusion.md | 修改 | Tier 統計表 6 處校正（總數 33→36、Matrix World V-01 補入 Tier 2 旗艦獨立分類、ch06a V-01 從 Tier 2 改 Tier 1+pointer、附錄 3 個列入、Tier 2 從~10 改 14 主章+1 旗艦、Tier 1 拆 Tier 1+pointer 3 個與 Tier 1 精簡 15 個）+ S12+ 三批排程連動修正 + root heading「33→36」修正 |
+| docs/book/appendix-matrix-world.md | 修改 | 3 處 broken `#N` anchor → `#vizscript-01/03`（方案 B）：`#6`→V-01、`#64`→V-01、`#2`→V-03 |
+| docs/book/appendix-four-subspaces.md | 修改 | 6 處 broken `#N` anchor → `#vizscript-01/03`（方案 B）：4 個 `#4`→V-03 / `#64`→V-01 / `#7`→拿掉 anchor（無對應 VizScript）|
+| docs/book/appendix-map-eigenvalues.md | 修改 | sed 修 X ms→Xms 空格不一致（與其他附錄一起批次處理）|
+| .gitignore | 修改 | 新增 `docs/book/*.pdf` pattern + 5 個白名單反白（The-Art-of-Linear-Algebra*.pdf / MapofEigenvalues.pdf / MatrixWorld.pdf）防 8 本 Strang 版權 PDF 誤 push |
+| docs/dev/sop/SOP_DRAFT.md | （pending）| S11 整合 + 風格統一教訓待補（session-end Step 5b 處理）|
+| docs/dev/CURRENT_SESSION.log | 修改 | S11 啟動 + 即時記錄（含 5 項任務逐步完成）+ 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S11 一行 |
+| docs/dev/RETROSPECTIVE.md | 修改 | S11 對話反思追加（session-end Step 6 處理）|
+| ~/.claude/projects/.../memory/feedback_private_pdfs.md | 新增（memory）| Strang 8 本版權 PDF 兩層級處理規範（PDF 不 push / md 內可大段引用原文，Back 授權）|
+| ~/.claude/projects/.../memory/MEMORY.md | 修改（memory）| 補一行 index 指向 feedback_private_pdfs.md |
 
 ---
 
@@ -344,6 +400,7 @@
 - **S09 §6.4 EVD + §6.5 SVD（兩章主章模式收尾）：** 3h / 1629 行（695 + 934）/ 7 VizMark — SVD 章 934 行為全書最長 + Tier 3 主 VizScript 首次出現在 §6
 - **S10 Foreword + Conclusion + 3 附錄（散文 + 附錄混合 session）：** **~2.5h / 1290 行（158 + 198 + 272 + 328 + 334）/ 3 VizMark（1 Tier 2 旗艦 + 2 Tier 1 + pointer）— 附錄重整合 vs 主章重教學雙模式確立 + Matrix World 升級 Tier 2 旗艦（S12+ 全書首頁）**
 - **S11 預估：** **~1.5h / 整合工作（不新撰寫）**：BOOK.md 合併（13 個 md 檔依順序串接 + 重新編號）+ VIZ-CATALOG.md 抽取（36 個 VizScript 索引）+ 跨檔 anchor link grep 校驗 + 風格 / 配色 / 術語統一檢查 + 資料一致性校驗（VizScript 總數 36、`using XX` 標記譜系、雙 pointer / 單 pointer 分佈）
+- **S11 實際：** **~2h / 整合 + 校對 + 統一 5 項任務 + Strang PDF 防護**：(3) anchor 校驗 9 處 broken 修復 / (5) 一致性 Tier 表 6 處校正 / (1) BOOK.md 8650 行（**含 fence-code-aware awk 教訓**：第一輪 sed `g/^#/##/` 誤把 ch06e Python code block 內 `# 參數化單位球` 等註解改為 ## heading，重生用 awk 解決）/ (2) VIZ-CATALOG.md 241 行 / (4) SCHEMA §3.5 新增 + 23 處 sed 修正（**macOS BSD sed 不支援 `\b` word boundary，需改用 `([0-9]) ms` 不帶 boundary**）+ 額外 Strang 版權 PDF 雙保險 .gitignore 防護 + memory feedback 兩層級分開記憶
 
 **§1–§6 + 序言 + 結論 + 3 附錄累計（S10 收尾）：** 共 **13 個 md 檔（ch01–ch06f 9 個主章 + front-foreword + back-conclusion + 3 附錄）= 總計 ~8100 行**（主章 6824 行 + S10 散文/附錄 1290 行）+ **36 個 VizScript**（4 個 Tier 3：[ch04 V-02](../book/ch04-mat-mat.md#vizscript-02) + [ch06f V-01](../book/ch06f-USV.md#vizscript-01) 兩支主旗艦 + ch04 V-01（Tier 2）+ ch06f V-02（Tier 2）；多支 Tier 2 含 [appendix-matrix-world V-01](../book/appendix-matrix-world.md#vizscript-01) 旗艦 + 多支 Tier 1）。**§1–§6 全書內容 100% 完成**，下階段轉入「校對 + 整合 + 風格統一」（S11）。
 
@@ -380,11 +437,14 @@
 
 ```
 請先讀取以下檔案恢復 context：
-1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔）
-2. docs/dev/SESSION_INDEX.md — 歷史 session 列表（含 S10）
+1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔，S11 收工版）
+2. docs/dev/SESSION_INDEX.md — 歷史 session 列表（含 S11）
 3. docs/dev/CURRENT_SESSION.log — 上一次 session 即時記錄
-4. docs/book/SCHEMA.md + docs/book/VIZ_SCHEMA.md — 雙 Schema 規範（A 派術語）
-5. docs/book/ch01–ch05 + ch06a–ch06f（9 主章）+ front-foreword + back-conclusion + 3 附錄 = 13 個 md 範本
-6. docs/dev/sop/SOP_DRAFT.md（版本 0.11，含 S00–S10 全部章節寫作策略 + 7 個 S10 觀察）
-然後繼續「待辦」中的第一項任務（S11 整合 + 校對 + 統一 + BOOK.md + VIZ-CATALOG.md + 跨檔 anchor link 校驗，預估 1.5h；§1–§6 全書內容 100% 完成，下階段為「整合 + 風格統一」非新撰寫）。
+4. docs/book/VIZ-CATALOG.md — **S12+ 開工首要檔（入口 metadata 索引，挑題目用）**
+5. docs/book/BOOK.md — 全書合併單檔（8650 行，整本書離線閱讀版）
+6. docs/book/SCHEMA.md（§3.5 全書視覺錨點 — 配色 / cell / 動畫 / 3D 視角預設）+ docs/book/VIZ_SCHEMA.md（§2.3 cross-reference）
+7. docs/book/ch01–ch05 + ch06a–ch06f（9 主章）+ front-foreword + back-conclusion + 3 附錄 = 16 個 md 範本（VizScript 13 段 A-M 完整劇本）
+8. docs/dev/sop/SOP_DRAFT.md（含 S00–S10 全部章節寫作策略；S11 整合教訓待 session-end 時補）
+9. docs/dev/RETROSPECTIVE.md — Session 對話反思（S11 收工版含 1 條反思條目）
+然後從「S12+ 起步建議」決定本次任務：技術棧 PoC + 首批 Tier 3 旗艦選 ch04 V-02 (MM4 + Mona Lisa，母模板，推薦先做) 或 ch06f V-01 (SVD Master，全書最強規格)。可參考 Strang 版權 PDF（docs/book/*.pdf，已 .gitignore 不 push）補完數學推導與例題。
 ```

@@ -59,7 +59,7 @@ A^{+} = V \Sigma^{+} U^{\mathrm{T}} & \text{對任意 } A \in \mathbb{R}^{m \tim
 \end{cases}
 $$
 
-其中 $\Sigma^{+}$ 是 $\Sigma$ 的偽反（$\sigma_p > 0$ 取倒數，$\sigma_p = 0$ 維持 0）。**$A^{+}$ 把「逆矩陣」這個只對可逆方陣有效的概念，推廣到所有 $m \times n$ 矩陣** — 這是 SVD 的核心應用之一（已在 [ch06f §6 (4 大應用)](ch06f-USV.md#6) 詳述）。
+其中 $\Sigma^{+}$ 是 $\Sigma$ 的偽反（$\sigma_p > 0$ 取倒數，$\sigma_p = 0$ 維持 0）。**$A^{+}$ 把「逆矩陣」這個只對可逆方陣有效的概念，推廣到所有 $m \times n$ 矩陣** — 這是 SVD 的核心應用之一（已在 [ch06f VizScript-01 4 應用切換](ch06f-USV.md#vizscript-01) 詳述）。
 
 ### 3. Matrix World 的兩條軸線
 
@@ -170,13 +170,13 @@ Matrix World 是「**矩陣分類學的視覺百科**」 — 把所有重要矩�
 
 **洞察 1：「外層的矩陣分解適用更廣，內層的分解更精緻」** — 最外層的 $A = CR$ 和 $A = U\Sigma V^{\mathrm{T}}$ 適用**任意矩陣**，但分解結構相對「弱」（CR 的 $C$/$R$ 不對稱、SVD 的 $U/V$ 雖然正交但需排序）。最內層的對稱譜分解 $S = Q\Lambda Q^{\mathrm{T}}$ 只適用對稱矩陣，但結構**最優美**（$Q$ 兩側對稱、$\Lambda$ 對角全實）。**這個「廣 vs 精」的折衷是 §6 五大分解設計的核心邏輯**。
 
-**洞察 2：「偽反矩陣 $A^{+}$ 統一了所有逆運算」** — 圖底部「$A^{-1} = V\Sigma^{-1}U^{\mathrm{T}} \leftrightarrow A^{+} = V\Sigma^{+}U^{\mathrm{T}}$」是整個 Matrix World 的「**底層統一定理**」。**任何矩陣**（含 singular、瘦長、矮胖）都可用 SVD 算偽反，這把「解 $A\mathbf{x}=\mathbf{b}$」從「方陣可逆」推廣到「**任意矩陣的最小範數解**」（[ch06f §6.4 推薦系統 / 矩陣補全](ch06f-USV.md#64) 的核心應用）。
+**洞察 2：「偽反矩陣 $A^{+}$ 統一了所有逆運算」** — 圖底部「$A^{-1} = V\Sigma^{-1}U^{\mathrm{T}} \leftrightarrow A^{+} = V\Sigma^{+}U^{\mathrm{T}}$」是整個 Matrix World 的「**底層統一定理**」。**任何矩陣**（含 singular、瘦長、矮胖）都可用 SVD 算偽反，這把「解 $A\mathbf{x}=\mathbf{b}$」從「方陣可逆」推廣到「**任意矩陣的最小範數解**」（[ch06f VizScript-01 推薦系統 / 矩陣補全 應用](ch06f-USV.md#vizscript-01) 的核心應用）。
 
 **洞察 3：「Symmetric 是矩陣世界的『樞紐』類別」** — 從圖中可見：
 - Symmetric → Positive Semidefinite → Positive Definite 是**連續正定性**的階梯
 - Symmetric → $S = Q\Lambda Q^{\mathrm{T}}$ 是**正交對角化**的標誌
 - Symmetric ⊂ Normal ⊂ Diagonalizable 是**對稱推廣**的階梯
-- 任意矩陣 $A$ → $A^{\mathrm{T}}A$ 是「**從任意推導出對稱**」的標準操作（SVD 構造算法核心，見 [ch06f §2 SVD 構造](ch06f-USV.md#2)）
+- 任意矩陣 $A$ → $A^{\mathrm{T}}A$ 是「**從任意推導出對稱**」的標準操作（SVD 構造算法核心，見 [ch06f VizScript-03 4 子空間 SVD 構造](ch06f-USV.md#vizscript-03)）
 
 **常見誤解：**
 
@@ -246,11 +246,11 @@ Matrix World 是「**矩陣分類學的視覺百科**」 — 把所有重要矩�
 
 #### F. 動畫節奏
 
-- **Hover 進入：** 200 ms 加粗邊框 + tooltip 淡入
-- **Click 觸發 Panel：** 400 ms 右側 panel 滑入（ease-out）+ Map view 縮小到 800 px 寬
-- **章節過濾器切換：** 600 ms 所有非該章節元素淡出至 30% 透明度，該章節元素閃爍 2 次後保持高亮
-- **範例矩陣辨認動畫：** 800 ms「**從外到內**」依序高亮對應層橢圓（呈現「往內收斂」直覺）
-- **跳轉按鈕點擊：** 200 ms fade-out Map view + 800 ms 過渡到目標 VizScript
+- **Hover 進入：** 200ms 加粗邊框 + tooltip 淡入
+- **Click 觸發 Panel：** 400ms 右側 panel 滑入（ease-out）+ Map view 縮小到 800 px 寬
+- **章節過濾器切換：** 600ms 所有非該章節元素淡出至 30% 透明度，該章節元素閃爍 2 次後保持高亮
+- **範例矩陣辨認動畫：** 800ms「**從外到內**」依序高亮對應層橢圓（呈現「往內收斂」直覺）
+- **跳轉按鈕點擊：** 200ms fade-out Map view + 800ms 過渡到目標 VizScript
 
 #### G. 公式同步顯示（Mini-Dashboard panel）
 
@@ -271,7 +271,7 @@ Matrix World 是「**矩陣分類學的視覺百科**」 — 把所有重要矩�
 
 #### I. 邊界與健壯性
 
-- **小尺寸矩陣輸入：** 1×1 純數字（純拉桿）視為 Diagonal 子集；2×2 / 3×3 完整辨認；4×4+ 顯示「**矩陣較大、辨認可能耗時 < 200 ms**」 progress bar
+- **小尺寸矩陣輸入：** 1×1 純數字（純拉桿）視為 Diagonal 子集；2×2 / 3×3 完整辨認；4×4+ 顯示「**矩陣較大、辨認可能耗時 < 200ms**」 progress bar
 - **數值容差：** 對稱性檢驗用 $\| S - S^{\mathrm{T}} \|_F < 10^{-6}$ 容差（避免浮點誤差）
 - **退化情形：** 對全零矩陣 $O$ 直接跳到「$O$ 是最內層」說明
 - **辨認失敗：** 若矩陣不屬於任一已知類別，提示「**此矩陣是『一般 Matrix』** — 從最外層開始」
@@ -294,7 +294,7 @@ Matrix World 是「**矩陣分類學的視覺百科**」 — 把所有重要矩�
 - **建議平台：** Marimo（反應式 notebook）+ plotly（同心橢圓可向量化縮放）+ matplotlib（高品質匯出 PNG / SVG 備用）
 - **核心套件：** `plotly.graph_objects.Scatter`（橢圓 paths）、`marimo.ui.dropdown`/`checkbox`/`text_input`（過濾器 + 矩陣輸入）、`numpy.linalg.eig`（範例矩陣特徵值計算）、`scipy.linalg.norm`（對稱性容差檢驗）
 - **資料結構：** 11 層橢圓 + 13 個分解符號 + 8 個 section number 共 32 個可點擊區域，全部編碼為 plotly traces 或 shapes
-- **效能：** 預估 32 個 traces 渲染 < 100 ms；hover/click 互動 < 50 ms
+- **效能：** 預估 32 個 traces 渲染 < 100ms；hover/click 互動 < 50ms
 - **匯出：** SVG 向量格式（保留印刷品質）+ 互動式 HTML（離線可用）
 
 #### M. 延伸與替代方案

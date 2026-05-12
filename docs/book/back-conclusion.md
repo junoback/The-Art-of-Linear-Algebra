@@ -1,4 +1,4 @@
-# 結論與致謝（Conclusion & Acknowledgements）+ 全書 33 個 VizScript 總覽 + 參考文獻
+# 結論與致謝（Conclusion & Acknowledgements）+ 全書 36 個 VizScript 總覽 + 參考文獻
 
 > **原書頁碼：** 英文版 p.32–p.34（書尾）/ 簡中版 p.32–p.34
 > **對應 .tex 段落：** `from-tex/en.md` 第 571–625 行 / `from-tex/zh.md` 第 559–602 行
@@ -96,25 +96,26 @@
 | §6.5 SVD | [ch06f-USV.md](ch06f-USV.md) | [VizScript-03](ch06f-USV.md#vizscript-03) | 4 子空間 SVD 構造（精簡，重用 ch03 V-02） | ⭐⭐ Tier 1 |
 | §6.5 SVD | [ch06f-USV.md](ch06f-USV.md) | [VizScript-04](ch06f-USV.md#vizscript-04) | 2×2 SVD 數值範例 walkthrough（Strang 經典）| ⭐ Tier 1 |
 
-### Tier 分佈統計（全書）
+### Tier 分佈統計（全書，S11 校正版）
 
 | Tier | 數量 | 列表 |
 |---|---|---|
 | ⭐⭐⭐ Tier 3 旗艦 | 2 | **[ch04 V-02](ch04-mat-mat.md#vizscript-02)（MM4 + Mona Lisa）+ [ch06f V-01](ch06f-USV.md#vizscript-01)（SVD Master）** |
 | ⭐⭐⭐ Tier 3 候選 | 1 | [ch03 V-02](ch03-mat-vec.md#vizscript-02)（4 Subspaces — S12+ 視實作時間決定升級）|
-| ⭐⭐⭐ Tier 2 | ~10 | 各章主 VizScript（ch01 V-01 / ch02 V-01 / ch03 V-01 / ch04 V-01 / ch05 V-01 / ch05 V-02 / ch06a V-01 / ch06b V-01 / ch06c V-01 / ch06d V-01 / ch06e V-01 / ch06f V-02）|
-| ⭐⭐ Tier 1 | ~13 | 各章次 VizScript（精簡 13 段或 + pointer 策略）|
-| ⭐ Tier 1 輕量 | 7 | 各章 walkthrough VizScript（單一範例動畫）|
-| **總計** | **33** | 全書 §1–§6 共 13 章節 + 9 個主 md 檔 |
+| ⭐⭐⭐ Tier 2 旗艦（附錄）| 1 | **[appendix-matrix-world V-01](appendix-matrix-world.md#vizscript-01)（Matrix World — S12+ 全書互動式教材首頁）**|
+| ⭐⭐ Tier 2 主章 | 14 | [ch01 V-01](ch01-viewing-matrix.md#vizscript-01) / [ch01 V-02](ch01-viewing-matrix.md#vizscript-02) / [ch02 V-01](ch02-vec-vec.md#vizscript-01) / [ch02 V-02](ch02-vec-vec.md#vizscript-02) / [ch03 V-01](ch03-mat-vec.md#vizscript-01) / [ch03 V-03](ch03-mat-vec.md#vizscript-03) / [ch04 V-01](ch04-mat-mat.md#vizscript-01) / [ch05 V-01](ch05-patterns.md#vizscript-01) / [ch05 V-02](ch05-patterns.md#vizscript-02) / [ch06b V-01](ch06b-CR.md#vizscript-01) / [ch06c V-01](ch06c-LU.md#vizscript-01) / [ch06d V-01](ch06d-QR.md#vizscript-01) / [ch06e V-01](ch06e-QLQ.md#vizscript-01) / [ch06f V-02](ch06f-USV.md#vizscript-02) |
+| ⭐⭐ Tier 1 + pointer | 3 | [ch06a V-01](ch06a-five.md#vizscript-01)（五分解 dashboard）/ [appendix-map-eigenvalues V-01](appendix-map-eigenvalues.md#vizscript-01)（12 格特徵值地圖）/ [appendix-four-subspaces V-01](appendix-four-subspaces.md#vizscript-01)（4 子空間整合）|
+| ⭐ Tier 1（精簡 / 輕量）| 15 | [ch03 V-04](ch03-mat-vec.md#vizscript-04) / [ch04 V-03](ch04-mat-mat.md#vizscript-03) / [ch04 V-04](ch04-mat-mat.md#vizscript-04) / [ch05 V-03](ch05-patterns.md#vizscript-03) / [ch05 V-04](ch05-patterns.md#vizscript-04) / [ch06b V-02](ch06b-CR.md#vizscript-02) / [ch06b V-03](ch06b-CR.md#vizscript-03) / [ch06c V-02](ch06c-LU.md#vizscript-02) / [ch06c V-03](ch06c-LU.md#vizscript-03) / [ch06d V-02](ch06d-QR.md#vizscript-02) / [ch06d V-03](ch06d-QR.md#vizscript-03) / [ch06e V-02](ch06e-QLQ.md#vizscript-02) / [ch06e V-03](ch06e-QLQ.md#vizscript-03) / [ch06f V-03](ch06f-USV.md#vizscript-03) / [ch06f V-04](ch06f-USV.md#vizscript-04) |
+| **總計** | **36** | 主章 33（13 個 md 檔 ch01–ch06f 9 章 + 4 散文 / 附錄章）+ 附錄 3（旗艦 1 + pointer 2）|
 
-### S12+ Python 實作優先順序
+### S12+ Python 實作優先順序（S11 校正版）
 
 | 批次 | 對象 | 預估 session 數 | 完成後成果 |
 |---|---|---|---|
 | **首批（核心骨架）** | ch04 V-02 + ch06f V-01（2 個 Tier 3 旗艦）| 6 session（各 3 session）| 「**全書互動式教材核心骨架 80%**」|
-| **次批（4 子空間 + 主章 Tier 2）**| ch03 V-02（升級 Tier 3）+ ch06b/c/d/e V-01（5 個 Tier 2）+ ch01/02/05 V-01（3 個 Tier 2）| ~17 session | 全書主要互動完成 |
-| **末批（散文 + 輕量 + 附錄）**| ch01/02 V-02 + Tier 1 各 + 附錄 VizMark | ~5–6 session | 全書 100% 互動 |
-| **Total S12+ 預估** | — | **~28–30 session**（不含技術棧 PoC 初期 ~3 session）| 完整互動式教材 |
+| **次批（教材首頁 + 4 子空間 + §6 主章）**| **appendix-matrix-world V-01（Tier 2 旗艦 — 教材首頁）** + ch03 V-02（升級 Tier 3 候選）+ ch06b/c/d/e V-01（4 個 §6 主章 Tier 2）+ ch01/02/05 V-01（3 個 §1/§2/§5 主章 Tier 2）| ~19 session | 全書主互動完成 + 教材首頁就緒 |
+| **末批（剩餘 Tier 2 + Tier 1 + 附錄 pointer）**| ch01/02/03/04/05/06f V-02 + ch03 V-03（7 個剩餘 Tier 2）+ 3 個 Tier 1 + pointer（含 ch06a 五分解 dashboard + 2 個附錄 pointer 整合）+ 15 個 Tier 1 精簡 / 輕量 | ~6–8 session | 全書 36 個 VizScript 全部 100% 互動 |
+| **Total S12+ 預估** | — | **~31–33 session**（不含技術棧 PoC 初期 ~3 session）| 完整互動式教材 |
 
 ---
 

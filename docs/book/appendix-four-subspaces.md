@@ -65,7 +65,7 @@ $$
 \end{array}
 $$
 
-**SVD 的「**4 子空間最佳對齊性質**」：** $U$ 和 $V$ 是**標準正交矩陣**（$U^{\mathrm{T}}U = I_m$、$V^{\mathrm{T}}V = I_n$），所以「**列空間的基底彼此正交、零空間的基底彼此正交**」 — 這是其他分解（CR / LU / QR / EVD）無法提供的優勢。**SVD 同時最優地對齊 4 子空間，是「線性代數最完整的視覺定理」**。詳細展開見 [ch06f §4 4 子空間 SVD 對齊](ch06f-USV.md#4)。
+**SVD 的「**4 子空間最佳對齊性質**」：** $U$ 和 $V$ 是**標準正交矩陣**（$U^{\mathrm{T}}U = I_m$、$V^{\mathrm{T}}V = I_n$），所以「**列空間的基底彼此正交、零空間的基底彼此正交**」 — 這是其他分解（CR / LU / QR / EVD）無法提供的優勢。**SVD 同時最優地對齊 4 子空間，是「線性代數最完整的視覺定理」**。詳細展開見 [ch06f VizScript-03 4 子空間 SVD 構造](ch06f-USV.md#vizscript-03)。
 
 ### 4. 解 $A\mathbf{x} = \mathbf{b}$ 的完整解空間結構（附錄重點 ⭐）
 
@@ -103,11 +103,11 @@ $$
 
 | 概念 | §3 主章節 | §6.5 主章節 | 本附錄補充 |
 |---|---|---|---|
-| 4 子空間定義 | [ch03 §3 第 2 段](ch03-mat-vec.md) 從 $A\mathbf{x}$ 與 $\mathbf{y}A$ 引入 | [ch06f §4](ch06f-USV.md#4) SVD 對齊 | **整合鳥瞰** — 4 子空間是 §3 入門 + §6.5 集大成 |
+| 4 子空間定義 | [ch03 §3 第 2 段](ch03-mat-vec.md) 從 $A\mathbf{x}$ 與 $\mathbf{y}A$ 引入 | [ch06f VizScript-03](ch06f-USV.md#vizscript-03) SVD 對齊 | **整合鳥瞰** — 4 子空間是 §3 入門 + §6.5 集大成 |
 | 兩塊大餅圖視覺 | [ch03 Figure 3.2](ch03-mat-vec.md) + [VizScript-02](ch03-mat-vec.md#vizscript-02) ⭐⭐⭐ Tier 3 候選 | [ch06f VizScript-03](ch06f-USV.md#vizscript-03) SVD 構造版 | **pointer 整合** — 本附錄不重複實作 |
-| SVD 基底對齊 | 未深入 | [ch06f §4 + §2 構造算法](ch06f-USV.md#4) | **正交分解定理完整版** |
-| 解 $A\mathbf{x}=\mathbf{b}$ | [ch03 §3 第 3 段](ch03-mat-vec.md) 零空間引入 | [ch06f §6.4 矩陣補全](ch06f-USV.md#64) | **完整解空間結構** + 最小二乘 + 正則化 |
-| 偽反矩陣 $A^{+}$ | 未涉及 | [ch06f §7 與其他分解關係](ch06f-USV.md#7) | **整合定義 + 與 Matrix World 連結** |
+| SVD 基底對齊 | 未深入 | [ch06f VizScript-03 構造算法](ch06f-USV.md#vizscript-03) | **正交分解定理完整版** |
+| 解 $A\mathbf{x}=\mathbf{b}$ | [ch03 §3 第 3 段](ch03-mat-vec.md) 零空間引入 | [ch06f VizScript-01 推薦系統 / 矩陣補全應用](ch06f-USV.md#vizscript-01) | **完整解空間結構** + 最小二乘 + 正則化 |
+| 偽反矩陣 $A^{+}$ | 未涉及 | [ch06f §7 與其他分解關係](ch06f-USV.md)（總結表段，無對應 VizScript） | **整合定義 + 與 Matrix World 連結** |
 
 **附錄定位：** 本附錄是「**§3 + §6.5 + Matrix World 三章的橋樑**」 — 不重複教學，只整合三章的觀點 + 補解 $A\mathbf{x}=\mathbf{b}$ 完整結構 + pointer 到旗艦 VizScript。
 
@@ -189,7 +189,7 @@ $$
 
 **為什麼這張圖是 SVD 的「終極前奏」？**
 
-§6.5 SVD 提供「**4 子空間的標準正交基底**」 — 用 $A = U \Sigma V^{\mathrm{T}}$ 同時把這四個子空間的基底**正交對齊**。**SVD 是 4-Subspaces 圖的「**填色版本**」 — 不只告訴你 4 個子空間存在，還給出每個子空間的「**最佳座標系**」**。詳見 [ch06f §4 SVD 4 子空間對齊](ch06f-USV.md#4)。
+§6.5 SVD 提供「**4 子空間的標準正交基底**」 — 用 $A = U \Sigma V^{\mathrm{T}}$ 同時把這四個子空間的基底**正交對齊**。**SVD 是 4-Subspaces 圖的「**填色版本**」 — 不只告訴你 4 個子空間存在，還給出每個子空間的「**最佳座標系**」**。詳見 [ch06f VizScript-03 SVD 4 子空間構造](ch06f-USV.md#vizscript-03)。
 
 **常見誤解：**
 
@@ -261,8 +261,8 @@ $$
 
 #### F. 動畫節奏
 
-- **拉桿即時更新：** 矩陣 / 向量改變後，特解 / 通解平面 / 最優解以 300 ms 平滑移動到新位置
-- **情境切換動畫：** 800 ms「保證有解 → 強制無解」過渡時，$\mathbf{b}$ 慢慢移出 $\mathbf{C}(A)$，最小二乘解 $\mathbf{x}^*$ 浮現（不再是 $\mathbf{x}_p$）
+- **拉桿即時更新：** 矩陣 / 向量改變後，特解 / 通解平面 / 最優解以 300ms 平滑移動到新位置
+- **情境切換動畫：** 800ms「保證有解 → 強制無解」過渡時，$\mathbf{b}$ 慢慢移出 $\mathbf{C}(A)$，最小二乘解 $\mathbf{x}^*$ 浮現（不再是 $\mathbf{x}_p$）
 - **跨子空間切換：** 點「→ 看 4 子空間結構詳解」按鈕後，左面板放大、右面板淡出，整體切換到 [ch03 V-02](ch03-mat-vec.md#vizscript-02)
 
 #### G. 公式同步顯示（右面板下方）

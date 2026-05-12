@@ -67,3 +67,18 @@
 [2026-05-12 S03] 收工更新 SOP_DRAFT.md：§2.6 補 §2 耗時資料點（1h / 497 行，驗證 ch01 範本可複用）+ 新增 §2.8「對比 / 對偶結構章節寫作模式」+ 全書視覺一致性錨點（配色 hex / cell 尺寸 / 動畫時間）+ 版本記錄追加 0.4
 [2026-05-12 S03] 收工更新 SESSION_INDEX.md（追加 S03 一行）+ HANDOFF.md（整檔覆寫）
 [2026-05-12 S03] Session 結束 — 下次 S04 §3 Matrix × Vector - 2 Ways（含 4-Subspaces 概念引入）
+
+# Session: S04
+# Started: 2026-05-12
+# git HEAD: bdce3ef (main)
+# worktree: 乾淨，只有 main repo working dir
+# 任務: §3 Matrix × Vector - 2 Ways（Mv1 點積方式 / Mv2 列向量線性組合方式 + vM1/vM2 左乘對偶 + 4-Subspaces 概念引入）
+# ---
+[2026-05-12 S04] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；worktree 乾淨（1 個 main repo working dir，無 auto-spawn 殘留）
+[2026-05-12 S04] 平行抓素材：ch02 範本（完整 13 段 A-M 結構）/ from-tex en+zh §3（line 69-112 / 68-107）/ from-pdf en.txt §3（line 116-212）/ 3 張 PNG 多模態讀圖（MatrixTimesVector / VectorTimesMatrix / 4-Subspaces — Strang 兩塊大餅圖視覺結構確認）
+[2026-05-12 S04] 撰寫 docs/book/ch03-mat-vec.md（935 行）一氣完成：標頭 + 摘要 + 數學要點（Mv1/Mv2/vM1/vM2 + Mv↔vM 對偶表 + 4 子空間定義 + 正交分解 + rank-nullity）+ 3 張圖四欄描述 + 4 個 VizMark + 4 個 VizScript + 章末延伸 + 來源對照
+[2026-05-12 S04] VizMark 分級：⭐⭐⭐ × 2（VizScript-01 Mv1↔Mv2 切換 / VizScript-02 4-Subspaces 3D 互動 — 全書最強視覺化候選）+ ⭐⭐ × 1（VizScript-03 vM 左乘對偶，共畫面只寫 transpose 差異）+ ⭐ × 1（VizScript-04 列空間軌跡，輕量輪廓版）
+[2026-05-12 S04] 更新 docs/book/_merged.md：§3 完成標記 [x]，VizMark 計數 2/1/1
+[2026-05-12 S04] 收工更新 SOP_DRAFT.md：§2.6 補 §3 耗時資料點（1.5h / 935 行）+ 新增 §2.9「多 VizMark 章節分級寫作策略」（⭐⭐⭐ 完整 / ⭐⭐ 精簡 / ⭐ 輪廓）+ 版本記錄追加 0.5
+[2026-05-12 S04] 收工更新 SESSION_INDEX.md（追加 S04 一行）+ HANDOFF.md（整檔覆寫）
+[2026-05-12 S04] Session 結束 — 下次 S05 §4 Matrix × Matrix - 4 Ways（MM1/MM2/MM3/MM4，可複用本章 Mv↔vM 對偶結構）

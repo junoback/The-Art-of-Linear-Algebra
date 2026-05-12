@@ -65,3 +65,21 @@ Back 開場 `開始`，session-init 後直接 `直接動手寫 ch05`。Claude �
 - **對偶 Pattern / 對偶結構優先用對偶總表**（3 列 × 4 欄）而非兩兩獨立寫描述 — 節省篇幅且讀者對照更直觀，§6 5 大分解若出現對偶（如 $A=LU$ 與 $A=L^{\mathrm{T}}DL$）即套用。
 
 ---
+
+## S10 — Foreword + Conclusion + 3 附錄收尾（§1–§6 全書內容 100%）（2026-05-12）
+
+### 本 session 主軸
+Back 開場 `開始`，session-init 後 `依照順序開始 S10`。Claude 按 HANDOFF S10 起步建議 5 步驟（先 PNG 重核 → 抓素材 → 順序撰寫 5 個檔）完成 1290 行 / 3 VizMark。**§1–§6 全書內容章節 100% 完成里程碑達成**（13 個 md 檔 + ~8100 行 + 36 個 VizScript）。
+
+### 對話低效時刻
+- **HANDOFF 累積錯誤晚到 S10 才校正**：S07–S09 三次 session 都寫「全書 23 VizScript」，實際是 33（主章）。Claude 動筆 Conclusion「全書 X 個 VizScript 總覽」時才 grep 校驗發現錯誤。原因：HANDOFF 數字 = 上次 session 的快照，沒人手動 grep 校驗就會跟著錯下去；應該在 S07/S08/S09 任何一次 session 起步時 `grep "^### VizScript-" docs/book/ch0*.md | wc -l` 一次驗證。**已寫進 SOP §2.6 S10 觀察 5：「HANDOFF 數字一致性需 S11 整合時 grep 校驗」**，但其實 S07 起就該如此。
+
+### 建議 Back 下次這樣問會更快
+- 無建議 — 本 session Back 兩句指令（`開始` / `依照順序開始 S10`）+ 收工指令都極精準，HANDOFF 中 S10 起步建議寫得詳細所以幾乎不需追問。
+
+### Claude 自我提醒
+- **HANDOFF 中的「累積統計值」（如 VizScript 總數、總行數、章節數）每次 session 起步時 grep 一次驗證**，不要信任上次 session 的記憶。`grep -c "^### VizScript-" docs/book/*.md` + `wc -l docs/book/ch*.md` 各執行一次只花 5 秒，但可預防 HANDOFF 數字錯誤跨多 session 累積。
+- **「整合性附錄」VizMark 設計優先採 pointer 策略**（如本次 4-subspaces 指 ch03 V-02 + ch06f V-03、map-eigenvalues 指 ch06e V-01），不重複實作主章已完成的 VizScript。但「跨全書索引地圖」類附錄例外（如 Matrix World 升 Tier 2 旗艦），因為它是「整合本身的視覺化」而非「pointer 到別處」。
+- **附錄章節 PNG 標記譜系與主章不同**：S10 確認 3 張附錄 PNG 皆無 `using XX` 標記（HANDOFF 預估 MapofEigenvalues 標 P3 推翻）— 附錄是「地圖層級 / 基本概念圖」非 Pattern 套用層級。未來其他類「整合 / 概覽 / 索引」附錄起手前也該預期「無 using 標」為常規。
+
+---

@@ -167,3 +167,24 @@
 [2026-05-12 S09] 更新 SOP_DRAFT.md：§2.6 補 S09 耗時資料點（3h / 1629 行 / SVD 章 934 行為全書最長）+ 6 觀察（雙 pointer 復活判準明文化 / §6.x PNG 標記最終地圖 / Tier 3 §6 首例 / 應用面廣度規律進一步驗證 / §6 主章序列篇幅比例 1.71 SVD 集大成 / §6 雙 pointer 設計地圖規律）+ 版本記錄追加 0.10
 [2026-05-12 S09] 收工更新 SESSION_INDEX.md（追加 S09 一行）+ HANDOFF.md（整檔覆寫，更新最後更新區 / 已完成 / 待辦至 S10 / 關鍵決策 / 檔案變更追蹤 / 技術筆記 / S10 起步建議）
 [2026-05-12 S09] Session 結束 — 下次 S10 從 Foreword + Conclusion + 附錄（MapofEigenvalues / MatrixWorld / TheFourSubspaces）開始；起步前對附錄 PNG 重核 7 種 `using XX` 標記候選（MapofEigenvalues 預期可能標 P3 動態系統 / MatrixWorld 是全書地圖無 using 標 / TheFourSubspaces 是 ch03 已用過的 Strang 兩塊大餅圖無 using 標）；**§6 主章序列收尾，§1–§6 全書內容章節 100% 完成（共 8 章節 + 5 段散文章 = 13 個 md 檔，總計約 7800 行 + 23 個 VizScript），下階段轉入「附錄 + 校對 + 整合」**
+
+# Session: S10
+# Started: 2026-05-12
+# git HEAD: 5e33f50 (main)
+# worktree: 乾淨，只有 main repo working dir（無 auto-spawn 殘留）
+# 任務: Foreword + Conclusion + 3 附錄（MapofEigenvalues / MatrixWorld / TheFourSubspaces）— 附錄 + 散文章混合 session，預估 1.5–2h / 600–800 行 / 5–6 VizMark
+# ---
+[2026-05-12 S10] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；git worktree 乾淨（只有 1 個 main repo working dir）；§1–§6 全書內容章節 100% 完成，下階段轉入「附錄 + 校對 + 整合」
+[2026-05-12 S10] PNG 重核完成：MapofEigenvalues / MatrixWorld / 4-Subspaces **三張皆無 `using XX` 標記**（HANDOFF 預估「MapofEigenvalues 可能標 P3」推翻）— 附錄 PNG 是「地圖層級」而非「Pattern 套用層級」，標記譜系與主章不同
+[2026-05-12 S10] 平行抓素材：from-tex en+zh Foreword (line 1–14) / Conclusion+References (line 571–625) 完成；確認 VizScript 錨點格式 `#vizscript-01`
+[2026-05-12 S10] 撰寫 docs/book/front-foreword.md（158 行）：Strang 推薦序英中對照 + 三大主題導讀（圖解優於符號 / 超越行列點積 / 線性組合+秩 1 矩陣完成代數的藝術）+ 1920-2026 緣起時間線 + 路線 A/B/C 三條閱讀路線；0 VizMark（散文章節）
+[2026-05-12 S10] 撰寫 docs/book/back-conclusion.md（198 行）：Hiranabe 結論英中對照 + **全書 33 個主章 VizScript 總覽表（S11 整合橋樑）** + Tier 分佈統計（Tier 3 旗艦 2 + Tier 2 ~10 + Tier 1 多支）+ S12+ 實作優先順序三批排程 + 全書 S00–S10 里程碑回顧 + 5 個參考文獻 + 致謝；0 VizMark
+[2026-05-12 S10] 撰寫 docs/book/appendix-map-eigenvalues.md（272 行）：12 類矩陣 × 特徵值幾何位置完整表 + 對應 §6.4 EVD 三層遞進關係 + 與 (P4) 三明治連結 + 12 格 dashboard 互動劇本 13 段 A-M；⭐⭐ Tier 1 + pointer 指 ch06e
+[2026-05-12 S10] 撰寫 docs/book/appendix-matrix-world.md（**328 行**）：**⭐⭐⭐ Tier 2 旗艦 — S12+ 全書互動式教材首頁**；11 層同心橢圓繼承樹（Matrix → Square → Diagonalizable → Normal → Symmetric → ... → {I, O}）+ 偽反矩陣全矩陣統一公式 + 兩條軸線設計（縱深特殊性 ⊥ 橫向對稱性）+ 13 段 A-M 完整 dashboard 劇本（3 模式切換 + 章節過濾器 + 範例矩陣辨認）
+[2026-05-12 S10] 撰寫 docs/book/appendix-four-subspaces.md（334 行）：Strang 正交分解定理 + SVD 構造 4 子空間標準正交基底 + **新增「解 $A\mathbf{x}=\mathbf{b}$ 完整解空間結構視覺」段**（特解 + 零空間平移仿射子空間 + 最小範數最優解 $\mathbf{x}^* = A^{+}\mathbf{b}$）；⭐⭐ Tier 1 + pointer 指 ch03 V-02 + ch06f V-03
+[2026-05-12 S10] **§1–§6 全書內容章節 100% 完成里程碑**：13 個 md 檔（ch01–ch06f 9 主章 + foreword + conclusion + 3 附錄）+ ~8100 行 + 36 個 VizScript（主章 33 + 附錄 3）+ 4 個 Tier 3 / Tier 2 旗艦（[ch04 V-02](docs/book/ch04-mat-mat.md#vizscript-02) + [ch06f V-01](docs/book/ch06f-USV.md#vizscript-01) + [appendix-matrix-world V-01](docs/book/appendix-matrix-world.md#vizscript-01) + [ch04 V-01]）
+[2026-05-12 S10] HANDOFF 累積錯誤校正：全書 VizScript 數從 23 校為 36（前 session 漏算 ch03/ch04/ch05 各 4 個 = 12 個，多算少數 ~10）；S11 整合 BOOK.md / VIZ-CATALOG.md 抽取時將以 36 為標準統計值
+[2026-05-12 S10] 更新 docs/book/_merged.md：S10 標 [x] + VizMark 計數「3 附錄合計 1 Tier 2 旗艦 + 2 Tier 1 + pointer」+ 章節↔圖檔對映補附錄 PNG 重核（3 張附錄 PNG **皆無 `using XX` 標記** — HANDOFF 預估推翻）+ 新增 S10 完成里程碑表
+[2026-05-12 S10] 更新 docs/dev/sop/SOP_DRAFT.md：§2.6 補 S10 耗時資料點（~2.5h / 1290 行 / 5 個檔案 / 3 VizMark）+ 7 觀察（附錄 PNG 無 using 標新規律 / 附錄重整合 vs 主章重教學雙模式 / Matrix World Tier 2 旗艦首次出現 / Conclusion 33 VizScript 總覽段是 S11 橋樑 / HANDOFF 累積錯誤校正 23→36 / 散文耗時規律 / 附錄耗時規律）+ 版本記錄追加 0.11
+[2026-05-12 S10] 收工更新 SESSION_INDEX.md（追加 S10 一行）+ HANDOFF.md（整檔覆寫，更新最後更新區 / 已完成項加 S10 + S10 PNG 重核 + HANDOFF 數字校正 + 7 觀察 / 待辦至 S11 / 關鍵決策加 6 條 / 檔案變更追蹤加 S10 / 技術筆記更新章節速度資料點 + S10 視覺錨點 + S10 術語擴充 + S12+ 三旗艦明確化 / 新 session 指令更新到 S11）
+[2026-05-12 S10] Session 結束 — 下次 S11 進入「整合 + 校對 + 風格統一 session」（預估 1.5h）：（1）BOOK.md 合併 13 個 md 檔依序串接 + 重新編號（front-foreword → ch01–ch06f → back-conclusion → 3 附錄）；（2）VIZ-CATALOG.md 抽取 36 個 VizScript 索引（Tier 3 旗艦排前）；（3）跨檔 anchor link grep 校驗（`#vizscript-01` 等是否實際存在）；（4）風格 / 配色 / 術語統一檢查；（5）資料一致性校驗（VizScript 總數 36、`using XX` 標記譜系完整地圖、雙 pointer / 單 pointer 分佈）。**§1–§6 全書內容 100% 完成 — 13 個 md 檔，~8100 行，36 個 VizScript（4 個 Tier 3 旗艦 + Tier 2 + Tier 1）**，下階段為「整合 + 風格統一」非新撰寫

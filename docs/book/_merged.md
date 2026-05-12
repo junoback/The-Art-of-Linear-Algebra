@@ -18,7 +18,7 @@
 | S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`, `ch06b-CR.md` | [x] | 總覽 1/0/0 + CR 1/1/1 | [x] | [x] |
 | S08 | §6.2 A=LU + §6.3 A=QR | `ch06c-LU.md`, `ch06d-QR.md` | [x] | LU 1/1/1 + QR 1/1/1 | [x] | [x] |
 | S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`, `ch06f-USV.md` | [x] | EVD 1/1/1 + SVD **1 Tier3 + 1 Tier2 / 1 / 1** | [x] | [x] |
-| S10 | Foreword + Conclusion + 附錄（MapofEigenvalues / MatrixWorld） | `front-foreword.md`, `back-conclusion.md`, `appendix-*.md` | [ ] | / / / | [ ] | [ ] |
+| S10 | Foreword + Conclusion + 3 附錄（MapofEigenvalues / MatrixWorld / TheFourSubspaces）| `front-foreword.md`, `back-conclusion.md`, `appendix-map-eigenvalues.md`, `appendix-matrix-world.md`, `appendix-four-subspaces.md` | [x] | 0+0+0 / **MatrixWorld 1** / 0 + **Map 0/1/0** + **4Sub 0/1/0** = 合計 **1 / 2 / 0**（Matrix World 旗艦 Tier 2）| [x] 3 VizScript | [x] |
 | S11 | 整合 + 校對 + 統一 + `BOOK.md` + `VIZ-CATALOG.md` | — | [ ] | — | — | [ ] |
 | S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 | （延後） | — | — | — | [ ] |
 
@@ -73,10 +73,21 @@
 - `SVD`（標 `using P4`，**雙 pointer 主 ch04 VizScript-02 + 副 ch05 VizScript-03**）
 - `A_USVT`（縮圖，無標記）
 
-### 附錄與封面（S10）
-- `MapofEigenvalues`
-- `MatrixWorld`
-- `TheFourSubspaces`
+### 附錄與封面（S10 ✅，3 張附錄 PNG **皆無 `using XX` 標記**）
+- `MapofEigenvalues`（**無 using 標記** — 12 類矩陣 × 特徵值幾何位置「分類地圖」，[appendix-map-eigenvalues.md](appendix-map-eigenvalues.md) ⭐⭐ Tier 1 + pointer 指 ch06e）
+- `MatrixWorld`（**無 using 標記** — 圖內標 Strang 書 section number 1.4/7.1/4.4/6.2/6.3 等，[appendix-matrix-world.md](appendix-matrix-world.md) ⭐⭐⭐ **Tier 2 旗艦** — S12+ 全書互動式教材首頁）
+- `4-Subspaces`（與 ch03 同款，**無 using 標記**，[appendix-four-subspaces.md](appendix-four-subspaces.md) ⭐⭐ Tier 1 + pointer 指 ch03 V-02 + ch06f V-03）
+- **散文章節（Foreword / Conclusion）：** [front-foreword.md](front-foreword.md) 0 VizMark / [back-conclusion.md](back-conclusion.md) 0 VizMark + 全書 33 個 VizScript 總覽段（S11 整合的橋樑）
+
+### S10 PNG `using XX` 標記重核總結（HANDOFF 預估推翻）
+
+| PNG | HANDOFF 預估 | S10 實際 | 結論 |
+|---|---|---|---|
+| MapofEigenvalues | 「可能標 P3」（動態系統）| **無 using 標** | 是「分類地圖」非 Pattern 套用 |
+| MatrixWorld | 「無 using 標」 | **無 using 標**（圖內是 Strang section number）| 是「全書地圖」非 Pattern 套用 |
+| 4-Subspaces | 「無 using 標」 | **無 using 標** | 是「基本概念圖」非 Pattern 套用 |
+
+**S10 規律：** 附錄 PNG 是「**地圖層級 / 基本概念圖**」，與 §6 主章 PNG 標 `using PX/MMX` 不同譜系。附錄重「**整合性 + pointer 到主章**」，不重複實作主章已完成的 VizScript。
 
 ---
 
@@ -119,9 +130,25 @@
 | §6.3 QR | 2–3 | 1 |
 | §6.4 QΛQᵀ | 2–3 | 1 |
 | §6.5 UΣVᵀ | 2–3 | 1 |
-| 附錄 | 1–2 | 0–1 |
-| **總計** | **24–39** | **13–14** |
+| 附錄 | **3 個（實際）** | **1（MatrixWorld 旗艦 Tier 2）** |
+| **總計（實際 S02–S10 收尾）** | **33** | **~13–14 高優先級（2 Tier 3 旗艦 + ~10 Tier 2 主章 + 1 Matrix World 附錄旗艦）** |
 
-S12+ 從 ⭐⭐⭐ 高優先級 13–14 個劇本開始挑題目實作，每個 Tier 2 估 1.5 session → **互動式 PoC 階段需 ~20 session**。
+S12+ 從 ⭐⭐⭐ Tier 3 旗艦 2 個（[ch04 V-02](ch04-mat-mat.md#vizscript-02) Mona Lisa MM4、[ch06f V-01](ch06f-USV.md#vizscript-01) SVD Master）+ Tier 2 主章 + Matrix World 旗艦地圖開始實作，每個 Tier 3 估 3 session、Tier 2 估 2 session → **互動式 PoC 階段需 ~28–30 session**。
 
-整個專案總視野：S00–S11 + S12-S31 ≈ **約 32 session 完成全書互動化**。
+整個專案總視野：S00–S11 + S12–S40 ≈ **約 38–40 session 完成全書互動化**（含技術棧 PoC 初期 ~3 session）。
+
+---
+
+## S10 完成里程碑（§1–§6 + 序言 + 結論 + 3 附錄 = 全書 md 化 100%）
+
+| 項目 | 數值 |
+|---|---|
+| 章節 md 檔總數 | **13 個** = ch01–ch06f（9 個主章）+ front-foreword + back-conclusion + 3 個附錄 |
+| 總行數（粗估）| **~8100 行** = 6824（主章）+ 1290（S10 5 檔）|
+| VizScript 總數 | **36 個** = 主章 33 個（§1=2, §2=2, §3=4, §4=4, §5=4, §6 總覽=1, §6.1=3, §6.2=3, §6.3=3, §6.4=3, §6.5=4，合計 33）+ 3 附錄各 1 = **36** |
+| Tier 3 旗艦數 | **2 個**（ch04 V-02 Mona Lisa + ch06f V-01 SVD Master）|
+| Tier 3 候選數 | **1 個**（ch03 V-02 4 子空間，S12+ 視實作時間升級）|
+| Tier 2 旗艦地圖 | **1 個**（appendix-matrix-world V-01，S12+ 全書互動式教材首頁）|
+| `using XX` PNG 標記譜系完整地圖 | **CR1=P1 / CR2=P2 / LU1=無 / LU2=MM4 / QR=P1 / EVD=P4 / SVD=P4 / 3 附錄=無**（共 10 張 §6+附錄 PNG）|
+| 雙 pointer VizScript | **2 個**（[ch06b V-01](ch06b-CR.md#vizscript-01) CR 對偶 + [ch06f V-01](ch06f-USV.md#vizscript-01) SVD 集大成）|
+| 撰寫工期 | **S00–S10 共 11 個 session，2026-05-11 至 2026-05-12，~20h 純撰寫**（含 PNG 重核 + SOP 累積）|

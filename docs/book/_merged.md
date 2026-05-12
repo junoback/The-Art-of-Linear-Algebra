@@ -15,7 +15,7 @@
 | S04 | §3 Matrix × Vector - 2 Ways（含 4-Subspaces） | `ch03-mat-vec.md` | [x] | 2 / 1 / 1 | [x] | [x] |
 | S05 | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` | [x] | 2 / 1 / 1 | [x] | [x] |
 | S06 | §5 Practical Patterns | `ch05-patterns.md` | [x] | 2 / 1 / 1 | [x] | [x] |
-| S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`, `ch06b-CR.md` | [ ] | / / / | [ ] | [ ] |
+| S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`, `ch06b-CR.md` | [x] | 總覽 1/0/0 + CR 1/1/1 | [x] | [x] |
 | S08 | §6.2 A=LU + §6.3 A=QR | `ch06c-LU.md`, `ch06d-QR.md` | [ ] | / / / | [ ] | [ ] |
 | S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`, `ch06f-USV.md` | [ ] | / / / | [ ] | [ ] |
 | S10 | Foreword + Conclusion + 附錄（MapofEigenvalues / MatrixWorld） | `front-foreword.md`, `back-conclusion.md`, `appendix-*.md` | [ ] | / / / | [ ] | [ ] |

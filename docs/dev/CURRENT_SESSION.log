@@ -114,3 +114,20 @@
 [2026-05-12 S06] 收工更新 SOP_DRAFT.md：§2.6 補 §5 耗時資料點（1h / 830 行）+ 4 觀察（HANDOFF Pattern 數量需對 PNG 重核 / 多圖小章節 vs N-way 單圖章節耗時相當 / Tier 1 + pointer 策略 / 對偶 Pattern 用總表節省篇幅）+ 版本記錄追加 0.7
 [2026-05-12 S06] 收工更新 SESSION_INDEX.md（追加 S06 一行）+ HANDOFF.md（整檔覆寫，更新關鍵決策 + 檔案變更追蹤 + 技術筆記 + 視覺錨點補紫色 / 對角矩陣 / 動態系統軌跡 + S07 起步建議）
 [2026-05-12 S06] Session 結束 — 下次 S07 §6 五大分解總覽 + §6.1 A=CR（兩章 session，採「Tier 1 + pointer」策略，(MM4) 累加 demo 全部指向 ch04 VizScript-02）
+
+# Session: S07
+# Started: 2026-05-12
+# git HEAD: 1c3c0e1 (main)
+# worktree: 乾淨，只有 main repo working dir（無 auto-spawn 殘留）
+# 任務: §6 五大分解總覽 + §6.1 A=CR — 兩章 session，撰寫 ch06a-five.md + ch06b-CR.md
+# ---
+[2026-05-12 S07] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；worktree 乾淨（1 個 main repo working dir，無 auto-spawn 殘留）
+[2026-05-12 S07] 平行抓素材：from-tex en+zh §6 §6.1（line 205–305 / 197–293）+ from-pdf en.txt §6（line 400–520）+ 5-Factorizations / A_CR / A_LU / A_QR / A_QLQT / A_USVT / CR1 / CR2 共 8 張 PNG 多模態讀圖
+[2026-05-12 S07] PNG 重核重大發現：CR1.png 右下角標 `using P1`、CR2.png 右下角標 `using P2` — 原書直接把 §6.1 圖標 §5 (P1)(P2) Pattern 的跨章連結；確認 §6.1–§6.5 全部章節需逐章核對 PNG 是否有 `using PX` 標記，可能影響 VizScript 跨章 pointer 設計
+[2026-05-12 S07] 撰寫 docs/book/ch06a-five.md（331 行）：§6 五大分解總覽 + 5 大分解總表 + 視覺辨識指紋表 + (MM4) 統一形式表 + 五大分解升級鏈 + 適用矩陣對照 + Figure 6.0 (5-Factorizations.png) 四欄描述 + VizScript-01 ⭐⭐⭐ Tier 1 + pointer「五分解互動切換 dashboard」(秩 1 累加 delegate 到 ch04 VizScript-02、三明治 delegate 到 ch05 VizScript-02/03)
+[2026-05-12 S07] 撰寫 docs/book/ch06b-CR.md（545 行）：§6.1 A=CR + 7 個數學要點段（定義 / (MM4) 連結 / (P1)(P2) 連結 / 列秩=行秩證明 / Procedure / 與其他分解關係 / 總結表）+ Figure 6.1 CR1 四欄描述（標 using P1）+ Figure 6.2 CR2 四欄描述（標 using P2）+ 3 個 VizScript：VizScript-01 ⭐⭐⭐ Tier 2「CR 拆解 + 三色獨立列高亮 + RREF 動態」（含對偶 CR1/CR2 三模式切換 + 雙 pointer 設計指 ch04 + ch05）/ VizScript-02 ⭐⭐ Tier 1 精簡「rank 與獨立列數對應」/ VizScript-03 ⭐ Tier 1 輕量「2×3 範例 walkthrough」
+[2026-05-12 S07] 「雙 pointer VizScript」設計首次採用：本章 VizScript-01 同時指 ch04 VizScript-02 看 (MM4) 累加 + 指 ch05 VizScript-01 看 (P1)(P2) 對角特例；S12+ 實作時兩個跳轉按鈕互不衝突
+[2026-05-12 S07] 更新 docs/book/_merged.md：S07 標記 [x]，VizMark 計數「總覽 1/0/0 + CR 1/1/1」（合計 ⭐⭐⭐ × 2 / ⭐⭐ × 1 / ⭐ × 1）
+[2026-05-12 S07] 收工更新 SOP_DRAFT.md：§2.6 補 S07 耗時資料點（2h / 876 行 / 兩章 session 模式首次驗證）+ 4 觀察（兩章 session 可行 / `using PX` 標記是跨章連結官方鐵證 / 雙 pointer 設計可行 / 對偶兩張圖是 §6.1–§6.5 全書一致模式）+ 版本記錄追加 0.8
+[2026-05-12 S07] 收工更新 SESSION_INDEX.md（追加 S07 一行）+ HANDOFF.md（整檔覆寫，更新最後更新區 / 已完成 / 待辦至 S08 / 關鍵決策 / 檔案變更追蹤 / 技術筆記 / S08 起步建議）
+[2026-05-12 S07] Session 結束 — 下次 S08 §6.2 A=LU + §6.3 A=QR（兩章 session 模式延續，採雙 pointer 策略，先對 PNG LU1/LU2/QR 核對是否有 using PX 標記）

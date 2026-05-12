@@ -17,7 +17,7 @@
 | S06 | §5 Practical Patterns | `ch05-patterns.md` | [x] | 2 / 1 / 1 | [x] | [x] |
 | S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`, `ch06b-CR.md` | [x] | 總覽 1/0/0 + CR 1/1/1 | [x] | [x] |
 | S08 | §6.2 A=LU + §6.3 A=QR | `ch06c-LU.md`, `ch06d-QR.md` | [x] | LU 1/1/1 + QR 1/1/1 | [x] | [x] |
-| S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`, `ch06f-USV.md` | [ ] | / / / | [ ] | [ ] |
+| S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`, `ch06f-USV.md` | [x] | EVD 1/1/1 + SVD **1 Tier3 + 1 Tier2 / 1 / 1** | [x] | [x] |
 | S10 | Foreword + Conclusion + 附錄（MapofEigenvalues / MatrixWorld） | `front-foreword.md`, `back-conclusion.md`, `appendix-*.md` | [ ] | / / / | [ ] | [ ] |
 | S11 | 整合 + 校對 + 統一 + `BOOK.md` + `VIZ-CATALOG.md` | — | [ ] | — | — | [ ] |
 | S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 | （延後） | — | — | — | [ ] |
@@ -65,11 +65,13 @@
 ### §6.3 A = QR（S08）
 - `QR`
 
-### §6.4 S = QΛQᵀ（S09）
-- `EVD`
+### §6.4 S = QΛQᵀ（S09 ✅，PNG 標 **using P4**）
+- `EVD`（標 `using P4`，單 pointer 指 ch05 VizScript-03）
+- `A_QLQT`（縮圖，無標記）
 
-### §6.5 A = UΣVᵀ（S09）
-- `SVD`
+### §6.5 A = UΣVᵀ（S09 ✅，PNG 標 **using P4**，**全書最長章 + 唯一 Tier 3 主 VizScript**）
+- `SVD`（標 `using P4`，**雙 pointer 主 ch04 VizScript-02 + 副 ch05 VizScript-03**）
+- `A_USVT`（縮圖，無標記）
 
 ### 附錄與封面（S10）
 - `MapofEigenvalues`

@@ -149,3 +149,21 @@
 [2026-05-12 S08] 更新 SOP_DRAFT.md：§2.6 補 S08 耗時資料點（2.5h / 1195 行 / 主章 + 主章模式）+ 5 觀察（using XX 譜系擴大至 MM4 / 單 pointer 比雙 pointer 更常見 / 分解章篇幅由應用面廣度決定 / 3D 投影視覺是 QR 章獨有需求 / 主章 + 主章模式驗證可行）+ 版本記錄追加 0.9
 [2026-05-12 S08] 收工更新 SESSION_INDEX.md（追加 S08 一行）+ HANDOFF.md（整檔覆寫，更新最後更新區 / 已完成 / 待辦至 S09 / 關鍵決策 / 檔案變更追蹤 / 技術筆記 / S09 起步建議）
 [2026-05-12 S08] Session 結束 — 下次 S09 §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ（兩章 session「主章 + 主章」模式延續，採單 pointer 策略，起步前對 PNG EVD/SVD 核對是否有 using P3/P4 或 MM4 標記；SVD 預期是全書最長 ~700 行）
+
+# Session: S09
+# Started: 2026-05-12
+# git HEAD: 0b2d21c (main)
+# worktree: 乾淨，只有 main repo working dir（無 auto-spawn 殘留）
+# 任務: §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ — 兩章 session「主章 + 主章」模式延續，撰寫 ch06e-QLQ.md + ch06f-USV.md（SVD 預期全書最長 ~700 行）
+# ---
+[2026-05-12 S09] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；worktree 乾淨（1 個 main repo working dir，無 auto-spawn 殘留）；候選 PNG 已盤點：A_QLQT.png / EVD.png / A_USVT.png / SVD.png（4 張），起步前需多模態讀圖確認是否有 `using P3/P4/MM4` 標記
+[2026-05-12 S09] PNG 重核重大發現：EVD.png 標 **`using P4`**（圈標）、SVD.png 標 **`using P4`**（圈標）— 兩章 PNG 都只標 P4，**HANDOFF 預估「SVD 可能 P4 + MM4 雙標」被推翻**；A_QLQT.png 與 A_USVT.png 是縮圖無標記（5-Factorizations 局部）；§6.x 章節 PNG `using XX` 最終地圖：CR1=P1/CR2=P2/LU1=無/LU2=MM4/QR=P1/EVD=P4/SVD=P4
+[2026-05-12 S09] 平行抓素材：from-tex en+zh §6.4 §6.5（en line 430–569 / zh line 418–558）+ 4 張 PNG 多模態讀圖完成；ch04/ch05/ch06d 範本錨點確認（pointer 連結用 `ch05-patterns.md#vizscript-03` 等格式）
+[2026-05-12 S09] 撰寫 docs/book/ch06e-QLQ.md（**695 行**）：§6.4 S=QΛQᵀ + 7 個數學要點段（定義 / 譜定理證明 / P_p 三性質 / (P4) 連結 / 對稱矩陣特殊性 / 與其他分解關係 / 總結表）+ Figure 6.6 EVD 四欄描述（標 using P4）+ 3 VizMark：⭐⭐⭐ Tier 2「譜分解 + 橢球主軸對齊 3D」單 pointer 指 ch05 VizScript-03 / ⭐⭐ Tier 1「P_p 三性質視覺驗證」/ ⭐ Tier 1「2×2 EVD walkthrough」
+[2026-05-12 S09] 撰寫 docs/book/ch06f-USV.md（**934 行，全書最長章**）：§6.5 A=UΣVᵀ + 8 個數學要點段（定義 Full vs Reduced / 構造算法兩 EVD 整合 / (P4) 連結 / 4 子空間對齊 / Eckart-Young 定理 / 4 大旗艦應用詳解 / 與其他分解關係 / 總結表）+ Figure 6.7 SVD 四欄描述（標 using P4）+ **4 VizMark**：⭐⭐⭐ **Tier 3** SVD 完整互動 + 4 應用切換（壓縮/PCA/降噪/推薦）+ 4 子空間 + 2D 幾何 + Mona Lisa demo（**全書唯一雙 pointer 主 ch04 VizScript-02 + 副 ch05 VizScript-03**）/ ⭐⭐⭐ Tier 2「奇異值降冪 + Eckart-Young」/ ⭐⭐ Tier 1「4 子空間 SVD 構造」/ ⭐ Tier 1「2×2 SVD walkthrough」
+[2026-05-12 S09] 「雙 pointer 復活」設計策略確立：S08 規律「PNG 標什麼就指什麼，單 pointer 為常規」修正為「**雙條件成立才升級雙 pointer**：PNG 標記重複（P4 在 EVD/SVD 都標）+ 內容旗艦同根（SVD 與 ch04 Mona Lisa demo 同根）」。EVD 嚴守單 pointer（只滿足條件 1），SVD 升級雙 pointer（兩條件都滿足）
+[2026-05-12 S09] 「Tier 3 主 VizScript」首次出現在 §6 — SVD VizScript-01 是全書第二支 Tier 3 主 VizScript（與 ch04 VizScript-02 並列「核心骨架雙旗艦」），預估 S12+ 各 3 session，完成後可宣稱「全書互動式教材核心骨架 80%」
+[2026-05-12 S09] 更新 docs/book/_merged.md：S09 標記 [x]，VizMark 計數「EVD 1/1/1 + SVD 1Tier3+1Tier2/1/1」（合計 ⭐⭐⭐ × 3 / ⭐⭐ × 2 / ⭐ × 2，**全書 VizMark 密度最高的 session**）+ §6.4 §6.5 章節↔圖檔對映補 PNG `using P4` 標記說明
+[2026-05-12 S09] 更新 SOP_DRAFT.md：§2.6 補 S09 耗時資料點（3h / 1629 行 / SVD 章 934 行為全書最長）+ 6 觀察（雙 pointer 復活判準明文化 / §6.x PNG 標記最終地圖 / Tier 3 §6 首例 / 應用面廣度規律進一步驗證 / §6 主章序列篇幅比例 1.71 SVD 集大成 / §6 雙 pointer 設計地圖規律）+ 版本記錄追加 0.10
+[2026-05-12 S09] 收工更新 SESSION_INDEX.md（追加 S09 一行）+ HANDOFF.md（整檔覆寫，更新最後更新區 / 已完成 / 待辦至 S10 / 關鍵決策 / 檔案變更追蹤 / 技術筆記 / S10 起步建議）
+[2026-05-12 S09] Session 結束 — 下次 S10 從 Foreword + Conclusion + 附錄（MapofEigenvalues / MatrixWorld / TheFourSubspaces）開始；起步前對附錄 PNG 重核 7 種 `using XX` 標記候選（MapofEigenvalues 預期可能標 P3 動態系統 / MatrixWorld 是全書地圖無 using 標 / TheFourSubspaces 是 ch03 已用過的 Strang 兩塊大餅圖無 using 標）；**§6 主章序列收尾，§1–§6 全書內容章節 100% 完成（共 8 章節 + 5 段散文章 = 13 個 md 檔，總計約 7800 行 + 23 個 VizScript），下階段轉入「附錄 + 校對 + 整合」**

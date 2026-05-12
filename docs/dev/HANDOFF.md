@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S04（§3 + 4-Subspaces 完成）
+- **Session:** S05（§4 Matrix × Matrix - 4 Ways 完成）
 - **日期:** 2026-05-12
-- **狀態:** `ch03-mat-vec.md` 完成（935 行，3 圖描述 + 4 VizMark + 4 VizScript：⭐⭐⭐ × 2 完整 13 段 / ⭐⭐ × 1 精簡 / ⭐ × 1 輪廓）；驗證「多 VizMark 章節分級寫作策略」可控篇幅；SOP_DRAFT.md 新增 §2.9 分級策略 + 版本 0.5；下次 S05 從 §4 Matrix × Matrix - 4 Ways 開始
+- **狀態:** `ch04-mat-mat.md` 完成（849 行，1 圖含 4 子圖 + 4 VizMark + 4 VizScript：⭐⭐⭐ Tier 2 + ⭐⭐⭐ Tier 3（MM4 + Mona Lisa SVD demo，§6 SVD 鋪陳）+ ⭐⭐ Tier 1 + ⭐ Tier 1）；驗證「N-way 單圖章節」可控篇幅；SOP_DRAFT.md §2.6 補 §4 耗時 + 新觀察 + 版本 0.6；下次 S06 從 §5 Practical Patterns 開始
 
 ---
 
@@ -37,17 +37,19 @@
 - [x] **S01.5** 補規劃：撰寫 `VIZ_SCHEMA.md`（VizMark 5 型 + VizScript 13 段 A-M 格式，含 800 字範例）+ 修訂 SCHEMA.md + 重寫 `_merged.md` 路線圖（S02-S11）
 - [x] **S02** §1 Viewing a Matrix - 4 Ways：`ch01-viewing-matrix.md`（418 行）— 1 圖描述 + 2 VizMark + 2 VizScript（VizScript-01 ⭐⭐⭐ + VizScript-02 ⭐⭐，各 13 段 A-M 完整）
 - [x] **S02** 全書術語慣例 B 派 → A 派切換（**column = 列直立 / row = 行橫躺**，與華文主流一致）+ `SCHEMA.md` §3.1 規範更新 + SOP_DRAFT.md §2.4 教訓記錄
-- [x] **S03** §2 Vector × Vector - 2 Ways：`ch02-vec-vec.md`（497 行）— 1 圖描述 + 2 VizMark + 2 VizScript（VizScript-01 ⭐⭐⭐ 外積→秩 1 矩陣 + VizScript-02 ⭐⭐ v1↔v2 對偶切換）；驗證 ch01 範本可複用、撰寫穩定 ~1h
-- [x] **S03** SOP_DRAFT.md 新增 §2.8「對比 / 對偶結構章節寫作模式」+ 全書視覺一致性錨點（配色 hex / cell 尺寸 / 動畫時間統一化）+ 版本 0.4
-- [x] **S04** §3 Matrix × Vector - 2 Ways + 4-Subspaces：`ch03-mat-vec.md`（935 行）— 3 圖描述 + 4 VizMark + 4 VizScript：
-  - **VizScript-01** ⭐⭐⭐ Mv1↔Mv2 視角切換（13 段 A-M 完整 ~1000 字）
-  - **VizScript-02** ⭐⭐⭐ 4-Subspaces 3D 互動（13 段 A-M 完整 ~1200 字，含 SVD 求基底 + 拖曳 x 飛行動畫 + 秩變化平面塌縮）— 全書 ⭐⭐⭐ 第一名候選
-  - **VizScript-03** ⭐⭐ vM1↔vM2 左乘對偶（精簡 13 段，與 -01 共畫面）
-  - **VizScript-04** ⭐ 列空間軌跡掃描（輕量輪廓）
-- [x] **S04** SOP_DRAFT.md 新增 §2.9「多 VizMark 章節分級寫作策略」（⭐⭐⭐ 完整 / ⭐⭐ 精簡 / ⭐ 輪廓）+ §2.6 補 §3 耗時資料點 + 版本 0.5
+- [x] **S03** §2 Vector × Vector - 2 Ways：`ch02-vec-vec.md`（497 行）— 1 圖描述 + 2 VizMark + 2 VizScript；驗證 ch01 範本可複用
+- [x] **S03** SOP_DRAFT.md §2.8 對比 / 對偶結構章節寫作模式 + 全書視覺一致性錨點 + 版本 0.4
+- [x] **S04** §3 Matrix × Vector - 2 Ways + 4-Subspaces：`ch03-mat-vec.md`（935 行）— 3 圖描述 + 4 VizMark + 4 VizScript（⭐⭐⭐ × 2 完整 / ⭐⭐ × 1 精簡 / ⭐ × 1 輪廓）
+- [x] **S04** SOP_DRAFT.md §2.9 多 VizMark 分級策略 + 版本 0.5
+- [x] **S05** §4 Matrix × Matrix - 4 Ways：`ch04-mat-mat.md`（849 行）— 1 圖含 4 子圖描述 + 4 VizMark + 4 VizScript：
+  - **VizScript-01** ⭐⭐⭐ Tier 2 4 視角 tab 切換（13 段 A-M 完整 ~1000 字）
+  - **VizScript-02** ⭐⭐⭐ Tier 3 MM4 秩 1 累加 + Mona Lisa SVD demo + 重排序對比 + 誤差曲線（13 段 A-M 完整 ~1200 字，**§6 SVD 鋪陳全書最強候選之一**）
+  - **VizScript-03** ⭐⭐ Tier 1 維度檢核（精簡 13 段）
+  - **VizScript-04** ⭐ Tier 1 MM1 walkthrough（輕量輪廓）
+- [x] **S05** SOP_DRAFT.md §2.6 補 §4 耗時資料點（1h / 849 行）+ 新觀察「N-way 單圖章節需拆 N 個子圖獨立段」+ 「⭐⭐⭐ 劇本可選 Tier 2 / Tier 3」 + 版本 0.6
 
 ### 進行中
-- 無，S04 已收尾
+- 無，S05 已收尾
 
 ### 待辦（多 session 路線圖 v2 — 方案 A 整合 VizMark+VizScript）
 
@@ -59,8 +61,8 @@
 | ✅ S02 | §1 Viewing a Matrix - 4 Ways（驗證雙 Schema + A 派術語切換） | `ch01-viewing-matrix.md`（418 行，2 VizMark + 2 VizScript） |
 | ✅ S03 | §2 Vector × Vector - 2 Ways（驗證 ch01 範本可複用 + 對比結構寫作模式） | `ch02-vec-vec.md`（497 行，2 VizMark + 2 VizScript） |
 | ✅ S04 | §3 Matrix × Vector - 2 Ways（含 4-Subspaces，驗證多 VizMark 分級策略） | `ch03-mat-vec.md`（935 行，4 VizMark + 4 VizScript） |
-| **→ S05** | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` |
-| S06 | §5 Practical Patterns | `ch05-patterns.md` |
+| ✅ S05 | §4 Matrix × Matrix - 4 Ways（驗證 N-way 單圖章節模式 + ⭐⭐⭐ Tier 2/3 選擇權） | `ch04-mat-mat.md`（849 行，4 VizMark + 4 VizScript） |
+| **→ S06** | §5 Practical Patterns（P1 / P2 / P1' / P2' / P3） | `ch05-patterns.md` |
 | S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`、`ch06b-CR.md` |
 | S08 | §6.2 A=LU + §6.3 A=QR | `ch06c-LU.md`、`ch06d-QR.md` |
 | S09 | §6.4 S=QΛQᵀ + §6.5 A=UΣVᵀ | `ch06e-QLQ.md`、`ch06f-USV.md` |
@@ -68,20 +70,25 @@
 | S11 | 整合 + 校對 + 統一 + `BOOK.md` + `VIZ-CATALOG.md` | 合併版書 + 視覺化候選池目錄 |
 | S12+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （延後到 S11 後再細規劃，預估 ~20 session）|
 
-### S05 起步建議
+### S06 起步建議
 
-1. **直接從 ch03 範本套用**（與 ch02 不同：§4 有 4 個 ways，可複用本章 Mv↔vM 對偶結構 + 多 VizMark 分級策略；單章預估 700–900 行）
-2. **遵 SOP §2.8 全書視覺錨點 + §2.9 分級策略**：配色 hex 沿用、cell 60×60、動畫 400–700ms；4 個 VizMark 不要每個都寫 800 字
-3. 從 `from-tex/en.md` 抓 §4 部分（line 114–168 附近，含 MatrixTimesMatrix 1 張圖 + 4 種視角 MM1/MM2/MM3/MM4）
-4. 看 PNG（`MatrixTimesMatrix.png` 是 §4 主圖），用 Read tool 多模態直接讀
-5. 寫 `ch04-mat-mat.md`：
-   - (MM1) 點積方式：$C_{ij} = \mathbf{a}^*_i \cdot \mathbf{b}_j$
-   - (MM2) 列線性組合方式：$C$ 的每一直立列是 $A$ 列的線性組合（係數來自 $B$ 對應列）
-   - (MM3) 行線性組合方式：$C$ 的每一橫躺行是 $B$ 行的線性組合（係數來自 $A$ 對應行）
-   - (MM4) 外積之和方式：$AB = \sum_{k} \mathbf{a}_k \mathbf{b}^*_k$（**§2 (v2) 外積的直接推廣，是 §6 SVD 的鑰匙**）
-6. VizMark 預估：3–4 個，⭐⭐⭐ × 1（4 視角切換動畫 — 把 (Mv1)(Mv2) 推廣到 4 視角）+ ⭐⭐ × 2（MM4 外積之和 + 維度檢核）+ ⭐ × 1（具體數值算法 walkthrough）
+1. **直接從 ch04 範本套用**（§5 Patterns 是 §4 (MM2)/(MM3)/(MM4) 的特殊配置，結構複用 §4 但每個 Pattern 描述較短；單章預估 600–800 行）
+2. **遵 SOP §2.8 全書視覺錨點 + §2.9 分級策略**：配色 hex 沿用、cell 60×60、動畫 400–700ms；4–5 個 Pattern 不要每個都寫 800 字
+3. 從 `from-tex/en.md` 抓 §5 部分（line 127–195 附近，含 Pattern12 / Pattern11-22 / Pattern3 三張圖）
+4. **§5 重點**：每個 Pattern 都是 §4 視角的特例 — 用「對應 MM? 視角 + 特殊形狀 / 限制」格式描述
+   - **(P1)** Pattern 1 = (MM2) + (Mv2) 結合：$A$ 直立列被 column scaling 矩陣（對角矩陣）右乘 → 「each column scaled by a diagonal entry」
+   - **(P2)** Pattern 2 = (MM3) extension：row scaling 矩陣左乘 → 「each row scaled by a diagonal entry」
+   - **(P1')** = (P1) variant：對角矩陣的元素直接乘到對應 column
+   - **(P2')** = (P2) variant：對角矩陣的元素直接乘到對應 row
+   - **(P3)** Pattern 3 = $X D X^{-1}$ 譜分解（解微分方程 / 遞迴方程）→ **連到 §6.4 特徵值分解**
+5. 看 PNG 3 張（`Pattern12.png` / `Pattern11-22.png` / `Pattern3.png`），用 Read tool 多模態直接讀
+6. 寫 `ch05-patterns.md`：
+   - 數學要點段含 5 個 Pattern + 「Pattern ↔ §4 視角」對映表
+   - 各 Pattern 寫精簡圖描述（每 Pattern ~30 行）
+   - VizMark 預估：3 個，⭐⭐⭐ × 1（對角矩陣 column / row scaling 動畫，可看見對角元素「沿著」row/column 縮放）+ ⭐⭐ × 1（(P3) $X D X^{-1}$ 完整動畫，§6.4 鋪陳）+ ⭐ × 1（具體數值 walkthrough）
+7. **隱藏難點預警**：(P3) 涉及特徵值 / 特徵向量 / 對角化，是 §6.4 的提前曝光 — 描述要點到為止，把細節推到 §6.4 寫，本章只建立「視覺直覺」即可
 
-### 工件清單（S05+ 撰寫前必讀）
+### 工件清單（S06+ 撰寫前必讀）
 
 | 檔案 | 用途 |
 |---|---|
@@ -91,10 +98,11 @@
 | `docs/book/ch01-viewing-matrix.md` | **S02 成稿，A 派術語的參考範本**（單視角章節） |
 | `docs/book/ch02-vec-vec.md` | **S03 成稿，對比 / 對偶結構章節範本**（多視角章節，§3 §4 §6 可複用） |
 | `docs/book/ch03-mat-vec.md` | **S04 成稿，多 VizMark + 多圖章節範本 + 4-Subspaces 標誌圖**（§4 直接套用結構） |
+| `docs/book/ch04-mat-mat.md` | **S05 成稿，N-way 單圖章節範本（1 圖含 N 子圖）**（§5 §6 直接複用，§6 5 大分解每個都連回 (MM4)） |
 | `docs/book/from-tex/{en,zh}.md` | pandoc 轉換結果（含 LaTeX 公式原文）|
 | `docs/book/from-pdf/{en,zh}.txt` | pdftotext 純文字（補 pandoc 缺漏）|
 | `docs/book/figs-png/*.png` | 50 張 PNG 圖檔（vision-ready）|
-| `docs/dev/sop/SOP_DRAFT.md` | §2.8 全書視覺一致性錨點 + §2.9 多 VizMark 分級策略 — **S05+ 直接沿用** |
+| `docs/dev/sop/SOP_DRAFT.md` | §2.8 全書視覺錨點 + §2.9 多 VizMark 分級 + S05 補「N-way 單圖章節」觀察 — **S06+ 直接沿用** |
 
 ---
 
@@ -120,6 +128,9 @@
 | 2026-05-12 | **S03 確立「對比 / 對偶結構章節寫作模式」：§ 數學要點 加對比段 + 直覺段提煉記憶口訣** | §3（dot way vs combination way）、§4（4 ways）、§6（5 大分解）均適用同一格式，減少每章設計成本 |
 | 2026-05-12 | **S04 確立「多 VizMark 章節分級寫作策略」（SOP §2.9）：⭐⭐⭐ 完整 13 段 / ⭐⭐ 精簡 / ⭐ 輪廓** | ch03 4 個 VizMark 若全寫 800 字會膨脹到 1300+ 行失焦；分級後 935 行可控。§4 後續多 VizMark 章節皆套用此策略 |
 | 2026-05-12 | **S04 確立「4-Subspaces 圖是全書視覺化最高 priority 之一（⭐⭐⭐ Tier 3）」** | Strang 兩塊大餅圖是線性代數核心定理（rank-nullity / 投影 / SVD）的視覺載體；VizScript-02 估 3 session 實作，是 §6 SVD 預先鋪陳的關鍵互動 |
+| 2026-05-12 | **S05 確立「N-way 單圖章節寫作模式」（SOP §2.6 補）：1 張圖含 N 子圖時，圖描述段需把每個子圖拆獨立段** | ch04 Figure 4.1 是 4 子圖 (MM1/MM2/MM3/MM4) 2×2 排版，每子圖 ~15 行獨立段描述。配合 §2.9 分級策略，849 行控制良好。§6 5 大分解每個雖各有獨立圖，但每個分解內部多視角時可複用此模式 |
+| 2026-05-12 | **S05 確立「⭐⭐⭐ 劇本可選 Tier 2 或 Tier 3」** | ch04 VizScript-01 (4 視角切換) 寫成 Tier 2（1.5 session）、VizScript-02 (MM4 + Mona Lisa SVD demo) 寫成 Tier 3（2.5 session）。S12+ 時間預算決定要實作幾支 Tier 3；本書全部 ⭐⭐⭐ 劇本若都 Tier 3，總實作 ~25 session；若混合 Tier 2 / Tier 3，可壓到 ~15 session |
+| 2026-05-12 | **S05 確立「§4 (MM4) 是 §6 五大分解的視覺基石」** | $A = CR / LU / QR$ / $S = Q\Lambda Q^{\mathrm{T}}$ / $A = U\Sigma V^{\mathrm{T}}$ 都可用 (MM4) 展開成「秩 1 之和」；§6 5 章寫作時必引 §4 (MM4) 作對應，**VizScript-02 是 SVD 的視覺前置**。本決策影響 S07–S09 寫作路徑 — 每個分解章節都複用 ch04 VizScript-02 結構 + 換成對應的 $\mathbf{u}_p / \mathbf{v}_p$ 物件 |
 
 ---
 
@@ -177,6 +188,15 @@
 | docs/dev/CURRENT_SESSION.log | 修改 | S04 啟動 + 即時記錄 + 結束記錄 |
 | docs/dev/SESSION_INDEX.md | 修改 | 追加 S04 一行 |
 
+### S05 新增/修改的檔案
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/ch04-mat-mat.md | 新增 | **§4 章節 md：849 行**，含 1 圖描述（MatrixTimesMatrix 含 4 子圖 MM1/MM2/MM3/MM4，2×2 排版，每子圖獨立段）+ 4 VizMark + 4 VizScript（VizScript-01 ⭐⭐⭐ Tier 2 4 視角切換 / VizScript-02 ⭐⭐⭐ Tier 3 MM4 秩 1 累加 + Mona Lisa SVD demo + 重排序對比 + 誤差曲線 / VizScript-03 ⭐⭐ Tier 1 維度檢核 / VizScript-04 ⭐ Tier 1 MM1 walkthrough）；4 視角總表 + 與 §2 §3 對偶傳承表 + 維度檢核 + 非交換律段 |
+| docs/book/_merged.md | 修改 | S05 標記 `[x]` 完成，VizMark 計數 `2 / 1 / 1` |
+| docs/dev/sop/SOP_DRAFT.md | 修改 | §2.6 補 §4 耗時資料點（1h / 849 行）+ 新觀察「N-way 單圖章節需拆 N 個子圖獨立段」+ 「⭐⭐⭐ 劇本可選 Tier 2 / Tier 3」+ 版本 0.6 |
+| docs/dev/CURRENT_SESSION.log | 修改 | S05 啟動 + 即時記錄 + 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S05 一行 |
+
 ---
 
 ## 技術筆記
@@ -190,14 +210,16 @@
 ### 互動式版本技術選項（S12+ 決策，目前傾向）
 | 方案 | 優點 | 缺點 |
 |------|------|------|
-| **Marimo + matplotlib + marimo.ui**（S02–S04 VizScript 首選） | 反應式 notebook、純 Python、可匯出 HTML | 較新生態系較小 |
+| **Marimo + matplotlib + marimo.ui**（S02–S05 VizScript 首選） | 反應式 notebook、純 Python、可匯出 HTML | 較新生態系較小 |
 | Streamlit + Plotly | 部署成網頁簡單、互動流暢 | 不適合 notebook 形式閱讀 |
 | Jupyter + ipywidgets + matplotlib | 標準、容易分享 .ipynb | 互動效能一般、需要 kernel |
 | Plotly + Dash | 視覺化品質最高 | 學習曲線較陡 |
 | Manim | 動畫效果最好（3Blue1Brown 同款） | 不互動、是動畫腳本 |
 | 純 HTML + JS（D3 / Three.js） | 任何瀏覽器可開 | 跳脫 Python 生態 |
 
-**S04 新觀察：** 4-Subspaces VizScript-02 需要 3D 互動（拖曳箭頭 + 平面塌縮動畫 + 飛行軌跡），matplotlib 3D 互動性偏弱；S12+ 評估時 **Plotly 3D + Dash** 或 **Three.js + Pyodide** 可能更合適這類 ⭐⭐⭐ Tier 3 劇本。
+**S04 觀察：** 4-Subspaces VizScript-02 需要 3D 互動（拖曳箭頭 + 平面塌縮動畫 + 飛行軌跡），matplotlib 3D 互動性偏弱；S12+ 評估時 **Plotly 3D + Dash** 或 **Three.js + Pyodide** 可能更合適這類 ⭐⭐⭐ Tier 3 劇本。
+
+**S05 觀察：** ch04 VizScript-02 需 64×64 SVD 熱圖 + 4 種預設影像 + 累加動畫 — **Plotly Dash 強烈優先**（heatmap 渲染效能、影像對比布局、誤差曲線併同畫面都比 matplotlib 自然）。S12+ 評估技術棧時建議「同一份程式碼支援 Marimo（教學用）+ Dash（高品質 demo 用）」雙重後端，共用 _common/ 視覺化原語。
 
 ### 全書術語慣例（A 派 — 華文主流）
 
@@ -226,20 +248,36 @@
 
 **矩陣尺寸：** $A \in \mathbb{R}^{m \times n}$ 表示 **$m$ 行 $n$ 列**（$m$ rows, $n$ columns）。$m$ = 行數、$n$ = 列數。
 
+**矩陣乘法形狀：** $A \in \mathbb{R}^{m \times k}$、$B \in \mathbb{R}^{k \times n}$、$AB = C \in \mathbb{R}^{m \times n}$。**內維 $k$（A 的列數 = B 的行數）必須對齊**才可乘。
+
 ### 全書視覺一致性錨點（S03 確立，S04+ 沿用）
 
 - **配色 hex：** 綠（列 / 直立）`#2ca02c`、粉紅 / 紅（行 / 橫躺）`#d62728`、藍點（個別數字 / $\mathbf{x}$ 分量）`#1f77b4`、灰填充 `#eeeeee` / 框 `#333333`、子空間半透明 alpha 0.3
 - **cell 尺寸：** 預設 60×60 px，極小 80×80（$m=n=2$）、極大 48×48（$m=n=6$）
 - **3D 視窗尺寸（S04 新增）：** 預設 600×480 px、視角 elev=25° azim=-60°
-- **動畫時間：** 視角切換 600–800ms、平行性高亮淡入 200ms、子空間維度變化 600ms、飛行軌跡 700ms、緩動 ease-in-out
-- **數值範圍：** $a_{ij} \in [-9, 9]$ 步進 1，維度 $m, n \in [2, 6]$（3D 限 $\{2, 3\}$）
+- **動畫時間：** 視角切換 600–800ms、平行性高亮淡入 200ms、子空間維度變化 600ms、飛行軌跡 700ms、秩 1 累加 400ms / 項（S05 新增）、緩動 ease-in-out
+- **數值範圍：** $a_{ij} \in [-9, 9]$ 步進 1，維度 $m, n \in [2, 6]$（3D 限 $\{2, 3\}$、SVD demo 64×64 像素）
+- **N-way 切換動畫（S05 新增）：** 多視角 tab 切換時 800ms 動畫含「色塊重排 + 重染色 + 公式同步」三層。
 
 ### 章節撰寫速度資料點（更新版）
 
 - **S02 §1（含 A 派切換重寫 0.5h）：** 1.5h / 418 行 / 2 VizMark
 - **S03 §2（ch01 範本可複用）：** 1h / 497 行 / 2 VizMark
 - **S04 §3（4 VizMark 分級策略）：** 1.5h / 935 行 / 4 VizMark — **多圖多 VizMark 章節是「~2 倍篇幅 / 1.5 倍耗時」**
-- **預估後續：** §4 4 ways 1.5h / §5 patterns 1h / §6.1–§6.3 各 1.5h / §6.4–§6.5 各 2h（SVD 最複雜）
+- **S05 §4（1 圖含 4 子圖 + 4 VizMark）：** 1h / 849 行 / 4 VizMark — **N-way 單圖章節比多圖章節省 0.5h（少寫 2 段獨立大圖描述）**
+- **預估後續：** §5 patterns 1h（5 個 small pattern）/ §6.1 1.5h / §6.2–§6.3 各 1.5h / §6.4–§6.5 各 2h（SVD 最複雜）
+
+### §4 (MM4) 與 §6 五大分解的鋪陳對應（S05 新增）
+
+| §6 分解 | (MM4) 形式 | VizScript 結構複用 |
+|---|---|---|
+| $A = CR$ | $A = \sum_p \mathbf{c}_p \mathbf{r}^*_p$（$r$ 項） | ch04 VizScript-02 + 換成 $C$ 直立列 / $R$ 橫躺行 |
+| $A = LU$ | $A = \sum_p \mathbf{l}_p \mathbf{u}^*_p$（$n$ 項） | ch04 VizScript-02 + 強調「下三角 × 上三角」 |
+| $A = QR$ | $A = \sum_p \mathbf{q}_p \mathbf{r}^*_p$（$n$ 項） | ch04 VizScript-02 + 強調「$\mathbf{q}_p$ 正交」 |
+| $S = Q\Lambda Q^{\mathrm{T}}$ | $S = \sum_p \lambda_p \mathbf{q}_p \mathbf{q}^{\mathrm{T}}_p$ | ch04 VizScript-02 + 對稱矩陣特例 |
+| $A = U\Sigma V^{\mathrm{T}}$ | $A = \sum_p \sigma_p \mathbf{u}_p \mathbf{v}^{\mathrm{T}}_p$ | ch04 VizScript-02 完整繼承（Eckart–Young + 截斷） |
+
+**結論：** ch04 VizScript-02（MM4 秩 1 累加 + Mona Lisa SVD demo）是後續 5 章 VizScript 的「母模板」 — S07–S09 寫作時只需換物件名稱與額外特例（如正交、對稱、按 σ 排序），不需重新設計動畫結構。**S12+ 實作 ch04 VizScript-02 後，§6 5 大分解 VizScript 可加速實作 60%。**
 
 ---
 
@@ -251,7 +289,7 @@
 2. docs/dev/SESSION_INDEX.md — 歷史 session 列表
 3. docs/dev/CURRENT_SESSION.log — 上一次 session 即時記錄
 4. docs/book/SCHEMA.md + docs/book/VIZ_SCHEMA.md — 雙 Schema 規範（A 派術語）
-5. docs/book/ch01-viewing-matrix.md（單視角範本）+ docs/book/ch02-vec-vec.md（對比結構範本）+ docs/book/ch03-mat-vec.md（多 VizMark + 多圖範本，4-Subspaces 標誌圖）
-6. docs/dev/sop/SOP_DRAFT.md §2.8 全書視覺錨點 + §2.9 多 VizMark 分級策略
-然後繼續「待辦」中的第一項任務（S05 §4 Matrix × Matrix - 4 Ways）。
+5. docs/book/ch01–ch04 — 4 套範本：單視角 / 對比結構 / 多圖多 VizMark / N-way 單圖
+6. docs/dev/sop/SOP_DRAFT.md §2.6 補「N-way 單圖章節」+ §2.8 全書視覺錨點 + §2.9 多 VizMark 分級策略
+然後繼續「待辦」中的第一項任務（S06 §5 Practical Patterns，5 個 Pattern + 3 張圖：Pattern12 / Pattern11-22 / Pattern3）。
 ```

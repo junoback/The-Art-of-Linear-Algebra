@@ -82,3 +82,18 @@
 [2026-05-12 S04] 收工更新 SOP_DRAFT.md：§2.6 補 §3 耗時資料點（1.5h / 935 行）+ 新增 §2.9「多 VizMark 章節分級寫作策略」（⭐⭐⭐ 完整 / ⭐⭐ 精簡 / ⭐ 輪廓）+ 版本記錄追加 0.5
 [2026-05-12 S04] 收工更新 SESSION_INDEX.md（追加 S04 一行）+ HANDOFF.md（整檔覆寫）
 [2026-05-12 S04] Session 結束 — 下次 S05 §4 Matrix × Matrix - 4 Ways（MM1/MM2/MM3/MM4，可複用本章 Mv↔vM 對偶結構）
+
+# Session: S05
+# Started: 2026-05-12
+# git HEAD: a23ef97 (main)
+# worktree: 乾淨，只有 main repo working dir（無 auto-spawn 殘留）
+# 任務: §4 Matrix × Matrix - 4 Ways（MM1 點積 / MM2 列線組 / MM3 行線組 / MM4 外積之和 — SVD 鑰匙），撰寫 ch04-mat-mat.md
+# ---
+[2026-05-12 S05] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；worktree 乾淨
+[2026-05-12 S05] 平行抓素材：ch03 範本（多 VizMark + 13 段 A-M 結構）/ from-tex en+zh §4（line 114-125 / 109-120）/ from-pdf en.txt §4（line 215-262 含 Figure 6）/ MatrixTimesMatrix.png 多模態讀圖（4 子圖 MM1/MM2/MM3/MM4 並列 2×2，含原書 (1,2;3,4;5,6) × (x1,y1;x2,y2) 範例）
+[2026-05-12 S05] 撰寫 docs/book/ch04-mat-mat.md（849 行）一氣完成：標頭 + 摘要 + 數學要點（MM1/MM2/MM3/MM4 + 4 視角總表 + §2 §3 對偶傳承表 + 維度檢核 + 非交換律）+ Figure 4.1 四欄描述（含 4 子圖各獨立段）+ 4 個 VizMark + 4 個 VizScript + 章末延伸（與 §1-§3 來源、§5-§6 後續、工程實作）+ 來源對照
+[2026-05-12 S05] VizMark 分級：⭐⭐⭐ × 2（VizScript-01 4 視角 tab 切換動畫 Tier 2 / VizScript-02 MM4 秩 1 累加 + Mona Lisa SVD demo Tier 3 — §6 SVD 鋪陳）+ ⭐⭐ × 1（VizScript-03 維度檢核精簡 Tier 1）+ ⭐ × 1（VizScript-04 MM1 walkthrough 輪廓 Tier 1）
+[2026-05-12 S05] 更新 docs/book/_merged.md：§4 完成標記 [x]，VizMark 計數 2/1/1
+[2026-05-12 S05] 收工更新 SOP_DRAFT.md：§2.6 補 §4 耗時資料點（1h / 849 行）+ 新增「N-way 單圖章節」觀察 + ⭐⭐⭐ 劇本 Tier 2/3 選擇權 + 版本記錄追加 0.6
+[2026-05-12 S05] 收工更新 SESSION_INDEX.md（追加 S05 一行）+ HANDOFF.md（整檔覆寫）+ commit + push origin main
+[2026-05-12 S05] Session 結束 — 下次 S06 §5 Practical Patterns（P1/P2/P1'/P2'/P3，是 §4 (MM2)/(MM3)/(MM4) 的特殊配置，可複用本章視角結構）

@@ -13,7 +13,7 @@
 | S02 | §1 Viewing a Matrix - 4 Ways | `ch01-viewing-matrix.md` | [x] | 1 / 1 / 0 | [x] | [x] |
 | S03 | §2 Vector × Vector - 2 Ways | `ch02-vec-vec.md` | [x] | 1 / 1 / 0 | [x] | [x] |
 | S04 | §3 Matrix × Vector - 2 Ways（含 4-Subspaces） | `ch03-mat-vec.md` | [x] | 2 / 1 / 1 | [x] | [x] |
-| S05 | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` | [ ] | / / / | [ ] | [ ] |
+| S05 | §4 Matrix × Matrix - 4 Ways | `ch04-mat-mat.md` | [x] | 2 / 1 / 1 | [x] | [x] |
 | S06 | §5 Practical Patterns | `ch05-patterns.md` | [ ] | / / / | [ ] | [ ] |
 | S07 | §6 5 Factorizations 總覽 + §6.1 A=CR | `ch06a-five.md`, `ch06b-CR.md` | [ ] | / / / | [ ] | [ ] |
 | S08 | §6.2 A=LU + §6.3 A=QR | `ch06c-LU.md`, `ch06d-QR.md` | [ ] | / / / | [ ] | [ ] |

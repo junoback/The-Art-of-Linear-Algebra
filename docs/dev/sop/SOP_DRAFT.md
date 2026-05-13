@@ -258,7 +258,7 @@ S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章�
 
 **S11 §2.10 + S15 §2.14 整合收尾雙重驗證 ✓** — 這套流程（跨檔 anchor 校驗 → BOOK.md 重生 → 規範補充 → 全套收工）穩定可用，未來如有「**全書又新增一個 Appendix E**」性質的大規模擴充，可直接套用。
 
-### 2.15 Marimo WASM 部署 3 大非顯而易見陷阱（S16 PoC 確立）
+### 2.15 Marimo WASM 部署 6 大非顯而易見陷阱（S16 PoC + S17 補充）
 
 **S16 第一個 Python 視覺化 PoC（hello.py + ch01_mv1_poc.py + `marimo export html-wasm` 三階段）發現 3 個本機跑通卻 WASM 失敗的「沉默陷阱」**。每一個都讓我在 S16 多繞 1 個 round-trip 才修對。記入 SOP 讓 S17+ 旗艦實作開工前就避開：**
 
@@ -287,6 +287,33 @@ S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章�
 - [ ] reactive cell 內 `mo` 加 closure args
 - [ ] WASM export 後 console 必看：(1) 載入順序中是否含目標套件 (2) 是否有 `ModuleNotFoundError` (3) 是否有 cell exception
 - [ ] 部署頁 README / 首頁加「30s 首次載入」說明
+
+---
+
+**S17 補充：3 個 marimo 跨 cell / plotly 細節陷阱（ch04 V-02 母模板開工 debug 過程中發現）**
+
+S17 第一次寫真正多 cell × multi-subplot × multi-heatmap 的 notebook 就踩了 3 個本機 import 測試看不出來、要實際跑 marimo runtime 才會炸的坑：
+
+4. **marimo 把底線開頭的 cell variable 視為 cell-private 不跨 cell export** — 我把 helper 函數命名為 `_accumulate / _layer_energy / _layers_of` 從 helper cell `return`，下游 cell 引用時全部 NameError，整個 cell 沉默 errored 而不渲染（瀏覽器只看到部分 cell，console 沒明顯 traceback 因為「未渲染」不是「exception」）。
+    - **規則：** 跨 cell 共用的函數 / 變數 **絕不可以 `_` 開頭**。如 `_helper`, `_const` 等命名都會被 marimo 視為 cell-local。
+    - **變通：** 要嘛改命名（`accumulate` 而非 `_accumulate`），要嘛把 helper 與唯一使用者合併同一 cell（推薦，最穩、最少依賴 marimo 跨 cell magic）
+    - **症狀：** WASM 部分 cell 不渲染、console 看 `kernelMessage` 沒明顯 error → 翻 cell python 文件查 NameError
+
+5. **plotly `make_subplots(subplot_titles=[""] * k)` 空字串會被跳過不生成 annotation slot** — 我寫 `subplot_titles=[""] * k` 想用佔位、後置 `fig.layout.annotations[p].text = "..."` 動態填內容，**結果空字串被 plotly 視為「沒標題」直接 skip，annotations tuple 是空的**，IndexError tuple index out of range。
+    - **規則：** plotly 對空字串 `""` 與 `None` 都跳過，**只有非空字串才生成 annotation slot**。
+    - **變通：** 要嘛直接在 `make_subplots` 傳入完整最終 title（不後置改），要嘛用 placeholder 非空字串 `[" "] * k` 或 `[f"slot_{p}" for p in range(k)]` 保留 slot
+    - **症狀：** WASM console STDERR `IndexError: tuple index out of range` 指 `strip.layout.annotations[p].text = ...`
+
+6. **plotly heatmap `z` 參數最好 `np.asarray(M, dtype=float)` 包一層** — 我傳 plain Python `[[0]]` 進 helper `_add_heatmap`，helper 內 `abs(M).max()` 直接炸 `TypeError: bad operand type for abs(): 'list'`（list 沒有 `.max()`，Python 內建 `abs()` 也不接 list）。本機如果 `M` 是 numpy array 就過了，但臨時用 list 當 dummy 時會炸。
+    - **規則：** helper 函數開頭一律 `M = np.asarray(M, dtype=float)` 保護，不假設 caller 一定傳 numpy
+    - **變通：** 同時把 `abs(M)` → `np.abs(M)`、`abs(error)` → `np.abs(error)` 用 numpy 介面而非 Python builtin
+    - **症狀：** WASM console STDERR `TypeError: bad operand type for abs(): 'list'`
+
+**S17 對 S18+ 影響：擴充 checklist**：
+- [ ] 跨 cell 共用的函數 / 變數命名不可 `_` 開頭
+- [ ] plotly `subplot_titles` 不可傳空字串，要嘛預先計算完整 title、要嘛 placeholder 非空字串
+- [ ] heatmap helper 內 `M = np.asarray(M, dtype=float)` 保護
+- [ ] `abs()` → `np.abs()` 用 numpy 介面
 
 ### 2.7 收工流程（每 session 結束）
 

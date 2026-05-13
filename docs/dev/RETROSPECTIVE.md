@@ -271,3 +271,34 @@ Back 不立刻挑旗艦，先做技術棧 PoC + 載體討論（先例 6 個 + �
 - **「載體選型」這種策略討論值得主動展開比較表** — Back 問「app 式書籍有先例？」我給了 6 先例 + 6 平台比較表 + 推薦 + tradeoff，他直接「先做 Marimo PoC」省略 30 min 討論回合。**策略型問題主動給比較表是高 ROI 動作**
 
 ---
+
+## S17 — ch04 V-02 MM4 母模板架構階段：首批 Tier 3 旗艦實作開工（2026-05-13 ~ 2026-05-14）
+
+### 本 session 主軸
+
+Back 選 HANDOFF S16 推薦路線 A — 開始 [ch04-mat-mat.md VizScript-02](../book/ch04-mat-mat.md#vizscript-02) 母模板（完成後 §6 五分解 pointer 全解鎖）；S17 scope 鎖「最小可動骨架」（小矩陣 3×2·2×2 + r slider + 秩 1 圖層 strip + 主舞台 6 heatmap + WASM 部署），不含圖像 / 動畫 / 重排序 / Walkthrough（推 S18-S19）；產出 `viz/ch04_matrix_matrix.py` 440 行 / 8 cell + `viz/_common/rank1_layer.py` 工具模組；2 round debug 才通 + 3 個新 WASM 陷阱記入 SOP §2.15（marimo `_` 前綴 cell-private / plotly `subplot_titles` 空字串 / heatmap `z` 需 numpy）；commit `cc957f1`。
+
+### 對話低效時刻
+
+- **scope 切分前我多寫了 1 個 helper cell 結果踩了 `_` 前綴陷阱** — 我寫 `@app.cell def _(np): ... return _accumulate, _layer_energy, _layers_of` 想「把工具與計算分 cell 更乾淨」，結果踩了 marimo 「`_` 開頭 variable cell-private 不跨 cell export」這個沉默陷阱。**如果第一版就直接 helper 與計算合併同一 cell**（最終修法），會省 Round 1 的 debug + Back 視覺確認 + 我修 + Back 再確認。**多 cell 分工只在「真有跨 cell 重用」時才值得，否則內聯比較穩**。
+
+- **Round 1 視覺問題不是 console error 而是「cell 沒渲染」，我先入為主以為是 PEP 723 / mo.ui.plotly 漏了** — Back 報「只看到 sliders + 標題 + 結尾說明」，我第一反應檢查 PEP 723 + mo.ui.plotly wrap 都對。**沒注意到「cell 沒渲染」≠「cell exception」**（marimo WASM 對 NameError 處理是「整個 cell 沉默 skip」不是 STDERR）。Round 2 Back 給的 console log 其實已經有 STDERR `TypeError` / `IndexError` 在裡面 — 但那是 Round 2 修了 `_` 前綴問題之後的下游 error。最初的 NameError 因為「未渲染」沒進 STDERR。**WASM cell 沒渲染但沒 STDERR 的情形，第一動作該是「marimo 內部 cell graph 解析失敗」假設，要看的不是 console 而是 cell python 文件**。
+
+- **「我只看到這個畫面」我以為 Back 截了完整畫面，沒主動問是否還有其他 cell** — Back 截了上半（標題 + sliders）+ 下半（S17 骨架說明），中間 3 cell 不見。我先按截圖修，沒先問「中間 3 cell 是真的不見、還是 scroll 沒到？」。**截圖時主動問「有沒有完整 scroll 過？」省一次誤判**。
+
+### 建議 Back 下次這樣問會更快
+
+- **WASM 視覺問題截圖時主動標示「我有沒有 scroll 到底」** — 一張截圖只能拍到視窗大小範圍，下次若回報「只看到 X」，加一句「我有把整頁 scroll 完，中間 X 段是真的不見」就能避免我猜「會不會沒 scroll」。對應地我也會在初期問「截圖之外的其他段有顯示嗎？」
+
+- **WASM debug 直接附 console log（S16 教訓延續）成功應用** — Round 2 你直接貼了完整 console，我 1 秒看出 `TypeError` / `IndexError` 兩個錯誤行就修對。**S16 學到的「先附 console」這次 work 了，繼續維持**。
+
+### Claude 自我提醒
+
+- **跨 cell 共用任何東西，命名不可 `_` 開頭** — marimo 把這視為 cell-private 不跨 cell export，下游引用會 NameError 但 marimo 處理是「整個 cell 沉默不渲染」沒明顯 STDERR。S18+ 寫 helper 時 default 命名規則：(a) 跨 cell 用一律 `helper_xxx` / `acc_xxx` / `rank1_xxx` 等具名前綴 (b) 若只 cell 內部用才可以 `_xxx`
+- **WASM 部分 cell 不渲染 + console 沒 STDERR ＝ marimo cell-graph 解析問題（不是 runtime exception）** — 第一動作該是 (1) `python -c "import ast; ast.parse(open('xxx.py').read())"` 看 syntax (2) marimo edit 在本機跑 (3) 檢查 `_` 前綴 / cross-cell variable 拼錯字 (4) 才是看 console。次序顛倒會多繞 round
+- **多 cell 分工只在「真有跨 cell 重用」時才做** — S17 helper cell 寫完發現只 1 個下游 cell 用，那「分 cell」沒帶來重用價值卻多了一個跨 cell 邊界（多 1 個 `_` 陷阱風險）。**helper 函數預設先內聯在唯一使用者 cell，等真有第 2 個使用者再抽出來**
+- **`np.asarray(M, dtype=float)` 是 plot helper 的 default 防線** — heatmap / annotation / hover 函數的開頭該預設保護輸入，不假設 caller 一定傳 numpy。同樣 `abs()` → `np.abs()` 是純習慣改寫
+- **scope 切分守得住是 S17 最大優點** — 我沒把圖像 / 動畫 / 重排序硬塞進骨架，預估 3 session 拆架構 / 互動 / 應用 — 這次只做架構，commit 端正。S18 加圖像 / S19 加動畫 + 重排序 + Walkthrough 是接下來節奏
+- **截圖回報時要主動確認「scroll 完整否」** — 對 WASM 部分 cell 不渲染類問題，未確認 scroll 範圍就修可能修錯方向。S18+ 先問「整頁 scroll 過嗎？中間 X 段是真的不見嗎？」
+
+---

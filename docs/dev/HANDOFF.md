@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** **S16 完成（Marimo 技術棧 PoC — Python 視覺化實作起步 / commit `2f9b9e3`）**
-- **日期:** 2026-05-13
-- **狀態:** **S16 完成：** 從 S15 全書 md 化結構就緒（22 Q&A 100% + 16 md callout 覆蓋）跨入「Python 視覺化實作階段」。Back 不立刻挑旗艦，先做「Marimo 技術棧 PoC」+ 載體討論（先例 6 個 Immersive Math ⭐⭐⭐⭐⭐ / Seeing Theory / Distill / 3B1B / Book of Shaders / D2L.ai；技術棧 6 個比較 → 維持 HANDOFF S11 已選 **Marimo + WASM** 路線）；三階段全通過：(1) uv 安裝（brew install uv 0.11.14）+ uv init viz --python 3.12 + uv add marimo plotly matplotlib numpy scikit-learn pillow → hello.py 4 cell reactive slider PoC（Stage 1 ✅）/ (2) ch01_mv1_poc.py 7 cell：6 slider × plotly 2D 4 箭頭 × (Mv2) 平行四邊形，同時展示 (Mv1) 點積 + (Mv2) 線性組合雙觀點，數值對拍 A@x == row_dot_x == x[0]·col1+x[1]·col2（Stage 2 ✅，3 round debug 才通）/ (3) marimo export html-wasm dist/ch01_mv1_poc 27 MB static dir GitHub Pages 可直接部署（Stage 3 ✅）；**3 個 WASM 教訓收進 SOP §2.15**（PEP 723 metadata 是 WASM dep 唯一聲明處 / plotly 必須 mo.ui.plotly(fig) 顯式包裝 / 首次載入 30-60s UX 警告）+ S17+ 旗艦開工 5 條 checklist；產出 viz/ 7 檔追蹤（dist/+.venv/+__pycache__/ gitignore）+ viz/README.md 含 Immersive Math 等先例 + Marimo vs Jupyter/Streamlit/Observable 對照表。下次 S17 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 MM4+Mona Lisa 母模板 或 ch06f V-01 SVD Master）開始，技術棧驗證零阻抗起跑。**S15 完成：** 沿用 S12-S13 確立的 3-layer 框架 + 方案 D 雙層落點 + 批量寫作流程，產出 §6 共 6 條 Q&A：**Q14 為什麼要把矩陣「分解」？**（156 行 / Gauss 1809 → Eckart-Young 1936 200 年史 + 6 大工程動機 + 「為什麼正好五個」遞進對稱性 5 級表）+ **Q15 A=CR 列秩=行秩自然冒出**（119 行 / Sylvester 1851 rank + Frobenius 1879 + Strang 2020 首次代數封裝「最樸素分解」+ 3×3 rank 2 雙重讀法）+ **Q16 A=LU 高斯消去本質**（165 行 / 《九章算術》方程章 2000 年東方原型 + Newton 1707 → Gauss 1809 → Turing 1948 LU 命名 + 3×3 算驗 + 5 跨領域因果結構表）+ **Q17 A=QR Gram-Schmidt 動機**（138 行 / Gauss 1801 Ceres → Legendre/Gram/Schmidt/Householder 200 年最小平方→Hilbert 演化 + 3×2 完算 + 條件數不被平方化）+ **Q18 譜定理對稱特徵向量自動正交**（144 行 / Cauchy 1829 主軸定理 → 量子力學 1920s Hermitian + 雙證明 + 5 物理對稱↔數學物件對應）+ **Q19 SVD 為什麼任意矩陣存在**（174 行 / Beltrami 1873 首次發現 → Eckart-Young 1936 + 雙證明路徑 + 3×2 SVD 巧妙串接 Q17+Q18 同 $A$ + Strang「the most important theorem」名言）+ 6 主章 callout 客製化（[ch06a Q14+Q11+Q13](../book/ch06a-five.md) / [ch06b Q15+Q14](../book/ch06b-CR.md) / [ch06c Q16+Q14](../book/ch06c-LU.md) / [ch06d Q17](../book/ch06d-QR.md) / [ch06e Q18+Q11+Q13](../book/ch06e-QLQ.md) / [ch06f Q19+Q14+Q08+Q13](../book/ch06f-USV.md) 共 15 links）。總產出 [appendix-D-why.md](../book/appendix-D-why.md) **2740 行（+1083 行 / 65% 增量）/ 19 Q&A（19/22 = 86%）** + 6 主章 callout / 15 Q&A links（累計 **12 callout / 28 Q&A links — 全主章 100% 覆蓋** ✓）。**S15 全部完成 ✓：** Q20 特徵值地圖（225 行 / 200 年史 + 8 類代數機制 + Normal matrix 統一源頭）+ Q21 Matrix World 同心橢圓（246 行 / 250 年史 + 4 替代方案致命缺陷比較 + 結構主義立場）+ **Q22 解 Ax=b 為線代核心（311 行 = 全書最長 Q&A / 4000 年史 + 6 步從零推導 + 5 種解情境 + 全書 22 條會師結構 + Strang 「Linear Algebra = the study of Ax=b in all its depth」最強昇華）** + 3 附錄 callout（map Q20+Q18+Q11 / matrix-world Q21+Q14+Q19 / four-subspaces Q22+Q08+Q19 共 9 links）→ **全書 15 callout / 37 Q&A links / 16 個內容 md 100% 覆蓋達成 ✓**；整合收尾:(1) 跨檔 anchor 校驗 37 條跨檔引用 + 22 錨點 + **0 broken link** ✓ + (2) BOOK.md 重生 8650 → **12305 行（+42%）** + (3) SCHEMA.md 補 §3.6「背後觀念 callout 規範」 + (4) VIZ-CATALOG.md 新增「Appendix D 背後觀念層 22 Q&A 索引」獨立段 + (5) 全套收工（SESSION_INDEX/SOP/RETROSPECTIVE/HANDOFF/CURRENT_SESSION.log）。**S12-S15 4-session 路線完成：appendix-D-why.md 3522 行 / 22 Q&A = 100% ✓ + 全書 16 個內容 md 100% callout 覆蓋 ✓ + 平均效率 30 min/Q&A**。下次 S16+ 進入 **S12+ Python 視覺化實作階段**（從 [VIZ-CATALOG 首批 Tier 3 旗艦](../book/VIZ-CATALOG.md) ch04 V-02 或 ch06f V-01 開始 + 技術棧 PoC Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）。
+- **Session:** **S17 完成（ch04 V-02 MM4 母模板架構階段 — 首批 Tier 3 旗艦開工骨架完成 / commit `cc957f1`）**
+- **日期:** 2026-05-14
+- **狀態:** **S17 完成：** 從 S16 Marimo 技術棧 PoC 三階段全通過跨入「首批 Tier 3 旗艦實作」階段。Back 選 HANDOFF S16 推薦路線 A 開始 [ch04-mat-mat.md VizScript-02](../book/ch04-mat-mat.md#vizscript-02) MM4+Mona Lisa SVD 母模板（完成後 §6 五分解 pointer 全解鎖）；S17 scope 鎖「最小可動骨架」（小矩陣 3×2·2×2 模式 + r slider 0..2 + 秩 1 圖層 strip + 主舞台 2×3 共 6 heatmap + WASM 部署），不含圖像 / 飛入動畫 / 4 重排序 / 誤差曲線 / Walkthrough（推 S18-S19）；產出 [viz/ch04_matrix_matrix.py](../../viz/ch04_matrix_matrix.py) 440 行 / 8 cell（A 6 entry sliders + B 4 entry sliders + r slider + 即時 LaTeX 計算 cell + 主舞台 6 heatmap subplot + 秩 1 圖層 strip + 三式對拍 healthcheck `A@B == sum of rank-1 layers == accumulate(A,B,k=2)` ✓）+ [viz/_common/rank1_layer.py](../../viz/_common/rank1_layer.py) 工具模組（rank1_outer / layers_of / accumulate / layer_energy，本機 reference / S18+ 非 WASM script 用；WASM export 不嵌入子模組所以 notebook 內聯 helper） + viz/_common/__init__.py；**2 round WASM debug：**(R1) Back 報「sliders + 結尾說明顯示，中間 3 cell（即時計算 / 主舞台 / strip）不見」→ 真因：**marimo 把 `_` 開頭 cell variable 視為 cell-private 不跨 cell export**，我寫 helper cell `return _accumulate, _layer_energy, _layers_of`，下游 cell 引用 NameError 整個 cell 沉默不渲染（不是 STDERR 是「未渲染」）→ 修法 helper 與計算合併同一 cell，命名無 `_` 前綴 / (R2) console 兩個 STDERR exception：① 主舞台 cell `TypeError: bad operand type for abs(): 'list'`（dummy `[[0]]` 傳進 `abs(M).max()`，list 沒 `.max()`）→ helper 內 `np.asarray(M, dtype=float)` + `np.abs()`；② strip cell `IndexError: tuple index out of range`（plotly `subplot_titles=[""] * k` 空字串被跳過不生成 annotation slot，後置 `annotations[p].text = ...` 越界）→ `make_subplots` 直接傳完整 title 不後置改 → R2 後 console clean ✓；**S17 3 個新 WASM 陷阱補進 SOP §2.15**（合計 6 大陷阱）：(4) marimo `_` 前綴 cell-private 不跨 cell / (5) plotly `subplot_titles` 空字串不生成 annotation slot / (6) plotly heatmap z 需 `np.asarray(M, dtype=float)` 保護。下次 S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」（VizScript-02 模式 2：64×64 灰階圖像 4 張預計算 SVD + cache + 三圖並列原圖/重建/誤差 + radio 切換 + 相對誤差數字）；S19 補完 Tier 3（飛入動畫 + 4 重排序對比 + 誤差曲線 + Walkthrough 6 步 + 快捷鍵）。**S16 完成：** 從 S15 全書 md 化結構就緒（22 Q&A 100% + 16 md callout 覆蓋）跨入「Python 視覺化實作階段」。Back 不立刻挑旗艦，先做「Marimo 技術棧 PoC」+ 載體討論（先例 6 個 Immersive Math ⭐⭐⭐⭐⭐ / Seeing Theory / Distill / 3B1B / Book of Shaders / D2L.ai；技術棧 6 個比較 → 維持 HANDOFF S11 已選 **Marimo + WASM** 路線）；三階段全通過：(1) uv 安裝（brew install uv 0.11.14）+ uv init viz --python 3.12 + uv add marimo plotly matplotlib numpy scikit-learn pillow → hello.py 4 cell reactive slider PoC（Stage 1 ✅）/ (2) ch01_mv1_poc.py 7 cell：6 slider × plotly 2D 4 箭頭 × (Mv2) 平行四邊形，同時展示 (Mv1) 點積 + (Mv2) 線性組合雙觀點，數值對拍 A@x == row_dot_x == x[0]·col1+x[1]·col2（Stage 2 ✅，3 round debug 才通）/ (3) marimo export html-wasm dist/ch01_mv1_poc 27 MB static dir GitHub Pages 可直接部署（Stage 3 ✅）；**3 個 WASM 教訓收進 SOP §2.15**（PEP 723 metadata 是 WASM dep 唯一聲明處 / plotly 必須 mo.ui.plotly(fig) 顯式包裝 / 首次載入 30-60s UX 警告）+ S17+ 旗艦開工 5 條 checklist；產出 viz/ 7 檔追蹤（dist/+.venv/+__pycache__/ gitignore）+ viz/README.md 含 Immersive Math 等先例 + Marimo vs Jupyter/Streamlit/Observable 對照表。下次 S17 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 MM4+Mona Lisa 母模板 或 ch06f V-01 SVD Master）開始，技術棧驗證零阻抗起跑。**S15 完成：** 沿用 S12-S13 確立的 3-layer 框架 + 方案 D 雙層落點 + 批量寫作流程，產出 §6 共 6 條 Q&A：**Q14 為什麼要把矩陣「分解」？**（156 行 / Gauss 1809 → Eckart-Young 1936 200 年史 + 6 大工程動機 + 「為什麼正好五個」遞進對稱性 5 級表）+ **Q15 A=CR 列秩=行秩自然冒出**（119 行 / Sylvester 1851 rank + Frobenius 1879 + Strang 2020 首次代數封裝「最樸素分解」+ 3×3 rank 2 雙重讀法）+ **Q16 A=LU 高斯消去本質**（165 行 / 《九章算術》方程章 2000 年東方原型 + Newton 1707 → Gauss 1809 → Turing 1948 LU 命名 + 3×3 算驗 + 5 跨領域因果結構表）+ **Q17 A=QR Gram-Schmidt 動機**（138 行 / Gauss 1801 Ceres → Legendre/Gram/Schmidt/Householder 200 年最小平方→Hilbert 演化 + 3×2 完算 + 條件數不被平方化）+ **Q18 譜定理對稱特徵向量自動正交**（144 行 / Cauchy 1829 主軸定理 → 量子力學 1920s Hermitian + 雙證明 + 5 物理對稱↔數學物件對應）+ **Q19 SVD 為什麼任意矩陣存在**（174 行 / Beltrami 1873 首次發現 → Eckart-Young 1936 + 雙證明路徑 + 3×2 SVD 巧妙串接 Q17+Q18 同 $A$ + Strang「the most important theorem」名言）+ 6 主章 callout 客製化（[ch06a Q14+Q11+Q13](../book/ch06a-five.md) / [ch06b Q15+Q14](../book/ch06b-CR.md) / [ch06c Q16+Q14](../book/ch06c-LU.md) / [ch06d Q17](../book/ch06d-QR.md) / [ch06e Q18+Q11+Q13](../book/ch06e-QLQ.md) / [ch06f Q19+Q14+Q08+Q13](../book/ch06f-USV.md) 共 15 links）。總產出 [appendix-D-why.md](../book/appendix-D-why.md) **2740 行（+1083 行 / 65% 增量）/ 19 Q&A（19/22 = 86%）** + 6 主章 callout / 15 Q&A links（累計 **12 callout / 28 Q&A links — 全主章 100% 覆蓋** ✓）。**S15 全部完成 ✓：** Q20 特徵值地圖（225 行 / 200 年史 + 8 類代數機制 + Normal matrix 統一源頭）+ Q21 Matrix World 同心橢圓（246 行 / 250 年史 + 4 替代方案致命缺陷比較 + 結構主義立場）+ **Q22 解 Ax=b 為線代核心（311 行 = 全書最長 Q&A / 4000 年史 + 6 步從零推導 + 5 種解情境 + 全書 22 條會師結構 + Strang 「Linear Algebra = the study of Ax=b in all its depth」最強昇華）** + 3 附錄 callout（map Q20+Q18+Q11 / matrix-world Q21+Q14+Q19 / four-subspaces Q22+Q08+Q19 共 9 links）→ **全書 15 callout / 37 Q&A links / 16 個內容 md 100% 覆蓋達成 ✓**；整合收尾:(1) 跨檔 anchor 校驗 37 條跨檔引用 + 22 錨點 + **0 broken link** ✓ + (2) BOOK.md 重生 8650 → **12305 行（+42%）** + (3) SCHEMA.md 補 §3.6「背後觀念 callout 規範」 + (4) VIZ-CATALOG.md 新增「Appendix D 背後觀念層 22 Q&A 索引」獨立段 + (5) 全套收工（SESSION_INDEX/SOP/RETROSPECTIVE/HANDOFF/CURRENT_SESSION.log）。**S12-S15 4-session 路線完成：appendix-D-why.md 3522 行 / 22 Q&A = 100% ✓ + 全書 16 個內容 md 100% callout 覆蓋 ✓ + 平均效率 30 min/Q&A**。下次 S16+ 進入 **S12+ Python 視覺化實作階段**（從 [VIZ-CATALOG 首批 Tier 3 旗艦](../book/VIZ-CATALOG.md) ch04 V-02 或 ch06f V-01 開始 + 技術棧 PoC Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）。
 
 ---
 
@@ -134,9 +134,18 @@
   - **Round 3（顯式渲染器）：** 加完 PEP 723 後 Back 報「沒報錯但一片空白」→ 判斷 bare `fig` 透過 `_repr_mimebundle_` 顯示可能沒接到 plotly 渲染器；改用 `mo.ui.plotly(fig)` 顯式包裝（marimo 內建 plotly UI widget）+ cell 加 `mo` 到 closure args → Back ✅「可以了，我等不夠久」**真正卡點是 plotly wheel 首次下載要 ~30-60s**，UX 上要在 README / 開啟頁面前告訴讀者「等 Loaded plotly 訊息」
 - [x] **S16 SOP §2.15「Marimo WASM 部署 3 大非顯而易見陷阱」** — (1) PEP 723 inline script metadata 是 marimo WASM 額外 deps 唯一聲明處（uv add 只裝本機 .venv）/ (2) plotly fig 必須 mo.ui.plotly(fig) 顯式包裝才 WASM 渲染穩 / (3) 首次載入要等 30-60s（Pyodide + plotly wheel + plotly.js bundle 三層下載），UX 必須警告 + S17+ 旗艦開工 5 條 checklist（PEP 723 block / mo.ui.plotly wrap / mo 加 closure / WASM export 後 console 必看 / 首頁 30s 警告）
 - [x] **S16 viz/README.md 含 Immersive Math 等先例 + Marimo vs Jupyter/Streamlit/Observable 對照表** — 技術棧上手 6 步 + 為什麼選 Marimo（vs Jupyter 非反應式 / Streamlit 需 server / Observable JS 重寫數學庫）+ 目前 notebook（hello.py / ch01_mv1_poc.py）+ 下一批計畫（VIZ-CATALOG 首批 Tier 3 旗艦）+ 部署 GitHub Pages / Cloudflare Pages / Netlify / Vercel + WASM 需 HTTP 不可 file:// + 開發守則（@app.cell 內修改 / SCHEMA §3.5 全書視覺錨點 / VIZ_SCHEMA 13 段 A-M）
+- [x] **S17 ch04 V-02 MM4 母模板架構階段** — Back 選 HANDOFF S16 推薦路線 A 開始 [ch04-mat-mat.md VizScript-02](../book/ch04-mat-mat.md#vizscript-02)；S17 scope 鎖「最小可動骨架」；產出 [viz/ch04_matrix_matrix.py](../../viz/ch04_matrix_matrix.py) 440 行 / 8 cell + viz/_common/{__init__.py, rank1_layer.py}；2 round WASM debug 才通；commit `cc957f1`
+- [x] **S17 Stage A 檔案結構 + PEP 723 metadata** — `viz/ch04_matrix_matrix.py` 頂端 PEP 723 inline metadata block 含 marimo + numpy + plotly；建立 `viz/_common/` 子目錄含 `__init__.py` + `rank1_layer.py`（rank1_outer / layers_of / accumulate / layer_energy 4 個工具函數，本機 reference / S18+ 非 WASM script 用；WASM export 不嵌入子模組 import 所以 notebook 內聯 helper）
+- [x] **S17 Stage B 小矩陣模式骨架** — A (3×2) 6 entry sliders + B (2×2) 4 entry sliders（VizScript 預設值 A=[[1,2],[3,4],[5,6]] / B=I_2 使 AB=A 便於對拍）+ 累加項數 r slider [0, 2] + mo.hstack/vstack 三欄控制面板（A / B / 累加控制）
+- [x] **S17 Stage C 即時計算 cell + 三式對拍** — A, B, k 構造 + target_C = A @ B + r_val = int(r.value) + Cr = accumulate(A, B, r_val) + error + 相對誤差 ||C-Cr||_F / ||C||_F + layers + energies + **健康檢查 `A@B == sum of rank-1 layers == accumulate(A,B,k)` ✓ 顯示在 markdown 區**
+- [x] **S17 Stage D 主舞台 2×3 共 6 heatmap subplot** — 列 1：秩 1 圖層 1 / 圖層 2 / 累加 Cr；列 2：(空) / 目標 C / 誤差 |C-Cr|；layers heatmap 依 r_val 灰/亮（opacity 0.35 / 1.0）；signed colormap RdBu_r 雙向 + zmid=0；error colormap Oranges 單向絕對值；cell 數字 12pt + hovertemplate `(%{y}, %{x}) = %{z:.2f}`；y 軸 reversed 對齊數學矩陣慣例左上原點
+- [x] **S17 Stage E 秩 1 圖層 strip** — k 個橫排 heatmap subplot（k=2）+ subplot_titles 含 `p={p+1} | 能量 {energies[p]:.2f} | {已累加/尚未累加}` 完整字串（不後置 annotations 改）+ 灰/亮 opacity 依 p < r_val
+- [x] **S17 Stage F WASM export + 部署驗證** — `.venv/bin/marimo export html-wasm ch04_matrix_matrix.py -o dist/ch04_matrix_matrix` → 27 MB static dir；本機 `python -m http.server --directory dist/ch04_matrix_matrix 8765`；HTTP 200 + title `ch04 matrix matrix`；console clean（no STDERR / no Traceback）；PEP 723 觸發 `Loading from micropip: ['plotly']` ✓
+- [x] **S17 2 round WASM debug 過程記錄** — (R1) Back 報「sliders + 結尾說明顯示，中間 3 cell 不見」→ 真因 marimo `_` 前綴 cell-private 不跨 cell export，下游 NameError 整個 cell 沉默不渲染 → 修 helper 合併同一 cell + 命名無 `_` 前綴 / (R2) console 兩個 STDERR：① 主舞台 `TypeError: bad operand type for abs(): 'list'` ← dummy `[[0]]` plain list → `np.asarray(M, dtype=float)` + `np.abs()` / ② strip `IndexError: tuple index out of range` ← plotly `subplot_titles=[""] * k` 空字串被跳過不生成 annotation → make_subplots 直接傳完整 title
+- [x] **S17 SOP §2.15 補入 3 個新 WASM 陷阱**（合計 6 大）— (4) marimo `_` 前綴 cell-private 不跨 cell export；跨 cell 共用的函數 / 變數命名不可 `_` 開頭，變通：helper 合併同一 cell（推薦） / (5) plotly `make_subplots(subplot_titles=[""] * k)` 空字串會被跳過不生成 annotation slot，後置 `annotations[p].text = ...` IndexError；變通：直接傳完整最終 title 或 placeholder 非空字串 / (6) plotly heatmap z 參數最好 `np.asarray(M, dtype=float)` 包一層，helper 內 `M = np.asarray(M, dtype=float)` 保護 + `abs()` → `np.abs()` 用 numpy 介面
 
 ### 進行中
-- 無，**S16 已收尾，Marimo 技術棧 PoC 三階段全通過**（commit `2f9b9e3`）。下次 S17 進入 **首批 Tier 3 旗艦實作階段**（從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 挑 ch04 V-02 MM4+Mona Lisa SVD 母模板 或 ch06f V-01 SVD Master，4 應用切換 / 壓縮 / PCA / 降噪 / 推薦）；技術棧已驗證零阻抗（uv + Python 3.12 + marimo 0.23.6 + plotly 6.7 + matplotlib 3.10 + sklearn 1.8 + Pillow 12.2 + scipy 1.17，本機 + WASM 雙環境）
+- 無，**S17 已收尾，ch04 V-02 母模板架構階段完成**（commit `cc957f1`）。下次 S18 從 S17 骨架接「**圖像模式 + Mona Lisa SVD**」（VizScript-02 模式 2：64×64 灰階圖像 4 張預計算 SVD + cache + 三圖並列原圖/重建/誤差 + radio 切換 + 相對誤差數字）；S19 補完 Tier 3（飛入動畫 800ms / 4 重排序對比 / 誤差曲線 / Walkthrough 6 步 / 快捷鍵 / hover tooltip）
 
 ### 待辦（多 session 路線圖 v3 — S11 整合 + S12+ 視覺化實作）
 
@@ -160,10 +169,56 @@
 | ✅ S14 | **§6 五大分解：Q14–Q19（6 條 Q&A）+ ch06a–ch06f 主章 callout — 全主章 100% 覆蓋** | [appendix-D-why.md](../book/appendix-D-why.md) 從 1657 行擴至 **2740 行（+1083 行 / 19 Q&A = 86%）**：Q14 分解動機（156）+ Q15 CR（119）+ Q16 LU（165）+ Q17 QR（138）+ Q18 譜定理（144）+ Q19 SVD（174）+ 6 主章 callout（[ch06a](../book/ch06a-five.md) Q14+Q11+Q13 / [ch06b](../book/ch06b-CR.md) Q15+Q14 / [ch06c](../book/ch06c-LU.md) Q16+Q14 / [ch06d](../book/ch06d-QR.md) Q17 / [ch06e](../book/ch06e-QLQ.md) Q18+Q11+Q13 / [ch06f](../book/ch06f-USV.md) Q19+Q14+Q08+Q13 共 15 links）— **累計 12 callout / 28 Q&A links 全主章 100% 覆蓋** |
 | ✅ S15 | **附錄 + 整合收尾：Q20–Q22 + 3 附錄 callout + BOOK.md 重生 + 規範補充** | [appendix-D-why.md](../book/appendix-D-why.md) 3522 行 / 22 Q&A 100% ✓ + 15 callout / 37 Q&A links + [BOOK.md](../book/BOOK.md) 12305 行（+42%）+ SCHEMA §3.6 + VIZ-CATALOG Appendix D 索引 + 0 broken anchor ✓ |
 | ✅ S16 | **Marimo 技術棧 PoC — Python 視覺化實作起步**（commit `2f9b9e3`）| viz/ 7 檔（uv + Python 3.12 + marimo 0.23.6 + plotly 6.7 + matplotlib 3.10 + sklearn 1.8 + Pillow 12.2）+ hello.py（Stage 1 4 cell）+ ch01_mv1_poc.py（Stage 2 7 cell (Mv1)+(Mv2) 雙觀點互動）+ marimo export html-wasm dist/ch01_mv1_poc 27 MB static deploy（Stage 3 ✅）+ SOP §2.15 WASM 3 陷阱 + S17+ 5 條 checklist |
-| **→ S17** | **首批 Tier 3 旗艦實作（ch04 V-02 母模板 或 ch06f V-01 SVD Master）** | 從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 首批挑：選 A = ch04 V-02 MM4+Mona Lisa SVD demo（母模板優勢，完成後 §6 五分解 pointer 全解鎖）/ 選 B = ch06f V-01 SVD Master 含 4 應用切換（壓縮/PCA/降噪/推薦）+ 4 子空間視覺 + 2D 幾何 + Mona Lisa demo + 雙 pointer 設計；推薦 A 先做；預估各 3 session |
-| S18+ | Python 視覺化批次旗艦實作 | 從 VIZ-CATALOG 次批 Tier 2（含 Matrix World V-01 全書互動式教材首頁 + ch06a V-01 五分解 dashboard 等），預估 ~28-30 session |
+| ✅ S17 | **ch04 V-02 MM4 母模板架構階段 — 首批 Tier 3 旗艦開工骨架完成**（commit `cc957f1`）| viz/ch04_matrix_matrix.py 440 行 / 8 cell + viz/_common/{__init__.py, rank1_layer.py}；小矩陣 3×2·2×2 模式骨架 + r slider 0..2 + 秩 1 圖層 strip + 主舞台 2×3 共 6 heatmap + WASM export + console clean + 2 round debug；SOP §2.15 補 S17 3 個新 WASM 陷阱（合計 6 大）|
+| **→ S18** | **ch04 V-02 圖像模式 + Mona Lisa SVD（VizScript-02 模式 2）** | 接 S17 骨架加：(1) 4 張 64×64 灰階圖像 npy 預計算（Mona Lisa / 條紋 / 漸層 / 隨機 / 預先 `numpy.linalg.svd(image, full_matrices=False)` cache 至 `viz/assets/`）(2) 模式 radio 切換（小矩陣 / 4 圖像，切換時整個畫面重建）(3) 圖像模式三張 64×64 並列（原圖 / 累加重建圖 / 誤差熱圖）+ 相對誤差數字 (4) r slider 範圍動態調整（小矩陣 0..2 / 圖像 0..64）(5) WASM export 確認 ~30 MB 內（4 npy ~33 KB 每張）+ console clean；預估 1 session |
+| S19 | **ch04 V-02 Tier 3 補完（飛入動畫 + 重排序 + 誤差曲線 + Walkthrough）** | (1) r slider 移動時秩 1 圖層從 strip「飛到」主舞台中央 + 與 Cr 合併動畫 800ms / 項 + ease-in-out cubic-bezier (2) 4 重排序 radio（按 σ_p / ||a_p|| / 隨機 / 自訂）對比，按 σ_p 排序時誤差曲線下降最快 — 鋪陳 Eckart-Young §6.5 (3) 誤差曲線圖 r vs ||C-Cr||_F / ||C||_F 即時更新，當前 r 紅點 + 垂直虛線標記 (4) Walkthrough 6 步首次開啟自動觸發 (5) 快捷鍵 Space / ←/→ / R / 0 / Shift+End / M；預估 1-1.5 session |
+| S20+ | Python 視覺化批次旗艦實作 | 從 VIZ-CATALOG 次批 Tier 2（含 Matrix World V-01 全書互動式教材首頁 + ch06a V-01 五分解 dashboard 等），預估 ~28-30 session |
 
-### S17 起步建議（S16 已完成，首批 Tier 3 旗艦實作）
+### S18 起步建議（S17 已完成，圖像模式 + Mona Lisa SVD）
+
+1. **S18 任務：ch04 V-02 圖像模式（VizScript-02 模式 2）** — 接 S17 骨架，加 64×64 灰階圖像 4 張預計算 SVD + 模式 radio 切換 + 三圖並列；預估 1 session
+
+2. **S18 拆 5 步：**
+   - **Step 1（~15 min）：** 準備 4 張 64×64 灰階圖像
+     - `viz/assets/mona_lisa_64.npy` — 從公開 Mona Lisa 圖（PIL convert L + resize 64×64）
+     - `viz/assets/stripes_64.npy` — 程式生成 horizontal stripes 圖案
+     - `viz/assets/gradient_64.npy` — 程式生成 linear gradient 對角漸層
+     - `viz/assets/random_64.npy` — `np.random.seed(42)` 後 randn 64×64
+     - 每張 SVD 預計算 cache `U, sigma, Vt` 至 `viz/assets/{name}_svd.npz`（避免 WASM 啟動算 SVD 卡 ~1s）
+   - **Step 2（~20 min）：** mode radio + 動態 r 範圍
+     - mode = mo.ui.radio(options=["小矩陣 demo", "Mona Lisa", "條紋", "漸層", "隨機"], value="小矩陣 demo")
+     - 切換 mode 時 r slider 範圍動態：小矩陣 [0, 2] / 圖像 [0, 64]
+     - **注意：marimo `mo.ui.radio` 是 reactive，可在計算 cell closure 用 `mode.value` 分支**
+   - **Step 3（~25 min）：** 圖像三圖並列主舞台改寫
+     - 原 6 heatmap subplot 改為「依 mode 動態 layout」
+     - 圖像模式：1×3 layout 顯示「原圖 / 累加重建圖 / 誤差熱圖」+ 64×64 灰階 `colorscale="Greys"` `aspect=1`
+     - 小矩陣模式：保持 S17 的 2×3 layout
+   - **Step 4（~10 min）：** 即時相對誤差數字 + 累積能量比例
+     - 圖像模式顯示 `||C - Cr||_F / ||C||_F = 23.4%` 即時數字 + 「累積保留能量比例 = Σ σ_p² / Σ σ²（p ≤ r）」
+     - 對於 Mona Lisa，r=10 時應 ~85%+ 能量、r=20 時應 ~95%+
+   - **Step 5（~10 min）：** WASM export 驗證 + 部署測
+     - `marimo export html-wasm` 確認 dist size ~30 MB 內（4 npy ~33 KB 每張 + 4 svd npz ~140 KB 每張）
+     - console 必看：(a) `Loading from micropip: ['plotly']` (b) 無 STDERR (c) `np.load(...)` 對 npy 在 Pyodide 環境 work
+     - **可能陷阱（待 S18 確認）：** WASM 環境如何讀本機 npy？可能需嵌入 base64 或用 fetch — 若 Pyodide `pyodide-http` 預裝可 fetch 同 dir 相對路徑
+
+3. **S18 開工 checklist（SOP §2.15 6 大陷阱）：**
+   - [ ] PEP 723 metadata 維持 marimo + numpy + plotly（圖像模式不需新增 dep）
+   - [ ] 跨 cell 共用的函數 / 變數命名不可 `_` 開頭
+   - [ ] plotly `subplot_titles` 不可傳空字串
+   - [ ] heatmap helper 內 `M = np.asarray(M, dtype=float)` 保護
+   - [ ] mode radio 切換時注意 r slider 範圍動態
+   - [ ] WASM export 後 console 必看 STDERR + Loading 順序
+   - [ ] **驗證 Pyodide 環境讀 viz/assets/*.npy 是否 work**（待 S18 確認 — 可能要改 base64 嵌入或 fetch）
+
+4. **參考工件：**
+   - [viz/ch04_matrix_matrix.py](../../viz/ch04_matrix_matrix.py) — S17 骨架（已 work，S18 直接擴）
+   - [viz/_common/rank1_layer.py](../../viz/_common/rank1_layer.py) — 工具函數本機 reference（注意 WASM 仍要 inline）
+   - [VizScript-02 in ch04-mat-mat.md](../book/ch04-mat-mat.md#vizscript-02) §C 模式 2 規格 + §D 視覺布局 + §K 技術實作建議 — 直接參照
+   - [SOP_DRAFT.md §2.15](sop/SOP_DRAFT.md) — 6 大 WASM 陷阱
+
+5. **S18 後續：** S19 補完 Tier 3（飛入動畫 / 4 重排序 / 誤差曲線 / Walkthrough / 快捷鍵）；S20+ 進入次批 Tier 2 旗艦（Matrix World V-01 + ch06a V-01 五分解 dashboard + ch06b/c/d/e V-01 五分解 pointer，依 S17 母模板複製樣板）
+
+### S17 起步建議（S16 已完成，首批 Tier 3 旗艦實作）— 歷史保留
 
 1. **S17 推薦選項 A：ch04 V-02 MM4 + Mona Lisa SVD 母模板**（[VizScript-02 in ch04-mat-mat.md](../book/ch04-mat-mat.md#vizscript-02)）— 母模板優勢，完成後 §6 五分解 pointer 全解鎖（ch06b/c/d V-01 全部 pointer / ch06a V-01 dashboard 控制器 / ch06f V-01 雙 pointer 主指向）；預估 3 session（架構 + 互動 + 應用 demo）
 
@@ -396,6 +451,12 @@ S13 已完成 13/22 Q&A（59%），S14 路線重點：Q14-Q19 §6 五大分解 6
 | 2026-05-13 | **S16 確立「WASM 首次載入 30-60s UX 警告規範」** | Pyodide + plotly wheel + plotly.js bundle 三層下載，讀者一眼空白容易誤判（S16 Back 就誤判過一次）；部署頁 / VIZ-CATALOG / BOOK.md 在連結 deployed page 處要附「⏳ 首次載入請等 ~30s，直到看到 plotly 圖出現再操作」說明 |
 | 2026-05-13 | **S16 確立「WASM debug 流程：先看 console 再修代碼，不要先猜」** | Round 1 我猜了 3 個風險（LaTeX label / slider 嵌 markdown / plotly 新特性）防禦性重寫但都不是真因，浪費 1 round + 30 min；Round 2 Back 貼 console 立刻看到 `ModuleNotFoundError: No module named 'plotly'`真因。**教訓：WASM debug 先看 DevTools Console 比猜更高效**；未來 PoC 第一輪錯就主動要求 console log |
 | 2026-05-13 | **S16 確立「uv + Python 3.12 + Marimo 0.23 + plotly 6.7 全棧穩定」** | viz/pyproject.toml lock 完整技術棧：marimo>=0.23.6 + matplotlib>=3.10.9 + numpy>=2.4.4 + pillow>=12.2.0 + plotly>=6.7.0 + scikit-learn>=1.8.0；本機 + WASM 雙環境驗證 OK；S17+ 旗艦實作可直接從此 lock 啟動 |
+| 2026-05-14 | **S17 確立「跨 cell 共用的函數 / 變數命名不可 `_` 開頭」** | marimo 把 `_` 開頭 cell variable 視為 cell-private 不跨 cell export；S17 我寫 helper cell `return _accumulate, _layer_energy, _layers_of`，下游 cell 引用全部 NameError，整個 cell **沉默不渲染**（沒有 STDERR exception，只是「未渲染」）。**症狀：WASM 部分 cell 不見、console clean** — 是 marimo cell-graph 解析問題不是 runtime exception。**規則：S18+ 跨 cell helper 命名一律具名前綴（`acc_xxx` / `rank1_xxx` / `helper_xxx` 等），不可 `_xxx`**；補進 SOP §2.15 陷阱 #4 |
+| 2026-05-14 | **S17 確立「marimo helper 函數預設內聯在唯一使用者 cell」** | S17 寫 helper cell 結果只 1 個下游 cell 使用，「分 cell」沒帶來重用價值卻多了一個跨 cell 邊界（多 1 個 `_` 陷阱風險 + 多 1 個 dependency 邊界）。**規則：helper 函數預設先內聯在唯一使用者 cell，等真有第 2 個使用者再抽出來**；S18+ 圖像 SVD helper 也照此辦理 |
+| 2026-05-14 | **S17 確立「plotly heatmap helper 防護模式」** | helper 函數開頭一律 `M = np.asarray(M, dtype=float)` 保護輸入，不假設 caller 一定傳 numpy；同步 `abs()` → `np.abs()` 用 numpy 介面而非 Python builtin；補進 SOP §2.15 陷阱 #6 |
+| 2026-05-14 | **S17 確立「plotly `subplot_titles` 不可傳空字串」** | plotly 對 `subplot_titles=[""] * k` 空字串會直接跳過不生成 annotation slot，後置 `fig.layout.annotations[p].text = ...` 會 IndexError；變通：直接在 `make_subplots` 傳完整最終 title（推薦）或 placeholder 非空字串 `[" "] * k`；補進 SOP §2.15 陷阱 #5 |
+| 2026-05-14 | **S17 確立「ch04 V-02 母模板 3 session 拆解節奏：架構 / 圖像 / Tier 3 補完」** | HANDOFF S16 預估 3 session，S17 把 scope 鎖在「最小可動骨架」（小矩陣模式 + r slider + 秩 1 圖層 strip + 6 heatmap）並守住，沒把圖像 / 動畫 / 重排序硬塞進來；S18 加圖像模式 + Mona Lisa SVD；S19 補完飛入動畫 + 4 重排序 + 誤差曲線 + Walkthrough + 快捷鍵。**3 session 拆解的最大好處 = 每 session 都能 commit 一個「可動 + console clean」的版本**，避免一次堆太多功能 debug 變多面 |
+| 2026-05-14 | **S17 確立「WASM 部分 cell 不渲染但 console clean = marimo cell-graph 解析問題」** | 與 S16「Round 1 防禦性重寫」教訓 + S17 「`_` 前綴 cell-private」兩條經驗合併，WASM debug 流程升級：**第一動作不是 console 而是 (1) `python -c "import ast; ast.parse(open('xxx.py').read())"` 看 syntax (2) marimo edit 在本機跑 (3) 檢查 `_` 前綴 / cross-cell variable 拼錯字 (4) 才看 console**；console STDERR 是 runtime exception 階段才出現，cell-graph 解析失敗的 cell 是沉默 skip 不是 exception |
 
 ---
 
@@ -485,6 +546,24 @@ S13 已完成 13/22 Q&A（59%），S14 路線重點：Q14-Q19 §6 五大分解 6
 | docs/dev/SESSION_INDEX.md | 修改 | （pending — session-end Step 4 處理）追加 S14 一行 |
 | docs/dev/HANDOFF.md | 修改 | 整檔覆寫（最後更新 / 已完成 / 進行中 / 待辦 → S15 / 關鍵決策追加 5 條 / 檔案變更追蹤追加 S14 區 / S15 起步建議完整改寫 + S14 起步歷史保留）|
 | docs/dev/RETROSPECTIVE.md | 修改 | S14 對話反思追加（本 session 無重大低效時刻 + 三 session 連續驗證「精準分批指令 + 批量產出」最佳工作模式 + 5 條 Claude 自我提醒）|
+
+### S15–S16 新增/修改的檔案
+
+詳見 [SESSION_INDEX.md](SESSION_INDEX.md) S15/S16 行 + [RETROSPECTIVE.md](RETROSPECTIVE.md) S15/S16 反思段 + commit `df95d89`（S15）/ `2f9b9e3`（S16）/ `22aabc2`（S16 收工）。
+
+### S17 新增/修改的檔案
+
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| viz/ch04_matrix_matrix.py | **新增** | **440 行 / 8 cell** — ch04 V-02 MM4 母模板架構階段骨架；PEP 723 metadata 含 marimo+numpy+plotly；cells: (1) imports（mo / np / go / make_subplots）/ (2) 配色 + colormap 常數 / (3) markdown 標題與 (MM4) 公式 / (4) A 6 entry sliders + B 4 entry sliders + r slider / (5) 控制面板 hstack / (6) **核心計算 + 三式對拍 healthcheck**（含 inline helper `rank1_outer / layers_of / accumulate / layer_energy`，避開 `_` 前綴陷阱） / (7) 即時計算 markdown（LaTeX 矩陣 + 能量 + 對拍結果） / (8) 主舞台 2×3 共 6 heatmap subplot / (9) 秩 1 圖層 strip / (10) S17 骨架說明 markdown |
+| viz/_common/__init__.py | 新增 | 空檔，宣告 `_common` 為 Python package（本機 reference 用，WASM export 不嵌入子模組 import） |
+| viz/_common/rank1_layer.py | 新增 | **工具模組** — `rank1_layer(a, b)` / `layers_of(A, B)` / `accumulate(A, B, r)` / `layer_energy(a, b)` 四函數；本機開發等價於 notebook inline helper；S18+ 非 WASM script / 測試用；WASM 不嵌入子模組所以 notebook 需要 inline 同邏輯 |
+| viz/dist/ch04_matrix_matrix/ | 新增（gitignore） | marimo export html-wasm 產出 27 MB static dir，含 Pyodide WASM runtime + plotly bundle + 嵌入的 notebook code with PEP 723 metadata；`viz/.gitignore` 已排除 `dist/` |
+| docs/dev/sop/SOP_DRAFT.md | 修改 | **§2.15 標題從「3 大」→「6 大」** + **新增「S17 補充：3 個 marimo 跨 cell / plotly 細節陷阱」**（陷阱 #4 marimo `_` 前綴 cell-private / 陷阱 #5 plotly `subplot_titles` 空字串不生成 annotation slot / 陷阱 #6 plotly heatmap z 需 `np.asarray(M, dtype=float)`）+ S17 對 S18+ 擴充 checklist 4 條 |
+| docs/dev/CURRENT_SESSION.log | 修改 | S17 啟動 + 即時記錄（Back 選 A / PoC 寫作 / 2 round WASM debug / 3 個新陷阱）+ 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S17 一行（含 commit `cc957f1` + 完整 2 round debug 記錄 + 3 個新 WASM 陷阱）+ swap S16/S17 順序使時序排列 |
+| docs/dev/HANDOFF.md | 修改 | 整檔覆寫（最後更新 / 已完成追加 S17 9 條 / 進行中 / 待辦 → S18 / S18 起步建議完整新寫 + S17 起步歷史保留 / 關鍵決策追加 6 條 / 檔案變更追蹤追加 S17 區）|
+| docs/dev/RETROSPECTIVE.md | 修改 | S17 對話反思追加（本 session 主軸 / 對話低效時刻 3 條 / 建議 Back 下次這樣問會更快 2 條 / Claude 自我提醒 6 條） |
 
 ---
 

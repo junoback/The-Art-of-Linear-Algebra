@@ -13,6 +13,14 @@
 
 《Map of Eigenvalues》是 Kenji Hiranabe 於 2021 年獨立發布的 slidedeck，**並非《Linear Algebra for Everyone》主書內容**，而是作為「**特徵值的視覺化分類地圖**」的補充作品。它把 12 種常見矩陣類別（從零矩陣 $O$ 到 Markov 矩陣）依「**特徵值在複平面上的幾何位置**」一字排開，讓讀者「**看一張圖就能辨認矩陣類型**」。每個類別給出：（1）類別名稱與符號；（2）小型範例矩陣（3×3）；（3）特徵值的代數條件（如 $\forall \lambda = 0$、$\forall \lambda \in \mathbb{R}$）；（4）特徵值在複平面上的散點圖（橙色圓點）。本附錄是 §6.4 EVD 的「**視覺地圖總覽**」 — 把該章的「對稱矩陣特殊性 $\forall \lambda \in \mathbb{R}$」放回 12 類矩陣的全景中。互動式版本透過「**單一 dashboard 同時呈現 12 類**」+ 拉桿改範例矩陣即時看特徵值移動，讓讀者建立「**矩陣類別 ↔ 特徵值分佈**」的雙向直覺。
 
+> ### 💡 背後觀念：「地圖」為什麼畫得出來？12 個幾何指紋的代數源頭
+>
+> Hiranabe 把 12 類矩陣依特徵值在複平面的位置「一字排開」 — 對稱在實軸、反對稱在虛軸、正交在單位圓、Markov 在單位圓內含 1、投影只在 $\{0, 1\}$ 兩點 ... 為什麼這些「幾何指紋」是**普遍規律**而非個別觀察？「地圖」這個視覺策略本身為什麼是可能的？背後 200 年代數源頭：
+>
+> - **[Q20：特徵值的「地圖」為什麼能畫得出來？](appendix-D-why.md#q20)** — 從 **Cauchy 1829 主軸定理**（對稱 → 實軸）→ Hermite 1855 → Cayley 1858 特徵多項式 + Cayley-Hamilton → Perron 1907 + **Frobenius 1912 Perron-Frobenius 定理**（Markov $\lambda = 1$ 與單位圓內）→ Schur 1909 → **Toeplitz 1918 Normal matrix** → Gershgorin 1931 disc → Hiranabe 2021 視覺集大成 共 200 年史。② 8 類矩陣特徵值幾何位置**逐一代數推導**（對稱 $\lambda = \bar\lambda$ / 反對稱 $\lambda + \bar\lambda = 0$ / 正交 $|\lambda|^2 = 1$ / 投影 $\lambda^2 = \lambda$ / 冪零 $\lambda^k = 0$ / $zI$ / 奇異 / Markov）+ 統一機制「**多項式 functional calculus**」（$p(A) = O \Rightarrow p(\lambda) = 0$）。③ **Normal matrix（$A^{\mathrm{T}}A = AA^{\mathrm{T}}$）是地圖能畫的代數源頭** + 實軸/虛軸/單位圓三條對偶曲線對應 Hermitian/skew-Hermitian/unitary（量子力學 $U = e^{-iHt/\hbar}$ 統一範例）+ 「**分類先於分解**」教學作用。
+> - **[Q18：譜定理 $S = Q\Lambda Q^{\mathrm{T}}$ 為什麼對稱矩陣特徵向量自動正交？](appendix-D-why.md#q18)** — 地圖上「對稱類 → 實軸」這條曲線的**最核心代數證明**（Cauchy 1829 主軸定理 + $\lambda = \bar\lambda$ 共軛轉置推導）— Map 把這個結果視覺化為「實軸排列」，但**為什麼**它必然如此見 Q18 雙證明。
+> - **[Q11：對角矩陣 $D$ 為什麼這麼特別？](appendix-D-why.md#q11)** — Map 中「對角矩陣」位於 12 類核心位置（特徵值 = 對角元素本身），擁有「**矩陣世界中的標量**」四超能力。**「對角化」的本質 = 用 $Q$ 把任意對稱矩陣轉到對角矩陣的座標** — Map 中所有矩陣分類的最簡形式都是對角。
+
 ---
 
 ## 數學要點

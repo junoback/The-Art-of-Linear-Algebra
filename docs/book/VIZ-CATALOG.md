@@ -224,12 +224,53 @@
 |---|---|
 | [`docs/book/VIZ-CATALOG.md`](VIZ-CATALOG.md)（本檔）| **入口 metadata 索引** — 挑題 + 跳轉 + 進度追蹤 |
 | [`docs/book/BOOK.md`](BOOK.md) | 全書合併版（離線閱讀 / PDF 匯出）|
-| [`docs/book/SCHEMA.md`](SCHEMA.md) | 章節 md 結構規範 |
+| [`docs/book/SCHEMA.md`](SCHEMA.md) | 章節 md 結構規範（含 §3.6 背後觀念 callout 規範，S15 補）|
 | [`docs/book/VIZ_SCHEMA.md`](VIZ_SCHEMA.md) | VizMark 標記 + VizScript 13 段 A-M 格式 |
-| ch01–ch06f 各 md 檔 | **實作詳情頁** — 每個 VizScript 的 13 段 A-M 完整劇本 |
-| appendix-* 各 md 檔 | 附錄 3 個 VizScript 詳情 |
+| [`docs/book/appendix-D-why.md`](appendix-D-why.md) | **背後觀念層 22 條 Q&A**（S12-S15 完成）— 每個運算規則的「① 歷史 + ② 推導 + ③ 昇華」3-layer 詳述 |
+| ch01–ch06f 各 md 檔 | **實作詳情頁** — 每個 VizScript 的 13 段 A-M 完整劇本 + 背後觀念 callout（連 Appendix D）|
+| appendix-* 各 md 檔 | 附錄 3 個 VizScript 詳情 + 背後觀念 callout |
 | [`docs/book/figs-png/`](figs-png/) | 50 張 PNG 原始視覺參考（含 `using XX` 標記）|
-| [`docs/dev/sop/SOP_DRAFT.md`](../dev/sop/SOP_DRAFT.md) | 累積 11 個 session 寫作經驗 — S12+ 視覺化的對應 SOP 起步 |
+| [`docs/dev/sop/SOP_DRAFT.md`](../dev/sop/SOP_DRAFT.md) | 累積 15 個 session 寫作經驗 — S12+ 視覺化的對應 SOP 起步 |
+
+---
+
+## Appendix D 背後觀念層 22 Q&A 索引（S12-S15 新增）
+
+> **用途：** S12-S15 完成的「**背後觀念層**」是 VIZ-CATALOG 的姐妹索引 — VIZ-CATALOG 索引「**怎麼視覺化**」、Appendix D 索引「**為什麼這條規則長這樣**」。兩個索引互補，組合起來涵蓋互動式教材的「實作 + 理論」雙面向。
+>
+> **總計：** 22 條 Q&A / 3522 行 / 100% 完成（S15 收尾）+ 全書 15 個 callout / 37 Q&A links / 16 個內容 md 100% 覆蓋
+
+| # | 主題 | 對應主章 | 連結 | session |
+|---|------|----------|------|---------|
+| Q01 | 為什麼線性代數要從「圖解」開始學？ | front-foreword | [→ Q01](appendix-D-why.md#q01) | S12 |
+| Q02 | 矩陣為什麼存在？「把表格看成單一物件」是什麼躍進？ | §1 | [→ Q02](appendix-D-why.md#q02) | S12 |
+| Q03 | 為什麼同一個矩陣要看成 4 種視角？ | §1 | [→ Q03](appendix-D-why.md#q03) | S12 |
+| Q04 | 點積為什麼是「分量相乘再相加」？ | §2 | [→ Q04](appendix-D-why.md#q04) | S12 |
+| Q05 | 外積為什麼是「列 × 行 = 秩 1 矩陣」？ | §2 | [→ Q05](appendix-D-why.md#q05) | S12 |
+| Q06 | $A\mathbf{x}$ 為什麼這樣定義？ | §3 | [→ Q06](appendix-D-why.md#q06) | S12 |
+| Q07 | 為什麼要有 2 個視角（點積 + 線性組合）？ | §3 | [→ Q07](appendix-D-why.md#q07) | S12 |
+| Q08 | 四個基本子空間為什麼會自然冒出？ | §3 | [→ Q08](appendix-D-why.md#q08) | S12 |
+| **Q09** | **矩陣乘法為什麼是「行乘列」？（S12 PoC）** | **§4** | [→ Q09](appendix-D-why.md#q09) | **S12** |
+| Q10 | 為什麼乘法不可交換 $AB \neq BA$？ | §4 | [→ Q10](appendix-D-why.md#q10) | S13 |
+| Q11 | 對角矩陣 $D$ 為什麼這麼特別？ | §5 | [→ Q11](appendix-D-why.md#q11) | S13 |
+| Q12 | (P3) 動態系統為什麼能用特徵值預測長期？ | §5 | [→ Q12](appendix-D-why.md#q12) | S13 |
+| Q13 | (P4) 三明治為什麼是線代核心？ | §5 | [→ Q13](appendix-D-why.md#q13) | S13 |
+| Q14 | 為什麼要把矩陣「分解」？ | §6 | [→ Q14](appendix-D-why.md#q14) | S14 |
+| Q15 | A=CR 為什麼成立？「列秩 = 行秩」怎麼自然冒出？ | §6.1 | [→ Q15](appendix-D-why.md#q15) | S14 |
+| Q16 | A=LU 高斯消去本質？ | §6.2 | [→ Q16](appendix-D-why.md#q16) | S14 |
+| Q17 | A=QR Gram-Schmidt 動機？ | §6.3 | [→ Q17](appendix-D-why.md#q17) | S14 |
+| Q18 | $S = Q\Lambda Q^{\mathrm{T}}$ 對稱譜定理為什麼成立？ | §6.4 | [→ Q18](appendix-D-why.md#q18) | S14 |
+| Q19 | SVD 為什麼對任意矩陣存在？ | §6.5 | [→ Q19](appendix-D-why.md#q19) | S14 |
+| Q20 | 特徵值的「地圖」為什麼能畫得出來？ | Appendix A | [→ Q20](appendix-D-why.md#q20) | S15 |
+| Q21 | Matrix World 為什麼是「同心橢圓繼承樹」而非「樹狀」？ | Appendix B | [→ Q21](appendix-D-why.md#q21) | S15 |
+| **Q22** | **「解 $A\mathbf{x}=\mathbf{b}$」為什麼是線代的核心問題？（全書收尾）** | **Appendix C** | [→ Q22](appendix-D-why.md#q22) | **S15** |
+
+**3-layer 框架：** 每條 Q&A 採 ① 歷史脈絡（含經典原典出處）+ ② 設計過程還原（含推導 + 小例題）+ ③ 概念昇華（跨領域應用 + 哲學意義）+ 延伸閱讀（本書 cross-ref + 歷史原典 + 現代教科書）三層結構。
+
+**閱讀路線：**
+- **隨章閱讀**：讀完每個主章的「章節摘要」+ callout 後，點 callout 中的 Q&A 連結進入 Appendix D 看詳述
+- **集中閱讀**：直接讀 [appendix-D-why.md](appendix-D-why.md) 從 Q01 到 Q22 一氣呵成
+- **主題追蹤**：跨 Q&A 知識網路（如 Q19 SVD 引用 Q08+Q17+Q18 / Q22 Ax=b 引用 Q08+Q14+Q17+Q19 等共 ~40 條 cross-Q link）
 
 ---
 
@@ -238,4 +279,5 @@
 | 日期 | Session | 變更 |
 |---|---|---|
 | 2026-05-13 | S11 | 初版生成（從各章節 md 抽取 36 個 VizScript metadata，三批排程明確化）|
+| 2026-05-13 | S15 | 新增「**Appendix D 背後觀念層 22 Q&A 索引**」獨立段（22 條 Q&A 完整列表 + 對應主章 + session + 連結 + 3-layer 框架說明 + 三條閱讀路線）+ 全書文件結構表更新（補 appendix-D-why.md 行 + SCHEMA.md 標註 §3.6 新增）+ SOP_DRAFT 從「11 session」更新為「15 session」 |
 

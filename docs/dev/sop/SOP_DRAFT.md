@@ -238,6 +238,26 @@ S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章�
 - **Strang LAFE 名言當「鉤子」效果強**：ch06a callout 用「**Make every matrix look diagonal**」（LAFE §6.1 開頭）、ch06f callout 用「**the most important theorem in linear algebra**」（LAFE Ch.7 結論）— 直接用大師直引名言當 hook，比泛論寫法吸引讀者進入附錄 D 強得多。**未來 callout 應主動挖經典名言作為 hook 詞**
 - **「雙證明路徑」對 §6 分解 Q&A 是高價值結構**：Q19 SVD 雙證明（譜定理建構性 + Jordan 變分定義）讓讀者從兩個獨立角度確認「為什麼存在」 — 一個給代數證明、一個給幾何直覺。Q18 也用雙證明（不同特徵值正交 + 實特徵值補充）。**§6 分解 Q&A 的「存在性 / 構造性問題」幾乎都適用雙證明設計**，未來 S15 附錄 Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼線代核心）也可考慮類似
 
+**§2.6 S15 耗時資料點（背後觀念層收尾 + 全書整合 100% 完成）：** ~3.5h / Q20-Q22 3 條 Q&A 批量（1.5h，平均 ~30 min / 條 — 比 S14 平均 25 min 略長，因為附錄 Q&A 收尾性質強需更多跨 Q cross-ref：Q20 連 Q11/Q12/Q13/Q18、Q21 連 Q03/Q13/Q14/Q19、Q22 是「全書 22 條會師點」連幾乎所有前面 Q&A）+ 3 附錄 callout（10 min）+ BOOK.md 重生（15 min，含 fence-aware awk 合併 17 md + header 12 處數字更新 + 新增 22 Q&A 結構表 + 15 callout 覆蓋表）+ 跨檔 anchor 校驗（10 min，grep 37 條跨檔引用 + 22 錨點對照 + 0 broken）+ SCHEMA §3.6 規範補充（15 min）+ VIZ-CATALOG Appendix D 索引段（15 min）+ 全套收工 SESSION_INDEX/SOP_DRAFT/RETROSPECTIVE/HANDOFF/CURRENT_SESSION.log（30 min）；產出 [appendix-D-why.md](../book/appendix-D-why.md) 從 2740 行擴至 **3522 行（+782 行 / 29% 增量）/ 22 Q&A（22/22 = 100% ✓）** + 3 附錄 callout / 9 Q&A links（累計 15 callout / 37 Q&A links — **全書 16 個內容 md 100% 覆蓋達成 ✓**）+ BOOK.md 從 8650 → **12305 行（+42% 增量）** + SCHEMA §3.6 新規範段 ~110 行 + VIZ-CATALOG Appendix D 索引段 ~40 行。**Q20-Q22 篇幅：** Q20 225 行（200 年史 + 8 類代數推導表 + Normal matrix 統一源頭 + 對偶曲線哲學）/ Q21 246 行（250 年視覺化哲學 + 4 替代方案致命缺陷比較 + 5 層昇華結構主義立場）/ Q22 **311 行（全書最長 Q&A）**（4000 年史 + 6 步從零推導 + 5 種解情境表 + 5 層昇華 + 全書 22 條會師結構表 + Strang「Linear Algebra = the study of Ax=b in all its depth」）= 平均 261 行 / 條，比 S14 平均 149 行長 75%（**附錄 Q&A 收尾性質強，需收束全書脈絡 + 跨領域應用 + 多層昇華**）。
+
+**S15 教訓（沿用 S12-S14 流程 + 6 條新增）：**
+- **附錄 Q&A 篇幅顯著比主章 Q&A 大**：S15 平均 261 行 vs S14 平均 149 行（+75%）— 附錄是「重整合」性質，每條 Q&A 需收束多個前面 Q&A 的觀點，自然偏長。**未來如有類似「全書收尾」性質的附錄，預期同樣會有 ~250-300 行 / 條的篇幅，不要強行壓縮**
+- **「全書 22 條會師結構」設計 = 收尾 Q&A 的標誌性手法**：Q22 用「Q01-Q21 全表逐條對 Ax=b 關係」作為昇華第 3 層，把全書 21 條 Q&A 串成一個圍繞 Ax=b 的同心結構。**這個「會師表」是「線代核心」這類整本書收尾 Q&A 的標準寫法**，未來若有類似「全書集大成」題目可重用
+- **跨檔 Edit 中文字元差異會失敗（半形 vs 全形括號）**：S15 寫 appendix-matrix-world callout 時 old_string 含 `（`（全形）但我貼上 `(`（半形），Edit 失敗 → 重新讀檔取得正確字元級匹配後成功。**未來 Edit 中文檔要嚴格保留原文字元，無法假設括號類型 / 全形 vs 半形差異**
+- **BOOK.md 重生不只是合併，要更新 12 處 header 數字 + 新增結構表 + 維護 17 md 邊界**：S15 BOOK.md 重生（沿用 S11 確立的 fence-aware awk 邏輯）成功 = 8650 → 12305 行 + 0 漏網的 fenced `#` 註解被誤改為 heading。**確認 S11 awk 邏輯穩定可重用**：`BEGIN{f=0} /^```/{f=!f; print; next} !f && /^#+ /{sub(/^/, "#"); print; next} {print}`
+- **規範化的時機 = 累積 N 次實例後**：S12 確立 3-layer 框架（PoC 1 次）→ S13/S14 沿用（驗證 14 次）→ S15 規範化（寫進 SCHEMA §3.6 標準 = 15 callout 都遵守的格式）。**SOP 規範應在 ~15+ 實例累積後才寫成 SCHEMA 標準**，避免過早抽象（S11 已驗證過：3D 視角規範也是 S12+ 已有 109 處 3D 提及後才在 §3.5 規範化）
+- **anchor 校驗用 grep + awk 排序對照 > 人工檢查**：S15 用 `grep -rno "appendix-D-why\.md#q[0-9]*"` 抽取 37 條引用 + `grep -o "{#q[0-9]*}"` 抽取 22 錨點 + 範圍 awk 校驗 → 0 broken。**比 S11 人工 grep 校驗 39 條 `#vizscript-NN` 更系統化**，未來大規模整合校驗應採類似 grep + awk 自動化策略
+
+### 2.14 整合收尾流程二次驗證（S15 延伸 S11 §2.10）
+
+**S15 二次整合收尾（背後觀念層收完 → BOOK.md 重生 + 規範補充）驗證 S11 §2.10 確立的整合 session 流程依然有效，並補 3 條新教訓：**
+
+1. **fence-aware awk 第二次驗證可重用** — S11 awk 邏輯（`/^```/{f=!f; print; next} !f && /^#+ /{sub(/^/, "#"); print; next}`）在 S15 第二次合併（17 md 而非 16 md，加入 appendix-D-why 3522 行新檔）依然完美：22 個 H1 全部正確降為 H3、code block 內所有 `#` 註解保護不誤改、邊界完美。**這是穩定可重用的核心 utility**，未來如有第三次整合（如 S16+ 改版）可直接重用
+2. **header 更新比合併更費時** — S15 BOOK.md 重生中：合併 17 md 約 5 min（awk + cat），但 header 12 處數字更新（VizScript 數 / Q&A 數 / 各章新行數 / callout 統計）+ 新增 2 個結構表（22 Q&A 結構表 + 15 callout 覆蓋表）共約 10 min。**整合工時主要消耗在 header 數字一致性維護**，未來如能設計「header 從 source md 自動抽取數字」的工具會大幅加速
+3. **規範補充應在收尾整合期一次完成** — S15 同時做 SCHEMA §3.6 規範補充 + VIZ-CATALOG Appendix D 索引段更新 + 全套 SOP/HANDOFF/SESSION_INDEX/RETROSPECTIVE 收工 — 共耗時 30 min。**這 4 件事應綁定在「**最後一個 session 的最後一個動作**」執行**，因為他們都依賴最終穩定狀態的數字（22 Q&A / 15 callout / 37 links / BOOK.md 12305 行 / ...）
+
+**S11 §2.10 + S15 §2.14 整合收尾雙重驗證 ✓** — 這套流程（跨檔 anchor 校驗 → BOOK.md 重生 → 規範補充 → 全套收工）穩定可用，未來如有「**全書又新增一個 Appendix E**」性質的大規模擴充，可直接套用。
+
 ### 2.7 收工流程（每 session 結束）
 
 依 CLAUDE.md 規範三層防呆：

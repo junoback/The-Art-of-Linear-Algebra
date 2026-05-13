@@ -13,6 +13,14 @@
 
 《The Four Subspaces and the Solutions to $A\mathbf{x} = \mathbf{b}$》是 Gilbert Strang 設計、Kenji Hiranabe 繪製的標誌性視覺化，**並非《Linear Algebra for Everyone》主書內容**，而是 Strang 在多本著作中反覆強調的「**線性代數最重要的一張圖**」。它把矩陣 $A \in \mathbb{R}^{m \times n}$ 對應的**四個基本子空間** — 行空間 $\mathbf{C}(A^{\mathrm{T}})$ + 零空間 $\mathbf{N}(A)$（在 $\mathbb{R}^n$ 上）和列空間 $\mathbf{C}(A)$ + 左零空間 $\mathbf{N}(A^{\mathrm{T}})$（在 $\mathbb{R}^m$ 上）— 用「**兩塊大餅圖**」呈現，並標註「**互相垂直**」「**維度和 = 全空間維度**」兩條關鍵關係。本附錄是 §3 [Matrix × Vector](ch03-mat-vec.md) + §6.5 [SVD](ch06f-USV.md) 的「**整合性收尾**」 — 與主章節相比，附錄**重「鳥瞰整合」而非「從零教學」**：（1）補 SVD 構造 4 子空間的**完整算法視角**（從 EVD 整合到 SVD 對齊）；（2）補解 $A\mathbf{x} = \mathbf{b}$ 的**完整解空間結構**（一般解 = 特解 + 零空間解）；（3）pointer 到 §3 / §6.5 已完成的旗艦 VizScript（[ch03 VizScript-02](ch03-mat-vec.md#vizscript-02)、[ch06f VizScript-03](ch06f-USV.md#vizscript-03)）。
 
+> ### 💡 背後觀念：$A\mathbf{x}=\mathbf{b}$ 為什麼是「線代核心」？4 子空間從哪裡冒出來？
+>
+> Strang 多次說「**$A\mathbf{x}=\mathbf{b}$ 是線性代數的核心問題**」（LAFE Ch.1 + ITLA 前言 + MIT 18.06 第 1 講）。為什麼一個看似具體的「解方程組」問題能站在線代最高位置？4 子空間（行空間 / 零空間 / 列空間 / 左零空間）為什麼會「自動」冒出？4000 年探索史終於收束在這一張附錄圖 — 本附錄是**全書 22 條「為什麼」最終會師點**:
+>
+> - **[Q22：「解 $A\mathbf{x}=\mathbf{b}$」為什麼是線代的核心問題？](appendix-D-why.md#q22)** — ① 4000 年史:**巴比倫 ~1800 BC 楔形泥板 YBC 4652** → **《九章算術》方程章 公元 1 世紀 高斯消去東方原型「遍乘直除」** → al-Khwarizmi 825 algebra 詞源 → Cramer 1750 → **Gauss 1809 Ceres 軌道最小二乘** → Cayley 1858 矩陣物件化 → Frobenius 1879 rank-nullity → **Moore 1920 + Penrose 1955 偽反矩陣 $A^{+}$**（「Ax=b 4000 年探索史最終解答」）→ Turing 1948 LU → Golub-Reinsch 1970 SVD → LAPACK 1992 → 2010s+ ML。② **6 步從零推導全部線代**:Step 1 n 方程濃縮為 $A\mathbf{x}=\mathbf{b}$ 自然生矩陣物件 / Step 2「有解嗎」→ 列空間 + 「解唯一嗎」→ 零空間 / Step 3 對偶化 → 4 子空間 + rank-nullity / Step 4「怎麼算」→ 五大分解 5 情境工具 / Step 5「無解怎麼辦」→ Gauss 1801 最小二乘設計過程 + 正規方程 + 幾何=投影 / Step 6 SVD 補完 → 偽反 $A^{+}$ 對任意矩陣統一公式 + 5 種 $A\mathbf{x}=\mathbf{b}$ 情境完整表（唯一/無窮/無解/rank-deficient/病態 ↔ Cramer/LU/QR/SVD/Tikhonov）。③ 5 層昇華:**「$A\mathbf{x}=\mathbf{b}$ 是線代的元問題」**（10 主題派生對應表）+ **「逆向工程」是科學本質**（13 領域對應表 物理/電路/控制/統計/ML/量子/機器人/MRI/CT/神經網路/推薦）+ **全書 22 條 Q&A 會師結構**（Q01-Q21 全表逐條對 $A\mathbf{x}=\mathbf{b}$ 的關係）+ Strang 50 年教學「方程 vs 結構雙重視角」最終啟示 + 最強昇華:「**Linear Algebra = the study of $A\mathbf{x}=\mathbf{b}$ in all its depth**」。
+> - **[Q08：四個基本子空間為什麼會自然冒出？](appendix-D-why.md#q08)** — 「**2 方向（右乘 vs 左乘）× 2 概念（像 vs 核）= 4 組合必然產物**」 — 不是 4 個獨立發明的子空間，而是**從「解 $A\mathbf{x}=\mathbf{b}$」+「對偶 $\mathbf{y}A = \mathbf{c}$」自然產生的代數結構**。$\mathbf{N}(A) = \mathbf{C}(A^{\mathrm{T}})^{\perp}$ 完整證明（用 (Mv1) 點積視角展開）+ rank-nullity 兩 boxed 等式 + Strang Big Picture ASCII 圖。
+> - **[Q19：$A = U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任意矩陣存在？](appendix-D-why.md#q19)** — SVD 的最深刻威力是「**自動給出 4 子空間的標準正交基底**」（$U$ 前 $r$ 列 = 列空間、後 $m-r$ 列 = 左零空間；$V$ 前 $r$ 列 = 行空間、後 $n-r$ 列 = 零空間）。**SVD 是 4-Subspaces 圖的「填色版本」** — 不只告訴你 4 個子空間存在，還給出每個子空間的「最佳座標系」。SVD 偽反 $A^{+} = V\Sigma^{+}U^{\mathrm{T}}$ 提供解 $A\mathbf{x}=\mathbf{b}$ 的「最小二乘 + 最小範數」通用最優解。
+
 ---
 
 ## 數學要點

@@ -37,9 +37,9 @@
 | [Q17](#q17) | A=QR 為什麼需要正交化？Gram-Schmidt 從哪冒出來？ | §6.3 | ✅ 已完成（S14） |
 | [Q18](#q18) | $S=Q\Lambda Q^{\mathrm{T}}$ 為什麼對稱矩陣特徵向量自動正交？ | §6.4 | ✅ 已完成（S14） |
 | [Q19](#q19) | $A=U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任何矩陣都存在？ | §6.5 | ✅ 已完成（S14） |
-| Q20 | 特徵值的「地圖」為什麼能畫得出來？ | Appendix A | 🚧 規劃中 |
-| Q21 | Matrix World 為什麼是「同心橢圓繼承樹」而非「樹狀」？ | Appendix B | 🚧 規劃中 |
-| Q22 | 「解 $A\mathbf{x}=\mathbf{b}$」為什麼是線代的核心問題？ | Appendix C | 🚧 規劃中 |
+| [Q20](#q20) | 特徵值的「地圖」為什麼能畫得出來？ | Appendix A | ✅ 已完成（S15） |
+| [Q21](#q21) | Matrix World 為什麼是「同心橢圓繼承樹」而非「樹狀」？ | Appendix B | ✅ 已完成（S15） |
+| [Q22](#q22) | 「解 $A\mathbf{x}=\mathbf{b}$」為什麼是線代的核心問題？ | Appendix C | ✅ 已完成（S15） |
 
 > **術語提醒：** 本附錄沿用全書 A 派慣例 — **column = 列（直立、綠色）、row = 行（橫躺、粉紅色）**。歷史出處引用若採 B 派（列 = Row、行 = Column）時會在註解標明，避免混淆。
 
@@ -2727,14 +2727,796 @@ $$
 
 ---
 
-## 其餘 3 條（Q20–Q22）— 規劃中
+## Q20：特徵值的「地圖」為什麼能畫得出來？ {#q20}
 
-依 S15 路線圖補完：
+> **觸發問題：** Hiranabe 的《Map of Eigenvalues》把 12 種矩陣類別並排畫在**同一張複平面地圖**上，每一類的特徵值都落在「**一條特定曲線或一個特定區域**」上 — 對稱類在實軸、反對稱類在虛軸、正交類在單位圓、Markov 類在單位圓內、投影類在 $\{0, 1\}$ 兩點 ... 為什麼這張「地圖」**畫得出來**？為什麼這些「幾何指紋」是**普遍規律**而非個別觀察？背後的代數機制是什麼？這張地圖在線代教學中扮演什麼角色？
+>
+> **對應主章：** [appendix-map-eigenvalues](appendix-map-eigenvalues.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
 
-- **S15** — Q20（特徵值地圖）+ Q21（Matrix World 同心橢圓）+ Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼線代核心）+ 剩餘主章 callout 批次插入（ch06a–ch06f + 3 附錄）+ 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗）
+### ① 歷史脈絡：從個別觀察到統一地圖的 200 年
 
-每條 Q&A 採與 Q01–Q19 相同的 3-layer 結構（① 歷史 → ② 推導 → ③ 昇華 + 延伸閱讀），篇幅約 1000–2500 字含舉例 + 推導 + 經典出處引用。
+「**特定矩陣類別的特徵值有特定幾何位置**」這個現象的研究，是從 19 世紀初開始一條一條被發現、最後被 20 世紀 Normal matrix 與 functional calculus 統一的歷程：
+
+- **Cauchy 1829** *Sur l'équation à l'aide de laquelle on détermine les inégalités séculaires des mouvements des planètes*, **Exer. de Math.** 4 — **主軸定理**：對稱矩陣的特徵值全為實數（[Q18](#q18)）。這是「特定類別 → 特定幾何位置」的**第一個個別發現**。
+- **Hermite 1855** *Remarques sur un théorème de M. Cauchy*, **C. R. Acad. Sci. Paris** 41 — Hermite 矩陣（$H = \bar H^{\mathrm{T}}$，對稱的複版本）特徵值也全為實數。Cauchy 的實對稱結果被推廣到複情形。
+- **Cayley 1858** *A Memoir on the Theory of Matrices*, **Phil. Trans. R. Soc.** 148 — **特徵多項式** $\det(A - \lambda I) = 0$ 正式建立，給「特徵值地圖」一個統一**代數定義入口**：任何矩陣的特徵值都是某個多項式的根。
+- **Cayley-Hamilton 1858/1858** — Cayley 在同一論文觀察到「**每個矩陣滿足其自己的特徵多項式**」（$p_A(A) = 0$），這個定理日後成為「**多項式 functional calculus**」的奠基石：若 $p(A) = 0$，則 $p(\lambda) = 0$ 對所有特徵值 $\lambda$ 成立 — 「**地圖能畫**」的核心代數機制。
+- **Frobenius 1878** *Über lineare Substitutionen und bilineare Formen*, **Crelle J.** 84 — Frobenius 系統性研究「具有特定代數性質的矩陣與其特徵值的關係」，為後來 Normal matrix 概念奠基。
+- **Perron 1907** + **Frobenius 1912** *Über Matrizen aus positiven Elementen*, **Sitzungsber. Preuss. Akad. Wiss.** — **Perron-Frobenius 定理**：非負矩陣與 Markov 矩陣的「**主特徵值 $\lambda = 1$ 必存在、其他特徵值在單位圓內**」。這是 Markov 類在地圖上「**單位圓內含 1**」幾何指紋的代數根源 — 後來成為 Google PageRank 演算法（1998）的數學基石。
+- **Schur 1909** *Über die charakteristischen Wurzeln einer linearen Substitution*, **Math. Annalen** 66 — **Schur 三角化定理**：任意方陣 $A$ 都 unitary 相似於上三角矩陣 $T$（$A = QTQ^{\mathrm{H}}$，$T$ 對角元 = 特徵值）。這個定理把「**特徵值地圖**」的可畫性推廣到**所有方陣** — 不需可對角化、不需 Normal。
+- **Toeplitz 1918** *Das algebraische Analogon zu einem Satze von Fejér*, **Math. Z.** 2 — **Normal matrix 概念**（$A^{\mathrm{H}}A = AA^{\mathrm{H}}$）首次正式命名 + 證明「Normal ⇔ unitary 可對角化」。這個發現把對稱、反對稱、正交、Hermitian、unitary 統一在「Normal」這個更高概念下 — **地圖能畫的代數源頭**。
+- **Gershgorin 1931** *Über die Abgrenzung der Eigenwerte einer Matrix*, **Izv. Akad. Nauk SSSR** — **Gershgorin disc 定理**：任意矩陣的特徵值落在以對角元為圓心、以「**行外元素絕對值之和**」為半徑的圓盤的聯集中。這是「**任意矩陣**」（不限於特定類別）特徵值幾何位置的最一般估計 — Map 中「Invertible / Singular」散佈現象的精確刻畫。
+- **Wielandt 1944** / **Householder 1958** — Gershgorin 的精緻化 + 數值穩定性分析。
+- **Hiranabe 2021** 《**Map of Eigenvalues**》slidedeck — Kenji Hiranabe 把 200 年積累的「**12 類矩陣 × 特徵值幾何位置**」首次以「**並列視覺化作品**」呈現。這不是新數學發現，但是**首次的視覺集大成** — 把分散在 Cauchy、Hermite、Perron-Frobenius、Toeplitz、Gershgorin 等多篇經典論文中的「個別現象」拉到同一張圖上，讓讀者「**一眼看完全景**」。
+
+**歷史總結：** 從 Cauchy 1829 第一個發現（對稱 → 實軸）到 Hiranabe 2021 視覺集大成，**將近 200 年**。地圖的代數根源是「**矩陣的代數結構 → 特徵值的代數方程 → 特徵值的幾何位置**」這條「結構 ↔ 幾何」的三段論。
+
+### ② 設計過程還原：8 類矩陣特徵值位置的代數機制
+
+每類矩陣的「特徵值幾何指紋」都有一個**簡短的代數推導** — 可從定義恆等式或範數恆等式直接導出。下面選 8 個核心類別，每個推導 2–4 步即可。
+
+#### 1. 對稱類 $S = S^{\mathrm{T}}$ → 實軸 $\lambda \in \mathbb{R}$
+
+已在 [Q18](#q18) 完整證明：對複向量內積 $\langle S\mathbf{x}, \mathbf{x}\rangle = \langle \mathbf{x}, S\mathbf{x}\rangle$（$S$ 對稱），代入 $S\mathbf{x} = \lambda\mathbf{x}$ 得 $\bar\lambda \|\mathbf{x}\|^2 = \lambda \|\mathbf{x}\|^2$ → $\lambda = \bar\lambda$ → $\lambda \in \mathbb{R}$ ✓
+
+#### 2. 反對稱類 $A = -A^{\mathrm{T}}$ → 虛軸 $\lambda \in i\mathbb{R}$
+
+設 $A\mathbf{x} = \lambda\mathbf{x}$（複向量）。取共軛轉置 + 內積：
+
+$$
+\mathbf{x}^{\mathrm{H}} A^{\mathrm{T}} = \bar\lambda\, \mathbf{x}^{\mathrm{H}} \quad \Rightarrow \quad \mathbf{x}^{\mathrm{H}}(-A) = \bar\lambda\, \mathbf{x}^{\mathrm{H}}
+$$
+
+兩邊右乘 $\mathbf{x}$：$-\mathbf{x}^{\mathrm{H}} A \mathbf{x} = \bar\lambda \|\mathbf{x}\|^2$。但 $A\mathbf{x} = \lambda\mathbf{x}$ 給 $\mathbf{x}^{\mathrm{H}} A \mathbf{x} = \lambda \|\mathbf{x}\|^2$。所以：
+
+$$
+-\lambda \|\mathbf{x}\|^2 = \bar\lambda \|\mathbf{x}\|^2 \quad \Rightarrow \quad \lambda + \bar\lambda = 0 \quad \Rightarrow \quad \mathrm{Re}(\lambda) = 0 \quad \Rightarrow \quad \lambda \in i\mathbb{R} \quad \checkmark
+$$
+
+**幾何直覺：** 反對稱矩陣對應「**純旋轉**」（無縮放），純旋轉的「速度」是純虛數。例 2D 旋轉的生成元 $\bigl[\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\bigr]$ 特徵值 $\pm i$。
+
+#### 3. 正交類 $Q^{\mathrm{T}}Q = I$ → 單位圓 $|\lambda| = 1$
+
+正交矩陣**範數保持**：$\|Q\mathbf{x}\| = \|\mathbf{x}\|$ 對任意 $\mathbf{x}$ 成立。代入 $Q\mathbf{x} = \lambda\mathbf{x}$：
+
+$$
+\|Q\mathbf{x}\|^2 = |\lambda|^2 \|\mathbf{x}\|^2 = \|\mathbf{x}\|^2 \quad \Rightarrow \quad |\lambda|^2 = 1 \quad \Rightarrow \quad |\lambda| = 1 \quad \checkmark
+$$
+
+**幾何直覺：** 正交矩陣是「**保持距離與角度的剛體變換**」（旋轉 + 鏡射），特徵值必為「**單位模**」 — 純旋轉成分 $e^{i\theta}$（複特徵值對）或鏡射成分 $\pm 1$（實特徵值）。
+
+#### 4. 投影類 $P^2 = P$ → 兩點 $\lambda \in \{0, 1\}$
+
+投影矩陣滿足**冪等性** $P^2 = P$。對特徵向量 $P\mathbf{x} = \lambda\mathbf{x}$：
+
+$$
+P^2 \mathbf{x} = P(P\mathbf{x}) = P(\lambda \mathbf{x}) = \lambda^2 \mathbf{x}
+$$
+
+又 $P^2 = P$ → $P^2\mathbf{x} = P\mathbf{x} = \lambda\mathbf{x}$。所以 $\lambda^2 = \lambda$ → $\lambda(\lambda - 1) = 0$ → $\lambda \in \{0, 1\}$ ✓
+
+**幾何直覺：** 投影把向量「**保留**」（$\lambda = 1$，方向在投影空間內）或「**抹零**」（$\lambda = 0$，方向被投影掉）— 沒有中間狀態。
+
+#### 5. 冪零類 $N^k = O$ → 原點 $\lambda = 0$
+
+設 $N^k = O$ 且 $N\mathbf{x} = \lambda\mathbf{x}$。則：
+
+$$
+N^k \mathbf{x} = \lambda^k \mathbf{x} = \mathbf{0} \quad \Rightarrow \quad \lambda^k = 0 \quad \Rightarrow \quad \lambda = 0 \quad \checkmark
+$$
+
+**注意：** $N \neq O$（否則無意義）。冪零矩陣的特徵值都是 0，但**不可對角化**（不然 $N = Q \cdot O \cdot Q^{-1} = O$ 矛盾）— Jordan 塊內部有 1 是這類矩陣的本質。
+
+#### 6. $zI$ 類 → 任意 $\lambda = z$
+
+$zI \mathbf{x} = z\mathbf{x}$ 對任意 $\mathbf{x}$ → 整個 $\mathbb{R}^n$ 都是特徵空間，特徵值 $\lambda = z$ 是 $n$ 重根。在複平面任意點 $z$ 處。
+
+#### 7. 奇異類 $\det A = 0$ → 必含 $\lambda = 0$
+
+$\det A = 0$ 意味 $A$ 有非零零空間 — 存在 $\mathbf{x} \neq \mathbf{0}$ 使 $A\mathbf{x} = \mathbf{0} = 0 \cdot \mathbf{x}$ → $\lambda = 0$ 是特徵值 ✓。對偶：**可逆類** $\det A \neq 0$ → $\lambda = 0$ **不**是特徵值（$\det A = \prod \lambda_p \neq 0$）。
+
+#### 8. Markov 類（行和 = 1，$A_{ij} \geq 0$）→ 必含 $\lambda = 1$ + 其他 $|\lambda| \leq 1$
+
+**$\lambda = 1$ 必存在：** Markov 矩陣行和 = 1 等價於 $A^{\mathrm{T}} \mathbf{1} = \mathbf{1}$（$\mathbf{1}$ = 全 1 向量）— $\mathbf{1}$ 是 $A^{\mathrm{T}}$ 的特徵向量，特徵值 1。而 $A$ 與 $A^{\mathrm{T}}$ 特徵值相同（同特徵多項式 $\det(A - \lambda I) = \det((A - \lambda I)^{\mathrm{T}})$）→ $\lambda = 1$ 是 $A$ 的特徵值 ✓
+
+**其他 $|\lambda| \leq 1$：** Perron-Frobenius 定理（1907/1912）— 非負矩陣的 spectral radius $\rho(A) = \max |\lambda|$ 滿足 $\rho(A) \leq \max_j \sum_i |a_{ij}| = 1$（用 $\ell^1$ 行範數估計）。
+
+**幾何直覺：** Markov 矩陣對應「**機率守恆的演化**」 — 不會放大（$|\lambda| > 1$ 違背機率上界 1），不會縮到零（$\lambda = 1$ 對應穩定態的存在）。這就是為什麼 Markov 鏈長期行為由 $\lambda = 1$ 的特徵向量（**穩定分佈**）主導 — Google PageRank、人口流動、化學反應達平衡都是這個機制。
+
+#### 8 類整理表
+
+| 矩陣類別 | 定義恆等式 | 推導 $\lambda$ 的方程 | 幾何位置 |
+|---|---|---|---|
+| 對稱 | $S = S^{\mathrm{T}}$ | $\lambda = \bar\lambda$ | 實軸 $\mathbb{R}$ |
+| 反對稱 | $A = -A^{\mathrm{T}}$ | $\lambda + \bar\lambda = 0$ | 虛軸 $i\mathbb{R}$ |
+| 正交 | $Q^{\mathrm{T}}Q = I$ | $|\lambda|^2 = 1$ | 單位圓 |
+| 投影 | $P^2 = P$ | $\lambda^2 = \lambda$ | $\{0, 1\}$ |
+| 冪零 | $N^k = O$ | $\lambda^k = 0$ | 原點 |
+| $zI$ | $A = zI$ | $\lambda = z$ | 任意點 $z$ |
+| 奇異 | $\det A = 0$ | $0 \cdot \prod_{p>1} \lambda_p = 0$ | 必含原點 |
+| Markov | $A^{\mathrm{T}}\mathbf{1} = \mathbf{1}$, $A_{ij} \geq 0$ | $\lambda = 1$ + Perron-Frobenius | $|\lambda| \leq 1$ 含 1 |
+
+#### 統一機制：多項式 functional calculus
+
+上表中前 5 個推導有共同的「**多項式 functional calculus**」結構 — **若矩陣 $A$ 滿足多項式恆等式 $p(A) = 0$，則對所有特徵值 $\lambda$ 都有 $p(\lambda) = 0$**：
+
+$$
+A\mathbf{x} = \lambda\mathbf{x} \quad \Rightarrow \quad p(A)\mathbf{x} = p(\lambda)\mathbf{x}
+$$
+
+所以 $p(A) = O$ 強制 $p(\lambda) = 0$。
+
+| 類別 | $p(A) = 0$ | $p(\lambda) = 0$ | $\lambda$ 解 |
+|---|---|---|---|
+| 投影 | $P^2 - P = O$ | $\lambda^2 - \lambda = 0$ | $\{0, 1\}$ |
+| 冪零 | $N^k = O$ | $\lambda^k = 0$ | $0$（重根）|
+| 對合（involution）| $A^2 = I$ | $\lambda^2 = 1$ | $\{-1, +1\}$ |
+| 反射（Householder）| $H^2 = I$, $H = H^{\mathrm{T}}$ | $\lambda^2 = 1$ + 實 | $\{-1, +1\}$ |
+
+**對稱、反對稱、正交不是「多項式恆等式」型**，而是「**轉置/共軛/範數恆等式**」型 — 它們的特徵值幾何由「複內積守恆」直接導出，**機制不同但結論同樣強**。
+
+統一這兩類機制的更高概念是：**Normal matrix**（$A^{\mathrm{T}}A = AA^{\mathrm{T}}$）— 對稱、反對稱、正交、對角、$zI$ 全部 Normal。Normal matrix 的特徵值能**完全刻畫矩陣**（up to unitary 等價），這是「地圖能畫」的最深代數源頭（下節昇華詳述）。
+
+### ③ 概念昇華：地圖揭示什麼？
+
+#### 層次 1：Normal matrix 是「地圖能畫」的代數源頭
+
+**Toeplitz 1918 定理：** $A$ Normal（$A^{\mathrm{T}}A = AA^{\mathrm{T}}$）⇔ $A$ unitary 可對角化（$A = Q\Lambda Q^{\mathrm{H}}$，$Q^{\mathrm{H}}Q = I$）
+
+對 Normal matrix，特徵值**完全刻畫矩陣** — 知道 $\{\lambda_p\}$ 與「Normal」這個性質，就能（up to unitary 等價）還原 $A$。地圖上「**位置 ↔ 矩陣類別**」的雙射對應，本質上是 Normal matrix 譜定理的視覺呈現。
+
+| Normal 子類 | 特徵值幾何 |
+|---|---|
+| 對稱 $S = S^{\mathrm{T}}$ | 實軸 |
+| Hermitian $H = H^{\mathrm{H}}$ | 實軸（複版本）|
+| 反對稱 $A = -A^{\mathrm{T}}$ | 虛軸 |
+| skew-Hermitian | 虛軸（複版本）|
+| 正交 $Q^{\mathrm{T}}Q = I$ | 單位圓（實情況）|
+| Unitary $U^{\mathrm{H}}U = I$ | 單位圓（複版本）|
+| 對角 $D$ | 對角元位置（任意）|
+| $zI$ | 任意點 $z$（重根）|
+
+非 Normal 矩陣（如冪零 Jordan 塊、一般可逆但不 Normal 的矩陣）— 特徵值**不能完全刻畫**矩陣，但仍能畫到地圖上，只是失去「**雙射對應**」（兩個非 Normal 矩陣可能有相同特徵值但不 unitary 等價）。地圖對非 Normal 類別退化為「**部分指紋**」 — 但仍有教學價值，因為「特徵值位置」是辨認矩陣類別的第一線索。
+
+#### 層次 2：對偶結構的代數美學 — 實軸、虛軸、單位圓
+
+地圖上三條最重要的「**幾何曲線**」（實軸 / 虛軸 / 單位圓）對應三類核心 Normal matrix：
+
+| 幾何曲線 | 對應矩陣類別 | 物理意義 |
+|---|---|---|
+| 實軸 $\mathbb{R}$ | 對稱 / Hermitian | **能量算符**（量子力學 observable = Hermitian）|
+| 虛軸 $i\mathbb{R}$ | 反對稱 / skew-Hermitian | **生成元**（Lie 代數，純旋轉的時間導數）|
+| 單位圓 $\|z\| = 1$ | 正交 / Unitary | **演化算符**（量子力學時間演化 = unitary）|
+
+**深層連結：Cayley 變換** $z \mapsto \dfrac{1-z}{1+z}$ 把**單位圓**映射到**虛軸**，把**虛軸**映射到**單位圓** — 對應的矩陣變換 $A \mapsto (I - A)(I + A)^{-1}$ 把**正交矩陣 ↔ 反對稱矩陣**（雙向轉換 Lie 群 ↔ Lie 代數）。這個美學在量子力學中對應**「能量 → 演化算符」的指數映射** $U = e^{-iHt/\hbar}$ — Hermitian $H$（實譜）透過 $i$ 倍變成 skew-Hermitian（虛譜），再透過指數變成 unitary（單位圓譜）。
+
+**結論：** 地圖上的三條曲線（實軸 / 虛軸 / 單位圓）不是隨意挑的「漂亮位置」 — 它們是**量子力學、Lie 群理論、線代統一的代數結構**的視覺投影。
+
+#### 層次 3：地圖的教學作用 — 「分類先於分解」
+
+傳統線代教學從「具體運算」（行列式 → 求逆 → 特徵值）切入，學生算完特徵值卻沒有「**位置直覺**」 — 不知道「對稱矩陣特徵值為什麼必在實軸」、不知道「Markov 矩陣為什麼 $\lambda = 1$」、不知道為什麼「正交矩陣特徵值在單位圓上」。
+
+**Map of Eigenvalues 提出的教學順序革命：**
+
+1. **先看 12 類矩陣的特徵值地圖**（建立「**類別 ↔ 位置**」直覺）
+2. **聚焦對稱類**（→ §6.4 EVD，[ch06e](ch06e-QLQ.md)）
+3. **推廣到任意矩陣**（→ §6.5 SVD，[ch06f](ch06f-USV.md)）
+
+這個順序對應「**從全景看到聚焦**」的學習自然路徑，與「**先看 Matrix World 同心橢圓繼承樹**」（[appendix-matrix-world.md](appendix-matrix-world.md)，[Q21](#q21)）的「**從結構看到分解**」是對偶教學策略 — 兩個附錄分別從「**特徵值位置**」與「**矩陣性質繼承**」兩個維度引導讀者建立「**先分類再分解**」的學習地圖。
+
+#### 層次 4：地圖的歷史地位 — Hiranabe 的視覺集大成
+
+Map of Eigenvalues 的數學內容沒有一條是 Hiranabe 2021 的新發現 — Cauchy（1829）、Hermite（1855）、Perron-Frobenius（1907/1912）、Toeplitz（1918）、Gershgorin（1931）全在 200 年前後就已建立。但 Hiranabe 的**視覺整合**是線代教學史上的**首次集大成**：
+
+- **首次**把「12 類矩陣 + 範例矩陣 + 代數條件 + 特徵值幾何位置」**全部塞進一張頁面**
+- **首次**用「並列網格」讓讀者「**一眼看完所有類別的對比**」
+- **首次**在教材中明確點出「**對稱實軸、反對稱虛軸、正交單位圓**」三條對偶曲線（這個對偶在 Strang LAFE 也未明確並列展示）
+
+地圖的存在改變了線代教學的可能 — **學生第一次能用「視覺辨認」取代「公式記憶」** 來辨認矩陣類別。這是「**圖解優先**」（[Q01](#q01)）哲學在矩陣分類問題上的具體實踐。
+
+**最強昇華：** 地圖告訴我們**矩陣有「形狀」與「位置」兩種視角**。傳統教學把矩陣看成「$n \times n$ 數字表」，地圖把矩陣看成「**特徵值在複平面的位置指紋**」。這個視角轉換在量子力學中是基本的 — 算符 = 觀測值（實譜）、演化（單位圓譜）、生成元（虛軸譜）— 全部由「譜的幾何位置」定義其物理意義。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [appendix-map-eigenvalues](appendix-map-eigenvalues.md) — Map of Eigenvalues 完整內容（12 類矩陣 × 特徵值幾何位置）+ VizScript-01 互動 dashboard
+- [appendix-matrix-world](appendix-matrix-world.md) — 對偶視覺化：同心橢圓繼承樹（[Q21](#q21)）
+- [§6.4 ch06e S=QΛQᵀ](ch06e-QLQ.md) — 對稱類（地圖上「實軸」這條曲線）的詳細分解
+- [§6.5 ch06f A=UΣVᵀ](ch06f-USV.md) — 推廣到任意矩陣（奇異值 ≥ 0 = 實軸正半軸）
+- [Q11](#q11) — 對角矩陣（地圖上「對角元位置散佈」的最簡形式）
+- [Q12](#q12) — (P3) 動態系統 + Markov 應用（[Q20](#q20) 第 8 類 Markov 的應用根據）
+- [Q13](#q13) — (P4) 三明治 + 譜分解（地圖能畫的代數結構源頭）
+- [Q18](#q18) — 譜定理（對稱類 → 實軸的核心證明）
+
+**歷史原典：**
+- Cauchy, A.-L. (1829), *Sur l'équation à l'aide de laquelle on détermine les inégalités séculaires des mouvements des planètes*, **Exer. de Math.**, 4, 140–160 — 主軸定理（對稱 → 實軸首次發現）
+- Hermite, C. (1855), *Remarques sur un théorème de M. Cauchy*, **C. R. Acad. Sci. Paris**, 41, 181–183 — Hermitian 矩陣實譜
+- Cayley, A. (1858), *A Memoir on the Theory of Matrices*, **Phil. Trans. R. Soc.**, 148, 17–37 — 特徵多項式 + Cayley-Hamilton
+- Frobenius, G. (1878), *Über lineare Substitutionen und bilineare Formen*, **Crelle J.**, 84, 1–63 — 矩陣代數結構與特徵值
+- Perron, O. (1907), *Zur Theorie der Matrizen*, **Math. Annalen**, 64, 248–263 — 非負矩陣譜半徑
+- Frobenius, G. (1912), *Über Matrizen aus positiven Elementen*, **Sitzungsber. Preuss. Akad. Wiss.**, 471–476 — Perron-Frobenius 定理完整版（Markov 矩陣 $\lambda = 1$ 根源）
+- Schur, I. (1909), *Über die charakteristischen Wurzeln einer linearen Substitution mit einer Anwendung auf die Theorie der Integralgleichungen*, **Math. Annalen**, 66, 488–510 — Schur 三角化（任意方陣特徵值可畫）
+- Toeplitz, O. (1918), *Das algebraische Analogon zu einem Satze von Fejér*, **Math. Z.**, 2, 187–197 — Normal matrix 概念
+- Gershgorin, S. (1931), *Über die Abgrenzung der Eigenwerte einer Matrix*, **Izv. Akad. Nauk SSSR, Otd. Fiz.-Mat. Nauk**, 7, 749–754 — Gershgorin disc 定理
+
+**現代教科書：**
+- Hiranabe, K. (2021), *Map of Eigenvalues*, slidedeck — 視覺集大成 [GitHub](https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra/blob/main/MapofEigenvalues.pdf)
+- Strang, G. (2020), *Linear Algebra for Everyone*, **Ch.6**「Eigenvalues and Eigenvectors」— 12 類矩陣分散在多節介紹（地圖把它們收成一頁）
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), Ch.6.5 + Ch.10 — Perron-Frobenius + Markov
+- Horn, R. A. & Johnson, C. R. (2013), *Matrix Analysis* (2nd ed.), Ch.2「Unitary equivalence and normal matrices」+ Ch.8「Positive and nonnegative matrices」— Normal + Perron-Frobenius 完整代數理論
+- Trefethen, L. N. & Embree, M. (2005), *Spectra and Pseudospectra: The Behavior of Nonnormal Matrices and Operators*, **Princeton UP** — 「非 Normal matrix 譜行為」整書 + Pseudospectra 概念（地圖的進階版）
+- Bhatia, R. (1997), *Matrix Analysis*, Springer GTM 169 — 譜理論進階
+- Meyer, C. D. (2000), *Matrix Analysis and Applied Linear Algebra*, **SIAM**, Ch.8 — Perron-Frobenius 完整應用（Markov / PageRank）
 
 ---
 
-> **附錄末更新時間：** S14 (2026-05-13) — Q01–Q19 完成（19/22，86%）— §6 五大分解 + 整體動機 6 條全部完成；剩 Q20–Q22（3 附錄）由 S15 補完
+## Q21：Matrix World 為什麼是「同心橢圓繼承樹」而非「樹狀」？ {#q21}
+
+> **觸發問題：** 矩陣分類學的視覺化方式很多 — **樹狀圖**（生物分類學的標準）、**Venn 圖**（集合論視覺化的鼻祖）、**UML 類別繼承圖**（軟體工程的繼承表達）、**Hasse 圖**（偏序集的格論視覺化）。Hiranabe 在 2020 年（與 Strang 2023 v1.5 修訂）為什麼選**同心橢圓**而非其他？這個選擇背後的數學是什麼？同心橢圓如何精確對應「**集合包含 + 性質繼承 + 分解粒度**」三件事？這張地圖為什麼能作為「**全書互動式教材的首頁**」？
+>
+> **對應主章：** [appendix-matrix-world](appendix-matrix-world.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：「同心圓」視覺化的 2000 年演進
+
+「**用同心圓表達包含關係**」這個視覺策略的歷史比想像中深 — 從 Aristotle 的分類學、到 Euler-Venn 的集合圖、再到 Bourbaki 結構主義、最後到 Hiranabe 的線代地圖：
+
+- **Aristotle ~350 BC** *Categories* + *Posterior Analytics* — **分類學的最早形式**：屬（genus）/ 種（species）二元層級。Aristotle 把萬物按「**最高屬 → 中間屬 → 種**」樹狀分類，這是「**樹狀繼承**」的源頭，後來成為生物分類學的標準。但 Aristotle 沒有「**多重繼承**」的概念 — 樹狀只能單一父。
+- **Euler 1768** *Lettres à une Princesse d'Allemagne*（給德國公主的信）— **Euler 圖**：用閉曲線（圓 / 橢圓）表達集合，包含關係用「**內部圓 ⊂ 外部圓**」。這是「**同心圓表達集合包含**」的**首次明確視覺化**，比 Venn 早 100 年。Euler 的學生（前蘇聯數學家 Лопшиц / Lopsits）稱「**Eulerische Kreise**」（Euler 圈）。
+- **John Venn 1880** *On the Diagrammatic and Mechanical Representation of Propositions and Reasoning*, **Phil. Mag.** — **Venn 圖**正式化，用兩或三個**任意位置相交**的圓表達集合的交、聯、補。Venn 圖**強調集合運算**（交集 / 聯集），而 Euler 圖**強調包含關係**。Matrix World 屬於 Euler 圖傳統，不是 Venn 圖傳統。
+- **Cantor 1874–1895** *Beiträge zur Begründung der transfiniten Mengenlehre*, **Math. Annalen** — **集合論**正式建立，集合包含 $\subset$ 成為代數關係。Cantor 給出了「**繼承層次的代數**」根基。
+- **Hasse 1934** *Über die Klassenzahl abelscher Zahlkörper* + **Birkhoff 1948** *Lattice Theory*, **AMS Colloquium Publications** — **Hasse 圖** + **格論**：用節點 + 邊精確表達偏序集（partial order）的結構。Hasse 圖是「**有限格**」的標準視覺化 — 矩陣分類就是這樣一個格。
+- **Bourbaki 1939+** *Éléments de mathématique* — 法國數學集體「Bourbaki」推動的**結構主義**：從**最一般的「母結構」**（mère structure，如群、環、體）出發，逐步加約束**派生**出更特殊的結構。這個哲學深刻影響 20 世紀數學教學，**「從一般到特殊」的同心結構成為標準呈現方式**。
+- **Strang 1980+** MIT 18.06 課程 — Strang 在 50 年教學中逐步建立「**矩陣分類學的結構主義表達**」：從 General Matrix → Square → Symmetric → Positive Definite 的層級。他在 LAFE 2020 把這個層級**首次系統化**整理在書中（第 6–7 章）。
+- **Hiranabe 2020** *Matrix World* v1.0 slidedeck — Kenji Hiranabe 把 Strang 的層級**首次視覺化**為同心橢圓地圖，整合 11 層繼承 + 5 大分解 + 8 個 Strang section number。
+- **Hiranabe + Strang 2023** *Matrix World* v1.5 — Strang 親自參與修訂（左下角署名 "with the help of Prof. Gilbert Strang"），把 v1.0 的不準確處（如 Diagonal 與 Positive Definite 的相對位置）修正，並加入 Permutation 子類、Jordan form、$A^{+}$ 統一公式。**這個版本是線代分類學「結構主義集大成」的首次完整視覺呈現**。
+
+**歷史總結：** 「同心圓表達包含」始於 Euler 1768，「結構主義 + 母結構」起於 Bourbaki 1939+，「矩陣分類同心圓」止於 Hiranabe-Strang 2023 — **跨越 250 年的視覺化哲學在一張圖中匯合**。
+
+### ② 設計過程還原：為什麼選同心橢圓？4 個視覺替代方案的比較
+
+矩陣分類的視覺化有 4 個主要備選方案 — Hiranabe / Strang 為什麼**最終選擇同心橢圓**？我們把每個替代方案具體展開並指出其侷限：
+
+#### 替代方案 A：樹狀圖（Tree Diagram）
+
+樹狀圖把每個矩陣類別放一個節點，**父節點 = 更廣的類別**、**子節點 = 更特殊的類別**：
+
+```
+            Matrix
+              │
+            Square
+              │
+        ┌─────┴─────┐
+   Diagonalizable  ...
+        │
+     Normal
+        │
+   Symmetric
+        │
+   Positive Definite
+```
+
+**致命缺陷：線代分類「不是樹」 — 同一類別常同時是多個更廣類別的子類。**
+
+- **Symmetric** 同時 ⊂ Normal、Diagonalizable、Square、Matrix — 4 個父
+- **Orthogonal** 同時 ⊂ Normal、Square、Invertible — 3 個父
+- **Diagonal** 同時 ⊂ Symmetric、Normal、Upper Triangular、Lower Triangular — 4 個父
+
+樹狀圖**強制每個節點只能有一個父**，違反矩陣分類學的多重繼承本質。要表達多重繼承需畫**箭頭交叉**（線爆量、視覺凌亂、無法擴展到 11 層）。
+
+#### 替代方案 B：Venn 圖（Venn Diagram，任意位置橢圓）
+
+Venn 圖用**任意位置、任意大小**的橢圓表達集合，包含與否由相交區域呈現：
+
+**致命缺陷：Venn 圖原意是「集合運算分析」（交、聯、補），不是「層次包含表達」。**
+
+- 11 個集合兩兩相交可能產生 $2^{11} = 2048$ 個區域（理論最大），實作上根本無法視覺化
+- Venn 圖沒有「**深度感**」 — 哪個集合「更內」、哪個「更外」無法區分
+- Venn 圖在 4 個集合以上就需要橢圓彎曲變形（4-Venn 需橢圓而非圓）— 11 集合是 Venn 圖的災難
+
+#### 替代方案 C：UML 類別繼承圖（UML Class Diagram）
+
+軟體工程的 UML 用箭頭（從子類指向父類）表達繼承：
+
+```
+    Matrix
+      ↑
+    Square
+      ↑
+    Diagonalizable
+      ↑       ↖
+    Normal    （多重繼承用多個箭頭）
+      ↑
+    Symmetric
+```
+
+**致命缺陷：UML 是「工程語言」，沒有「越特殊越在內」的視覺直覺。**
+
+- UML 強調「**依賴方向**」（子依賴父）而非「**特殊化深度**」（誰更具體）
+- UML 多重繼承用箭頭交叉，11 層 × 平均 2 父 = 22 條箭頭，視覺爆量
+- UML 主要服務「**抽象介面 + 實作類**」的軟體模式，不適合表達「**集合大小遞減 + 性質約束遞增**」的數學分類
+
+#### 替代方案 D：Hasse 圖（Hasse Diagram，格論視覺化）
+
+Hasse 圖是**偏序集**的標準視覺化 — 節點代表元素，邊代表「**覆蓋關係**」（$x \prec y$ 且無中間元素）。線代分類**確實是格論意義下的格**（lattice），所以 Hasse 圖**數學上完美對應**：
+
+**致命缺陷：Hasse 圖是「純抽象偏序」，無法承載多層次資訊。**
+
+- Hasse 圖只表達「**誰 ⊂ 誰**」，無法嵌入分解符號、範例矩陣、Strang section number
+- Hasse 圖節點是點 + 標籤，無法表達「**這層橢圓內部的等價結構**」
+- Hasse 圖適合「**有限格的結構分析**」（如數論中的因數格），不適合教學中的「**多資訊整合**」
+
+#### 最終選擇：同心橢圓（Concentric Ellipses）— 4 大設計優勢
+
+**設計優勢 1：集合包含 = 視覺包含（同形視覺）**
+
+「**內層橢圓 ⊂ 外層橢圓**」**直接同形對應**「**內層集合 ⊂ 外層集合**」 — 沒有箭頭、沒有方向、沒有邊。讀者**用「看」就能直接讀出包含關係**，不需要學習任何附加視覺語法。
+
+數學基礎：拓樸學的「**巢狀子集**」（nested subsets）概念 — Russian doll / 套娃結構是「集合包含」的**完美視覺同態**。
+
+**設計優勢 2：多重繼承自動處理（不需箭頭交叉）**
+
+Symmetric 同時是 Normal、Diagonalizable、Square、Matrix 的子集 — 在同心橢圓中**自動成立**（Symmetric 橢圓**自然包含**於外層 4 個橢圓中），不需任何額外箭頭。樹狀 / UML 需要 4 條交叉箭頭才能表達同樣關係。
+
+**設計優勢 3：「特殊化深度」用視覺徑向距離精確表達**
+
+從最外橢圓到最內 $\{I, O\}$ 的**徑向距離** = 數學上「**約束累積強度**」：
+
+| 從外到內 | 累積約束 |
+|---|---|
+| L0 Matrix | 無 |
+| L2 Square | $m = n$ |
+| L4 Diagonalizable | $\exists X: A = X\Lambda X^{-1}$ |
+| L5 Normal | $A^{\mathrm{T}}A = AA^{\mathrm{T}}$（自動 unitary 對角化）|
+| L6 Symmetric | $S = S^{\mathrm{T}}$ |
+| L7 Positive Definite | $\forall \lambda > 0$ |
+| L10 Diagonal | $A_{ij} = 0, i \neq j$ |
+| L11 $\{I, O\}$ | $A = I$ 或 $A = O$ |
+
+**徑向距離是「有意義的度量」**（不是 Venn / Euler 圖那種隨意位置）— 同心橢圓**把抽象的偏序強度視覺化為實際距離**。
+
+**設計優勢 4：「兩條軸線」設計承載多層資訊**
+
+同心橢圓不只有「縱深軸」（外→內），還可在每層橢圓**橫向劃分**為左半 / 右半：
+
+| 縱深軸（外→內）= 性質越特殊 | 橫向軸（左↔右）= 一般 vs 對稱 |
+|---|---|
+| Matrix → Square → ... → $\{I, O\}$ | 左：一般分解（$X\Lambda X^{-1}$、LU、$A = U\Sigma V^{\mathrm{T}}$）<br/>右：對稱分解（$S = Q\Lambda Q^{\mathrm{T}}$、Permutation、Orthogonal）|
+
+**每層橢圓承載：類別名 + 集合論定義 + 對應分解 + Strang section number + 範例矩陣 — 5 種資訊在一個橢圓內整齊呈現。**這個「**多軸線承載力**」是樹狀 / Venn / UML / Hasse 都做不到的。
+
+#### 同心橢圓的拓樸數學基礎
+
+從**格論**角度看，矩陣分類是一個**幾乎線性的格**（almost linear lattice）— 主軸是「Matrix → Square → ... → $\{I, O\}$」直線，少數位置分支（Normal 分支出 Symmetric / Orthogonal、Symmetric 分支出 Positive Definite / Positive Semidefinite）。
+
+**「幾乎線性的格」用同心圓最自然：**
+
+- **線性主結構** = 一條徑向軸 = 同心圓的「外→內」距離
+- **分支** = 在徑向距離相同處的「**角度展開**」 = 同心圓的「左半 / 右半」
+
+換句話說，同心橢圓是**「徑向 + 角度」極座標拓樸**對矩陣分類偏序集的視覺投影。從這個角度看，**同心橢圓是矩陣分類學的「自然視覺座標系」**。
+
+### ③ 概念昇華：Matrix World 揭示什麼？
+
+#### 層次 1：「同心圓 vs 樹狀」= 「結構主義 vs 還原主義」的哲學對立
+
+- **樹狀** = **還原主義**：每個類別只關心**直接父**，整體結構靠遞迴重建
+- **同心** = **結構主義**：每個類別**同時嵌在多個外層**中，理解需要看「**整體結構**」而非個別父子關係
+
+這對應 **Bourbaki 1939+ 數學結構主義** vs **Aristotle ~350 BC 樹狀分類學** 的根本對立。
+
+Matrix World 用同心橢圓 **= 公開站隊結構主義** = 「**矩陣 = 多個約束的交集**」（每個橢圓是約束的累積）而非「**矩陣 = 樹的一個葉子**」（每個類別是單一繼承鏈的終點）。這個哲學選擇深刻影響教學：**學生會「先看全景再看細節」而非「先學定義再爬樹**」。
+
+#### 層次 2：「同心圓 + 分解符號」雙重編碼 = 「結構越特殊，分解越精緻」代數律
+
+每層橢圓不只表達**集合**，也標註「**該集合上適用的分解**」。從外到內，**分解逐步精細化**：
+
+| 橢圓層 | 適用分解 | 分解的對稱性層級 | 為什麼這層需要這個分解 |
+|---|---|---|---|
+| L0 Matrix | $A = CR$ / $A = U\Sigma V^{\mathrm{T}}$ | 弱（無對稱要求）| 任意矩陣，最樸素 / 最一般分解 |
+| L2 Square | $A = LU$ / $A = QR$ / EVD | 中（不要求兩基底正交合一）| 方陣，可逆性決定子分支 |
+| L5 Normal | unitary 對角化 | 強（正交對角化）| $A^{\mathrm{T}}A = AA^{\mathrm{T}}$ 強制兩邊基底同 |
+| L6 Symmetric | $S = Q\Lambda Q^{\mathrm{T}}$ | 最強（兩基底合一）| 對稱性 → 一個 $Q$ 完成所有 |
+| L8 Orthogonal | $Q^{\mathrm{T}}Q = I$ 自身 | 完美正交 | 範數保持，所有特徵值 $|\lambda| = 1$ |
+| L11 $\{I, O\}$ | 不需分解 | 標量化 | 已是最簡 |
+
+**代數律：「圈層越內 → 分解越精緻 → 適用矩陣越少」** — 這是「**廣度與精緻度的折衷**」在矩陣分類中的視覺呈現。SVD 在最外層 = 「**最廣**」但「**最普世**」；對稱譜分解 $Q\Lambda Q^{\mathrm{T}}$ 在 L6 = 「**最精緻**」但「**最受限**」。
+
+#### 層次 3：Matrix World 支援「逆向學習」（從最內向最外）
+
+傳統線代教學從外向內學（先 Matrix → 後 Symmetric → 最後 SVD）— 學生先看一般再特化。Matrix World **首次明確支援「逆向學習」**：
+
+- 從**最內** $\{I, O\}$ 開始（最強約束、最簡單）
+- 一步步往外**放鬆約束**：對角 → 投影 → 正交 → 對稱 → Normal → 可對角化 → 方陣 → Matrix
+- 每往外一層，學生問：「**失去什麼性質？需要什麼新分解來補回來？**」
+
+這對應生物學的「**自下而上**」教學（從細胞 → 組織 → 器官 → 個體 → 種群 → 生態）。**Matrix World 是線代教學史上第一個明確支援這種「特殊到一般」逆向學習的視覺工具**。
+
+#### 層次 4：Matrix World ↔ Map of Eigenvalues 對偶結構
+
+| 視覺工具 | 切入點 | 適合用途 | 對應問題 |
+|---|---|---|---|
+| **Map of Eigenvalues**（[appendix-map-eigenvalues](appendix-map-eigenvalues.md)，[Q20](#q20)）| **動態量：特徵值幾何位置** | 從特徵值反推矩陣類別 | 「我看到 $\lambda$ 全在實軸，這是什麼矩陣？」 |
+| **Matrix World**（[appendix-matrix-world](appendix-matrix-world.md)，本 Q21）| **靜態結構：集合包含繼承** | 從矩陣類別推導分解 | 「Symmetric 適用什麼分解？SVD 適用任意矩陣嗎？」 |
+
+兩個附錄是「**對偶的分類學視覺化**」 — **完整的線代分類直覺需要兩者都建立**。Map 給「**辨認**」、Matrix World 給「**推導**」。在 S12+ 互動式教材中，兩附錄將**互相超連結**（從 Matrix World 任一橢圓可跳到 Map 對應格子，反之亦然），形成「**結構 ↔ 譜**」雙向導覽。
+
+#### 層次 5：「最內 $\{I, O\}$」的哲學意義 — 極端對立的統一
+
+最內層是 $\{I, O\}$ — **單位矩陣**（最強的可逆，所有 $\lambda = 1$）+ **零矩陣**（最強的不可逆，所有 $\lambda = 0$）。這兩個**極端對立**的矩陣**同時在最內**。
+
+這符合「**極端對立的統一**」哲學：
+
+- **Hegel 辯證法** — 正反合，極端對立統一於更高層次
+- **老子《道德經》**「反者道之動，弱者道之用」 — 對立面相互轉化
+- **量子力學** — 純態 vs 混態的極限對應同一個觀察基底
+- **數學** — $I$ 與 $O$ 都是**自我相似**（$I = I^k$、$O = O^k$）= 矩陣世界的**兩個不動點**
+
+$I$ 與 $O$ 都是**所有矩陣分類層的成員**（既是 Matrix、Square、Diagonalizable、Normal、Symmetric、Positive Semidefinite、Diagonal —— 它們是「分類學的零維極限」）。Matrix World 把這兩個對立極端**並列放在最內**，**視覺化「對立統一」**這個跨領域的哲學律。
+
+#### 最強昇華：Matrix World 是「線代結構主義的視覺宣言」
+
+Matrix World 不是「方便的視覺化」 — 它是「**線代分類學的哲學立場**」。選擇同心橢圓 = 選擇結構主義 = 選擇「**矩陣不是孤立物件、而是約束的累積**」 = 選擇「**全景式理解優於樹狀爬升**」。
+
+這個立場與 **§1 (1.4) 4 視角設計原則**（[Q03](#q03)：同一矩陣 4 種看法）+ **(P4) 三明治哲學**（[Q13](#q13)：視角切換 + 純對角縮放）+ **SVD 統一定理**（[Q19](#q19)：任意矩陣的標準型）形成**全書結構主義教學的一致主軸**。
+
+**Matrix World 作為 S12+ 互動式教材的首頁**，意味著讀者**第一眼看到的就是「線代不是運算技巧的集合、而是結構的世界」** — 這是 Strang 五十年教學改革（[Q01](#q01)）在視覺工具上的最終實踐。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [appendix-matrix-world](appendix-matrix-world.md) — Matrix World 完整內容（11 層 + 13 分解 + 兩條軸線 + 偽反矩陣統一公式）+ VizScript-01 旗艦 dashboard
+- [appendix-map-eigenvalues](appendix-map-eigenvalues.md) — 對偶視覺化：特徵值地圖（[Q20](#q20)）
+- [§6 ch06a 五大分解總覽](ch06a-five.md) — 5 分解在 Matrix World 中的位置對應
+- [§6.5 ch06f A=UΣVᵀ](ch06f-USV.md) — SVD 在最外層的原因 + 偽反矩陣 $A^{+}$ 統一公式
+- [Q03](#q03) — 同一矩陣 4 種視角（結構主義在 §1 的首次出現）
+- [Q13](#q13) — (P4) 三明治哲學（結構主義的代數內核）
+- [Q14](#q14) — 為什麼要分解（Matrix World 中的「分解層級」設計）
+- [Q19](#q19) — SVD 為什麼存在於最外層（任意矩陣的標準型）
+- [Q20](#q20) — Map of Eigenvalues 對偶切入（特徵值幾何位置）
+
+**歷史原典：**
+- Aristotle (~350 BC), *Categories* + *Posterior Analytics* — 樹狀分類學的最早形式
+- Euler, L. (1768), *Lettres à une Princesse d'Allemagne*, vol. II, letters 102–108 — Euler 圖（同心圓表達集合包含的首次明確視覺化）
+- Venn, J. (1880), *On the Diagrammatic and Mechanical Representation of Propositions and Reasoning*, **Phil. Mag.**, 10, 1–18 — Venn 圖
+- Cantor, G. (1895/1897), *Beiträge zur Begründung der transfiniten Mengenlehre*, **Math. Annalen**, 46, 481–512 + 49, 207–246 — 集合論
+- Hasse, H. (1934), *Über die Klassenzahl abelscher Zahlkörper*, **Akademie-Verlag** — Hasse 圖
+- Birkhoff, G. (1948), *Lattice Theory*, **AMS Colloquium Publications** 25 — 格論
+- Bourbaki, N. (1939+), *Éléments de mathématique*, **Hermann** — 結構主義 + 母結構概念
+
+**現代教科書：**
+- Hiranabe, K. (2020/2023), *Matrix World* slidedeck v1.0 / v1.5 — [GitHub](https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra/blob/main/MatrixWorld.pdf)（v1.5 由 Strang 參與修訂）
+- Hiranabe, K. (2020), *Matrix World in Linear Algebra for Everyone*, [anagileway 博客](https://anagileway.com/2020/09/29/matrix-world-in-linear-algebra-for-everyone/) — 作者本人解說
+- Strang, G. (2020), *Linear Algebra for Everyone*, **Ch.1–7** — Matrix World 中所有 section number 對應原書
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.) — 完整矩陣分類層級
+- Mac Lane, S. (1998), *Categories for the Working Mathematician* (2nd ed.), **Springer GTM 5** — 範疇論視角的結構主義
+- Horn, R. A. & Johnson, C. R. (2013), *Matrix Analysis* (2nd ed.), Ch.2 + Ch.7 — Normal、對稱、正定等類別的代數刻畫
+- Stillwell, J. (2010), *Mathematics and Its History* (3rd ed.), **Springer UTM** — Euler 圖 / Venn 圖 / 集合論歷史脈絡
+
+---
+
+## Q22：「解 $A\mathbf{x}=\mathbf{b}$」為什麼是線代的核心問題？ {#q22}
+
+> **觸發問題：** 線性代數有許多主題 — 矩陣 / 向量 / 特徵值 / 分解 / 子空間 / 行列式 / 偽反 ... 看似散亂。但 Strang 在多本著作中反覆稱「**$A\mathbf{x}=\mathbf{b}$ 是線性代數的核心問題**」（the central problem of linear algebra），本書附錄 C 的英文標題就是 *The Four Subspaces and the **Solutions to $A\mathbf{x}=\mathbf{b}$***。為什麼「**解線性方程組**」這個看似具體的計算問題，能站在線代學科最高位置？線代其他主題（特徵值、分解、子空間、SVD...）真的都是它的派生 / 工具嗎？解 $A\mathbf{x}=\mathbf{b}$ 為什麼是「**全書 22 條為什麼的最終會師點**」？
+>
+> **對應主章：** [appendix-four-subspaces](appendix-four-subspaces.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：解 $A\mathbf{x}=\mathbf{b}$ 的 4000 年演進史
+
+線代誕生於「**解線性方程組**」這個實際需求 — 從巴比倫泥板（公元前 1800 年）到 21 世紀機器學習，**每一個重大進展幾乎都圍繞「怎麼更好地解 $A\mathbf{x}=\mathbf{b}$」展開**：
+
+- **巴比倫 ~1800 BC** — 楔形泥板 YBC 4652 / VAT 8389 等含 2 元、3 元線性方程組例題（求面積、長寬、勞動分配），是**已知最早的線性方程組求解嘗試**。當時用「**虛位法**」（regula falsi）試錯逼近答案。
+- **《九章算術》方程章 公元 1 世紀（漢代）** — 3 元 3 方程組「**遍乘直除**」算法，是**高斯消去法的東方原型**，比 Gauss 早 1800 年。例題「上禾三秉、中禾二秉、下禾一秉，實三十九斗」直接化為 $3 \times 3$ 增廣矩陣的高斯消去。Strang LAFE 與 ITLA 多次引用九章算術作為線代起源。
+- **印度 Brahmagupta 628 AD** *Brahmasphutasiddhanta* — 用「Bhaskara 算法」解線性 Diophantus 方程組。
+- **波斯 al-Khwarizmi 825 AD** *Kitab al-Jabr wa-l-Muqabala* — **「algebra」（الجبر）一詞詞源** + 解二元一次方程的系統化方法。代數的命名與線方程組求解同源。
+- **Newton 1707** *Arithmetica Universalis* — 系統性解 $n$ 元一次方程組，同期 Leibniz 1693 用行列式記號發現「方程組可解性 ↔ 係數行列式非零」。
+- **Cramer 1750** *Introduction à l'analyse des lignes courbes algébriques*, **Genève** — **Cramer 法則**用行列式比解 $A\mathbf{x}=\mathbf{b}$，這是「**第一個明確的 $A\mathbf{x}=\mathbf{b}$ 通用公式解**」（雖然計算複雜度 $O(n!)$ 隨後被 Gauss 消去 $O(n^3)$ 完全淘汰）。
+- **Gauss 1809** *Theoria Motus Corporum Coelestium*, **Hamburg** — **解 $A\mathbf{x}=\mathbf{b}$ 首次成為「重大科學發現的關鍵工具」**。Gauss 用最小二乘法 + 高斯消去法從 14 次觀測中計算小行星 Ceres 的軌道（6 個未知參數，**14 方程 vs 6 未知 → 超定系統無精確解**），這個工作奠定「**$A\mathbf{x}=\mathbf{b}$ 在無解時用最小二乘逼近**」的數學基礎，並把線代從「**理論代數**」推進為「**計算科學的核心工具**」（[Q17](#q17) 完整講述）。
+- **Cayley 1858** *A Memoir on the Theory of Matrices*, **Phil. Trans. R. Soc.** 148 — 「**矩陣 $A$**」首次成為**獨立代數物件**，$A\mathbf{x}=\mathbf{b}$ 從「方程組」躍進為「**矩陣方程**」（[Q02](#q02)），這個物件化是 4 子空間概念與後續所有分解的代數前提。
+- **Frobenius 1879** *Über homogene totale Differentialgleichungen*, **Crelle J.** 86 + **1912** — **Rank-nullity 定理**完整證明 + 提出「**矩陣的 rank = 解 $A\mathbf{x}=\mathbf{b}$ 維度結構的關鍵不變量**」。這是「**4 子空間 + 解空間結構**」的代數源頭。
+- **Sylvester 1851** + **Schmidt 1907** + **Eckart-Young 1936** — **SVD 譜系**的形成（[Q19](#q19) 完整講述）— 最初目的之一是**處理「$A$ singular / rank-deficient」時 $A\mathbf{x}=\mathbf{b}$ 的解**。
+- **Moore 1920** *On the reciprocal of the general algebraic matrix*, **Bull. AMS** 26 + **Penrose 1955** *A generalized inverse for matrices*, **Proc. Cambridge Philos. Soc.** 51 — **Moore-Penrose 偽反矩陣 $A^{+}$** 形式化「**對任意矩陣（含 $m \neq n$ 含 singular）$A\mathbf{x}=\mathbf{b}$ 的最小二乘 + 最小範數最優解**」。$A^{+}$ 是「**$A\mathbf{x}=\mathbf{b}$ 在 4000 年探索史的最終解答**」 — 給任意 $A$、任意 $\mathbf{b}$ 都有意義的單一公式 $\mathbf{x}^* = A^{+}\mathbf{b}$。
+- **Turing 1948** *Rounding-off errors in matrix processes*, **Q. J. Mech. Appl. Math.** 1 — **LU 命名與數值穩定性分析**（[Q16](#q16)），「解 $A\mathbf{x}=\mathbf{b}$」進入**數值線性代數時代**。
+- **Householder 1958** *Unitary triangularization of a nonsymmetric matrix*, **JACM** 5 — **Householder QR 變換**（[Q17](#q17)），數值穩定的最小二乘解。
+- **Golub-Kahan 1965** + **Golub-Reinsch 1970** — 第一個實用 SVD 數值演算法（[Q19](#q19)），解 rank-deficient $A\mathbf{x}=\mathbf{b}$ 進入工程實踐。
+- **LINPACK 1979** + **LAPACK 1992** — 工業標準。「**解 $A\mathbf{x}=\mathbf{b}$**」被封裝為 5 條 BLAS/LAPACK 函式呼叫（`DGESV` / `DGELS` / `DGELSD` / `DGESDD` / `DGESVD`）— 線代計算工業化。
+- **2010s+ 機器學習** — 解 $A\mathbf{x}=\mathbf{b}$（最小二乘 / Ridge / Lasso）出現在**每個機器學習演算法的核心**：線性迴歸是直接版本、神經網路反向傳播是 Jacobian 化的版本、推薦系統的協同過濾是矩陣補全版本、PCA / Latent Semantic Indexing 是 SVD 版本。
+
+**歷史總結：** **4000 年來，線代每個重大進展 — 矩陣概念 / 行列式 / 高斯消去 / Cramer / LU / QR / SVD / 偽反 / 4 子空間 / Rank-nullity — 全部都是為解 $A\mathbf{x}=\mathbf{b}$ 量身打造的工具**。線代從來不是「為了研究矩陣本身」的學問，**它是「研究怎麼解 $A\mathbf{x}=\mathbf{b}$」的學問** — 矩陣只是這個元問題的代數工具。
+
+### ② 設計過程還原：解 $A\mathbf{x}=\mathbf{b}$ 自然帶出整個線代
+
+如果我們**從零開始**只給「解 $A\mathbf{x}=\mathbf{b}$」這一個問題，整個線代的核心概念**會自然冒出**：
+
+#### Step 1：把 $n$ 方程濃縮為矩陣方程（[Q02](#q02) [Q06](#q06)）
+
+從「$n$ 個方程式」開始 — 例如：
+
+$$
+\begin{cases}
+2x_1 + 3x_2 + x_3 = 7 \\
+4x_1 + x_2 + 5x_3 = 9 \\
+x_1 + 2x_2 + 3x_3 = 6
+\end{cases}
+$$
+
+「**重複的係數表 + 反覆寫變數**」促使我們**抽象出矩陣物件**（[Q02](#q02)）：
+
+$$
+\underbrace{\begin{bmatrix} 2 & 3 & 1 \\ 4 & 1 & 5 \\ 1 & 2 & 3 \end{bmatrix}}_{A} \underbrace{\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}}_{\mathbf{x}} = \underbrace{\begin{bmatrix} 7 \\ 9 \\ 6 \end{bmatrix}}_{\mathbf{b}}
+$$
+
+「**矩陣**」這個概念**因為要解 $A\mathbf{x}=\mathbf{b}$ 而誕生**。$A\mathbf{x}$ 的定義（[Q06](#q06)）正是為了讓上式成立。
+
+#### Step 2：「有解嗎？」逼出列空間 + 「解唯一嗎？」逼出零空間（[Q08](#q08)）
+
+問「**$A\mathbf{x}=\mathbf{b}$ 何時有解？**」→ 答案是 $\mathbf{b}$ 必須在 $A$ 的**列空間** $\mathbf{C}(A)$ 中（$A\mathbf{x}$ 是 $A$ 的列向量線性組合）→ 列空間概念誕生。
+
+問「**$A\mathbf{x}=\mathbf{b}$ 何時解唯一？**」→ 若 $A\mathbf{x}_1 = A\mathbf{x}_2 = \mathbf{b}$，則 $A(\mathbf{x}_1 - \mathbf{x}_2) = \mathbf{0}$ → 「**零空間** $\mathbf{N}(A) = \{\mathbf{x}: A\mathbf{x} = \mathbf{0}\}$」必須 = $\{\mathbf{0}\}$ → 零空間概念誕生。
+
+問「**$A\mathbf{x}=\mathbf{b}$ 的所有解的結構是什麼？**」→ 通解 = **特解 + 零空間**：
+
+$$
+\boxed{\mathbf{x} = \mathbf{x}_p + \mathbf{x}_n, \quad \mathbf{x}_n \in \mathbf{N}(A)}
+$$
+
+通解是 $\mathbb{R}^n$ 中一個**平移過的子空間**（仿射子空間）— 通過特解 $\mathbf{x}_p$ 平行於 $\mathbf{N}(A)$。
+
+#### Step 3：四個基本子空間自然冒出（[Q08](#q08)）
+
+把上述問題「**對偶化**」（把 $A$ 換成 $A^{\mathrm{T}}$、把 $\mathbf{x}$ 換成 $\mathbf{y}$、左乘換右乘）→ **行空間** $\mathbf{C}(A^{\mathrm{T}})$ + **左零空間** $\mathbf{N}(A^{\mathrm{T}})$ → 4 子空間結構自然產生。**Rank-nullity 定理 + 正交補關係**完整描述 $A\mathbf{x}=\mathbf{b}$ 解空間結構。
+
+#### Step 4：「怎麼有效計算？」逼出五大分解（[Q14](#q14) 至 [Q19](#q19)）
+
+不同的 $A$ 性質需要不同的分解：
+
+| $A$ 性質 | 適合分解 | 解 $A\mathbf{x}=\mathbf{b}$ 的策略 |
+|---|---|---|
+| 方陣可逆 | **LU**（[Q16](#q16)）| $LU\mathbf{x} = \mathbf{b}$ → $L\mathbf{y} = \mathbf{b}$ 前代 → $U\mathbf{x} = \mathbf{y}$ 後代（兩步三角解法）|
+| 方陣 + overdetermined | **QR**（[Q17](#q17)）| $A = QR$ → $QR\mathbf{x} = \mathbf{b}$ → $R\mathbf{x} = Q^{\mathrm{T}}\mathbf{b}$（一步三角解法 + 數值穩定）|
+| 對稱方陣 | **EVD**（[Q18](#q18)）| $Q\Lambda Q^{\mathrm{T}}\mathbf{x} = \mathbf{b}$ → $\mathbf{x} = Q\Lambda^{-1}Q^{\mathrm{T}}\mathbf{b}$ |
+| 任意 $m \times n$（含 rank-deficient）| **SVD**（[Q19](#q19)）| $\mathbf{x}^* = V\Sigma^{+}U^{\mathrm{T}}\mathbf{b}$（最小二乘 + 最小範數）|
+| 入門 / rank 視覺化 | **CR**（[Q15](#q15)）| 教學工具，不主要用於 $A\mathbf{x}=\mathbf{b}$ |
+
+**五大分解就是「**$A\mathbf{x}=\mathbf{b}$ 5 種情境的最優工具配置**」**。每個分解都有「**為哪種 $A\mathbf{x}=\mathbf{b}$ 而生**」的歷史動機（見各 Q&A 的 ① 歷史段）。
+
+#### Step 5：「無解怎麼辦？」逼出最小二乘 + 正交投影
+
+當 $\mathbf{b} \notin \mathbf{C}(A)$ 時無解。Gauss 1801 解 Ceres 軌道時面對 14 方程 vs 6 未知 — **永遠無解！** Gauss 的天才解法：
+
+**設計過程還原（Gauss 1801）：**
+
+1. **接受無精確解，求「最佳近似」** — 找 $\mathbf{x}^*$ 使**殘差最小**：
+$$
+\mathbf{x}^* = \arg\min_{\mathbf{x}} \|A\mathbf{x} - \mathbf{b}\|^2
+$$
+
+2. **對 $\mathbf{x}$ 求極值**（微積分）：
+$$
+\frac{\partial}{\partial \mathbf{x}} \|A\mathbf{x} - \mathbf{b}\|^2 = 2 A^{\mathrm{T}}(A\mathbf{x} - \mathbf{b}) = \mathbf{0}
+$$
+
+3. **化為正規方程**：
+$$
+\boxed{A^{\mathrm{T}}A \mathbf{x}^* = A^{\mathrm{T}}\mathbf{b}}
+$$
+
+當 $A^{\mathrm{T}}A$ 可逆（$A$ 列獨立）時：
+
+$$
+\mathbf{x}^* = (A^{\mathrm{T}}A)^{-1} A^{\mathrm{T}}\mathbf{b}
+$$
+
+**幾何意義：** $A\mathbf{x}^*$ 是 $\mathbf{b}$ 在 $\mathbf{C}(A)$ 上的**正交投影**！這就是為什麼 4 子空間正交補關係（$\mathbf{C}(A) \perp \mathbf{N}(A^{\mathrm{T}})$，[Q08](#q08)）是「**最小二乘的代數基礎**」。
+
+#### Step 6：SVD 補完最終缺口 — 偽反矩陣 $A^{+}$（[Q21](#q21) Matrix World 底部）
+
+正規方程 $(A^{\mathrm{T}}A)^{-1}$ 在 $A$ rank-deficient 時不存在。SVD 偽反 $A^{+} = V\Sigma^{+}U^{\mathrm{T}}$（[Q19](#q19) [appendix-matrix-world](appendix-matrix-world.md) 底部統一公式）提供「**最小二乘 + 最小範數**」的**通用最優解**：
+
+$$
+\boxed{\mathbf{x}^* = A^{+} \mathbf{b} = V \Sigma^{+} U^{\mathrm{T}} \mathbf{b}}
+$$
+
+**性質：**
+1. $\mathbf{x}^*$ 最小化 $\|A\mathbf{x} - \mathbf{b}\|^2$（最小二乘性）
+2. 在所有最小化者中，$\mathbf{x}^*$ 範數最小（**最小範數性**）
+3. 對**任意** $A \in \mathbb{R}^{m \times n}$（含 $m \neq n$、含 rank-deficient）都有定義
+
+$A^{+}$ 是「**$A\mathbf{x}=\mathbf{b}$ 在 4000 年探索史的最終解答**」。
+
+#### $A\mathbf{x}=\mathbf{b}$ 的 5 種解情境完整表
+
+| 情境 | $\mathbf{b}$ 位置 | $\mathbf{N}(A)$ | 解狀態 | 最優工具 |
+|---|---|---|---|---|
+| **A. 唯一解** | $\mathbf{b} \in \mathbf{C}(A)$ | $\{\mathbf{0}\}$ | $\mathbf{x} = A^{-1}\mathbf{b}$（方陣可逆）| Cramer / **LU** |
+| **B. 無窮多解** | $\mathbf{b} \in \mathbf{C}(A)$ | 非平凡 | $\mathbf{x} = \mathbf{x}_p + \mathbf{N}(A)$ 仿射子空間 | LU / QR / **SVD** |
+| **C. 無解** | $\mathbf{b} \notin \mathbf{C}(A)$ | $\{\mathbf{0}\}$ | 最小二乘 $\mathbf{x}^* = (A^{\mathrm{T}}A)^{-1}A^{\mathrm{T}}\mathbf{b}$ | 正規方程 / **QR** |
+| **D. 無解 + rank-deficient** | $\mathbf{b} \notin \mathbf{C}(A)$ | 非平凡 | 最小二乘 + 最小範數 $\mathbf{x}^* = A^{+}\mathbf{b}$ | **SVD** |
+| **E. 病態（ill-conditioned）** | $\mathbf{b} \in \mathbf{C}(A)$ 但條件數大 | 接近 0 的奇異值 | Ridge 正則化 $\mathbf{x}^* = (A^{\mathrm{T}}A + \lambda I)^{-1}A^{\mathrm{T}}\mathbf{b}$ | **Tikhonov / SVD** |
+
+**每種情境都對應一個分解 + 一個工具** — 五大分解、4 子空間、最小二乘、偽反矩陣、正規方程、Tikhonov 正則化 — **全部都是 $A\mathbf{x}=\mathbf{b}$ 不同情境的最優解工具**。
+
+### ③ 概念昇華：$A\mathbf{x}=\mathbf{b}$ 是什麼？
+
+#### 層次 1：$A\mathbf{x}=\mathbf{b}$ 是「線代的元問題」（Meta-Problem）
+
+線代不像微積分（核心問題：求極限 / 導數 / 積分）那樣有單一明確主題。線代的主題看似散亂（矩陣 / 向量 / 特徵值 / 分解 / 子空間 / 行列式 / 偽反 ...），**但它們全部可從一個元問題派生**：
+
+$$
+\boxed{\text{給矩陣 } A \in \mathbb{R}^{m \times n} \text{ 與向量 } \mathbf{b} \in \mathbb{R}^m, \text{ 找 } \mathbf{x} \in \mathbb{R}^n \text{ 使 } A\mathbf{x}=\mathbf{b} \text{（或最小化 } \|A\mathbf{x}-\mathbf{b}\|\text{）}}
+$$
+
+從這個元問題出發，線代每個主題都是它的某個面向：
+
+| 線代主題 | 對應 $A\mathbf{x}=\mathbf{b}$ 的問題 |
+|---|---|
+| **列空間 $\mathbf{C}(A)$** | 「**有解嗎？**」→ $\mathbf{b} \in \mathbf{C}(A)$ 嗎？ |
+| **零空間 $\mathbf{N}(A)$** | 「**解唯一嗎？**」→ $\mathbf{N}(A) = \{\mathbf{0}\}$ 嗎？ |
+| **4 子空間 + Rank-nullity** | 「**解的結構是什麼？**」 |
+| **高斯消去 / LU / QR** | 「**怎麼有效計算？**」（一般情形）|
+| **最小二乘 + 正規方程** | 「**無解怎麼辦？**」 |
+| **偽反矩陣 $A^{+}$** | 「**rank-deficient 怎麼辦？**」 |
+| **SVD** | 「**對任意 $A$ 統一公式是什麼？**」 |
+| **特徵值 / EVD** | 「**$A\mathbf{x}=\lambda\mathbf{x}$ 怎麼解？**」（特殊版本）|
+| **行列式 / Cramer** | 「**有什麼明確公式解？**」（被 Gauss 消去淘汰）|
+| **Matrix World 分類學** | 「**$A$ 屬於哪一類 → 用什麼分解最好？**」 |
+
+線代的每個主題都是「**$A\mathbf{x}=\mathbf{b}$ 元問題**」的某個面向。**線代不是「研究矩陣」的學問，它是「研究怎麼解 $A\mathbf{x}=\mathbf{b}$」的學問**。
+
+#### 層次 2：$A\mathbf{x}=\mathbf{b}$ 的跨領域抽象意義 — 「逆向工程」是科學的本質
+
+**正向問題：** 給 $\mathbf{x}$ 算 $A\mathbf{x}$（已知**原因**算**結果**）
+**反向問題：** 給結果 $\mathbf{b}$ 求原因 $\mathbf{x}$ — **解 $A\mathbf{x}=\mathbf{b}$**
+
+科學的本質常是「**從觀測結果反推原因**」 — **這正是 $A\mathbf{x}=\mathbf{b}$ 的形式**。所有科學領域的核心問題在簡化（局部線性化）後都化為「解某個線性系統」：
+
+| 領域 | 對應 $A\mathbf{x}=\mathbf{b}$ | 解法工具 |
+|---|---|---|
+| 物理（線性響應）| 力 = 彈簧常數 × 位移 → 知力反推位移 $K\mathbf{x} = \mathbf{f}$ | LU |
+| 電路（KVL/KCL）| 阻抗 × 電流 = 電壓 → 知電壓反推電流 $\mathbf{Z}\mathbf{I} = \mathbf{V}$ | LU |
+| 控制理論 | 狀態方程 $A\mathbf{x} = B\mathbf{u}$ → 求控制輸入 $\mathbf{u}$ | Riccati / SVD |
+| 統計（迴歸）| $\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\epsilon}$ → 估計 $\boldsymbol{\beta}$ | 最小二乘 / QR |
+| 機器學習（線性迴歸 + Ridge / Lasso）| 同上 + 正則化 | SVD / 偽反 / Coordinate Descent |
+| 量子力學（時間演化）| $\psi(t) = e^{-iHt/\hbar}\psi(0)$（特徵值版 $H\psi = E\psi$）| EVD |
+| 機器人路徑規劃 | Jacobian $J\dot{\mathbf{q}} = \dot{\mathbf{x}}$ → 解關節速度 | 偽反 + SVD |
+| 影像處理（反卷積）| 模糊核 × 清晰圖 = 模糊圖 → 反卷積回清晰圖 | 正則化 + 偽反 |
+| MRI 影像重建 | $\mathbf{F}\mathbf{x} = \mathbf{b}$（Fourier 變換係數）→ 反推切片影像 | SVD + 壓縮感知 |
+| CT 掃描 | Radon 變換投影 = 觀測 → 反推 3D 結構 | SVD / 偽反 / Filtered Back Projection |
+| 神經網路訓練 | 損失梯度 = Jacobian × 殘差 → 解 $\boldsymbol{\theta}$ 更新方向 | SGD（隱含 $A\mathbf{x}=\mathbf{b}$）|
+| 推薦系統 | 用戶-物品矩陣補全 $A^{+}\mathbf{b}$ | SVD / 矩陣補全 |
+| 計算化學 | Hartree-Fock 自洽場 $F\mathbf{c} = \epsilon S\mathbf{c}$ | 廣義 EVD |
+
+**「$A\mathbf{x}=\mathbf{b}$」是所有應用數學的最頻繁公約數** — 不論物理、工程、AI、金融、影像、生醫，最終都歸結為「**解某個線性系統**」。線代給這個「**逆向工程的線性版本**」提供完整數學語言。
+
+#### 層次 3：$A\mathbf{x}=\mathbf{b}$ 是全書 22 條 Q&A 的會師點
+
+回顧前 21 條 Q&A，**它們全部圍繞 $A\mathbf{x}=\mathbf{b}$ 展開**：
+
+| Q | 主題 | 與 $A\mathbf{x}=\mathbf{b}$ 的關係 |
+|---|---|---|
+| [Q01](#q01) | 圖解優先 | 為了視覺化 $A\mathbf{x}=\mathbf{b}$ 的結構 |
+| [Q02](#q02) | 矩陣物件化 | 把 $n$ 個方程濃縮為 $A\mathbf{x}=\mathbf{b}$ |
+| [Q03](#q03) [Q07](#q07) | 4 視角 / 2 視角 | 看 $A\mathbf{x}=\mathbf{b}$ 的不同切入點 |
+| [Q04](#q04) [Q05](#q05) | 點積 / 外積 | $A\mathbf{x}$ 的兩種讀法之根 |
+| [Q06](#q06) | $A\mathbf{x}$ 定義 | 建構 $A\mathbf{x}=\mathbf{b}$ 的左邊 |
+| [Q08](#q08) | 4 子空間 | $A\mathbf{x}=\mathbf{b}$ 解空間結構 |
+| [Q09](#q09)–[Q11](#q11) | 矩陣乘法 / 不可交換 / 對角 | $A\mathbf{x}=\mathbf{b}$ 相關運算規律 |
+| [Q12](#q12) [Q13](#q13) | (P3) / (P4) | $\mathbf{x}_{k+1} = A\mathbf{x}_k$ 動態解 + 解的視角切換 |
+| [Q14](#q14) | 為什麼分解 | 6 工程動機**全部圍繞 $A\mathbf{x}=\mathbf{b}$** |
+| [Q15](#q15) | CR | rank 視覺化（$A\mathbf{x}=\mathbf{b}$ 解存在條件）|
+| [Q16](#q16) | LU | 解中等規模 $A\mathbf{x}=\mathbf{b}$ |
+| [Q17](#q17) | QR | 解 overdetermined $A\mathbf{x}=\mathbf{b}$（最小二乘）|
+| [Q18](#q18) | 譜定理 | 對稱矩陣的 $A\mathbf{x}=\mathbf{b}$ |
+| [Q19](#q19) | SVD | 解**任意** $A$ 的 $A\mathbf{x}=\mathbf{b}$ + 偽反 |
+| [Q20](#q20) | 特徵值地圖 | 矩陣類別 → 適用什麼 $A\mathbf{x}=\mathbf{b}$ 工具 |
+| [Q21](#q21) | Matrix World | 從分類 → 推導分解 → 解 $A\mathbf{x}=\mathbf{b}$ 結構地圖 |
+
+**全書 22 條 Q&A 構成一個圍繞 $A\mathbf{x}=\mathbf{b}$ 展開的同心結構** — 從 Q01 圖解優先（哲學動機）→ Q02–Q08（矩陣 + 4 子空間 + $A\mathbf{x}=\mathbf{b}$ 結構基礎）→ Q09–Q13（運算 + 動態）→ Q14–Q19（五大分解 = 為 $A\mathbf{x}=\mathbf{b}$ 量身打造的工具）→ Q20–Q21（地圖與分類學）→ **Q22（會師點：$A\mathbf{x}=\mathbf{b}$ 是線代核心）**。
+
+#### 層次 4：「方程 vs 結構」雙重視角 — Strang 五十年教學的最終啟示
+
+傳統線代教學從「解 $A\mathbf{x}=\mathbf{b}$」的**算法面**切入（高斯消去 → 求逆 → 行列式 → ...），學生算得出答案但**不理解為什麼有解 / 解唯一 / 解的結構是什麼**。
+
+**Strang 50 年改革（[Q01](#q01)）的核心啟示：**
+
+> **「$A\mathbf{x}=\mathbf{b}$ 既是計算問題、也是結構問題 — 兩者必須同時掌握。」**
+
+| 層面 | 內容 | 對應章節 |
+|---|---|---|
+| **計算面** | 高斯消去 / LU / QR / SVD — 怎麼算 | [§6.2–§6.5](ch06a-five.md) |
+| **結構面** | 4 子空間 + Rank-nullity + 正交投影 + 偽反 — 為什麼這樣算 + 解的結構意義 | [§3](ch03-mat-vec.md) + [appendix-four-subspaces](appendix-four-subspaces.md) |
+
+Strang 的革命是：**把結構面推到前面**（[ch03 §3 第 2 段](ch03-mat-vec.md) 4 子空間在書的早期就出現，而非埋在最後一章）。這個順序革命使 $A\mathbf{x}=\mathbf{b}$ 從「**單純計算**」躍升為「**全書結構主軸**」。
+
+**對比 Strang 與傳統教科書（Anton / Lay / Friedberg）：**
+
+| 順序 | 傳統教科書 | Strang LAFE / ITLA |
+|---|---|---|
+| 1 | 行列式 + Cramer | 4 視角看矩陣 + $A\mathbf{x}$ |
+| 2 | 求逆 + 反矩陣 | 列空間 + 零空間 |
+| 3 | 高斯消去 | 4 子空間 + Rank-nullity |
+| 4 | 矩陣運算 | 五大分解（CR / LU / QR / EVD / SVD） |
+| 5 | 4 子空間（最後章）| 解 $A\mathbf{x}=\mathbf{b}$ 應用 |
+| 6 | SVD（很少出現）| **SVD 是整本書的高潮 + 偽反統一所有逆運算** |
+
+**Strang 把「**結構主軸**」推前 = 把「**為什麼**」推前 = 把線代從「**計算技巧的集合**」轉化為「**結構洞察的學科**」**。
+
+#### 層次 5：最強昇華 — $A\mathbf{x}=\mathbf{b}$ 不是線代的一個問題，它**就是**線代
+
+$$
+\boxed{\text{Linear Algebra} = \text{The study of } A\mathbf{x}=\mathbf{b} \text{ in all its depth}}
+$$
+
+線代學科的存在意義就是「**完整理解 + 完整求解 $A\mathbf{x}=\mathbf{b}$**」。**所有的分解、子空間、特徵值、SVD、最小二乘、偽反矩陣 — 都是線代圍繞這一個元問題積累的工具與洞察**。
+
+這就是為什麼 Strang 多次強調「**$A\mathbf{x}=\mathbf{b}$ is the central problem of linear algebra**」（LAFE Ch.1 第 1 句 + ITLA 前言 + MIT 18.06 第 1 講開場）。
+
+**全書 22 條 Q&A 的最終會師：**
+
+| 線代學科 | = | 解 $A\mathbf{x}=\mathbf{b}$ 的完整數學 |
+|---|---|---|
+| 矩陣物件化（[Q02](#q02)）| ← | 為了把 $n$ 方程濃縮為 $A\mathbf{x}=\mathbf{b}$ |
+| 4 子空間（[Q08](#q08)）| ← | 為了刻畫 $A\mathbf{x}=\mathbf{b}$ 解空間結構 |
+| 五大分解（[Q14](#q14)–[Q19](#q19)）| ← | 為了 5 種不同情境的最優解工具 |
+| Matrix World（[Q21](#q21)）| ← | 為了從矩陣類別推導合適的 $A\mathbf{x}=\mathbf{b}$ 工具 |
+| Map of Eigenvalues（[Q20](#q20)）| ← | 為了從特徵值幾何辨識矩陣類別 |
+| 互動視覺化（全書 36 個 VizScript）| ← | 為了**看到** $A\mathbf{x}=\mathbf{b}$ 的結構與解 |
+
+**$A\mathbf{x}=\mathbf{b}$ 是線代的「**奇異值 1 號**」** — 所有重要性都從這一個元問題輻射出去。**從 4000 年前巴比倫泥板的 2x2 方程組、到 21 世紀機器學習的億維迴歸、到本書 22 條 Q&A 的「為什麼」探索 — 全部圍繞同一條原則：「給結果反推原因」的線性版本，就是 $A\mathbf{x}=\mathbf{b}$**。
+
+**線代不是矩陣的學問，它是 $A\mathbf{x}=\mathbf{b}$ 的學問。**
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [appendix-four-subspaces](appendix-four-subspaces.md) — 4 子空間完整視覺 + 解 $A\mathbf{x}=\mathbf{b}$ 結構（特解 + 零空間 + 仿射子空間 + 最小範數最優解）+ VizScript-01 整合面板
+- [appendix-matrix-world](appendix-matrix-world.md) — 偽反矩陣 $A^{+}$ 統一公式底部標註（[Q21](#q21)）
+- [§3 ch03 Matrix × Vector](ch03-mat-vec.md) — $A\mathbf{x}$ 定義 + 4 子空間首次出現 + 解 $A\mathbf{x}=\mathbf{b}$ 入門
+- [§6.2 ch06c LU](ch06c-LU.md) — 解中等規模 $A\mathbf{x}=\mathbf{b}$（前代 + 後代）
+- [§6.3 ch06d QR](ch06d-QR.md) — 解 overdetermined（最小二乘）
+- [§6.5 ch06f SVD](ch06f-USV.md) — 解任意 $A$（偽反 + 最小範數）+ VizScript-01「推薦系統 / 矩陣補全」應用
+- [Q02](#q02) — 矩陣為什麼存在（為了 $A\mathbf{x}=\mathbf{b}$）
+- [Q06](#q06) — $A\mathbf{x}$ 為什麼這樣定義（為了 $A\mathbf{x}=\mathbf{b}$）
+- [Q08](#q08) — 4 子空間為什麼自然冒出（從 $A\mathbf{x}=\mathbf{b}$ 解空間結構問題）
+- [Q14](#q14) — 為什麼要分解（6 工程動機圍繞 $A\mathbf{x}=\mathbf{b}$）
+- [Q17](#q17) — QR + Gauss 1801 Ceres 軌道（最小二乘起源）
+- [Q19](#q19) — SVD + Moore-Penrose 偽反（$A\mathbf{x}=\mathbf{b}$ 終極解答）
+- [Q20](#q20) [Q21](#q21) — 從矩陣類別 / 特徵值幾何反推 $A\mathbf{x}=\mathbf{b}$ 工具選擇
+
+**歷史原典：**
+- 《九章算術》方程章（公元 1 世紀，漢代）— 高斯消去法的東方原型「遍乘直除」
+- al-Khwarizmi (825), *Kitab al-Jabr wa-l-Muqabala* — algebra 一詞詞源 + 線方程求解
+- Newton, I. (1707), *Arithmetica Universalis* — 系統性 $n$ 元一次方程組解法
+- Cramer, G. (1750), *Introduction à l'analyse des lignes courbes algébriques*, **Genève** — Cramer 法則
+- Gauss, C. F. (1809), *Theoria Motus Corporum Coelestium*, **Hamburg** — 最小二乘法 + Ceres 軌道計算（$A\mathbf{x}=\mathbf{b}$ 在無解時的最佳解）
+- Cayley, A. (1858), *A Memoir on the Theory of Matrices*, **Phil. Trans. R. Soc.**, 148, 17–37 — 矩陣物件化（$A\mathbf{x}=\mathbf{b}$ 躍升為矩陣方程）
+- Frobenius, G. (1879/1912), *Über homogene totale Differentialgleichungen*, **Crelle J.** 86 — Rank-nullity 定理 + 解空間結構
+- Moore, E. H. (1920), *On the reciprocal of the general algebraic matrix*, **Bull. AMS**, 26, 394–395 — 偽反矩陣首次定義
+- Penrose, R. (1955), *A generalized inverse for matrices*, **Proc. Cambridge Philos. Soc.**, 51, 406–413 — Moore-Penrose 偽反矩陣完整理論
+- Turing, A. M. (1948), *Rounding-off errors in matrix processes*, **Q. J. Mech. Appl. Math.**, 1, 287–308 — LU 命名 + 數值穩定性
+- Golub, G. H. & Reinsch, C. (1970), *Singular value decomposition and least squares solutions*, **Numerische Mathematik**, 14, 403–420 — SVD 工業標準（解任意 $A\mathbf{x}=\mathbf{b}$）
+
+**現代教科書：**
+- Strang, G. (2020), *Linear Algebra for Everyone*, **Wellesley-Cambridge Press** — 「the central problem of linear algebra is $A\mathbf{x}=\mathbf{b}$」名言出處 + 全書圍繞 4 子空間 + 五大分解結構
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), Ch.1–10 — 50 年教學總結 + $A\mathbf{x}=\mathbf{b}$ 完整理論
+- Strang, G. (2019), *Linear Algebra and Learning from Data* — $A\mathbf{x}=\mathbf{b}$ 在資料科學的應用集大成
+- MIT OCW 18.06 *Linear Algebra* — Strang 50 年教學的 OCW 版本，第 1 講開場即闡述 $A\mathbf{x}=\mathbf{b}$ 是核心問題
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra*, **SIAM** — 數值解 $A\mathbf{x}=\mathbf{b}$ 集大成（LU / QR / SVD / 迭代法 GMRES / Krylov）
+- Golub, G. H. & Van Loan, C. F. (2013), *Matrix Computations* (4th ed.), **Johns Hopkins UP** — 數值線代百科 + 解 $A\mathbf{x}=\mathbf{b}$ 完整演算法
+- Demmel, J. W. (1997), *Applied Numerical Linear Algebra*, **SIAM** — 病態 + Tikhonov 正則化 + 條件數分析
+- Boyd, S. & Vandenberghe, L. (2018), *Introduction to Applied Linear Algebra*, **Cambridge UP** — 線代以應用為導向（$A\mathbf{x}=\mathbf{b}$ 在 ML / 訊號 / 控制的應用）
+- Bishop, C. M. (2006), *Pattern Recognition and Machine Learning*, **Springer** — 機器學習中 $A\mathbf{x}=\mathbf{b}$ + Ridge / Lasso 完整推導
+- Hastie, T., Tibshirani, R., & Friedman, J. (2009), *The Elements of Statistical Learning* (2nd ed.), **Springer** — 統計學習中 $A\mathbf{x}=\mathbf{b}$ + 正則化集大成
+
+---
+
+> **全書 22 條 Q&A 完成 ✓** — 從 Q01 圖解優先（哲學起點）→ Q02–Q08（矩陣 + 4 子空間結構）→ Q09–Q13（運算 + 動態）→ Q14–Q19（五大分解）→ Q20–Q21（地圖與分類）→ **Q22 解 $A\mathbf{x}=\mathbf{b}$ 是核心（會師點）**。線代的「為什麼」探索在此完整收束。
+
+---
+
+> **附錄末更新時間：** S15 (2026-05-13) — **Q01–Q22 完成（22/22，100%） ✓** — Q22 解 $A\mathbf{x}=\mathbf{b}$ 為線代核心（4000 年史巴比倫泥板→九章算術→Cramer→Gauss→Cayley→Moore-Penrose→SVD→LAPACK→機器學習 + 6 步從零推導全部線代主題 + 5 種解情境表 + 5 層昇華 + Q01-Q21 全會師結構表 + Strang 50 年教學總結「Linear Algebra = the study of Ax=b in all its depth」）

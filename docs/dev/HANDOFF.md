@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S12（**背後觀念層啟動，appendix-D-why.md 9/22 Q&A 完成 + 4 主章 callout 插入**，S13–S15 路線繼續補完剩餘 13 條 Q&A）
+- **Session:** S13（**背後觀念層續寫 §4 + §5，appendix-D-why.md 13/22 Q&A 完成 + 2 主章 callout（ch04 + ch05）插入**，S14–S15 路線繼續補完剩餘 9 條 Q&A）
 - **日期:** 2026-05-13
-- **狀態:** **S12 完成：** Back 提出全書缺一個系統性「**為什麼這條規則長這樣**」維度（現有 13 個主章只講「怎麼算」缺「為什麼這樣算」），用 Cayley 1858 矩陣乘法為什麼是「列乘行」的 Q&A 範例展示「**① 歷史 + ② 推導 + ③ 昇華**」3-layer 模板；確立**方案 D（主章短摘 callout + 附錄 D 詳盡 Q&A 雙層落點）**；S12 完成：4-session 路線圖（S12-S15）+ 22 條 Q&A 清單 + Q09 PoC（矩陣乘法為什麼列乘行，2500 字含九章算術原文 + Cayley 1858 + 2×2 例題雙路驗證 + Strang LAFE §1.4 引言）+ **批量 Q01-Q08（Foreword + §1 + §2 + §3 共 8 條，合計 865 行）** + 4 主章 callout 客製化（foreword Q01 / ch01 Q02+Q03 / ch02 Q04+Q05 / ch03 Q06+Q07+Q08）+ foreword「23 個 VizScript」→「36 個 VizScript」舊數字 bug 修正；總產出 [appendix-D-why.md](../book/appendix-D-why.md) **1175 行 / 67.7 KB / 9 Q&A（9/22 = 41%）** + 4 主章 callout / 8 Q&A links + memory `feedback_why_layer.md`（3-layer 框架明文化）+ MEMORY.md index 補一行。**下次 S13 從 Q10（§4 不可交換）+ Q11-Q13（§5 對角 / P3 / P4）開始**，預估 ~2h。
+- **狀態:** **S13 完成：** 沿用 S12 確立的 3-layer 框架 + 方案 D 雙層落點 + 批量寫作流程，產出 §4 + §5 共 4 條 Q&A：**Q10 為什麼乘法不可交換 AB≠BA**（95 行 / Hamilton 四元數革命 + 四層理由 + 5 跨領域順序資訊對應）+ **Q11 對角矩陣為什麼這麼特別**（111 行 / 四超能力 + §6 中間項策略 + 「矩陣世界中的標量」）+ **Q12 (P3) 動態系統為什麼能用特徵值預測長期**（121 行 / Lagrange→Euler→Poincaré 史線 + 三步走解耦 + Fibonacci 黃金比例 + 7 跨領域應用）+ **Q13 (P4) 三明治為什麼線代核心**（156 行 / Sylvester→Jordan→Schmidt→Eckart-Young 100 年史 + 三層分解 + 2×2 EVD 完整驗算 + 「世紀大夢」昇華）+ 2 主章 callout 客製化（[ch04 Q09+Q10](../book/ch04-mat-mat.md) / [ch05 Q11+Q12+Q13](../book/ch05-patterns.md)）+ ch05 callout 中 1 處 typo「appendix-D-view」→「appendix-D-why.md」即時修正。總產出 [appendix-D-why.md](../book/appendix-D-why.md) **1657 行（+482 行 / 36% 增量）/ 13 Q&A（13/22 = 59%）** + 2 主章 callout / 5 Q&A links（累計 6 callout / 13 Q&A links）。**下次 S14 從 Q14（為什麼要分解）+ Q15-Q19（§6 五大分解各 1）開始**，預估 ~2.5h。
 
 ---
 
@@ -88,9 +88,16 @@
   - [ch02-vec-vec.md](../book/ch02-vec-vec.md)（1 callout / 2 links Q04 + Q05）
   - [ch03-mat-vec.md](../book/ch03-mat-vec.md)（1 callout / 3 links Q06 + Q07 + Q08）
 - [x] **S12 memory 新增** — feedback_why_layer.md 明文化「全書每個運算規則需附『背後觀念』3-layer」規範（① 歷史 / ② 設計過程還原 / ③ 概念昇華 必有的層級規則 + 落點方案 D + 篇幅指南 + 觸發時機 + 自驗檢查）；MEMORY.md index 補一行指向新 memory
+- [x] **S13 §4 + §5 背後觀念 Q10-Q13 批量寫作**：[appendix-D-why.md](../book/appendix-D-why.md) 從 1175 行擴至 **1657 行（+482 行）**，目錄表 Q10-Q13 4 條從「🚧 規劃中」→「✅ 已完成（S13）」+ 加錨點連結；尾段「其餘 13 條」改「其餘 9 條（Q14-Q22）」+ 改 S14-S15 路線；附錄末時間戳更新「S13 (2026-05-13) — Q01-Q13 完成（13/22, 59%）」
+  - **Q10 為什麼乘法不可交換 AB≠BA**（95 行）— ① Hamilton 四元數 1843 革命 + Cayley 1858 觀察 + Frobenius/Jordan 系統化 / ② 四層理由：形狀層面 + (MM4) 拆解對象不同 + 2×2 剪切矩陣小例題 + 函數合成本質（穿襪→穿鞋類比）+ 可交換條件三種情形 / ③ 順序資訊代數刻畫 + 5 跨領域對應表（量子/神經網路/機器人/編譯器/微分幾何）
+  - **Q11 對角矩陣為什麼這麼特別**（111 行）— ① Gauss-Jordan + Sylvester 1852 慣性定律 + Cayley-Hamilton + 數值線代基石 / ② 四超能力：純倍率作用（不耦合）+ 冪反指數逐元素表 + 恆可交換 + 特徵值/det/tr/rank 白送表 + 4 元素 D 小例題 + §6 中間項策略表 / ③ 「矩陣世界中的標量」+ Strang LAFE §6.1 引言「Make every matrix look diagonal」
+  - **Q12 (P3) 動態系統為什麼能用特徵值預測長期**（121 行）— ① Lagrange 1762 主模態 + Euler 1740 指數解法 + Cauchy 1829 抽象化 + Poincaré 1881 動力系統穩定性 / ② (P3) 公式三步走分解（座標變換→解耦演化→反變換）+ $\lambda_{\max}$ 主導 + 4×4 穩定性分類表 + Fibonacci 黃金比例小例題（Binet 公式從特徵值直接讀） / ③ 特徵值 = 動態系統 DNA + 7 跨領域應用表（PageRank/量子基態/PCA/馬可夫穩態/結構工程/神經網路訓練/生態學）
+  - **Q13 (P4) 三明治為什麼線代核心**（156 行）— ① Sylvester 1852 → Jordan 1870 → Schmidt 1907 → Eckart-Young 1936 = 100 年史線 / ② 三明治三層分解策略（進入最簡視角→純對角縮放→換回原視角）+ 三威力（降維 + 函數計算 + 視角切換哲學）+ 6 跨領域視角切換對應表（物理/訊號/量子/機器學習/影像壓縮/氣候）+ 對稱矩陣 2×2 EVD 完整驗算 + (P3)↔(P4) 對偶總表 / ③ 「矩陣 = 視角切換 + 純對角縮放 + 視角切換回來」代數刻畫 + §6 五大分解 (P4) 譜系表 + 「世紀大夢」最強昇華
+- [x] **S13 ch04 + ch05 主章 callout 客製化**：[ch04-mat-mat.md](../book/ch04-mat-mat.md) 章節摘要末新增 callout（連結 Q09 矩陣乘法行乘列來源 + Q10 不可交換本質，2 Q&A links）+ [ch05-patterns.md](../book/ch05-patterns.md) 章節摘要末新增 callout（連結 Q11 對角矩陣超能力 + Q12 (P3) 動態預測 + Q13 (P4) 三明治世界觀，3 Q&A links）— 採短摘要列表式（~250-400 字 hook + 連結附錄 D）格式，與 S12 ch01/ch02/ch03 callout 一致；ch05 callout 中 1 處 typo「appendix-D-view」→「appendix-D-why.md」即時修正
+- [x] **S13 累計進度：** 全書主章 callout 6 個（S12 的 4 個 + S13 的 2 個）共 13 Q&A links / appendix-D-why.md 13/22 Q&A = 59%；S14-S15 路線剩 9 條 Q&A（§6 五大分解 6 + 3 附錄）+ 6 chapters callout（ch06a-ch06f）+ 3 附錄 callout + 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗）
 
 ### 進行中
-- 無，S12 已收尾，**Foreword + §1 + §2 + §3 共 9 條 Q&A + 4 主章 callout + memory 全部完成**
+- 無，S13 已收尾，**Q10-Q13 §4 + §5 共 4 條 Q&A + 2 主章 callout（ch04 + ch05）全部完成**
 
 ### 待辦（多 session 路線圖 v3 — S11 整合 + S12+ 視覺化實作）
 
@@ -110,11 +117,32 @@
 | ✅ S10 | Foreword + Conclusion + 3 附錄 | `front-foreword.md`（158）+ `back-conclusion.md`（198）+ `appendix-map-eigenvalues.md`（272）+ `appendix-matrix-world.md`（**328 旗艦**）+ `appendix-four-subspaces.md`（334）= **1290 行 + 3 VizMark** |
 | ✅ S11 | 整合 + 校對 + 風格統一 + `BOOK.md` + `VIZ-CATALOG.md` + Strang PDF 防護 | [BOOK.md](../book/BOOK.md)（8650 行）+ [VIZ-CATALOG.md](../book/VIZ-CATALOG.md)（241 行 metadata）+ SCHEMA.md §3.5 全書視覺錨點 + 9 處 anchor 修復 + Tier 表 6 處校正 + 23 處風格 sed 修正 + .gitignore PDF 防護 |
 | ✅ S12 | **背後觀念層啟動：Foreword + §1 + §2 + §3 共 9 Q&A + 4 主章 callout** | [appendix-D-why.md](../book/appendix-D-why.md)（1175 行 / 9 Q&A，含 Q09 PoC + Q01-Q08 批量）+ 4 主章 callout（foreword / ch01 / ch02 / ch03 共 8 Q&A links）+ memory feedback_why_layer.md（3-layer 框架）+ foreword「23→36」舊數字 bug 修 |
-| **→ S13** | **§4 + §5：Q10–Q13（4 條 Q&A）+ ch04 / ch05 主章 callout** | Q10（§4 不可交換）+ Q11（§5 對角矩陣為什麼這麼特別）+ Q12（P3 動態系統用特徵值預測長期）+ Q13（P4 三明治為什麼是線代核心）；ch04 / ch05 主章 callout 各 1 個；預估 ~2h |
-| S14 | **§6 五大分解：Q14–Q19（6 條 Q&A）+ ch06a–ch06f 主章 callout** | Q14（為什麼要分解）+ Q15（A=CR 列秩=行秩）+ Q16（A=LU 高斯消去法本質）+ Q17（A=QR Gram-Schmidt 動機）+ Q18（譜定理對稱矩陣特徵向量正交）+ Q19（SVD 為什麼對任何矩陣存在）；ch06a-ch06f 主章 callout；預估 ~2.5h |
+| ✅ S13 | **§4 + §5：Q10–Q13（4 條 Q&A）+ ch04 / ch05 主章 callout** | [appendix-D-why.md](../book/appendix-D-why.md) 從 1175 行擴至 **1657 行（+482 行 / 13 Q&A = 59%）**：Q10 不可交換（95）+ Q11 對角矩陣（111）+ Q12 (P3) 動態預測（121）+ Q13 (P4) 三明治（156）+ 2 主章 callout（[ch04](../book/ch04-mat-mat.md) Q09+Q10 / [ch05](../book/ch05-patterns.md) Q11+Q12+Q13 共 5 Q&A links）+ ch05 1 處 typo 修 |
+| **→ S14** | **§6 五大分解：Q14–Q19（6 條 Q&A）+ ch06a–ch06f 主章 callout** | Q14（為什麼要分解）+ Q15（A=CR 列秩=行秩）+ Q16（A=LU 高斯消去法本質）+ Q17（A=QR Gram-Schmidt 動機）+ Q18（譜定理對稱矩陣特徵向量正交）+ Q19（SVD 為什麼對任何矩陣存在）；ch06a-ch06f 主章 callout；預估 ~2.5h |
 | S15 | **附錄 + 整合收尾：Q20–Q22（3 條）+ 3 附錄 callout + BOOK.md 重新生成 + VIZ-CATALOG.md 補引 + SCHEMA / VIZ_SCHEMA callout 規範 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批** | Q20（特徵值地圖怎麼畫得出來）+ Q21（Matrix World 同心橢圓 vs 樹狀）+ Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼是線代核心問題）+ 3 附錄 callout + 整合收尾；預估 ~1.5h |
 | S16+ | Python 視覺化技術棧 PoC + 首批 Tier 3 旗艦實作（延後至背後觀念層完成後） | 技術棧 PoC（Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）+ 從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 首批挑題：ch04 V-02 (MM4 + Mona Lisa) 或 ch06f V-01 (SVD Master) 開始 PoC，預估各 3 session |
 | S16+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （預估 ~28–30 session，背後觀念層 S12-S15 完成後啟動）|
+
+### S14 起步建議（S13 已完成，背後觀念層續寫）
+
+1. **S14 是「§6 五大分解 Q&A 批量寫」session** — 預估 ~2.5h，沿用 S12-S13 已驗證的批量寫作流程：
+   - **Q14（為什麼要把矩陣「分解」？）** — §6 整體動機。① 史線：Sylvester 1852 慣性 → Cayley/Jacobi 對角化追求 → Schmidt/Eckart-Young SVD → 20 世紀數值線代 / ② 6 個工程動機（求解 / 求冪 / 求反 / 分析穩定性 / 壓縮 / 降秩） / ③ 「把矩陣化為兩基底 + 對角」的世紀大夢
+   - **Q15（A=CR 列秩 = 行秩怎麼自然冒出？）** — § 6.1。① CR 是「最樸素的分解」 / ② $A = CR$ 直接讀出列空間獨立列 + 「列秩 = 行秩」雙重證明 / ③ rank-nullity 的視覺載體
+   - **Q16（A=LU 為什麼存在？高斯消去法為什麼能壓縮成兩三角矩陣？）** — §6.2。① 高斯消去法（《九章算術》→ Gauss 1800s） / ② LU 推導 + 主元 + (MM4) 視角 / ③ 「分塊解耦」哲學
+   - **Q17（A=QR 為什麼需要正交化？Gram-Schmidt 從哪冒出來？）** — §6.3。① Gram 1883 + Schmidt 1907 / ② Gram-Schmidt 推導 + 最小平方法動機 / ③ 正交基底 = 「無耦合的最佳座標」
+   - **Q18（$S=Q\Lambda Q^{\mathrm{T}}$ 對稱矩陣特徵向量為什麼自動正交？）** — §6.4。① 譜定理史（Cauchy 1829 → Sylvester → 量子力學 1920s 厄米化）/ ② 正交性證明（從 $S\mathbf{q}_1 = \lambda_1 \mathbf{q}_1$ + $S\mathbf{q}_2 = \lambda_2 \mathbf{q}_2$ 兩邊取內積差 → $(\lambda_1 - \lambda_2)\mathbf{q}_1 \cdot \mathbf{q}_2 = 0$） / ③ 「對稱 = 兩基底合一」是 (P4) 完美三明治
+   - **Q19（$A = U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任何矩陣存在？）** — §6.5（壓軸）。① Schmidt 1907 → Eckart-Young 1936 / ② 兩種證明路徑（$A^{\mathrm{T}}A$ 譜分解推導 / 變分定義 $\sigma_1 = \max \|A\mathbf{x}\|$） / ③ SVD 是 (P4) 的最強形式 + Eckart-Young 最佳低秩近似
+   - **6 個主章 callout：** ch06a / ch06b / ch06c / ch06d / ch06e / ch06f 各 1 個（連結對應 Q&A）
+
+2. **預估行數：** Q14（~100 行）+ Q15-Q19 各 ~120-150 行 = ~750 行；6 主章 callout 各 ~30-60 行 = ~280 行；appendix-D-why.md 預期擴至 ~2700 行
+
+3. **參考工件：**
+   - [appendix-D-why.md](../book/appendix-D-why.md) — 已有 Q01-Q13 範本（13 條），S14 沿用同 schema
+   - [ch04-mat-mat.md](../book/ch04-mat-mat.md) / [ch05-patterns.md](../book/ch05-patterns.md) — S13 callout 範本（短摘要列表式）
+   - [Strang 8 本版權 PDF](../book/) — 可大段引用補強 Q14-Q19 內容（Back 授權，已 .gitignore 不 push）
+   - [SOP_DRAFT.md §2.13](sop/SOP_DRAFT.md) — 背後觀念 3-layer 框架規範
+
+4. **S14 後續：S15** — Q20-Q22（3 附錄）+ 3 附錄 callout + 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗 + VIZ-CATALOG / SCHEMA / VIZ_SCHEMA callout 規範補充 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批收尾），預估 ~1.5h
 
 ### S12+ 起步建議（S11 已完成，本段為下一階段路線）
 
@@ -278,6 +306,10 @@
 | 2026-05-13 | **S12 確立「Q09 PoC → 風格鎖定 → 批量寫」流程** | 先草擬 Q09（最關鍵的矩陣乘法為什麼列乘行）給 Back review 確認風格 OK → 直接批量寫 Q01-Q08 8 條；避免清單批量寫完才發現方向不對 — PoC 投入 ~30 min 換來批量寫 ~2h 風格一致 |
 | 2026-05-13 | **S12 確立「主章 callout 統一落點：章節摘要末 / 數學要點前」** | callout 放在「術語提醒 ⚠」之後、`---`「數學要點」段之前 — 讀者讀完章節摘要、進入正式內容前先看到動機指引，不打斷主章節奏；每章 callout 對應 1-3 條 Q&A 的列表式短摘要 + 直接連結附錄 |
 | 2026-05-13 | **S12 確立「Q&A 內容詳盡度標準：詳盡優先 + 經典引用」** | 篇幅約 1000-2500 字含舉例 + 推導 + 經典出處（《九章算術》原文、Cayley 1858 原論文題名 + 期刊頁碼、Strang LAFE / ILA / LAaLD 章節 + 原話引用、Grassmann 1844 / Gibbs 1881 等）；Q&A 之間大量 cross-link 形成知識網路（Q06 ↔ Q07 ↔ Q08 / Q04 ↔ Q05 / Q01 ↔ Q09 ↔ Q19） |
+| 2026-05-13 | **S13 確立「Q&A 批量寫作模式可不再 PoC 直接批量」** | S12 已用 Q09 PoC 鎖定風格，S13 直接批量 Q10-Q13 無中途 review；4 條 Q&A 平均寫作時間 ~25 min / 條（含搜尋史線 + 公式 + 例題），比 S12 Q01-Q08 批量平均 ~12 min / 條長 — **因為 §4 + §5 條目自身內容更深（需含 2×2 完整驗算 + (P3)↔(P4) 對偶表 + 4×4 穩定性分類表等），不是流程效率退步**。**未來 S14 §6 五大分解預期每條 ~150 行（含分解定理證明 + 矩陣分解步驟 + (P4) 連結）將更長** |
+| 2026-05-13 | **S13 確立「Q&A 篇幅彈性：簡單章 ~95 行 / 深章 ~160 行」** | Q10 為四層理由清單型 95 行，Q11 為超能力對照表型 111 行，Q12 為三步走 + Fibonacci 例題 121 行，Q13 為「世紀大夢」連 §6 五大分解集大成型 156 行 — 篇幅由「動機問題的深度」而非「機械字數要求」決定。**SOP §2.13 改為「篇幅 1000-2500 字」彈性範圍，不再固定 ~108 行平均值** |
+| 2026-05-13 | **S13 確立「主章 callout 客製化 hook 設計：每條 Q&A 對應一個獨特 hook 詞」** | ch04 callout 用「行乘列來源 + 不可交換本質」雙 hook、ch05 callout 用「對角矩陣超能力 + (P3) DNA + (P4) 世界觀」三 hook — 每個 hook 是該 Q&A 的「最具體最有畫面感」的關鍵詞，讓讀者一眼判斷要不要點進附錄 D；boilerplate「為什麼這條規則長這樣」泛論寫法被棄用 |
+| 2026-05-13 | **S13 確立「Q&A 跨章 cross-link 知識網路擴張」** | Q10↔Q13（不可交換 ↔ 同時對角化的可交換條件）+ Q11↔Q12↔Q13（對角矩陣 ↔ (P3) 動態 ↔ (P4) 三明治三角）+ Q12↔Q18（特徵向量正交為「乾淨穩定性分析設定」）— 加上 S12 已建立的 Q06↔Q07↔Q08 / Q04↔Q05 三角，全書 Q&A 形成密集知識網路；Q14-Q19 預計再添 6 條 cross-link |
 
 ---
 
@@ -337,6 +369,19 @@
 | docs/dev/RETROSPECTIVE.md | 修改 | （pending — session-end Step 6 處理）S12 對話反思追加 |
 | ~/.claude/projects/.../memory/feedback_why_layer.md | **新增（memory）** | **全書每個運算規則需附「背後觀念」3-layer 規範**（① 歷史 / ② 設計過程還原 / ③ 概念昇華 + 落點方案 D + 篇幅指南 + 觸發時機 + 自驗檢查）|
 | ~/.claude/projects/.../memory/MEMORY.md | 修改（memory）| 補一行 index 指向 feedback_why_layer.md |
+
+### S13 新增/修改的檔案
+
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/appendix-D-why.md | 修改 | **從 1175 行擴至 1657 行（+482 行 / 36% 增量）/ 13 Q&A（13/22 = 59%）** — 新增 Q10-Q13 共 4 條 Q&A：Q10 為什麼乘法不可交換 AB≠BA（95 行）+ Q11 對角矩陣為什麼這麼特別（111 行）+ Q12 (P3) 動態系統為什麼能用特徵值預測長期（121 行）+ Q13 (P4) 三明治為什麼線代核心（156 行）；目錄表 Q10-Q13 4 條從「🚧 規劃中」→「✅ 已完成（S13）」+ 加錨點連結；尾段「其餘 13 條」改「其餘 9 條（Q14-Q22）」+ 改 S14-S15 路線；附錄末時間戳更新 S13 / 13/22 / 59% |
+| docs/book/ch04-mat-mat.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q09 矩陣乘法行乘列來源 + Q10 不可交換本質，2 Q&A links，~300 字 hook 含 Cayley 1858 設計初心 + (MM4) 視角強調 + 函數合成不可交換類比） |
+| docs/book/ch05-patterns.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q11 對角矩陣超能力 + Q12 (P3) 動態預測 + Q13 (P4) 三明治世界觀，3 Q&A links，~400 字 hook 含「對角矩陣承載按 index 加權的本質」共同主題 + Fibonacci 黃金比例例子 + 「世紀大夢」昇華 + 100 年史 4 人累積）+ 1 處 typo「appendix-D-view」→「appendix-D-why.md」即時修正 |
+| docs/dev/sop/SOP_DRAFT.md | 修改 | （pending — session-end Step 5b 處理）S13 補 §2.6 耗時資料點（~2h / 482 行 / 4 Q&A + 2 callout）+ 版本記錄 0.14 + S13 觀察（PoC 後可直接批量、Q&A 篇幅由動機深度決定、callout hook 客製化、Q&A 跨章 cross-link 網路） |
+| docs/dev/CURRENT_SESSION.log | 修改 | S13 啟動 + 即時記錄（4 條 Q&A metadata + 2 callout 插入 + typo 修）+ 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | 追加 S13 一行 |
+| docs/dev/HANDOFF.md | 修改 | 整檔覆寫（最後更新 / 已完成 / 進行中 / 待辦 → S14 / 關鍵決策追加 5 條 / 檔案變更追蹤追加 S13 區 / 技術筆記追加 S13 / 新 Session 指令更新到 S14）|
+| docs/dev/RETROSPECTIVE.md | 修改 | （pending — session-end Step 6 處理）S13 對話反思追加 |
 
 ---
 
@@ -447,24 +492,24 @@
 - **S11 預估：** **~1.5h / 整合工作（不新撰寫）**：BOOK.md 合併（13 個 md 檔依順序串接 + 重新編號）+ VIZ-CATALOG.md 抽取（36 個 VizScript 索引）+ 跨檔 anchor link grep 校驗 + 風格 / 配色 / 術語統一檢查 + 資料一致性校驗（VizScript 總數 36、`using XX` 標記譜系、雙 pointer / 單 pointer 分佈）
 - **S11 實際：** **~2h / 整合 + 校對 + 統一 5 項任務 + Strang PDF 防護**：(3) anchor 校驗 9 處 broken 修復 / (5) 一致性 Tier 表 6 處校正 / (1) BOOK.md 8650 行（**含 fence-code-aware awk 教訓**：第一輪 sed `g/^#/##/` 誤把 ch06e Python code block 內 `# 參數化單位球` 等註解改為 ## heading，重生用 awk 解決）/ (2) VIZ-CATALOG.md 241 行 / (4) SCHEMA §3.5 新增 + 23 處 sed 修正（**macOS BSD sed 不支援 `\b` word boundary，需改用 `([0-9]) ms` 不帶 boundary**）+ 額外 Strang 版權 PDF 雙保險 .gitignore 防護 + memory feedback 兩層級分開記憶
 - **S12 實際：** **~2.5h / 背後觀念層啟動 9/22 Q&A + 4 主章 callout 插入 + memory 新增**：規劃階段（4-session 路線圖 + 22 條 Q&A 清單）~30 min + Q09 PoC（2500 字 / 含九章算術原文 / Cayley 1858 / 2×2 例題雙路驗證）~30 min + Q01-Q08 批量寫（865 行 / 8 條 / 含 3 動機殊途同歸推導等深度版本）~1.5h + 4 主章 callout 客製化 + foreword 23→36 bug 修 ~15 min + memory feedback_why_layer.md 新增（3-layer 框架明文化） ~10 min。**Q&A 內容篇幅分佈：** Q01 最短 56 行（散文章節無需推導）/ Q08 最長 156 行（含 Big Picture ASCII 圖 + 完整正交補餘證明）/ 平均 ~108 行 / Q&A。**每條 Q&A 平均 ~1200-2500 字含 1-3 段歷史 + 1 段完整推導 + 1 個小例題 + 1 段昇華 + 5-15 條延伸閱讀**。
+- **S13 實際：** **~2h / Q10-Q13 §4 + §5 共 4 條 Q&A 批量 + 2 主章 callout（ch04 + ch05）**：4 條 Q&A 批量寫 ~1.5h（Q10 95 行 / Q11 111 行 / Q12 121 行 / Q13 156 行 = 平均 121 行 / 條，比 S12 平均 108 行長 12%；每條平均 ~25 min 含搜尋史線 + 公式 + 例題）+ 2 主章 callout 客製化（ch04 ~300 字 hook + ch05 ~400 字 hook）+ typo 修正 ~10 min + 統計 / 目錄表更新 / 尾段路線改 ~10 min。**S13 觀察：** (1) **「PoC 後可直接批量」流程驗證** — S13 跳過 PoC 直接批量，4 條共 ~1.5h，無中途 review 風格仍一致；(2) **Q&A 篇幅由「動機問題深度」決定** — Q10 四層理由清單 95 行 / Q13 (P4) 連 §6 集大成 156 行，差異 64% 屬正常；(3) **callout 客製化 hook 寫法** — ch04 用「行乘列來源 + 不可交換本質」雙 hook、ch05 用「對角矩陣超能力 + (P3) DNA + (P4) 世界觀」三 hook，比泛論「為什麼這條規則長這樣」具體；(4) **Q&A 跨章 cross-link 知識網路擴張** — Q10↔Q13 / Q11↔Q12↔Q13 / Q12↔Q18 等添加 ~10 條，與 S12 已建立的三角形成全書 Q&A 密集網路。
 
-### 背後觀念層撰寫資料點（S12 確立，S13-S15 沿用）
+### 背後觀念層撰寫資料點（S12 確立，S13 更新 / S14-S15 沿用）
 
-| 指標 | 數值 |
-|---|---|
-| 每條 Q&A 平均行數 | ~108 行（最短 56 / 最長 156）|
-| 每條 Q&A 平均字數 | ~1500 字（最短 800 / 最長 2500）|
-| 每條 Q&A 平均寫作時間 | ~12 min |
-| Q01-Q08 batch 整體 | 865 行 / ~1.5h / 8 條 |
-| Q09 PoC（含 review 對齊風格）| 2500 字 / ~30 min |
-| 主章 callout 插入 | ~150-300 字 / 1-3 links / ~5 min / 處 |
-| memory 規範記憶 | feedback_why_layer.md ~80 行 / 10 min |
+| 指標 | S12 數值（Q01-Q09 / Foreword + §1-§3）| S13 數值（Q10-Q13 / §4-§5）| 全期累計（Q01-Q13）|
+|---|---|---|---|
+| 每條 Q&A 平均行數 | ~108 行 | ~121 行（+12%）| ~112 行 |
+| 每條 Q&A 平均字數 | ~1500 字 | ~1900 字（+27%）| ~1620 字 |
+| 每條 Q&A 平均寫作時間 | ~12 min（含 PoC 30 min）| ~25 min（無 PoC）| 平均 ~16 min |
+| Q&A 批量整體 | 865 行 / ~1.5h / 8 條 | 482 行 / ~1.5h / 4 條 | 1347 行 / 3h / 12 條 |
+| Q09 PoC（含風格鎖定）| 2500 字 / ~30 min | — | — |
+| 主章 callout 插入 | 4 個 / 8 links / ~15 min | 2 個 / 5 links / ~10 min | 6 個 / 13 links / 25 min |
+| memory 規範記憶 | feedback_why_layer.md ~80 行 / 10 min | — | — |
 
-**S13-S15 預估：**
-- **S13**（§4 + §5 = Q10-Q13 共 4 條 + ch04 / ch05 callout）：~2h
-- **S14**（§6 五大分解 = Q14-Q19 共 6 條 + ch06a-ch06f callout）：~2.5h
+**S14-S15 預估：**
+- **S14**（§6 五大分解 = Q14-Q19 共 6 條 + ch06a-ch06f callout）：~2.5h（每條預期 ~150 行 / ~30 min，因含分解定理證明 + (P4) 連結）
 - **S15**（附錄 = Q20-Q22 共 3 條 + 3 附錄 callout + BOOK.md 重新生成 + VIZ-CATALOG / SCHEMA / VIZ_SCHEMA callout 規範 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批收尾）：~1.5h
-- **總 S13-S15 預估：** ~6h 完成全 22 條 Q&A + 11 章 callout（剩 7 章）+ 整合收尾
+- **總 S14-S15 預估：** ~4h 完成全 22 條 Q&A + 全書主章 callout（剩 ch06a-f 6 個 + 3 附錄 3 個 = 9 個 callout）+ 整合收尾
 
 **§1–§6 + 序言 + 結論 + 3 附錄累計（S10 收尾）：** 共 **13 個 md 檔（ch01–ch06f 9 個主章 + front-foreword + back-conclusion + 3 附錄）= 總計 ~8100 行**（主章 6824 行 + S10 散文/附錄 1290 行）+ **36 個 VizScript**（4 個 Tier 3：[ch04 V-02](../book/ch04-mat-mat.md#vizscript-02) + [ch06f V-01](../book/ch06f-USV.md#vizscript-01) 兩支主旗艦 + ch04 V-01（Tier 2）+ ch06f V-02（Tier 2）；多支 Tier 2 含 [appendix-matrix-world V-01](../book/appendix-matrix-world.md#vizscript-01) 旗艦 + 多支 Tier 1）。**§1–§6 全書內容 100% 完成**，下階段轉入「校對 + 整合 + 風格統一」（S11）。
 
@@ -501,18 +546,19 @@
 
 ```
 請先讀取以下檔案恢復 context：
-1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔，S12 收工版）
-2. docs/dev/SESSION_INDEX.md — 歷史 session 列表（含 S12）
+1. docs/dev/HANDOFF.md — 上次 session 狀態（本檔，S13 收工版）
+2. docs/dev/SESSION_INDEX.md — 歷史 session 列表（含 S13）
 3. docs/dev/CURRENT_SESSION.log — 上一次 session 即時記錄
-4. **docs/book/appendix-D-why.md — S13 開工首要檔（背後觀念 Q&A 附錄，目前 9/22 完成；S13 從 Q10 §4 不可交換開始批量寫 Q10-Q13）**
+4. **docs/book/appendix-D-why.md — S14 開工首要檔（背後觀念 Q&A 附錄，目前 13/22 完成；S14 從 Q14 為什麼要分解開始批量寫 Q14-Q19 §6 五大分解）**
 5. docs/book/VIZ-CATALOG.md — 全書 36 個 VizScript metadata 索引（S16+ 視覺化階段用）
 6. docs/book/BOOK.md — 全書合併單檔（8650 行，整本書離線閱讀版；S15 整合收尾需重新生成含 appendix-D-why.md）
 7. docs/book/SCHEMA.md（§3.5 全書視覺錨點）+ docs/book/VIZ_SCHEMA.md（§2.3 cross-reference）
-8. docs/book/ch01-ch05 + ch06a-ch06f + front-foreword + back-conclusion + 3 附錄 + **appendix-D-why** = 17 個 md 範本（ch01-ch03 + foreword 已含「💡 背後觀念」callout 範本）
-9. docs/dev/sop/SOP_DRAFT.md（含 S00-S12 全部章節寫作策略 + 背後觀念層 3-layer 框架）
-10. docs/dev/RETROSPECTIVE.md — Session 對話反思（含 S12 條目）
-然後從「S13 起步建議」決定本次任務：
-- **首選：S13 §4 + §5 = Q10-Q13 共 4 條 Q&A 批量寫**（Q10 矩陣乘法為什麼不可交換 / Q11 對角矩陣為什麼這麼特別 / Q12 P3 動態系統為什麼能用特徵值預測長期 / Q13 P4 三明治為什麼是線代核心）+ ch04 / ch05 主章「💡 背後觀念」callout 插入；預估 ~2h
-- **Q&A 寫作 schema：** 沿用 Q01-Q09 風格（觸發問題 + 3-layer ①歷史 / ②推導 / ③昇華 + 延伸閱讀含本書 cross-ref + 歷史原典 + 現代教科書），可大段引用 Strang《Linear Algebra for Everyone》/ 《Introduction to LA》/《LA and Learning from Data》/ Calculus Vol 1-3 等 docs/book/*.pdf 私人參考（已 .gitignore 不 push）
-- **callout schema：** 沿用 S12 ch01-ch03 範本（章節摘要末 + 術語提醒 ⚠ 後 + `---` 數學要點前；列表式 1-N 條 hook + 連結附錄 D）
+8. docs/book/ch01-ch05 + ch06a-ch06f + front-foreword + back-conclusion + 3 附錄 + **appendix-D-why** = 17 個 md 範本（ch01-ch05 + foreword 已含「💡 背後觀念」callout 範本 / ch06a-ch06f + 3 附錄 待補 callout）
+9. docs/dev/sop/SOP_DRAFT.md（含 S00-S13 全部章節寫作策略 + 背後觀念層 3-layer 框架）
+10. docs/dev/RETROSPECTIVE.md — Session 對話反思（含 S13 條目）
+然後從「S14 起步建議」決定本次任務：
+- **首選：S14 §6 五大分解 = Q14-Q19 共 6 條 Q&A 批量寫**（Q14 為什麼要分解 / Q15 A=CR 列秩=行秩 / Q16 A=LU 高斯消去法 / Q17 A=QR Gram-Schmidt / Q18 譜定理對稱矩陣 / Q19 SVD 任意矩陣）+ ch06a-ch06f 主章「💡 背後觀念」callout 插入（6 個）；預估 ~2.5h
+- **Q&A 寫作 schema：** 沿用 Q01-Q13 風格（觸發問題 + 3-layer ①歷史 / ②推導 / ③昇華 + 延伸閱讀含本書 cross-ref + 歷史原典 + 現代教科書），可大段引用 Strang《Linear Algebra for Everyone》/ 《Introduction to LA》/《LA and Learning from Data》/ Calculus Vol 1-3 等 docs/book/*.pdf 私人參考（已 .gitignore 不 push）
+- **callout schema：** 沿用 S12-S13 ch01-ch05 範本（章節摘要末 + 術語提醒 ⚠ 後 + `---` 數學要點前；列表式 1-N 條 hook + 連結附錄 D；每條 Q&A 對應一個「最具體最有畫面感」的關鍵詞 hook）
+- **S13 觀察可直接套用：** PoC 已完成（S12 Q09），S14 可跳過 PoC 直接批量；§6 Q&A 預期每條 ~150 行（含分解定理證明 + (P4) 三明治連結 + 矩陣分解步驟）
 ```

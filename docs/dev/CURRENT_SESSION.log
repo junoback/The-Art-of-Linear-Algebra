@@ -223,3 +223,17 @@
 [2026-05-13 S12] 主章 callout 批量插入完成 — 4 個 callout 分別放在 4 個檔案「章節摘要」段末（術語提醒 ⚠ 段之後、`---` 數學要點段之前）：（1）[front-foreword](docs/book/front-foreword.md)（164 行 / 1 callout / 1 link Q01）+ 順手修「23 個 VizScript」→「36 個 VizScript（主章 33 + 附錄 3）」舊數字 bug；（2）[ch01](docs/book/ch01-viewing-matrix.md)（425 行 / 1 callout / 2 links Q02+Q03）；（3）[ch02](docs/book/ch02-vec-vec.md)（504 行 / 1 callout / 2 links Q04+Q05）；（4）[ch03](docs/book/ch03-mat-vec.md)（943 行 / 1 callout / 3 links Q06+Q07+Q08）；合計 4 callouts / 8 Q&A links 覆蓋 Q01-Q08 全部 — 每個 callout 採客製化短摘要列表式（不複製內容、~150-300 字 hook + 連結附錄 D）格式，符合 SCHEMA.md callout 規範
 [2026-05-13 S12] 收工 — Back 確認 S12 收工。本次 session 完成：規劃 22 條 Q&A 清單 + 4-session 路線圖 + 草擬 Q09 PoC 確認風格 + 批量寫 Q01-Q08（8 條 Q&A，覆蓋 Foreword + §1 + §2 + §3）+ 4 處主章 callout 插入（front-foreword / ch01 / ch02 / ch03）+ memory feedback_why_layer.md 新增（3-layer 框架明文化）+ foreword 23→36 VizScript 老 bug 順手修；總產出 [appendix-D-why.md](docs/book/appendix-D-why.md) 1175 行 / 67.7 KB / 9 個 Q&A（9/22 = 41%）+ 4 主章 callout / 8 Q&A links；下次 S13 從 Q10 §4 不可交換 + Q11-Q13 §5 開始
 [2026-05-13 S12] Session 結束
+
+
+# Session: S13
+# Started: 2026-05-13
+# git HEAD: 37f8b89 (main)
+# worktree: 乾淨，只有 main repo working dir（無 auto-spawn 殘留）
+# 任務: 背後觀念層續寫 — §4 + §5：Q10–Q13（4 條 Q&A）+ ch04 / ch05 主章 callout（預估 ~2h）
+# ---
+[2026-05-13 S13] Session 啟動 — 讀取 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log 完畢；git worktree 乾淨（只有 1 個 main repo working dir，HEAD = 37f8b89）；S12 9/22 Q&A 完成（Foreword + §1 + §2 + §3 + Q09 PoC），本 session 從 Q10 §4 不可交換 + Q11-Q13 §5 開始
+[2026-05-13 S13] 完成 Q10-Q13 §4+§5 共 4 條 Q&A 批量寫作（appendix-D-why.md 從 1175 行擴至 1657 行，+482 行 / 36% 增量）：Q10 為什麼乘法不可交換 AB≠BA（95 行，①Hamilton 四元數+Cayley+Jordan 系統化 / ②四層理由：形狀+(MM4) 拆解+2×2 小例題+函數合成本質+可交換條件 / ③ 順序資訊代數刻畫 + 5 跨領域對應表）/ Q11 對角矩陣為什麼這麼特別（111 行，①Gauss-Jordan+Sylvester 1852 慣性定律+Cayley-Hamilton+數值線代基石 / ② 四超能力：純倍率不耦合+冪逆指數逐元素+恆可交換+特徵值/det/tr/rank 白送 + 4×2 小例題+§6 中間項策略表 / ③ 矩陣世界中的標量 + Strang 引言）/ Q12 (P3) 動態系統為什麼能用特徵值預測長期（121 行，①Lagrange/Euler/Cauchy/Poincaré 動力系統史 / ②(P3) 三步走拆解：座標變換→解耦演化→反變換 + 穩定性分類表 + Fibonacci 黃金比例小例題 / ③ 特徵值 = 系統 DNA + 7 跨領域應用表）/ Q13 (P4) 三明治為什麼線代核心（156 行，①Sylvester/Cayley/Jordan/Schmidt/Eckart-Young 100 年史線 / ② 三明治三層分解策略 + 三威力 + 6 跨領域視角切換對應表 + 2×2 對稱矩陣 EVD 三明治完整小例題驗算 + (P3)(P4) 對偶總表 / ③ 矩陣 = 視角切換+純對角縮放+視角切換回來代數刻畫 + §6 五大分解 (P4) 譜系表 + 最強昇華「世紀大夢」）— 每條延伸閱讀含本書 cross-link + 歷史原典帶期刊頁碼 + 現代教科書 3 條
+[2026-05-13 S13] 主章 callout 批量插入：ch04-mat-mat.md（1 callout / 2 Q&A links Q09+Q10，覆蓋 (MM1) 行乘列來源 + 不可交換本質）+ ch05-patterns.md（1 callout / 3 Q&A links Q11+Q12+Q13，覆蓋對角矩陣超能力 + (P3) 動態預測 + (P4) 三明治世界觀）— 4 個 callout 客製化短摘要列表式（~250-400 字 hook + 連結附錄 D），symbol order 嚴格按 SCHEMA 規範（術語提醒 ⚠ 之後、`---` 「數學要點」段之前）；ch05 callout 中 1 處 typo「appendix-D-view」→「appendix-D-why.md」即時修正
+[2026-05-13 S13] appendix-D-why.md 統計：1657 行 / 13 個 ## Q 段（Q01-Q13 全部完成，59% 進度）；目錄表 Q10-Q13 4 條從「🚧 規劃中」→「✅ 已完成（S13）」+ 加錨點連結；尾段「其餘 13 條（Q10-Q22）」改「其餘 9 條（Q14-Q22）」+ 改 S14-S15 路線；附錄末時間戳更新「S13 (2026-05-13) — Q01-Q13 完成（13/22, 59%）」
+[2026-05-13 S13] 收工 — Back 確認 S13 收工。本次 session 完成：appendix-D-why.md 從 1175 行擴至 1657 行（+482 行 / 36% 增量 / 13 Q&A = 59%）含 Q10-Q13 §4+§5 共 4 條 Q&A 批量（Q10 不可交換 95 行 / Q11 對角矩陣 111 行 / Q12 (P3) 動態預測 121 行 / Q13 (P4) 三明治 156 行）+ ch04 / ch05 主章 callout 客製化（共 5 Q&A links，累計 6 callout / 13 Q&A links）+ ch05 typo 修；HANDOFF / SESSION_INDEX / SOP_DRAFT（版本 0.14 含 §2.6 + §2.13 補 S13 4 條教訓）/ RETROSPECTIVE 收工整批更新；下次 S14 從 Q14（為什麼要分解）+ Q15-Q19（§6 五大分解 6 條）+ ch06a-ch06f 6 主章 callout 開始，預估 ~2.5h
+[2026-05-13 S13] Session 結束

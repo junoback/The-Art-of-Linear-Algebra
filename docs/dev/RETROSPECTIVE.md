@@ -136,3 +136,33 @@ Back 提出全書缺一個系統性「為什麼這條規則長這樣」維度（
 - **批量寫長文時，每條條目寫完立即記憶大綱要點到 log**：S12 批量 Q01-Q08 8 條約 865 行，最後寫 HANDOFF / SOP 時要 cross-ref 各條重點（行數 / 3-layer 涵蓋 / 經典引用），若沒在每條寫完當下記到 CURRENT_SESSION.log，最後要再 grep 各檔案統計 — 浪費 cache。**未來批量寫多條 Q&A 時，每完成一條立即在 log 追加一行 metadata（標題 / 行數 / 3-layer / 關鍵亮點）**。
 
 ---
+
+## S13 — 背後觀念層續寫 §4 + §5：Q10-Q13 + 2 主章 callout（2026-05-13）
+
+### 本 session 主軸
+
+Back 用一句話「§4 + §5 共 4 條 Q&A + 2 主章 callout」直接觸發批量寫。Claude 沿用 S12 已驗證的 PoC-鎖定流程跳過 PoC 直接批量產出 Q10（不可交換 AB≠BA 95 行）+ Q11（對角矩陣 111 行）+ Q12（(P3) 動態預測 121 行）+ Q13（(P4) 三明治 156 行）+ 2 主章 callout（ch04 / ch05），達成 appendix-D-why.md 從 1175 行擴至 1657 行（+482 行 / 13 Q&A = 59%）+ 6 callout / 13 Q&A links 全書累計。
+
+### 對話低效時刻（具體事件 + 為什麼）
+
+- **ch05 callout 中 1 處 typo「appendix-D-view」應為「appendix-D-why.md」**：寫批量 callout 時手快漏寫 `.md` + 把 `why` 拼成 `view`，幸好寫完後執行的 grep 驗證輪馬上捕到。**原因：**批量寫多 link 時應該每寫一個 link 就一條條 visually 對照前面範本（S12 ch01-ch03 callout 內的 link 格式都是 `appendix-D-why.md#qXX`），不能憑記憶輸入 `.md` 副檔名。**教訓：**Markdown link 批量插入後一律跑 `grep -nE "appendix-D-why" file.md` 驗證副檔名 + anchor 完整正確。
+
+- **awk pattern range `/regex/,/regex/` 對中文標題 + 數學符號不可靠**：第一次想統計 Q10-Q13 各條行數時，用 `awk '/^## Q10:/,/^## Q11:/'` 結果全部回傳 0 — pattern 沒匹配。**原因：**未確認檔案實際的「Q」與「：」是否與 awk regex 字面對齊（後面 Q&A 標題實際是 `## Q10：為什麼乘法不可交換 $AB \ne BA$？ {#q10}`，含全形冒號 `：` 而我寫的 regex 可能對到半形 `:` 或被特殊字元干擾）。**教訓：**統計 markdown ## heading 間行數時，**改用 `grep -n "^## "` 取行號 + 減法**比 awk pattern range 更穩定，特別是含中文標點 + LaTeX 公式時。
+
+### 建議 Back 下次這樣問會更快
+
+- **「§4 + §5 共 4 條 Q&A + 2 主章 callout」一句話精準指令** — Back 連續 2 個 session（S12 確認 4-session 路線、S13 跟著走）用最短句子直接觸發批量，這個 pattern 非常高效。**未來 S14（§6 五大分解）+ S15（附錄）也可沿用「主題 + 條數 + callout 數」格式**（如「§6 共 6 條 Q&A + 6 主章 callout」），Claude 自己會從 HANDOFF S14 路線決定執行細節。
+
+- **無低效提問** — 本 session Back 沒提任何不精準問題，整段對話一句話啟動 + 批量產出 + 收工。
+
+### Claude 自我提醒（不需 Back 督促也該做的事）
+
+- **Markdown link 批量插入後一律 grep 驗證副檔名 + anchor**：S13 ch05 callout typo 已踩雷，未來 S14 6 個主章 callout + S15 3 附錄 callout 批量插入時，最後一定要 `grep -nE "\]\(appendix-D-why\.md#q[0-9]+\)" docs/book/*.md` 跑一輪驗證所有 13+ 個 link 完整正確。
+
+- **統計 markdown heading 間行數用 grep -n + 行號減法**：別用 awk pattern range，特別是含中文標點 + LaTeX 公式時。例：`grep -n "^## Q" docs/book/appendix-D-why.md` → 取連續兩行的 line number 相減 = 該 Q 篇幅。
+
+- **HANDOFF 章節寫作速度資料點隨 session 累計，保留歷史 + 加新 column 對照**：S13 把資料點表從「平均值單一 column」改為「S12 / S13 / 全期累計」三 column 對照，未來 S14-S15 也應沿用此 layout（保留歷史值 + 加新 column）避免「每次只看當期失去縱向比較」。
+
+- **§14 SOP 預期更新方向**：Q14-Q19 §6 五大分解預期每條 ~150 行（含分解定理證明 + (P4) 三明治連結 + 分解步驟），預期添加「Q&A → (P4) 中央輻射結構」cross-link 設計觀察，補進 §2.13。
+
+---

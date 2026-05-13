@@ -241,3 +241,33 @@ Back 用 5 個獨立指令依序觸發 S15 全部任務：「**開始**」（ses
 - **里程碑：** 全書 §1-§6 主章節（S02-S10）+ 整合 BOOK.md/VIZ-CATALOG（S11）+ 背後觀念層 22 Q&A + 全書 callout（S12-S15）= **完整教材 16 個內容 md 100% 結構就緒**，S12+ Python 視覺化實作下一步進場
 
 ---
+
+## S16 — Marimo 技術棧 PoC：從 md 化跨入 Python 視覺化實作（2026-05-13）
+
+### 本 session 主軸
+
+Back 不立刻挑旗艦，先做技術棧 PoC + 載體討論（先例 6 個 + 平台 6 比較 → 維持 Marimo + WASM）；三階段全跑（hello.py + ch01_mv1_poc.py + html-wasm 部署）+ 3 round debug Stage 2 WASM 才通；產出 viz/ 7 檔 + commit `2f9b9e3` + SOP §2.15「Marimo WASM 部署 3 大陷阱」+ S17+ 旗艦開工 5 條 checklist。從「全書 md 化結構完成」跨入「Python 視覺化實作階段」。
+
+### 對話低效時刻
+
+- **Round 1 debug 我先猜方向、沒主動要 console log，浪費 1 round（~30 min）** — Back 報「An internal error occurred」我直接「防禦性重寫」猜 LaTeX label / slider 嵌 markdown / plotly 新特性 3 個風險，重 export 後 Back 仍錯但這次給了 console log → 立刻看到真因 `ModuleNotFoundError: No module named 'plotly'`。**如果 Round 1 我直接說「請貼 DevTools Console 紅色錯誤行」，一輪就解決**。WASM 黑盒環境 debug 的第一動作應該是「**索取 console log**」而非「猜原因 + 重寫」。
+
+- **「首次載入 30s」UX 沒在我給 URL 時警告** — Stage 1 OK 後我順手給 ch01_mv1_poc 的 URL 但只說「⚠️ 首次開啟要等 5-15 秒」— 實際上 Pyodide + plotly wheel + plotly.js 三層下載要 30-60s；Back 等不夠久誤判「沒報錯但空白」。**部署型 PoC 的 first-load 時間應該主動估上限 60s 而非樂觀的 15s**；少給時間反而讓使用者懷疑壞了。
+
+- **Stage 2 範例堆太多功能** — 我一次寫 7 cell × 4 plotly 箭頭 + 平行四邊形 + LaTeX f-string 表格 + 6 slider，本機 OK 但 WASM debug 時不知是哪個面壞掉。**PoC 第二階段應該「**只加一面變數**」**（從 hello 加 1 slider × 1 plot 就好），等通過才加下一面。我這版直接堆成「準旗艦」結果 debug 變多面同時懷疑。
+
+### 建議 Back 下次這樣問會更快
+
+- **報 WASM 錯誤時直接附 console log 不用等我問** — 之前你 `Cmd+Option+J → 截圖紅色 error 行` 一貼，我 30 秒看出真因。下次若 WASM 黑盒環境壞，**第一句就附 console log**（哪怕一張截圖），避免我先「防禦性重寫」浪費 1 round。
+
+- **「空白」也算錯誤狀態，可以更早報** — 你「沒報錯但空白」其實已經是錯誤訊號（不是「正在載」），下次直接附 console + 告訴我等了多久，我可以分辨「Pyodide 還在 micropip install」vs「真的卡死」。
+
+### Claude 自我提醒
+
+- **WASM debug 第一動作：要求 DevTools Console 截圖** — 不要先猜 + 不要靠重寫消除假設。Pyodide 黑盒環境的錯誤幾乎都在 console，比我猜 100 次更高效
+- **部署型工件 first-load 時間警告必須給「上限」而非「樂觀估計」** — Pyodide + 套件 wheel + 套件 JS bundle 三層下載通常要 30-60s；S17+ 旗艦頁面更可能 60-90s（加 sklearn / Pillow 後）；首頁明寫「首次載入請等到看到圖出現再操作（~60s）」
+- **PoC 階段「**一次只加一面變數**」原則** — Stage 1 → Stage 2 應該只多 1 個新元素（如「加 1 slider + 1 fig」）而非一次堆 4 箭頭 + 平行四邊形 + LaTeX + 6 slider；後者 debug 時無法定位是哪個元素壞掉
+- **S17+ 旗艦實作前先補完 SOP §2.15 五條 checklist** — PEP 723 metadata / mo.ui.plotly wrap / mo closure arg / WASM console 必看 / 首頁 60s 警告。這 5 條都是我這次踩出來的，下次 S17 寫 ch04 V-02 母模板時 checklist 過一遍能避開全部
+- **「載體選型」這種策略討論值得主動展開比較表** — Back 問「app 式書籍有先例？」我給了 6 先例 + 6 平台比較表 + 推薦 + tradeoff，他直接「先做 Marimo PoC」省略 30 min 討論回合。**策略型問題主動給比較表是高 ROI 動作**
+
+---

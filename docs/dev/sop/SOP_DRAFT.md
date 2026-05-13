@@ -258,6 +258,36 @@ S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章�
 
 **S11 §2.10 + S15 §2.14 整合收尾雙重驗證 ✓** — 這套流程（跨檔 anchor 校驗 → BOOK.md 重生 → 規範補充 → 全套收工）穩定可用，未來如有「**全書又新增一個 Appendix E**」性質的大規模擴充，可直接套用。
 
+### 2.15 Marimo WASM 部署 3 大非顯而易見陷阱（S16 PoC 確立）
+
+**S16 第一個 Python 視覺化 PoC（hello.py + ch01_mv1_poc.py + `marimo export html-wasm` 三階段）發現 3 個本機跑通卻 WASM 失敗的「沉默陷阱」**。每一個都讓我在 S16 多繞 1 個 round-trip 才修對。記入 SOP 讓 S17+ 旗艦實作開工前就避開：**
+
+1. **PEP 723 inline script metadata 是 marimo WASM 額外 deps 的唯一聲明處** — `uv add plotly` 只裝在本機 `.venv/`；export html-wasm 預設只讓 Pyodide 載 `Pygments, docutils, jedi, numpy, parso, pyodide-http`，**plotly / sklearn / Pillow 都不會自動裝**。必須在 notebook 頂端加：
+    ```python
+    # /// script
+    # requires-python = ">=3.12"
+    # dependencies = [
+    #     "marimo",
+    #     "numpy",
+    #     "plotly",
+    # ]
+    # ///
+    ```
+   marimo export 解析此 block 嵌入 HTML 的 `requirements` 陣列，Pyodide 啟動時用 micropip 自動下載。**S16 沒寫此 block，console 噴 `ModuleNotFoundError: No module named 'plotly'`**。
+
+2. **plotly fig 必須用 `mo.ui.plotly(fig)` 顯式包裝才會在 WASM 渲染** — 本機 marimo edit 跑 bare `fig`（最後一行 `fig` 不接 return）會透過 `_repr_mimebundle_` 自動顯示；但 WASM Pyodide 環境某些版本下沉默不渲染（畫面一片空白、console 沒錯）。**S17+ 旗艦 VizScript 一律使用 `mo.ui.plotly(fig)` 顯式包裝**（同樣 cell 內 `mo` 需加入 closure args）。matplotlib 對應的可用 `mo.mpl.interactive(fig)` 或直接 `fig`（matplotlib 較少踩雷因為 PNG/SVG 走標準路徑）。
+
+3. **首次載入要等 30-60 秒（Pyodide + plotly wheel + plotly.js bundle 三層下載）** — Marimo WASM 首頁啟動順序：(1) 載 pyodide.asm.wasm ~10 MB (2) 從 PyPI/Pyodide CDN micropip install plotly wheel (3) 載 plotly.js bundle。**讀者第一眼看到空白頁很容易誤判「壞了」**（S16 Back 就誤判一次）。
+    - **UX 規範：** 首頁 / VIZ-CATALOG / BOOK.md 在連結 deployed page 處，要附「⏳ 首次載入請等 ~30s，直到看到 plotly 圖出現再操作」說明
+    - **替代方案：** marimo 0.24+ 可開 `loading-indicator` 顯示載入進度條（待 S17+ 驗證）
+
+**S16 對 S17+ 影響：旗艦 VizScript 開工 checklist**：
+- [ ] notebook 頂端 PEP 723 block 包含所有非預設 dep（plotly / sklearn / Pillow / scipy 視 VizScript 需要）
+- [ ] 所有 plotly fig 包 `mo.ui.plotly(...)`
+- [ ] reactive cell 內 `mo` 加 closure args
+- [ ] WASM export 後 console 必看：(1) 載入順序中是否含目標套件 (2) 是否有 `ModuleNotFoundError` (3) 是否有 cell exception
+- [ ] 部署頁 README / 首頁加「30s 首次載入」說明
+
 ### 2.7 收工流程（每 session 結束）
 
 依 CLAUDE.md 規範三層防呆：
@@ -291,3 +321,5 @@ S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章�
 | **0.13** | 2026-05-13 | **S12 背後觀念層啟動 — appendix-D-why.md 9/22 Q&A 完成 + 4 主章 callout + memory feedback_why_layer.md**：耗時 ~2.5h / 產出 appendix-D-why.md 1175 行（9 Q&A 含 Q01-Q08 批量 865 行 + Q09 PoC 310 行）+ 4 主章 callout（foreword / ch01 / ch02 / ch03，共 8 Q&A links）+ memory + foreword 23→36 bug 修；**新增 §2.13「背後觀念 3-layer 框架」**（① 歷史 + ② 設計過程還原 + ③ 概念昇華 規範 + 方案 D 雙層落點 + Q&A 間 cross-link 知識網路 + S12 4 條教訓含「PoC → 風格鎖定 → 批量寫」流程 + 「客製化 callout 優於 boilerplate」+ 「順手修舊 bug」+ 「memory + SOP 互補」）+ §2.6 補 S12 耗時資料點 |
 | **0.14** | 2026-05-13 | **S13 背後觀念層續寫 §4 + §5 — Q10-Q13 共 4 條 Q&A + ch04 + ch05 主章 callout**：耗時 ~2h / 產出 appendix-D-why.md 從 1175 行擴至 **1657 行（+482 行 / 36% 增量）/ 13 Q&A（13/22 = 59%）**（Q10 不可交換 95 行 / Q11 對角矩陣 111 行 / Q12 (P3) 動態預測 121 行 / Q13 (P4) 三明治 156 行）+ 2 主章 callout（ch04 Q09+Q10 / ch05 Q11+Q12+Q13 共 5 links）+ ch05 typo 修；**§2.6 補 S13 耗時資料點 + §2.13 補 S13 4 條教訓**（「PoC 後可直接批量」驗證、「Q&A 篇幅由動機深度決定」彈性化、「callout 客製化 hook 比泛論具體」、「Q&A 跨章 cross-link 知識網路擴張」） |
 | **0.15** | 2026-05-13 | **S14 背後觀念層續寫 §6 — Q14-Q19 共 6 條 Q&A + ch06a-ch06f 6 主章 callout**：耗時 ~3.5h / 產出 appendix-D-why.md 從 1657 行擴至 **2740 行（+1083 行 / 65% 增量）/ 19 Q&A（19/22 = 86%）**（Q14 分解動機 156 行 / Q15 A=CR 119 行 / Q16 A=LU 165 行 / Q17 A=QR 138 行 / Q18 譜定理 144 行 / Q19 SVD 174 行）+ 6 主章 callout（ch06a Q14+Q11+Q13 / ch06b Q15+Q14 / ch06c Q16+Q14 / ch06d Q17 / ch06e Q18+Q11+Q13 / ch06f Q19+Q14+Q08+Q13 共 15 links）— **全主章 100% 覆蓋（12 callout / 28 Q&A links）**；**§2.6 補 S14 耗時資料點 + §2.13 補 S14 5 條教訓**（「跳順序批量可行」+「小例題巧妙串接 cross-Q 教學鏈」Q17→Q18→Q19 同 $A$ + 「§6 callout 平均 link 數比 §1-§5 高 15%」+「Strang LAFE 名言當鉤子效果強」+「雙證明路徑對存在性 Q&A 高價值」）|
+| **0.16** | 2026-05-13 | **S15 背後觀念層收尾 + 全書整合 100% — Q20-Q22 + 3 附錄 callout + BOOK.md 重生**：耗時 ~3.5h / 產出 appendix-D-why.md 2740 → **3522 行（+782 / 22 Q&A 100% ✓）**（Q20 特徵值地圖 225 行 / Q21 Matrix World 同心橢圓 246 行 / Q22 Ax=b 線代核心 311 行 = 全書最長 Q&A）+ 3 附錄 callout（map-eig Q20+Q18+Q11 / matrix-world Q21+Q14+Q19 / four-subspaces Q22+Q08+Q19 共 9 links）→ **全書 15 callout / 37 Q&A links / 16 內容 md 100% 覆蓋** ✓ + BOOK.md 8650 → **12305 行（+42%）** + SCHEMA §3.6 規範 + VIZ-CATALOG Appendix D 索引；**新增 §2.14「整合收尾流程二次驗證」**（fence-aware awk 重用 + header 更新比合併費時 + 規範補充綁定收尾整合期 3 條教訓） |
+| **0.17** | 2026-05-13 | **S16 Marimo 技術棧 PoC — Python 視覺化實作起步**：耗時 ~2.5h / 產出 viz/ 目錄（7 檔追蹤 + .venv/dist gitignore）含 uv + Python 3.12 + marimo 0.23.6 + plotly 6.7 + matplotlib 3.10 + sklearn 1.8 + Pillow 12.2 完整技術棧 + hello.py（Stage 1 reactive slider 4 cell）+ ch01_mv1_poc.py（Stage 2 6 slider × plotly 2D × (Mv1)+(Mv2) 雙觀點 7 cell）+ marimo export html-wasm 27 MB static dir（Stage 3 部署驗證）；**新增 §2.15「Marimo WASM 部署 3 大非顯而易見陷阱」**（PEP 723 metadata 是 WASM dep 唯一聲明處 + plotly 必須 mo.ui.plotly(fig) 顯式包裝 + 首次載入 30-60s UX 警告）+ S17+ 旗艦開工 5 條 checklist；下次 S17 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 母模板 或 ch06f V-01 SVD Master）開始 |

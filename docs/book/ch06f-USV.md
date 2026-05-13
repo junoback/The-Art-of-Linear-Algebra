@@ -103,6 +103,15 @@ $$
 
 — 這是 SVD.png 直接展示的形式。
 
+> ### 💡 背後觀念：SVD 為什麼是「線代之冠」？為什麼對任意矩陣都存在？
+>
+> $A = U\Sigma V^{\mathrm{T}}$ 是 §6 五大分解的**壓軸** — 它對**任意** $m \times n$ 矩陣都存在，不要求方陣、不要求對稱、不要求滿秩、不要求可逆。對比 EVD 只對「可對角化方陣」存在、CR / LU / QR 都有額外限制，SVD 為什麼能突破所有限制？為什麼 Strang 稱它為「**the most important theorem in linear algebra**」？4 條設計動機問題：
+>
+> - **[Q19：SVD 為什麼對任何矩陣都存在？](appendix-D-why.md#q19)** — SVD 是線代生命力最持久的單一概念：**Beltrami 1873** 首次發現（雙線性形式對角化）→ Jordan 1874 變分定義 → Sylvester 1889 矩陣語言 → Schmidt 1907 無限維 + 低秩近似觀察 → **Eckart-Young 1936 最佳低秩近似定理**（資料科學基石）→ Golub-Kahan 1965 第一實用演算法 → 1990s+ ML 核心工具。雙證明路徑：① 透過 $A^{\mathrm{T}}A$ 譜定理（$A^{\mathrm{T}}A$ 對稱半正定**普世構造** + Q18 譜定理**普世定理** → SVD **普世存在**）+ ② Jordan 1874 變分定義 $\sigma_1 = \max \|A\mathbf{x}\|$。3 大突破：不需方陣 / 不需可對角化 / 奇異值永遠非負實。
+> - **[Q14：為什麼要把矩陣「分解」？](appendix-D-why.md#q14)** — SVD 是唯一**同時對應所有 6 大工程動機**的分解：求解（$\mathbf{x}^{*} = A^{+}\mathbf{b}$ 最小範數最佳解）/ 求冪 / 求反（偽反 $A^{+}$ 對任意矩陣存在）/ 穩定性（奇異值 = 條件數）/ 壓縮（Eckart-Young 截斷）/ 結構理解（4 子空間正交基底）— **一個分解，看清所有**。這就是為什麼 Strang 在 LAFE Ch.7 用整章寫 SVD 並稱它為「**the most important theorem in linear algebra**」。
+> - **[Q08：四個基本子空間為什麼會自然冒出？](appendix-D-why.md#q08)** — SVD **自動給出** 4 子空間的正交基底：$U_r$ = 列空間 $\mathbf{C}(A)$、$U_0$ = 左零空間 $\mathbf{N}(A^{\mathrm{T}})$、$V_r$ = 行空間 $\mathbf{C}(A^{\mathrm{T}})$、$V_0$ = 零空間 $\mathbf{N}(A)$ — Strang 經典「兩塊大餅」圖直接由 SVD 構造。
+> - **[Q13：(P4) 三明治為什麼線代核心？](appendix-D-why.md#q13)** — SVD 是 (P4) 三明治的**最強形式**（兩基底分開 $U \ne V$、適用任意矩陣），是「**視角切換 → 純對角縮放 → 視角切換回來**」這個哲學的**最一般實現**。EVD 是「兩基底合一」的完美三明治、SVD 是「兩基底分開」的最強三明治 — 兩者構成 §6 (P4) 譜系的雙頂峰。
+
 ---
 
 ## 數學要點

@@ -31,12 +31,12 @@
 | [Q11](#q11) | 對角矩陣 $D$ 為什麼這麼特別？ | §5 | ✅ 已完成（S13） |
 | [Q12](#q12) | (P3) 動態系統為什麼能用特徵值預測長期？ | §5 | ✅ 已完成（S13） |
 | [Q13](#q13) | (P4) 三明治 $A = X\Lambda X^{-1}$ 為什麼是線代核心？ | §5 | ✅ 已完成（S13） |
-| Q14 | 為什麼要把矩陣「分解」？ | §6 | 🚧 規劃中 |
-| Q15 | A=CR 為什麼成立？「列秩 = 行秩」怎麼自然冒出？ | §6.1 | 🚧 規劃中 |
-| Q16 | A=LU 為什麼存在？高斯消去法為什麼能壓縮成兩三角矩陣？ | §6.2 | 🚧 規劃中 |
-| Q17 | A=QR 為什麼需要正交化？Gram-Schmidt 從哪冒出來？ | §6.3 | 🚧 規劃中 |
-| Q18 | $S=Q\Lambda Q^{\mathrm{T}}$ 為什麼對稱矩陣特徵向量自動正交？ | §6.4 | 🚧 規劃中 |
-| Q19 | $A=U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任何矩陣都存在？ | §6.5 | 🚧 規劃中 |
+| [Q14](#q14) | 為什麼要把矩陣「分解」？ | §6 | ✅ 已完成（S14） |
+| [Q15](#q15) | A=CR 為什麼成立？「列秩 = 行秩」怎麼自然冒出？ | §6.1 | ✅ 已完成（S14） |
+| [Q16](#q16) | A=LU 為什麼存在？高斯消去法為什麼能壓縮成兩三角矩陣？ | §6.2 | ✅ 已完成（S14） |
+| [Q17](#q17) | A=QR 為什麼需要正交化？Gram-Schmidt 從哪冒出來？ | §6.3 | ✅ 已完成（S14） |
+| [Q18](#q18) | $S=Q\Lambda Q^{\mathrm{T}}$ 為什麼對稱矩陣特徵向量自動正交？ | §6.4 | ✅ 已完成（S14） |
+| [Q19](#q19) | $A=U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任何矩陣都存在？ | §6.5 | ✅ 已完成（S14） |
 | Q20 | 特徵值的「地圖」為什麼能畫得出來？ | Appendix A | 🚧 規劃中 |
 | Q21 | Matrix World 為什麼是「同心橢圓繼承樹」而非「樹狀」？ | Appendix B | 🚧 規劃中 |
 | Q22 | 「解 $A\mathbf{x}=\mathbf{b}$」為什麼是線代的核心問題？ | Appendix C | 🚧 規劃中 |
@@ -1643,15 +1643,1098 @@ $$
 
 ---
 
-## 其餘 9 條（Q14–Q22）— 規劃中
+## Q14：為什麼要把矩陣「分解」？ {#q14}
 
-依 S14–S15 路線圖逐步補完：
+> **觸發問題：** §6 一開頭就告訴讀者：「五大分解 CR / LU / QR / $Q\Lambda Q^{\mathrm{T}}$ / $U\Sigma V^{\mathrm{T}}$ 是線代的核心」。但 — 既然每個矩陣 $A$ 本身已經是個明確的物件，為什麼還要費力把它**拆**成兩三個矩陣的乘積？分解到底解決了什麼問題？為什麼**正好五個**而不是十個或三個？
+>
+> **對應主章：** [§6 ch06a — 五大分解總覽](ch06a-five.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
 
-- **S14** — Q14（分解整體動機）+ Q15–Q19（§6 五大分解各 1）
-- **S15** — Q20–Q22（3 附錄）+ 剩餘主章 callout 批次插入（ch06a–ch06f + 3 附錄）+ 整合收尾
+### ① 歷史脈絡：從「直接運算」到「分解再運算」的兩百年演進
 
-每條 Q&A 採與 Q01–Q13 相同的 3-layer 結構（① 歷史 → ② 推導 → ③ 昇華 + 延伸閱讀），篇幅約 1000–2500 字含舉例 + 推導 + 經典出處引用。
+矩陣分解不是某一個人某一年發明的單一概念，而是**19 世紀中期到 20 世紀中期百年累積**的數學物件 — 每一個分解都源自一個具體的工程或物理問題：
+
+- **1800 年代初 — Gauss《Theoria Motus》（1809）**：研究小行星 Ceres 軌道時系統化「高斯消去法」 — 把方程組化為上三角矩陣求解。**這是 LU 分解的雛形**（雖然「分解」一詞還沒誕生）。
+- **Jacobi 1846**：對稱矩陣對角化迭代演算法（Jacobi 旋轉） — 把對稱矩陣**逐步**轉成對角形，是 EVD 的數值原型。
+- **Sylvester 1852 慣性定律**：對稱矩陣可化為 $\operatorname{diag}(\pm 1, 0)$ — **第一個明確「分解」結果**，且觀察到對稱矩陣的「正、負、零特徵值個數」是不變量。
+- **Cayley 1858** *A Memoir on the Theory of Matrices*：第一次系統化「矩陣是個代數物件」，並注意到 $A^n$ 可用特徵值快速計算 — 為 EVD 奠基。
+- **Schmidt 1907**：把矩陣分解推廣到無限維積分算符，產生 SVD 的雛形。
+- **Eckart-Young 1936** *Psychometrika*：證明 SVD 給出「**最佳低秩近似**」 — 任意矩陣 $A$ 都可寫成 $U\Sigma V^{\mathrm{T}}$，且截斷後是 Frobenius 範數下的最佳近似。
+- **1940–1960 數值線代誕生 — Householder, Wilkinson, Givens**：分解從「理論技巧」變成「**標準演算法**」。Householder 1958 引入「反射子」演算法穩定計算 QR；Wilkinson 1965 *The Algebraic Eigenvalue Problem* 系統化所有矩陣分解的數值穩定性。
+- **1965 Golub-Kahan SVD 演算法**：第一個實用的 SVD 數值演算法 — 從此 SVD 進入大規模工程計算。
+- **1970s+ LINPACK / LAPACK**：分解成為**開源科學計算的核心 API**（LU, QR, EVD, SVD 都是 LAPACK 一行呼叫）。
+- **2000s+ 機器學習興起**：SVD / PCA / NMF 等分解變成「資料降維 + 特徵抽取」的主流方法。
+
+**歷史總結：** 「分解」的本質是把**抽象矩陣** $A$ 拆成幾個**結構更簡單**的矩陣的乘積（三角、對角、正交），讓後續運算（求解、求冪、求反、求最佳近似）可以**在簡單矩陣上完成**。這個策略從 19 世紀的「方程組求解」一路發展到 21 世紀的「資料壓縮」，整整 200 年。
+
+### ② 設計過程還原：為什麼分解？六大工程動機
+
+要回答「為什麼分解」，最具體的辦法是看**分解到底解決了什麼問題**。以下是矩陣分解被廣泛使用的六大動機：
+
+#### 動機 1：求解線性方程 $A\mathbf{x} = \mathbf{b}$
+
+**直接求解的痛點：** $\mathbf{x} = A^{-1}\mathbf{b}$ 在數學上漂亮，但 $A^{-1}$ 計算成本高且數值不穩定。
+
+**分解策略：** 化 $A$ 為「容易解的形式」。
+
+- $A = LU$ → $L\mathbf{y} = \mathbf{b}$（前代）+ $U\mathbf{x} = \mathbf{y}$（後代），各 $O(n^2)$。
+- $A = QR$ → $R\mathbf{x} = Q^{\mathrm{T}}\mathbf{b}$，特別適合**最小平方法**（$A$ 不必方陣）。
+- $A = U\Sigma V^{\mathrm{T}}$ → $\mathbf{x}^* = V\Sigma^{+} U^{\mathrm{T}}\mathbf{b}$（偽反），對**任意**矩陣 $A$ 都給出最小範數最佳解。
+
+#### 動機 2：求矩陣冪 $A^k$（動態系統 / 馬可夫鏈）
+
+**直接求冪的痛點：** $A^k$ 需要 $k - 1$ 次矩陣乘法（每次 $O(n^3)$），$k$ 大時不切實際。
+
+**分解策略：** 三明治結構讓冪變成「對角元素冪」。
+
+$$
+A = X\Lambda X^{-1} \quad\Rightarrow\quad A^k = X\Lambda^k X^{-1}
+$$
+
+而 $\Lambda^k = \operatorname{diag}(\lambda_1^k, \ldots, \lambda_n^k)$ 是純對角元素冪 — 從 $O(kn^3)$ 降到 $O(n^3 + kn)$（詳見 [Q11](#q11)、[Q12](#q12)）。
+
+#### 動機 3：求反矩陣 $A^{-1}$ 與偽反 $A^{+}$
+
+**LU / QR / SVD 三條路徑：**
+
+- $A = LU$ → $A^{-1} = U^{-1}L^{-1}$（兩三角矩陣的反矩陣 $O(n^3)$）。
+- $A = QR$ → $A^{-1} = R^{-1}Q^{\mathrm{T}}$（正交矩陣的反等於轉置 — 零成本）。
+- $A = U\Sigma V^{\mathrm{T}}$ → $A^{+} = V\Sigma^{+} U^{\mathrm{T}}$ — **唯一適用於任意 $m \times n$ 矩陣的廣義反**（詳見 [appendix-matrix-world.md](appendix-matrix-world.md) 底部偽反公式 + [appendix-four-subspaces.md](appendix-four-subspaces.md) 解 $A\mathbf{x} = \mathbf{b}$ 完整結構）。
+
+#### 動機 4：穩定性與長期行為分析（特徵值）
+
+線性動態系統 $\mathbf{u}_{k+1} = A\mathbf{u}_k$ 或 $\mathbf{u}'(t) = A\mathbf{u}(t)$ 的長期行為，**完全由 $A$ 的特徵值決定**（詳見 [Q12](#q12)）。
+
+**分解策略：** $A = X\Lambda X^{-1}$ 把矩陣化為「特徵值純標量乘法」 — 穩定性、振盪頻率、漸近主導模態，全部「白送」出來。
+
+#### 動機 5：資料壓縮與降秩近似
+
+任意矩陣 $A \in \mathbb{R}^{m \times n}$ 由 $mn$ 個獨立數字描述，存儲與傳輸成本 $O(mn)$。
+
+**分解策略：** $A = U\Sigma V^{\mathrm{T}}$，截斷到前 $k$ 個奇異值：
+
+$$
+A \approx A_k = \sum_{p=1}^k \sigma_p\, \mathbf{u}_p\, \mathbf{v}^{\mathrm{T}}_p
+$$
+
+存儲成本 $O(k(m + n))$，$k \ll \min(m, n)$ 時遠小於 $mn$ — 圖像壓縮、推薦系統、PCA 全部建立在此（詳見 [Q05](#q05) 秩 1 之和原子論、[ch04 VizScript-02](ch04-mat-mat.md#vizscript-02) Mona Lisa SVD demo）。
+
+#### 動機 6：理解結構（rank / 子空間 / 不變量）
+
+分解直接讀出矩陣的結構資訊：
+
+- $A = CR$ 直接讀出列空間 + 列秩 = 行秩（詳見 [Q15](#q15)）。
+- $A = QR$ 直接讀出 Gram-Schmidt 正交基底（詳見 [Q17](#q17)）。
+- $A = U\Sigma V^{\mathrm{T}}$ 直接讀出**四個基本子空間的正交基底**（詳見 [Q08](#q08)、[Q19](#q19)、[appendix-four-subspaces.md](appendix-four-subspaces.md)）。
+
+### 六大動機 ↔ 五大分解對應表
+
+| 動機 | 最佳工具 | 對應 §6 章節 | 對應 Q |
+|---|---|---|---|
+| **求解** $A\mathbf{x}=\mathbf{b}$ | $A = LU$（方陣）/ $A = QR$（長矩陣）/ SVD（最一般） | §6.2 / §6.3 / §6.5 | [Q16](#q16) / [Q17](#q17) / [Q19](#q19) |
+| **求冪** $A^k$ | $A = X\Lambda X^{-1}$ | §6.4 | [Q11](#q11) / [Q12](#q12) |
+| **求反** $A^{-1}$ / $A^{+}$ | LU / QR / SVD | §6.2 / §6.3 / §6.5 | [Q19](#q19) |
+| **穩定性** | EVD | §6.4 | [Q12](#q12) / [Q18](#q18) |
+| **壓縮 / 降秩** | SVD（Eckart-Young 最佳） | §6.5 | [Q19](#q19) |
+| **結構理解** | CR / QR / SVD | §6.1 / §6.3 / §6.5 | [Q08](#q08) / [Q15](#q15) |
+
+### 為什麼正好五個分解？
+
+CR / LU / QR / $Q\Lambda Q^{\mathrm{T}}$ / $U\Sigma V^{\mathrm{T}}$ 並非歷史上唯一的分解（還有 Cholesky、Schur、Jordan、Hessenberg、QZ、ULV 等等），但 Strang 在 LAFE 把這**五個**選為核心，是因為它們對應**五個遞進層次的對稱性與一般性**：
+
+| 分解 | 矩陣要求 | 三明治對稱性 | 「最簡視角」 |
+|---|---|---|---|
+| **CR** | 任意 $A$ | 退化（無對角中間項） | 列空間獨立列 |
+| **LU** | 方陣（可消元） | 退化（兩三角，無對角） | 高斯消去主元 |
+| **QR** | 任意 $A$ | 半三明治（$Q$ 正交、$R$ 三角） | Gram-Schmidt 正交基底 |
+| **EVD** | 方陣（對稱最佳） | **完美三明治**（兩基底相同 $Q$） | 對稱矩陣特徵向量 |
+| **SVD** | **任意** $m \times n$ | **最強三明治**（兩基底不同 $U, V$） | 任意矩陣最佳基底對 |
+
+讀者只要掌握這五個，幾乎所有應用場景都有對應工具 — 這就是「五大分解」的**設計合理性**。
+
+### ③ 概念昇華：分解 = 「找到看清矩陣的最好視角」的世紀大夢
+
+矩陣分解不是技術技巧，而是線代世界觀的核心：
+
+> **任意矩陣 $A$ 看起來複雜，是因為我們在「標準基底」這個視角下看它；只要找到正確的視角（特徵基底 / 主軸 / 正交基底），$A$ 就會「對角化」 — 變成幾個獨立純標量的集合。**
+
+整個 §6 五大分解，從最樸素的 CR 到最強的 SVD，都在做**同一件事**：**幫矩陣找到看起來最簡單的基底**。
+
+這個世界觀的力量體現在三個層次：
+
+1. **計算效率：** 對角矩陣是矩陣世界中的「標量」（詳見 [Q11](#q11)） — 對角化後，任意矩陣函數都「降為」對角元素逐個套用，從 $O(n^3)$ 級複雜度降為 $O(n)$ 級。
+
+2. **物理意義：** 每個分解的「最簡視角」對應一個物理直覺 — EVD 的 $Q$ 是物體的對稱軸、SVD 的 $V$ 是輸入空間的主軸、QR 的 $Q$ 是 Gram-Schmidt 正交化的結果。**分解是把「黑盒矩陣」變成「可解釋組件」的橋樑**。
+
+3. **跨領域統一：** 物理（慣性張量主軸）、訊號處理（DFT 頻域分解）、量子（算符對角化）、機器學習（PCA）、影像壓縮（DCT / SVD）、氣候科學（EOF）— 全都是「找最簡視角 → 純對角運算 → 換回原視角」這同一個 design pattern 的特例（詳見 [Q13](#q13) 跨領域對應表）。
+
+**最強昇華：** 線代的「世紀大夢」是「**讓每一個矩陣看起來都像對角矩陣**」。Strang 在 LAFE §6.1 開頭直接寫：「**Make every matrix look diagonal**」 — 這句話就是 §6 五大分解的全部精神。CR、LU、QR、EVD、SVD 是這個夢的**五個強度遞增的近似**，每個都在「**對稱性**」與「**一般性**」之間做出不同的權衡。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [§6 ch06a 五大分解總覽](ch06a-five.md) — 五大分解 dashboard 全景圖
+- [§6.1 ch06b A=CR](ch06b-CR.md) — 最樸素的分解
+- [§6.2 ch06c A=LU](ch06c-LU.md) — 高斯消去法的代數封裝
+- [§6.3 ch06d A=QR](ch06d-QR.md) — 半三明治、Gram-Schmidt
+- [§6.4 ch06e $S=Q\Lambda Q^{\mathrm{T}}$](ch06e-QLQ.md) — 完美三明治
+- [§6.5 ch06f $A=U\Sigma V^{\mathrm{T}}$](ch06f-USV.md) — 最強三明治
+- [Q11](#q11) — 對角矩陣「逐元素超能力」的根源
+- [Q13](#q13) — (P4) 三明治線代核心
+- [appendix-matrix-world.md](appendix-matrix-world.md) — 全書矩陣世界互動式索引（11 層同心橢圓繼承樹）
+
+**歷史原典：**
+- Gauss, C. F. (1809), *Theoria Motus Corporum Coelestium*, Hamburg — 高斯消去法（LU 雛形）的首次系統化使用，研究小行星 Ceres 軌道
+- Sylvester, J. J. (1852), *A demonstration of the theorem that every homogeneous quadratic polynomial is reducible by real orthogonal substitutions to the form of a sum of positive and negative squares*, **Philosophical Magazine** — 慣性定律
+- Eckart, C. & Young, G. (1936), *The approximation of one matrix by another of lower rank*, **Psychometrika**, 1, 211–218 — SVD 最佳低秩近似存在性
+- Householder, A. S. (1958), *Unitary triangularization of a nonsymmetric matrix*, **JACM**, 5, 339–342 — QR 演算法的 Householder 反射子方法
+- Golub, G. H. & Kahan, W. (1965), *Calculating the singular values and pseudo-inverse of a matrix*, **SIAM J. Numer. Anal.**, 2, 205–224 — 第一個實用 SVD 演算法
+
+**現代教科書：**
+- Strang, G. (2020), *Linear Algebra for Everyone*, §6 「**The Five Factorizations of a Matrix**」開篇 — 本書 §6 的直接母本，明確提出「五大分解 = 線代核心」
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), Ch.5–7 — 五大分解的完整數學推導
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra* — 五大分解的數值穩定性與演算法
+- Golub, G. H. & Van Loan, C. F. (2013), *Matrix Computations* (4th ed.), Johns Hopkins — 矩陣分解的工業標準參考書
 
 ---
 
-> **附錄末更新時間：** S13 (2026-05-13) — Q01–Q13 完成（13/22，59%）
+## Q15：$A = CR$ 為什麼成立？「列秩 = 行秩」怎麼自然冒出？ {#q15}
+
+> **觸發問題：** §6.1 把 $A = CR$ 放在五大分解第一個，但這個分解在歷史上比 LU / QR / EVD / SVD 晚才被「正名」 — 它是 Strang 在《LAFE》才放上桌的「**最樸素的分解**」。為什麼這個看起來不起眼的分解，反而是 §6 的開門磚？而它**如何自然證明出「列秩 = 行秩」這個非平凡定理**？
+>
+> **對應主章：** [§6.1 ch06b — A = CR](ch06b-CR.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：rank 概念與 CR 的「教學動機」誕生
+
+「**列秩 = 行秩**」是 19 世紀線代最早被注意到、卻最晚被正式證明的非平凡定理之一：
+
+- **Sylvester 1851** *On the relation between the minor determinants of linearly equivalent quadratic functions*, **Philosophical Magazine** — 引入「**rank**（秩）」這個詞，定義為「最大非零子行列式的階數」。
+- **Frobenius 1879** *Über homogene totale Differentialgleichungen*, **J. reine angew. Math.** 86 — 給出「**列秩 = 行秩**」的第一個系統證明，但路徑非常技術性（透過子行列式的代數恆等式）。
+- **20 世紀教科書傳統**：高斯消去 + 列簡化階梯形（rref）+ 主元行列數 = rank 的觀察 — 是教學中最常見的「列秩 = 行秩」路徑，但通常**沒有寫成分解形式**。
+- **Strang 2020《Linear Algebra for Everyone》** — **首次把這個流程封裝為「分解」並命名 $A = CR$**。CR 不是新的數學內容，而是把 rank、列空間、行空間、主元列**用一個矩陣等式統一表述**的教學創舉。
+- **歷史總結：** CR 本身在計算上等價於「主元列 + rref 非零列」這個古老流程，但 **「分解化」的視角是新的** — 它讓「列秩 = 行秩」變成了**一行矩陣等式自動讀出**的結果。
+
+### ② 設計過程還原：從 $A$ 到 $C$ 與 $R$ 的兩步抽出
+
+設 $A \in \mathbb{R}^{m \times n}$，秩為 $r$。
+
+**Step 1：建構 $C$（從 $A$ 抽出列空間獨立列）**
+
+$$
+C = \big[\mathbf{a}_{j_1}\ \mathbf{a}_{j_2}\ \cdots\ \mathbf{a}_{j_r}\big] \in \mathbb{R}^{m \times r}
+$$
+
+其中 $j_1 < j_2 < \cdots < j_r$ 是 $A$ 中**第一批線性獨立的列**（pivot columns） — 直接從 $A$ 抽出。
+
+**Step 2：建構 $R$（從 rref 抽出組合係數）**
+
+把 $A$ 做高斯消去到列簡化階梯形 $\operatorname{rref}(A)$，**取出非零的 $r$ 行**：
+
+$$
+R \in \mathbb{R}^{r \times n}
+$$
+
+$R$ 的每一行記錄了「$A$ 的對應列如何用 $C$ 的列做線性組合」的係數。
+
+**Step 3：直接驗證 $A = CR$**
+
+$A$ 的第 $k$ 列 $\mathbf{a}_k$ 是 $C$ 的列的線性組合（係數來自 rref 的第 $k$ 列）：
+
+$$
+\mathbf{a}_k = \sum_{p=1}^r R_{p,k}\, \mathbf{c}_p = C \mathbf{r}_k
+$$
+
+橫向拼接所有列得 $A = CR$。✓
+
+### 「列秩 = 行秩」雙重讀法
+
+CR 之所以被稱為「**rank 的視覺載體**」，是因為它從**兩個方向同時讀出 $r$**：
+
+**讀法 1（列視角）：** $A$ 的每列 = $C$ 的列的線組合 → 列空間 = $C$ 的列空間 → **列秩 = $C$ 的列數 = $r$**。
+
+**讀法 2（行視角）：** $A$ 的每行 = $R$ 的行的線組合 → 行空間 = $R$ 的行空間 → **行秩 = $R$ 的行數 = $r$**。
+
+**結論：** 列秩 = $r$ = 行秩。✓
+
+這個雙重讀法的優美在於 — **「列秩 = 行秩」不需要任何技術證明，它就是 $A = CR$ 這個分解的兩個讀法**。
+
+### 小例題：$3 \times 3$ rank 2
+
+設 $A = \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 3 \\ 3 & 6 & 4 \end{bmatrix}$。
+
+**Step 1：找主元列。** 觀察 $\mathbf{a}_2 = 2\mathbf{a}_1$（第 2 列是第 1 列的 2 倍）、$\mathbf{a}_3$ 不是 $\mathbf{a}_1$ 的倍數 → 主元列 = 第 1、3 列。
+
+$$
+C = \begin{bmatrix} 1 & 1 \\ 2 & 3 \\ 3 & 4 \end{bmatrix} \in \mathbb{R}^{3 \times 2}
+$$
+
+**Step 2：求 rref。** 用高斯消去：
+
+$$
+\operatorname{rref}(A) = \begin{bmatrix} 1 & 2 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{bmatrix}
+$$
+
+取非零行 → $R = \begin{bmatrix} 1 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix} \in \mathbb{R}^{2 \times 3}$。
+
+**Step 3：驗算 $CR$**
+
+$$
+CR = \begin{bmatrix} 1 & 1 \\ 2 & 3 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} 1 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 3 \\ 3 & 6 & 4 \end{bmatrix} = A \quad \checkmark
+$$
+
+**讀 rank：** $C$ 兩列 → 列秩 = 2；$R$ 兩行 → 行秩 = 2 → 列秩 = 行秩 = 2 = $r$。
+
+### ③ 概念昇華：CR 是「rank 的視覺載體」+ 最樸素的分解
+
+CR 雖然是五大分解中**結構最簡單**的，卻承擔了三個教學功能：
+
+1. **rank 的視覺化：** CR 把抽象的 rank 概念寫成**具體的矩陣尺寸**（$C$ 是 $m \times r$、$R$ 是 $r \times n$）— 讀者一眼就看到「rank = 共同維度」。
+
+2. **「列秩 = 行秩」的自然證明：** 這個定理在傳統教科書中通常用「rref 的主元位置」或「子行列式」技術性證明，CR 把它降為**一行等式的兩個讀法** — 教學成本大幅降低。
+
+3. **§6.x 五大分解的「最低門檻入口」：** CR 不要求 $A$ 是方陣、不要求對稱、不要求滿秩、不要求正交化 — 適用於**任何** $A \in \mathbb{R}^{m \times n}$。它是「**矩陣可以拆**」這個概念的最直觀展示。
+
+**與其他分解的比較：** CR 在「**對稱性 ↔ 一般性**」光譜上位於**最低對稱、最高一般**的一端：
+
+| 分解 | 對稱性 | 矩陣要求 |
+|---|---|---|
+| **CR** | 退化（無對角中間項） | 任意 $A$ |
+| LU | 退化（兩三角） | 方陣（可消元） |
+| QR | 半三明治（$Q$ 正交） | 任意 $A$ |
+| EVD | 完美三明治 | 方陣（對稱最佳） |
+| SVD | 最強三明治 | 任意 $A$ |
+
+讀完 CR 後，讀者已經理解了「分解」的基本格式（兩矩陣乘積 + 中間共同維度）；後續的 LU / QR / EVD / SVD 都可以視為「在 CR 的基礎上**增加結構**」。
+
+**最強昇華：** CR 是 **「matrix = column space basis × row space coefficient」** 這個對稱結構的代數表達 — 它告訴讀者「**列空間與行空間從一開始就是同維度**」，這個事實看似平凡，卻是線代最深刻的非平凡定理之一。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [§6.1 ch06b A=CR](ch06b-CR.md) — CR 完整推導 + 雙 pointer 跨章設計（指 ch04 (MM4) + ch05 (P1/P2)）
+- [§6.1 ch06b VizScript-01](ch06b-CR.md#vizscript-01) — CR 拆解 + 三色獨立列高亮（Tier 2）
+- [Q08](#q08) — 四子空間與 rank-nullity
+- [Q14](#q14) — 為什麼要分解（CR 是「結構理解」動機的典型）
+- [Q19](#q19) — SVD 也讀出 rank（更強：奇異值 $\sigma_p > 0$ 的個數 = rank）
+- [appendix-four-subspaces.md](appendix-four-subspaces.md) — 4 子空間正交分解定理
+
+**歷史原典：**
+- Sylvester, J. J. (1851), *On the relation between the minor determinants of linearly equivalent quadratic functions*, **Philosophical Magazine**, 1, 295–305 — 首次引入「rank」一詞
+- Frobenius, G. (1879), *Über homogene totale Differentialgleichungen*, **J. reine angew. Math.**, 86, 1–19 — 列秩 = 行秩的系統證明
+- Strang, G. (2020), *Linear Algebra for Everyone*, §3.2 「The Big Picture」+ §6.1 — CR 分解的首次系統教學
+
+**現代教科書：**
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), §1.3 + §3.2 — CR 與列空間的對應
+- Strang, G. (2020), *LAFE*, §6.1「$A = CR$」— 本書 §6.1 的直接母本
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra*, Lec. 6 — rank-revealing 分解的數值角度
+
+---
+
+## Q16：$A = LU$ 為什麼存在？高斯消去法為什麼能壓縮成兩三角矩陣？ {#q16}
+
+> **觸發問題：** §6.2 把高斯消去法寫成 $A = LU$ — 一個下三角 + 一個上三角的乘積。但 — 高斯消去從表面看是「**演算法**」（一步步消除元素），LU 則是「**靜態分解**」（一行矩陣等式）。為什麼一個逐步演算法可以壓縮成一行等式？$L$ 與 $U$ 為什麼是三角矩陣？三角矩陣這個結構特殊在哪裡？
+>
+> **對應主章：** [§6.2 ch06c — A = LU](ch06c-LU.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：從《九章算術》到現代數值線代
+
+高斯消去法是線代中**最古老**也**最廣泛使用**的演算法之一，LU 分解則是它的「**代數化封裝**」：
+
+- **《九章算術》方程章（公元 1 世紀）** — 中國最古老的數學經典，方程章專門處理多元一次方程組，給出「**遍乘直除**」演算法 — 這正是高斯消去法的東方原型，**比 Gauss 早 1800 年**。原文如「方程章」第一題：「今有上禾三秉、中禾二秉、下禾一秉，實三十九斗；上禾二秉、中禾三秉、下禾一秉，實三十四斗⋯⋯」用三元一次方程組求解禾穀重量，過程即三角化矩陣。
+- **Newton 1707** *Arithmetica Universalis* — 西方代數教科書中明確的方程組消去法。
+- **Gauss 1809** *Theoria Motus Corporum Coelestium*, Hamburg — 用高斯消去法（搭配最小平方法）算出小行星 Ceres 軌道。**「高斯消去」名稱源自此**。
+- **Jacobi 1857** / **Doolittle 1878** — 給出 $LU$ 形式的明確表述（雖然「分解」一詞還沒誕生）。
+- **Banachiewicz 1938** — 在「Cracovian 記號」中首次系統化 LU 分解。
+- **Turing 1948** *Rounding-off errors in matrix processes*, **Q. J. Mech. Appl. Math.** 1 — **首次系統研究 LU 的數值穩定性** + 引入 **partial pivoting** 避免主元為 0 或極小值。Turing 在這篇論文中**首次明確稱呼此為「LU 分解」**。
+- **Wilkinson 1965** *The Algebraic Eigenvalue Problem* — LU 與 pivoting 的工業級數值分析。
+- **LINPACK 1979 → LAPACK 1992** — LU 成為**工業標準**（單一 LAPACK 呼叫 `DGETRF` 即得 PLU 分解）。
+- **歷史總結：** LU 走了 2000 年從演算法到代數結構的演變 — 中國《九章算術》→ Newton 系統化 → Gauss 應用 → Turing 代數封裝 + 數值化 → LAPACK 工業化。**LU 的存在不是巧合，而是「線性方程組消元」這個普世操作的代數結晶**。
+
+### ② 設計過程還原：高斯消去 → 矩陣乘法 → $A = LU$
+
+#### Step 1：高斯消去的本質是「列倍數加減」
+
+設 $A \in \mathbb{R}^{n \times n}$，做高斯消去把它化為上三角矩陣 $U$。每一步消去動作 = 「用第 $k$ 行的倍數加到第 $i$ 行」（$i > k$）— 這個動作可以寫成**單位下三角矩陣**的左乘：
+
+$$
+E_{ik} = I - \ell_{ik}\, \mathbf{e}_i \mathbf{e}_k^{\mathrm{T}}, \quad \ell_{ik} = \frac{a_{ik}^{(k-1)}}{a_{kk}^{(k-1)}}
+$$
+
+例如 $n=3$、消去第 2 行的第 1 個元素，用 $\ell_{21} = a_{21}/a_{11}$：
+
+$$
+E_{21} = \begin{bmatrix} 1 & 0 & 0 \\ -\ell_{21} & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+$E_{21} A$ 結果第 2 行第 1 元素為 0。
+
+#### Step 2：所有消去步驟組合起來
+
+整個高斯消去過程是依序左乘一連串單位下三角矩陣：
+
+$$
+E_{n,n-1} \cdots E_{32} E_{31} E_{21}\, A = U
+$$
+
+設 $M = E_{n,n-1} \cdots E_{21}$（所有消去動作的累積），則 $MA = U$。
+
+#### Step 3：取反 → 得 $A = LU$
+
+$M$ 是**單位下三角矩陣的乘積** → $M$ 也是單位下三角 → $L = M^{-1}$ 也是單位下三角。從 $MA = U$ 推出：
+
+$$
+\boxed{\; A = M^{-1} U = LU \;}
+$$
+
+**$L$ 的元素正是消去倍數 $\ell_{ik}$！** 這是 LU 的核心觀察：
+
+$$
+L = \begin{bmatrix} 1 & 0 & \cdots & 0 \\ \ell_{21} & 1 & \cdots & 0 \\ \ell_{31} & \ell_{32} & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ \ell_{n1} & \ell_{n2} & \cdots & 1 \end{bmatrix}
+$$
+
+**為什麼 $L$ 自動是單位下三角？** 每個 $E_{ik}^{-1} = I + \ell_{ik} \mathbf{e}_i \mathbf{e}_k^{\mathrm{T}}$ 是單位下三角，乘積仍是單位下三角，且**因為 $i > k$，$\mathbf{e}_i \mathbf{e}_k^{\mathrm{T}}$ 的乘法不會「干擾」彼此**（左下三角矩陣的乘法在這個結構下封閉）— 這是線代裡一個漂亮的代數結構性質。
+
+### 主元（pivot）與 partial pivoting
+
+如果某步消去時主元 $a_{kk}^{(k-1)} = 0$，無法做除法 → **LU 不存在**（對這個排列順序）。解法：**做 row swap**，即在演算法中加入排列矩陣 $P$：
+
+$$
+PA = LU
+$$
+
+**partial pivoting：** 每步選**該列下方絕對值最大**的元素做主元 — 不僅避免除零，更**降低數值誤差放大**。Turing 1948 證明 partial pivoting 是 LU 數值穩定性的關鍵保證。
+
+### 小例題：$3 \times 3$ LU
+
+設 $A = \begin{bmatrix} 2 & 1 & 1 \\ 4 & 3 & 3 \\ 8 & 7 & 9 \end{bmatrix}$。
+
+**Step 1：用第 1 行消去第 2、3 行的第 1 個元素。**
+
+$\ell_{21} = 4/2 = 2$、$\ell_{31} = 8/2 = 4$：
+
+$$
+A \to \begin{bmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 3 & 5 \end{bmatrix}
+$$
+
+**Step 2：用新的第 2 行消去第 3 行的第 2 個元素。**
+
+$\ell_{32} = 3/1 = 3$：
+
+$$
+\to U = \begin{bmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 2 \end{bmatrix}
+$$
+
+**Step 3：組合 $L$（消去倍數）與 $U$（消去終態）。**
+
+$$
+L = \begin{bmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ 4 & 3 & 1 \end{bmatrix}, \quad U = \begin{bmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 2 \end{bmatrix}
+$$
+
+**Step 4：驗算 $LU$**
+
+$$
+LU = \begin{bmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ 4 & 3 & 1 \end{bmatrix} \begin{bmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 2 \end{bmatrix} = \begin{bmatrix} 2 & 1 & 1 \\ 4 & 3 & 3 \\ 8 & 7 & 9 \end{bmatrix} = A \quad \checkmark
+$$
+
+### 三角矩陣為什麼那麼特殊？
+
+LU 之所以重要，是因為**三角矩陣是線代中最容易計算的矩陣結構**之一：
+
+| 三角矩陣性質 | 工程意義 |
+|---|---|
+| **求解** $L\mathbf{y} = \mathbf{b}$ | 前代法 $O(n^2)$（從上而下） |
+| **求解** $U\mathbf{x} = \mathbf{y}$ | 後代法 $O(n^2)$（從下而上） |
+| **行列式** $\det L = 1$、$\det U = \prod u_{ii}$ | 對角元素相乘 $O(n)$ |
+| **特徵值** | 直接讀對角線 $\lambda_p = u_{pp}$ |
+| **反矩陣** | 也是三角矩陣 $O(n^3)$ |
+| **乘法** | 兩三角矩陣乘積仍是三角 |
+
+從計算複雜度角度看，**三角矩陣是「介於對角矩陣與一般矩陣之間」的中間結構** — 比對角矩陣多了一個方向的耦合（前代或後代依序處理），但仍比一般矩陣簡單。
+
+### 為什麼用 LU 解 $A\mathbf{x} = \mathbf{b}$？
+
+直接解 $A\mathbf{x} = \mathbf{b}$ 需要 $A^{-1}$（成本 $O(n^3)$ + 數值不穩定）。**LU 把它分成兩個 $O(n^2)$ 三角求解：**
+
+1. **前代：** $L\mathbf{y} = \mathbf{b}$ → 解出 $\mathbf{y}$。
+2. **後代：** $U\mathbf{x} = \mathbf{y}$ → 解出 $\mathbf{x}$。
+
+**總成本：** 一次 LU 分解 $O(n^3)$（用於多個 $\mathbf{b}$ 攤銷）+ 每次求解 $O(n^2)$。**這就是為什麼 LAPACK / NumPy / MATLAB 都把 $A\mathbf{x} = \mathbf{b}$ 默認用 LU 解**。
+
+### ③ 概念昇華：LU 是「演算法 → 代數結構」的典範
+
+LU 的核心價值不在「算得快」（事實上跟高斯消去演算法**完全等價**），而在於**把演算法封裝為靜態結構**：
+
+1. **演算法視角：** 高斯消去是「一步步消除元素」 — 動態流程、容易實作、難以推理。
+2. **代數視角：** $A = LU$ 是「一行等式」 — 靜態結構、容易分析、可作為其他定理的構建塊。
+
+這個「演算法 → 代數」的轉換有三個威力：
+
+**威力 1：複用** — 同一 LU 可用於解多組 $\mathbf{b}_1, \mathbf{b}_2, \ldots$（譬如機器學習中的批次預測）。
+
+**威力 2：分析** — 從 $A = LU$ 可直接讀出許多性質：
+- $\det A = \det L \cdot \det U = \prod u_{ii}$（單位下三角行列式為 1）
+- $A$ 可逆 ⇔ $U$ 對角無 0 ⇔ 所有消去主元非 0
+- $A$ 對稱正定 ⇒ $A = LL^{\mathrm{T}}$（Cholesky 分解 = 對稱 LU 的特例）
+
+**威力 3：嫁接其他結構** — LU 可進一步與 QR、SVD、EVD 嫁接 — 譬如先用 LU 做 row reduction，再對 $U$ 做 SVD 提取奇異值（用於大規模稀疏矩陣）。
+
+### 跨領域對應：上三角 / 下三角的「因果結構」
+
+三角矩陣在工程中對應「**因果（causal）系統**」：
+
+| 領域 | 上三角 / 下三角的角色 |
+|---|---|
+| **訊號處理** | 因果濾波器（當前輸出只依賴過去輸入）= 下三角矩陣 |
+| **時間序列** | 自回歸 AR(p) 模型 = 下三角結構 |
+| **動態規劃** | 子問題依賴 = 拓樸排序 = 上三角矩陣 |
+| **編譯器最佳化** | DAG（有向無環圖）= 三角矩陣描述 |
+| **電路分析** | 拓樸電路的節點求解 = 三角化 |
+
+每個領域都在做同一件事：「**把問題拆成有先後順序的子問題鏈**」 — 三角矩陣是這個「分而治之」哲學的代數刻畫。
+
+### LU 與 (MM4) 視角的連結
+
+$A = LU$ 也可以用 (MM4) 視角展開：
+
+$$
+A = LU = \sum_{p=1}^n \ell_p u_p^{\mathrm{T}}
+$$
+
+其中 $\ell_p$ 是 $L$ 的第 $p$ 列（下三角結構意味著前 $p-1$ 個元素為 0）、$u_p^{\mathrm{T}}$ 是 $U$ 的第 $p$ 行（後 $n-p$ 個元素任意）— 每個秩 1 圖層的「形狀」由三角約束決定。這個視角讓 LU 與 §6 其他分解共享同一個基底架構（詳見 [ch06c VizScript-01](ch06c-LU.md#vizscript-01) LU 雙視角 peeling 互動）。
+
+**最強昇華：** LU 是 §6 分解中**最早被人類掌握**（《九章算術》兩千年前）也**最晚被代數化命名**（Turing 1948）的分解 — 它的存在告訴我們：**任何一個被反覆使用的演算法，都可以被封裝為一個代數物件**。這個「演算法 → 結構」的封裝過程，是現代數學的核心方法論（從群論封裝對稱、到範疇論封裝函式），而 LU 是這個方法論在線代中的最古老案例。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [§6.2 ch06c A=LU](ch06c-LU.md) — LU 完整推導 + 雙視角 peeling/MM4 切換
+- [§6.2 ch06c VizScript-01](ch06c-LU.md#vizscript-01) — LU 雙視角互動（Tier 2，使用 MM4 跨章 pointer）
+- [Q14](#q14) — 為什麼要分解（LU 對應「求解」動機）
+- [Q15](#q15) — A=CR 對偶分解（最樸素 vs 主元結構）
+- [Q17](#q17) — A=QR 替代分解（不需 pivot + 數值更穩）
+- [Q08](#q08) — rank-nullity 透過 LU 主元數 = rank 也能讀出
+
+**歷史原典：**
+- 《九章算術》（公元 1 世紀），方程章 — 高斯消去法的東方原型，比 Gauss 早 1800 年
+- Gauss, C. F. (1809), *Theoria Motus Corporum Coelestium*, Hamburg — 「高斯消去」命名源頭
+- Doolittle, M. H. (1878), *Method employed in the solution of normal equations and the adjustment of a triangulation*, **U.S. Coast & Geodetic Survey Report** — Doolittle 演算法（LU 的早期變體）
+- Turing, A. M. (1948), *Rounding-off errors in matrix processes*, **Q. J. Mech. Appl. Math.**, 1, 287–308 — LU 命名 + partial pivoting + 數值穩定性
+- Wilkinson, J. H. (1965), *The Algebraic Eigenvalue Problem*, Oxford — LU 工業級數值分析
+
+**現代教科書：**
+- Strang, G. (2020), *Linear Algebra for Everyone*, §2.6 + §6.2 — LU 的教學完整版
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), §2.6 「Elimination = Factorization」— LU 推導
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra*, Lec. 20–22 — LU 與 pivoting 數值穩定性
+- Golub, G. H. & Van Loan, C. F. (2013), *Matrix Computations* (4th ed.), Ch.3 — LU 工業標準演算法
+
+---
+
+## Q17：$A = QR$ 為什麼需要正交化？Gram-Schmidt 從哪冒出來？ {#q17}
+
+> **觸發問題：** §6.3 $A = QR$ 把任意矩陣 $A$ 拆成「正交矩陣 $Q$ + 上三角矩陣 $R$」。但 — 既然 $A$ 本身已經是個明確的矩陣，為什麼要費力把它「正交化」？Gram-Schmidt 演算法看起來像個技巧（投影 → 扣減 → 標準化逐步重複），為什麼這個技巧會成為**線代基石**？最小平方法為什麼要用 QR？
+>
+> **對應主章：** [§6.3 ch06d — A = QR](ch06d-QR.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：從最小平方法到 Hilbert 空間
+
+QR 分解的歷史與「**最小平方法**」緊密交織：
+
+- **Gauss 1801** — 用最小平方法算出小行星 Ceres 的軌道（1801 年新年由 Piazzi 觀測到、Gauss 在數據稀缺的情況下精準預測它再現）— **最小平方法的首次重大應用**，但 Gauss 沒明確寫出 QR。
+- **Legendre 1805** *Nouvelles méthodes pour la détermination des orbites des comètes* — 獨立發表最小平方法（與 Gauss 同期，後來引起優先權爭議）。
+- **Gauss 1809** *Theoria Motus* — 系統化最小平方法，含「正規方程」 $A^{\mathrm{T}} A \mathbf{x} = A^{\mathrm{T}} \mathbf{b}$ 的推導。
+- **Gram 1883** *Ueber die Entwickelung reeller Functionen in Reihen mittelst der Methode der kleinsten Quadrate*, **J. reine angew. Math.** 94 — 在最小平方法框架下處理函數空間的正交化。
+- **Schmidt 1907** *Zur Theorie der linearen und nichtlinearen Integralgleichungen*, **Math. Annalen** 63 — 把 Gram 的思想推廣到無限維 Hilbert 空間 — **Gram-Schmidt 正交化由此命名**（其實主要工作來自 Schmidt，Gram 的論文是早期相關工作）。
+- **Householder 1958** *Unitary triangularization of a nonsymmetric matrix*, **JACM** 5 — 「Householder 反射子」演算法 — 數值穩定的 QR 計算方法，是現代 LAPACK 的標準。
+- **歷史總結：** QR 的發展軌跡是「**最小平方法 → 函數空間正交化 → 矩陣分解 → 數值演算法**」 — 它從應用問題出發，最終結晶為線代的標準工具。
+
+### ② 設計過程還原：Gram-Schmidt 是「逐步扣除耦合」
+
+**為什麼想要正交基底？**
+
+設 $A = [\mathbf{a}_1\ \mathbf{a}_2\ \cdots\ \mathbf{a}_n]$ 的列線性獨立但**斜歪**（彼此不正交）。在斜歪基底下做投影、最小平方法、座標計算都很麻煩 — 因為**基底之間的耦合**讓「分量」不能獨立讀出。
+
+**正交基底好在哪裡？** 對正交基底 $\{\mathbf{q}_1, \ldots, \mathbf{q}_n\}$，任意向量 $\mathbf{v}$ 在這個基底下的座標**可以逐個獨立計算**：
+
+$$
+c_k = \mathbf{q}^{\mathrm{T}}_k \mathbf{v}
+$$
+
+不需要解任何方程組 — 這就是「**無耦合的最佳座標**」。
+
+**Gram-Schmidt 演算法（核心三步驟）：**
+
+從 $\mathbf{a}_1, \ldots, \mathbf{a}_n$ 一步一步建構正交基底：
+
+**Step 1：** $\mathbf{q}_1 = \dfrac{\mathbf{a}_1}{\|\mathbf{a}_1\|}$（直接標準化）。
+
+**Step 2：** 拿 $\mathbf{a}_2$，扣掉它沿 $\mathbf{q}_1$ 的投影分量：
+$$
+\mathbf{u}_2 = \mathbf{a}_2 - (\mathbf{q}^{\mathrm{T}}_1 \mathbf{a}_2)\, \mathbf{q}_1, \quad \mathbf{q}_2 = \frac{\mathbf{u}_2}{\|\mathbf{u}_2\|}
+$$
+
+**Step k：** 拿 $\mathbf{a}_k$，扣掉所有已知 $\mathbf{q}_i$（$i < k$）方向的投影：
+$$
+\mathbf{u}_k = \mathbf{a}_k - \sum_{i=1}^{k-1} (\mathbf{q}^{\mathrm{T}}_i \mathbf{a}_k)\, \mathbf{q}_i, \quad \mathbf{q}_k = \frac{\mathbf{u}_k}{\|\mathbf{u}_k\|}
+$$
+
+每一步的核心**動作**是「**扣減耦合**」 — 把當前向量中**已經被前面 $\mathbf{q}_i$ 覆蓋的成分**減掉，剩下的就是「真正新增的方向」。
+
+**為什麼自動冒出 $A = QR$？**
+
+從演算法可以反推 $\mathbf{a}_k$：
+$$
+\mathbf{a}_k = \sum_{i=1}^{k-1} (\mathbf{q}^{\mathrm{T}}_i \mathbf{a}_k)\, \mathbf{q}_i + \|\mathbf{u}_k\|\, \mathbf{q}_k
+$$
+
+這就是「$\mathbf{a}_k$ 是 $\mathbf{q}_1, \ldots, \mathbf{q}_k$ 的線性組合」的表達式 — **組合係數只用到前 $k$ 個 $\mathbf{q}$**，所以係數矩陣 $R$ 自動是**上三角**：
+
+$$
+R_{i,k} = \begin{cases} \mathbf{q}^{\mathrm{T}}_i \mathbf{a}_k & i < k \\ \|\mathbf{u}_k\| & i = k \\ 0 & i > k \end{cases}
+$$
+
+把 $\mathbf{q}_1, \ldots, \mathbf{q}_n$ 橫向拼成 $Q$，得：
+$$
+A = QR
+$$
+
+✓ 這就是 QR 分解。
+
+### 小例題：$3 \times 2$ Gram-Schmidt
+
+設 $A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}$。
+
+**Step 1：** $\mathbf{a}_1 = (1, 1, 0)^{\mathrm{T}}$、$\|\mathbf{a}_1\| = \sqrt{2}$ → $\mathbf{q}_1 = \tfrac{1}{\sqrt{2}}(1, 1, 0)^{\mathrm{T}}$。
+
+**Step 2：** $\mathbf{q}^{\mathrm{T}}_1 \mathbf{a}_2 = \tfrac{1}{\sqrt{2}}(1 + 0 + 0) = \tfrac{1}{\sqrt{2}}$。
+
+$$
+\mathbf{u}_2 = \mathbf{a}_2 - \tfrac{1}{\sqrt{2}}\, \mathbf{q}_1 = (1, 0, 1)^{\mathrm{T}} - \tfrac{1}{\sqrt{2}} \cdot \tfrac{1}{\sqrt{2}}(1, 1, 0)^{\mathrm{T}} = (1, 0, 1)^{\mathrm{T}} - (\tfrac{1}{2}, \tfrac{1}{2}, 0)^{\mathrm{T}} = (\tfrac{1}{2}, -\tfrac{1}{2}, 1)^{\mathrm{T}}
+$$
+
+$\|\mathbf{u}_2\| = \sqrt{\tfrac{1}{4} + \tfrac{1}{4} + 1} = \tfrac{\sqrt{6}}{2}$ → $\mathbf{q}_2 = \tfrac{1}{\sqrt{6}}(1, -1, 2)^{\mathrm{T}}$。
+
+**驗證正交：** $\mathbf{q}^{\mathrm{T}}_1 \mathbf{q}_2 = \tfrac{1}{\sqrt{12}}(1 - 1 + 0) = 0$ ✓。
+
+**組合 $R$：**
+
+$$
+Q = \begin{bmatrix} \tfrac{1}{\sqrt{2}} & \tfrac{1}{\sqrt{6}} \\ \tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{6}} \\ 0 & \tfrac{2}{\sqrt{6}} \end{bmatrix},\quad R = \begin{bmatrix} \sqrt{2} & \tfrac{1}{\sqrt{2}} \\ 0 & \tfrac{\sqrt{6}}{2} \end{bmatrix}
+$$
+
+**驗算 $QR$:**
+
+$$
+QR = \begin{bmatrix} \tfrac{1}{\sqrt{2}} \cdot \sqrt{2} + 0 & \tfrac{1}{\sqrt{2}} \cdot \tfrac{1}{\sqrt{2}} + \tfrac{1}{\sqrt{6}} \cdot \tfrac{\sqrt{6}}{2} \\ \tfrac{1}{\sqrt{2}} \cdot \sqrt{2} & \tfrac{1}{\sqrt{2}} \cdot \tfrac{1}{\sqrt{2}} - \tfrac{1}{\sqrt{6}} \cdot \tfrac{\sqrt{6}}{2} \\ 0 & 0 + \tfrac{2}{\sqrt{6}} \cdot \tfrac{\sqrt{6}}{2} \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix} = A \quad \checkmark
+$$
+
+### 為什麼最小平方法用 QR？
+
+最小平方法問題：求 $\min_\mathbf{x} \|A\mathbf{x} - \mathbf{b}\|^2$。
+
+**傳統解法（正規方程）：** $A^{\mathrm{T}} A \mathbf{x} = A^{\mathrm{T}} \mathbf{b}$ → $\mathbf{x}^* = (A^{\mathrm{T}} A)^{-1} A^{\mathrm{T}} \mathbf{b}$。
+
+**痛點：** 計算 $A^{\mathrm{T}} A$ 會**放大數值誤差**（條件數平方化） — $A$ 略接近秩虧時，$A^{\mathrm{T}} A$ 接近奇異，求解嚴重失準。
+
+**QR 解法：** $A = QR$ → $\|A\mathbf{x} - \mathbf{b}\|^2 = \|QR\mathbf{x} - \mathbf{b}\|^2 = \|R\mathbf{x} - Q^{\mathrm{T}}\mathbf{b}\|^2$（用 $Q$ 正交保長度）。
+
+最小化 → $R\mathbf{x} = Q^{\mathrm{T}}\mathbf{b}$（上三角後代 $O(n^2)$）。
+
+**優勢：** 不需算 $A^{\mathrm{T}} A$，**條件數不被平方化** → 數值穩定，工業標準。
+
+### ③ 概念昇華：「正交基底 = 無耦合的最佳座標」
+
+QR 的本質是把「斜歪基底」變成「正交基底」，這個轉換的威力可以從三個層次理解：
+
+1. **計算層次：** 正交基底下，座標、投影、距離全部「白送」 — $\mathbf{q}^{\mathrm{T}}\mathbf{v}$ 直接給出分量、$\sum (\mathbf{q}^{\mathrm{T}}_k \mathbf{v})^2 = \|\mathbf{v}\|^2$（Parseval 恆等式）。
+
+2. **數值層次：** $Q$ 正交意味著 $Q^{\mathrm{T}}Q = I$ — 任何運算 $\mathbf{y} = Q\mathbf{x}$ 都**保持長度** → 不放大誤差，數值穩定。
+
+3. **哲學層次：** 「**先正交化、再計算**」是科學計算的普世策略 — 從 FFT（離散傅立葉轉換用三角函數正交基底）到 PCA（主成分用 SVD 給出的正交基底），都遵循「找正交基底 → 在該基底下做運算」這個模式。
+
+**與其他分解的連結：**
+
+| 分解 | 中間正交矩陣 | 「正交」的角色 |
+|---|---|---|
+| **QR** | $Q$ | 列空間的正交基底（Gram-Schmidt 結果） |
+| **EVD（對稱）** | $Q$ | 對稱矩陣的特徵向量基底（自動正交，詳見 [Q18](#q18)） |
+| **SVD** | $U, V$ | 兩個正交基底（適用任意矩陣，詳見 [Q19](#q19)） |
+
+QR 是「**單邊正交**」的分解（只有 $Q$ 正交），EVD 與 SVD 是「**雙邊正交**」（兩端都正交）。QR 因此被視為 EVD / SVD 的**前置工具** — 許多 EVD / SVD 的數值演算法都先做 QR。
+
+**最強昇華：** QR 把 Gram-Schmidt 從「**演算法**」提升為「**分解**」 — 從「逐步操作」變成「靜態結構」。這個視角轉換的價值，跟把高斯消去法從「演算法」提升為 LU 分解，是平行的（詳見 [Q16](#q16)）。**分解化是把演算法封裝為代數物件的標準路徑**，這個思想貫穿全 §6。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [§6.3 ch06d A=QR](ch06d-QR.md) — QR 完整推導 + 3D 投影視覺
+- [§6.3 ch06d VizScript-01](ch06d-QR.md#vizscript-01) — Gram-Schmidt 動畫 + 3D 投影視覺（Tier 2）
+- [Q14](#q14) — 為什麼要分解（QR 對應「求解」「結構理解」動機）
+- [Q11](#q11) — 對角矩陣為什麼特別（QR 中的對角線是 $\|\mathbf{u}_k\|$）
+- [Q18](#q18) — 對稱矩陣特徵向量自動正交（QR 之後最強的正交化）
+- [Q19](#q19) — SVD 雙邊正交化的最強形式
+
+**歷史原典：**
+- Gauss, C. F. (1809), *Theoria Motus Corporum Coelestium*, Hamburg — 最小平方法系統化 + 正規方程
+- Legendre, A.-M. (1805), *Nouvelles méthodes pour la détermination des orbites des comètes*, Paris — 最小平方法獨立發表
+- Gram, J. P. (1883), *Ueber die Entwickelung reeller Functionen in Reihen mittelst der Methode der kleinsten Quadrate*, **J. reine angew. Math.**, 94, 41–73
+- Schmidt, E. (1907), *Zur Theorie der linearen und nichtlinearen Integralgleichungen*, **Math. Annalen**, 63, 433–476 — Gram-Schmidt 命名來源
+- Householder, A. S. (1958), *Unitary triangularization of a nonsymmetric matrix*, **JACM**, 5, 339–342 — 數值穩定 QR 演算法
+
+**現代教科書：**
+- Strang, G. (2020), *Linear Algebra for Everyone*, §4.4 「Orthogonalization」+ §6.3 「QR」— 本書 §6.3 的直接母本
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), §4.4 + §6.3 — QR 與最小平方法詳論
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra*, Lec. 7–10 — QR 的多種算法（Classical/Modified Gram-Schmidt、Householder、Givens）+ 數值穩定性比較
+- Golub, G. H. & Van Loan, C. F. (2013), *Matrix Computations* (4th ed.), Ch.5 — QR 演算法工業標準
+
+---
+
+## Q18：$S = Q\Lambda Q^{\mathrm{T}}$ 為什麼對稱矩陣特徵向量自動正交？ {#q18}
+
+> **觸發問題：** §6.4 譜定理告訴我們：**對稱**矩陣 $S$ 的特徵向量**自動正交**。這個性質聽起來太巧合 — 為什麼隨便一個 $n \times n$ 對稱矩陣，居然能保證有 $n$ 個互相正交的特徵向量？這個「正交」不是 Gram-Schmidt 強加的，而是**對稱性自動賦予的禮物**。為什麼對稱性有這麼大的威力？
+>
+> **對應主章：** [§6.4 ch06e — S = QΛQᵀ](ch06e-QLQ.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：譜定理從天體力學到量子力學
+
+「**對稱矩陣特徵向量自動正交**」這個結果（譜定理的核心）有一段從天體力學到量子力學的歷史：
+
+- **Cauchy 1829** *Sur l'équation à l'aide de laquelle on détermine les inégalités séculaires des mouvements des planètes*, **Mém. Acad. Sci.** — 證明**對稱矩陣有實特徵值**+ 給出「**主軸定理**」（橢圓的主軸方向就是相關矩陣的特徵向量）— 這是譜定理的第一個版本。Cauchy 的動機是天體力學的「百年攝動方程」。
+- **Sylvester 1852** 慣性定律 — 對稱矩陣可化為 $\operatorname{diag}(\pm 1, 0)$，且正、負、零特徵值個數是不變量。
+- **Jacobi 1846** — 對稱矩陣對角化的迭代演算法（Jacobi 旋轉），數值上首次系統化「自動正交化對稱矩陣」。
+- **Schur 1909** *Über die charakteristischen Wurzeln einer linearen Substitution mit einer Anwendung auf die Theorie der Integralgleichungen*, **Math. Annalen** 66 — 證明**任意**方陣可三角化（Schur 分解）— 是譜定理的廣義版本。
+- **量子力學 1920s** — Heisenberg / Schrödinger 把對稱矩陣推廣到**Hermitian**（複數對稱 $A^{*} = A$）— 物理量必須是 Hermitian 算符，保證**實的觀測值** + **正交的本徵態**。譜定理直接成為量子力學的數學基石。
+- **歷史總結：** 譜定理從天體力學（保證行星軌道穩定性）發展到量子力學（保證觀測值實數性），整整一百多年。對稱性與正交性的對應**從一開始就不是巧合**，而是**自然界基本對稱性的反映**。
+
+### ② 設計過程還原：為什麼對稱保證正交？兩個證明
+
+#### 證明 1：不同特徵值對應的特徵向量正交
+
+設 $S = S^{\mathrm{T}}$、$S\mathbf{q}_1 = \lambda_1 \mathbf{q}_1$、$S\mathbf{q}_2 = \lambda_2 \mathbf{q}_2$、$\lambda_1 \ne \lambda_2$。
+
+**目標：** 證明 $\mathbf{q}^{\mathrm{T}}_2 \mathbf{q}_1 = 0$。
+
+**Step 1：** 從 $S\mathbf{q}_1 = \lambda_1 \mathbf{q}_1$ 兩邊左乘 $\mathbf{q}^{\mathrm{T}}_2$：
+$$
+\mathbf{q}^{\mathrm{T}}_2\, S\, \mathbf{q}_1 = \lambda_1\, \mathbf{q}^{\mathrm{T}}_2\, \mathbf{q}_1 \quad\quad \text{(A)}
+$$
+
+**Step 2：** 從 $S\mathbf{q}_2 = \lambda_2 \mathbf{q}_2$ 兩邊取轉置：
+$$
+(\mathbf{q}^{\mathrm{T}}_2)\, S^{\mathrm{T}} = \lambda_2\, \mathbf{q}^{\mathrm{T}}_2
+$$
+
+利用對稱性 $S^{\mathrm{T}} = S$：
+$$
+\mathbf{q}^{\mathrm{T}}_2\, S = \lambda_2\, \mathbf{q}^{\mathrm{T}}_2
+$$
+
+右乘 $\mathbf{q}_1$：
+$$
+\mathbf{q}^{\mathrm{T}}_2\, S\, \mathbf{q}_1 = \lambda_2\, \mathbf{q}^{\mathrm{T}}_2\, \mathbf{q}_1 \quad\quad \text{(B)}
+$$
+
+**Step 3：** (A) − (B)：
+$$
+0 = (\lambda_1 - \lambda_2)\, \mathbf{q}^{\mathrm{T}}_2\, \mathbf{q}_1
+$$
+
+因 $\lambda_1 \ne \lambda_2$，必有 $\mathbf{q}^{\mathrm{T}}_2\, \mathbf{q}_1 = 0$ ✓。
+
+**這個證明的鑰匙：** Step 2 用了 $S^{\mathrm{T}} = S$ — **對稱性正是讓兩個方向（$S$ 作用在左 vs 右）等價的條件**。如果 $S$ 不對稱，Step 2 給出 $\mathbf{q}^{\mathrm{T}}_2 S^{\mathrm{T}}$ ≠ $\mathbf{q}^{\mathrm{T}}_2 S$，整個證明就崩潰。
+
+#### 證明 2：實特徵值（補充）
+
+對稱矩陣的特徵值必為**實數**（不只正交，連特徵值都不會跳到複數平面）。
+
+設 $S = S^{\mathrm{T}}$ 是實對稱、$S\mathbf{q} = \lambda \mathbf{q}$（暫時允許 $\mathbf{q}$ 與 $\lambda$ 為複數）。
+
+對複向量取共軛轉置 $\mathbf{q}^{*}$：
+
+$$
+\mathbf{q}^{*} S \mathbf{q} = \lambda\, \mathbf{q}^{*} \mathbf{q} = \lambda\, \|\mathbf{q}\|^2 \quad\quad \text{(C)}
+$$
+
+另一邊：因 $S$ 實對稱 $\Rightarrow S^{*} = S^{\mathrm{T}} = S$，
+$$
+\mathbf{q}^{*} S \mathbf{q} = \mathbf{q}^{*} S^{*} \mathbf{q} = (S\mathbf{q})^{*} \mathbf{q} = (\lambda\mathbf{q})^{*} \mathbf{q} = \bar{\lambda}\, \|\mathbf{q}\|^2 \quad\quad \text{(D)}
+$$
+
+(C) = (D) → $\lambda = \bar{\lambda}$ → $\lambda$ 必為實數 ✓。
+
+#### 重根情況（補充）
+
+當 $\lambda_1 = \lambda_2$（重根、退化特徵值）時，對應的**特徵子空間**至少是 2 維。可以在這個特徵子空間內**做 Gram-Schmidt 正交化**，得到一組正交的特徵向量。
+
+**完整譜定理：** $n \times n$ 實對稱矩陣 $S$ 一定存在 $n$ 個正交的特徵向量（即使有重根）；組成正交矩陣 $Q$，給出**完美三明治**：
+
+$$
+\boxed{\; S = Q\Lambda Q^{\mathrm{T}}, \quad Q^{\mathrm{T}} Q = I, \quad \Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) \;}
+$$
+
+### 小例題：$2 \times 2$ 對稱矩陣完整 EVD
+
+設 $S = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$（對稱）。
+
+**Step 1：求特徵值。** $\det(S - \lambda I) = (2 - \lambda)^2 - 1 = 0$ → $\lambda^2 - 4\lambda + 3 = 0$ → $\lambda_1 = 3$、$\lambda_2 = 1$（兩個實特徵值，符合 Cauchy 1829）。
+
+**Step 2：求特徵向量。**
+
+對 $\lambda_1 = 3$：$(S - 3I)\mathbf{q}_1 = 0$ → $\begin{bmatrix} -1 & 1 \\ 1 & -1 \end{bmatrix}\mathbf{q}_1 = 0$ → $\mathbf{q}_1 = \tfrac{1}{\sqrt{2}}(1, 1)^{\mathrm{T}}$。
+
+對 $\lambda_2 = 1$：$(S - I)\mathbf{q}_2 = 0$ → $\begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix}\mathbf{q}_2 = 0$ → $\mathbf{q}_2 = \tfrac{1}{\sqrt{2}}(1, -1)^{\mathrm{T}}$。
+
+**Step 3：驗證正交。**
+
+$$
+\mathbf{q}^{\mathrm{T}}_1\, \mathbf{q}_2 = \tfrac{1}{2}(1 \cdot 1 + 1 \cdot (-1)) = 0 \quad \checkmark
+$$
+
+**「自動正交」確認！** 沒做任何 Gram-Schmidt — 對稱性本身就保證了。
+
+**Step 4：完成 EVD。**
+$$
+S = Q\Lambda Q^{\mathrm{T}} = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix} 3 & 0 \\ 0 & 1 \end{bmatrix} \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+$$
+
+### 對稱性、正交性、實特徵值的「自然界對應」
+
+**為什麼對稱矩陣自動有「實特徵值 + 正交本徵向量」？**
+
+這不是巧合，而是**物理對稱性與數學對稱性的對應**：
+
+| 物理對稱 | 對應數學物件 | 譜定理保證 |
+|---|---|---|
+| **能量守恆** | Hermitian 算符 $H$ | 實本徵值 = 可觀測能量 |
+| **時間反演** | 實對稱矩陣 | 實特徵值 |
+| **空間旋轉** | 慣性張量（實對稱） | 主軸正交 |
+| **馬可夫轉移可逆性** | 對稱轉移矩陣 | 特徵向量正交 → 主成分解耦 |
+| **二次型最佳化** | $f(\mathbf{x}) = \mathbf{x}^{\mathrm{T}} S \mathbf{x}$ | 主軸正交 → 「無耦合方向」獨立最佳化 |
+
+**最深刻的對應：** 當物理量是**可觀測量**（observable），它對應的算符必須是 Hermitian / 對稱 — 因為**觀測值必須是實數**，而譜定理保證了這一點。**對稱性的數學優美直接反映了物理量的客觀性**。
+
+### ③ 概念昇華：「對稱 = 兩基底合一」是 (P4) 的完美三明治
+
+回顧 (P4) 的一般形式：
+
+$$
+A = U\Sigma V^{\mathrm{T}}
+$$
+
+任意矩陣的 SVD 需要**兩個**不同的正交基底 $U, V$。但當 $A = S$ 是**對稱**時：
+
+$$
+S = Q\Lambda Q^{\mathrm{T}}
+$$
+
+**兩個基底合一**為同一個 $Q$ — 這是 (P4) 三明治結構的**完美狀態**：
+
+- **SVD（一般情況）：** 來源視角 $V$ ≠ 結果視角 $U$ — 矩陣是「從一個視角投到另一個」
+- **EVD（對稱情況）：** 來源視角 = 結果視角 = $Q$ — 矩陣是「在同一個視角下的純對角縮放」
+
+這個「兩基底合一」的對稱性，是對稱矩陣**所有特殊性質的根源**：
+
+| 對稱矩陣特性 | (P4) 視角的解釋 |
+|---|---|
+| 實特徵值 | 對角矩陣 $\Lambda$ 可選實的（因為來源 = 結果視角，伸縮量必實） |
+| 特徵向量正交 | $Q$ 正交（兩基底合一 → 同時兩邊正交） |
+| 與自己「同時對角化」 | $S$ 和 $S^{\mathrm{T}}$ 用同一個 $Q$（因為 $S = S^{\mathrm{T}}$） |
+| 二次型主軸 | $\mathbf{x}^{\mathrm{T}} S \mathbf{x} = \mathbf{c}^{\mathrm{T}}\Lambda\mathbf{c} = \sum_p \lambda_p c_p^2$（無耦合純對角和） |
+| Rayleigh 商最值 | $\dfrac{\mathbf{x}^{\mathrm{T}} S \mathbf{x}}{\mathbf{x}^{\mathrm{T}}\mathbf{x}} \in [\lambda_\min, \lambda_\max]$（特徵值即極值） |
+
+**最強昇華：** 對稱矩陣是「**最容易看清的矩陣**」 — 因為它的「最簡視角」是同一個（$Q$ 兼任輸入與輸出基底）。SVD（[Q19](#q19)）的偉大之處正在於它證明了「**任意矩陣都可以變得像對稱矩陣那樣容易看清**」 — 只是需要兩個視角 $V$ 與 $U$，而不是一個。
+
+從這個角度看，譜定理是「**矩陣世界的最佳劇本**」：**所有對稱性都自動轉換為正交性，所有對稱矩陣都自動完美對角化**。後續的 SVD 是「即使不對稱，也能透過引入兩個視角達到類似效果」的廣義版本。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [§6.4 ch06e S=QΛQᵀ](ch06e-QLQ.md) — EVD 完整推導 + 橢球主軸 3D 視覺
+- [§6.4 ch06e VizScript-01](ch06e-QLQ.md#vizscript-01) — 譜分解 + 橢球主軸 3D（Tier 2，使用 P4）
+- [Q11](#q11) — 對角矩陣為什麼特別（$\Lambda$ 的所有超能力都繼承到 $S$）
+- [Q12](#q12) — (P3) 動態系統用特徵值預測長期（對稱矩陣的特例 = 乾淨穩定性分析）
+- [Q13](#q13) — (P4) 三明治為什麼線代核心（EVD = 完美三明治）
+- [Q17](#q17) — QR 正交化（Gram-Schmidt vs 譜定理「自動正交」對照）
+- [Q19](#q19) — SVD 為什麼對任意矩陣存在（兩基底分開的廣義譜定理）
+- [appendix-map-eigenvalues.md](appendix-map-eigenvalues.md) — 12 類矩陣 × 特徵值幾何位置（對稱類在實軸上）
+
+**歷史原典：**
+- Cauchy, A.-L. (1829), *Sur l'équation à l'aide de laquelle on détermine les inégalités séculaires des mouvements des planètes*, **Mém. Acad. Sci.**, 9, 174–195 — 對稱矩陣實特徵值 + 主軸定理
+- Sylvester, J. J. (1852), **Philosophical Magazine** — 慣性定律
+- Jacobi, C. G. J. (1846), *Über ein leichtes Verfahren, die in der Theorie der Säkularstörungen vorkommenden Gleichungen numerisch aufzulösen*, **J. reine angew. Math.**, 30, 51–94 — 對稱矩陣對角化的 Jacobi 旋轉演算法
+- Schur, I. (1909), *Über die charakteristischen Wurzeln einer linearen Substitution*, **Math. Annalen**, 66, 488–510 — 任意方陣 Schur 三角化
+- Hermitian / 量子力學基礎：Dirac, P. A. M. (1930), *The Principles of Quantum Mechanics*, Oxford — Hermitian 算符與可觀測量
+
+**現代教科書：**
+- Strang, G. (2020), *Linear Algebra for Everyone*, §6.1 「Eigenvalues and Eigenvectors」+ §6.2 「Diagonalizing a Matrix」— 譜定理完整論述
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), §6.4 「Symmetric Matrices」 — 譜定理證明 + 應用
+- Horn, R. A. & Johnson, C. R. (2013), *Matrix Analysis* (2nd ed.), Ch.2 — 譜定理的完整代數版本（含複 Hermitian、Normal 矩陣等廣義版本）
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra*, Lec. 24–25 — 對稱矩陣的數值演算法（QR 迭代 + 分而治之）
+
+---
+
+## Q19：$A = U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任意矩陣都存在？ {#q19}
+
+> **觸發問題：** §6.5 SVD 是五大分解的**壓軸** — 它對**任意** $m \times n$ 矩陣 $A$ 都存在，不要求方陣、不要求對稱、不要求滿秩、不要求可逆。為什麼這麼一般？對比 EVD 只對「可對角化方陣」存在、CR / LU / QR 都有額外限制 — SVD 為什麼能突破所有限制？這個「普適性」背後的數學機制是什麼？
+>
+> **對應主章：** [§6.5 ch06f — A = UΣVᵀ](ch06f-USV.md)
+>
+> **3-layer 涵蓋：** ① 歷史 / ② 推導 / ③ 昇華
+
+### ① 歷史脈絡：SVD 是 19 世紀末到 20 世紀末的世紀大夢
+
+SVD 的歷史是線代中**最豐富**的一條 — 從 19 世紀末雙線性形式對角化、到 20 世紀無限維算符理論、再到 20 世紀末資料科學的核心工具：
+
+- **Beltrami 1873** *Sulle funzioni bilineari*, **Giornale di Matematiche** 11 — **SVD 的首次發現**。Beltrami 從「雙線性形式對角化」角度給出有限維 SVD。當時的形式是 $A = UDV^{\mathrm{T}}$ — 與現代記號完全一致。
+- **Jordan 1874** *Mémoire sur les formes bilinéaires*, **J. Math. Pures Appl.** — 獨立發現 SVD，並給出**變分定義** $\sigma_1 = \max \|A\mathbf{x}\|$（在 $\|\mathbf{x}\| = 1$ 約束下）— 這個變分視角後來成為 SVD 廣義化的核心。
+- **Sylvester 1889** *Sur la réduction biorthogonale d'une forme linéo-linéaire à sa forme canonique* — 把 SVD 翻譯成**矩陣語言**（之前 Beltrami / Jordan 用的是雙線性形式語言）。
+- **Schmidt 1907** *Zur Theorie der linearen und nichtlinearen Integralgleichungen*, **Math. Annalen** 63 — 推廣 SVD 到**無限維積分算符**，引入 $\sum \sigma_p \mathbf{u}_p \mathbf{v}_p^{\mathrm{T}}$ 的秩 1 分解觀點 + **首次發現 SVD 的低秩近似性質**（Schmidt 截斷定理）。
+- **Eckart-Young 1936** *The approximation of one matrix by another of lower rank*, **Psychometrika** 1 — 在矩陣框架下嚴格證明「**SVD 截斷 = Frobenius 範數下最佳低秩近似**」 — Eckart-Young 定理。
+- **Mirsky 1960** *Symmetric gauge functions and unitarily invariant norms*, **Q. J. Math.** 11 — 把 Eckart-Young 推廣到**所有 unitarily invariant norm**（包括譜範數、Frobenius、所有 Schatten 範數）。
+- **Golub-Kahan 1965** *Calculating the singular values and pseudo-inverse of a matrix*, **SIAM J. Numer. Anal.** 2 — **第一個實用 SVD 數值演算法**（用兩階段 bidiagonalization + 隱式 QR 迭代）。
+- **Golub-Reinsch 1970** *Singular value decomposition and least squares solutions*, **Numerische Mathematik** 14 — 工業標準演算法（LAPACK `DGESDD` / `DGESVD` 的祖先）。
+- **1990s+ 機器學習** — SVD 成為 PCA、推薦系統、潛在語意分析、影像壓縮、神經網路低秩分解等所有大規模資料應用的核心工具。
+- **歷史總結：** SVD 走了 150 年從「Beltrami 的雙線性形式對角化」到「機器學習的核心工具」 — 是線代中**生命力最持久、應用範圍最廣**的單一概念。
+
+### ② 設計過程還原：SVD 存在性的兩條證明路徑
+
+#### 路徑 1：透過 $A^{\mathrm{T}}A$ 的譜定理（建構性證明）
+
+**核心觀察：** 對任意 $A \in \mathbb{R}^{m \times n}$，$A^{\mathrm{T}}A \in \mathbb{R}^{n \times n}$ 永遠是**對稱半正定**矩陣 — 這意味著它**永遠有完整正交特徵向量基底**（由 [Q18](#q18) 譜定理保證）。
+
+**Step 1：對 $A^{\mathrm{T}}A$ 做譜分解。**
+
+$A^{\mathrm{T}}A$ 對稱 ⇒ 存在正交矩陣 $V$ 與對角矩陣 $\Sigma^2 = \operatorname{diag}(\sigma_1^2, \ldots, \sigma_n^2)$，$\sigma_p^2 \geq 0$（半正定）：
+
+$$
+A^{\mathrm{T}}A = V \Sigma^2 V^{\mathrm{T}}
+$$
+
+按 $\sigma_p$ 降冪排列。設 $r$ 為 $\sigma_p > 0$ 的個數。
+
+**Step 2：定義奇異值與 $U$ 的前 $r$ 列。**
+
+對 $p = 1, \ldots, r$（即 $\sigma_p > 0$）：
+
+$$
+\mathbf{u}_p = \frac{1}{\sigma_p}\, A \mathbf{v}_p
+$$
+
+**Step 3：驗證 $\{\mathbf{u}_p\}$ 互相正交。**
+
+$$
+\mathbf{u}_p^{\mathrm{T}} \mathbf{u}_q = \frac{1}{\sigma_p \sigma_q}\, \mathbf{v}_p^{\mathrm{T}} A^{\mathrm{T}} A \mathbf{v}_q = \frac{1}{\sigma_p \sigma_q}\, \sigma_q^2\, \mathbf{v}_p^{\mathrm{T}} \mathbf{v}_q = \frac{\sigma_q}{\sigma_p}\, \delta_{pq} = \delta_{pq}
+$$
+
+（利用 $A^{\mathrm{T}} A \mathbf{v}_q = \sigma_q^2 \mathbf{v}_q$ + $V$ 正交 $\mathbf{v}_p^{\mathrm{T}} \mathbf{v}_q = \delta_{pq}$） ✓
+
+**Step 4：補齊 $U$ 的後 $m - r$ 列。**
+
+在 $\mathbb{R}^m$ 中，前 $r$ 個 $\mathbf{u}_p$ 已給出**列空間 $\mathbf{C}(A)$ 的正交基底**。用 **Gram-Schmidt（[Q17](#q17)）** 在補空間 $\mathbf{N}(A^{\mathrm{T}})$ 中補齊正交基底 → 完整 $U$ 是 $m \times m$ 正交矩陣。
+
+**Step 5：組合 $A = U\Sigma V^{\mathrm{T}}$。**
+
+按行檢查：對 $p \leq r$，$A \mathbf{v}_p = \sigma_p \mathbf{u}_p$ ✓；對 $p > r$，$A \mathbf{v}_p = 0$（因為 $\mathbf{v}_p \in \mathbf{N}(A)$）✓。
+
+所以 $A V = U \Sigma$ → $A = U\Sigma V^{\mathrm{T}}$ ✓。
+
+**這個證明的精髓：** SVD 的存在性**完全建立在 $A^{\mathrm{T}}A$ 對稱半正定 + 譜定理之上**。對稱半正定是**普世構造**（任何矩陣都能做出），譜定理是**普世定理**（對任何對稱矩陣成立） — 兩個普世性的組合自然導出 SVD 的普世存在。
+
+#### 路徑 2：變分定義（極值問題，Jordan 1874 視角）
+
+定義第一奇異值：
+
+$$
+\sigma_1 = \max_{\|\mathbf{x}\| = 1} \|A\mathbf{x}\|
+$$
+
+$\{\mathbf{x} : \|\mathbf{x}\| = 1\}$ 是**緊集**（單位球面）、$\|A\mathbf{x}\|$ 連續 → 由 Weierstrass 極值定理保證**極大值存在**。設達極大的方向為 $\mathbf{v}_1$，定義 $\mathbf{u}_1 = A\mathbf{v}_1 / \sigma_1$。
+
+**遞迴：** 在 $\mathbf{v}_1^{\perp}$ 子空間求 $\sigma_2 = \max_{\|\mathbf{x}\| = 1, \mathbf{x} \perp \mathbf{v}_1} \|A\mathbf{x}\|$，得 $\mathbf{v}_2, \mathbf{u}_2$。如此遞迴到 $\sigma_r > 0$、$\sigma_{r+1} = 0$ 終止。
+
+**變分定義的價值：** 它把 SVD 從「代數結構」提升為「**極值問題的解**」 — 奇異值是 $A$ 對單位球面的「最大拉伸量」，特徵向量 $\mathbf{v}_p$ 是「**最容易被 $A$ 拉長的方向**」。這個視角是 Eckart-Young 最佳低秩近似的根基。
+
+### SVD 為什麼這麼一般？三大突破
+
+對比 EVD：「EVD 只對可對角化方陣成立」，SVD 突破了三個限制：
+
+**突破 1：不需方陣**
+
+EVD 要求 $A$ 是 $n \times n$ 方陣（特徵值是「自我作用」的概念）。SVD 透過**引入兩個基底** $U \in \mathbb{R}^{m \times m}$ 與 $V \in \mathbb{R}^{n \times n}$ — 一個輸入基底、一個輸出基底，使 $A$ 是 $m \times n$ 任意尺寸時也有意義。
+
+**突破 2：不需對角化（不需特徵值實或正交）**
+
+EVD 要求 $A$ 可對角化（要有 $n$ 個線性獨立特徵向量），這對許多矩陣不成立（譬如 Jordan 塊）。SVD 不依賴 $A$ 的特徵值/特徵向量，而是依賴 $A^{\mathrm{T}}A$（永遠對稱半正定，由 [Q18](#q18) 保證有完整正交分解）。
+
+**突破 3：奇異值永遠非負實**
+
+特徵值可以是複數、可以是負數；**奇異值永遠是非負實數** $\sigma_p \geq 0$ — 因為 $\sigma_p^2$ 是 $A^{\mathrm{T}}A$ 的特徵值（對稱半正定 ⇒ 特徵值非負）。這保證 SVD 的「伸縮量」永遠是明確的物理量。
+
+### SVD 直接讀出四個基本子空間
+
+SVD 的另一個威力是它**自動給出四個基本子空間的正交基底**（詳見 [Q08](#q08)、[appendix-four-subspaces.md](appendix-four-subspaces.md)）：
+
+$$
+A = \underbrace{[U_r\ U_0]}_{U}\, \underbrace{\begin{bmatrix} \Sigma_r & 0 \\ 0 & 0 \end{bmatrix}}_{\Sigma}\, \underbrace{[V_r\ V_0]^{\mathrm{T}}}_{V^{\mathrm{T}}}
+$$
+
+| 子空間 | SVD 給出的正交基底 |
+|---|---|
+| 列空間 $\mathbf{C}(A)$ | $U_r$（$U$ 的前 $r$ 列） |
+| 左零空間 $\mathbf{N}(A^{\mathrm{T}})$ | $U_0$（$U$ 的後 $m - r$ 列） |
+| 行空間 $\mathbf{C}(A^{\mathrm{T}})$ | $V_r$（$V$ 的前 $r$ 列） |
+| 零空間 $\mathbf{N}(A)$ | $V_0$（$V$ 的後 $n - r$ 列） |
+
+**任意矩陣的所有結構資訊全部存在 SVD 中** — rank、列空間、行空間、零空間、奇異值（伸縮量）、偽反矩陣，一個 SVD 全給。
+
+### 小例題：$3 \times 2$ SVD（連動 Q17 與 Q18）
+
+設 $A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}$（與 [Q17](#q17) Gram-Schmidt 同例題）。
+
+**Step 1：算 $A^{\mathrm{T}}A$。**
+
+$$
+A^{\mathrm{T}}A = \begin{bmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}
+$$
+
+**這正是 [Q18](#q18) 的 EVD 小例題！**
+
+**Step 2：用 Q18 的結果。** $A^{\mathrm{T}}A$ 的特徵值 $\lambda_1 = 3$、$\lambda_2 = 1$；正交特徵向量 $\mathbf{v}_1 = \tfrac{1}{\sqrt{2}}(1, 1)^{\mathrm{T}}$、$\mathbf{v}_2 = \tfrac{1}{\sqrt{2}}(1, -1)^{\mathrm{T}}$。
+
+**Step 3：奇異值。** $\sigma_1 = \sqrt{3}$、$\sigma_2 = 1$。
+
+**Step 4：算 $\mathbf{u}_1, \mathbf{u}_2$。**
+
+$$
+A \mathbf{v}_1 = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 2 \\ 1 \\ 1 \end{bmatrix},\quad \mathbf{u}_1 = \frac{A \mathbf{v}_1}{\sqrt{3}} = \tfrac{1}{\sqrt{6}}\begin{bmatrix} 2 \\ 1 \\ 1 \end{bmatrix}
+$$
+
+$$
+A \mathbf{v}_2 = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix},\quad \mathbf{u}_2 = \frac{A \mathbf{v}_2}{1} = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}
+$$
+
+**驗證正交：** $\mathbf{u}_1^{\mathrm{T}} \mathbf{u}_2 = \tfrac{1}{\sqrt{12}}(0 + 1 - 1) = 0$ ✓。
+
+**Step 5：補齊 $\mathbf{u}_3$（$\in \mathbf{N}(A^{\mathrm{T}})$）。**
+
+$\mathbf{u}_3 \perp \mathbf{u}_1, \mathbf{u}_2$ → $\mathbf{u}_3 = \tfrac{1}{\sqrt{3}}(1, -1, -1)^{\mathrm{T}}$（解 $A^{\mathrm{T}}\mathbf{u}_3 = 0$）。
+
+**Step 6：完整 SVD。**
+
+$$
+U = \tfrac{1}{\sqrt{6}}\begin{bmatrix} 2 & \sqrt{3} & \sqrt{2} \\ 1 & \sqrt{3} & -\sqrt{2} \\ 1 & -\sqrt{3} & -\sqrt{2} \end{bmatrix}, \quad \Sigma = \begin{bmatrix} \sqrt{3} & 0 \\ 0 & 1 \\ 0 & 0 \end{bmatrix}, \quad V = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+$$
+
+**這個例題的優美：** Q17 用同個 $A$ 做 QR 得正交基底（單邊）；Q18 算 $A^{\mathrm{T}}A$ 的 EVD 得對稱譜分解；Q19 把兩者**接在一起**得 SVD 的雙邊正交分解 — **三個分解透過同一個 $3 \times 2$ 矩陣串成一條教學鏈**。
+
+### ③ 概念昇華：SVD 是「線代之冠」
+
+SVD 不是普通的分解 — 它是線代中**唯一兼具最高一般性與最高對稱性**的物件。它的重要性源自三個層次的「集大成」：
+
+#### 層次 1：(P4) 三明治的最強形式
+
+回顧 [Q13](#q13) (P4) 三明治：「視角切換 → 純對角縮放 → 視角切換回來」。SVD 是這個哲學的**最一般實現**：
+
+| 分解 | (P4) 強度 | 矩陣要求 |
+|---|---|---|
+| **CR** | 退化（無對角中間項） | 任意 $A$ |
+| **LU** | 退化（兩三角，無對角） | 方陣（可消元） |
+| **QR** | 半三明治（$Q$ 正交、$R$ 三角） | 任意 $A$ |
+| **EVD** | 完美三明治（兩基底相同 $Q$） | 對稱方陣 |
+| **SVD** | **最強三明治（兩基底分開 $U, V$）** | **任意 $m \times n$** |
+
+#### 層次 2：跨章節整合的「全書集大成」
+
+SVD 連動全書幾乎每個概念：
+
+| 全書概念 | SVD 的連結 |
+|---|---|
+| §1 視角 | SVD 同時讀「列視角」（$U$）+「行視角」（$V$） |
+| §2 點積/外積 | $\sigma_p \mathbf{u}_p \mathbf{v}_p^{\mathrm{T}}$ 是 §2 外積（秩 1 矩陣，[Q05](#q05)） |
+| §3 $A\mathbf{x}$ + 4 子空間 | SVD 自動給出 4 子空間正交基底（[Q08](#q08)） |
+| §4 (MM4) | SVD 是 (MM4) 的「最佳基底版本」 |
+| §5 (P3) (P4) | SVD = (P4) 最強形式 |
+| §6 五大分解 | SVD 是壓軸 |
+| 附錄 B Matrix World | SVD 給出偽反矩陣 $A^{+} = V \Sigma^{+} U^{\mathrm{T}}$ |
+| 附錄 C 解 $A\mathbf{x} = \mathbf{b}$ | SVD 給出最小範數解 $\mathbf{x}^{*} = A^{+}\mathbf{b}$ |
+
+#### 層次 3：Eckart-Young 最佳低秩近似 — SVD 的偉大應用
+
+對 SVD $A = \sum_{p=1}^r \sigma_p \mathbf{u}_p \mathbf{v}_p^{\mathrm{T}}$，**截斷到前 $k$ 項**：
+
+$$
+A_k = \sum_{p=1}^k \sigma_p\, \mathbf{u}_p\, \mathbf{v}_p^{\mathrm{T}}
+$$
+
+**Eckart-Young 1936 定理：** $A_k$ 是**所有秩 $\leq k$ 矩陣中對 $A$ 最佳的近似**（在 Frobenius 範數下）：
+
+$$
+\min_{\operatorname{rank}(B) \leq k} \|A - B\|_F = \|A - A_k\|_F = \sqrt{\sum_{p=k+1}^r \sigma_p^2}
+$$
+
+**這個定理是現代資料科學的基石** — 圖像壓縮、推薦系統、PCA、潛在語意分析、神經網路低秩分解 — 全部依賴此定理。
+
+**最強昇華：** SVD 是**矩陣世界的標準型**。任何矩陣 $A$，只要套上 SVD，立刻看到它的：
+
+1. **形狀**（$m \times n$）
+2. **rank**（$\sigma_p > 0$ 的個數）
+3. **4 子空間正交基底**
+4. **奇異值排序的伸縮譜**
+5. **最佳低秩近似**
+6. **偽反矩陣**
+
+— **一個分解，看清所有**。這就是為什麼 Strang 在 LAFE Ch.7 用整章寫 SVD，並稱它為「**the most important theorem in linear algebra**」。
+
+### 延伸閱讀
+
+**本書相關章節：**
+- [§6.5 ch06f A=UΣVᵀ](ch06f-USV.md) — 全書最長章 + SVD 完整推導 + 4 應用切換
+- [§6.5 ch06f VizScript-01](ch06f-USV.md#vizscript-01) — SVD 完整互動 Tier 3 旗艦（壓縮/PCA/降噪/推薦）+ 4 子空間視覺 + Mona Lisa demo
+- [Q05](#q05) — 外積秩 1 原子（SVD 的秩 1 之和構件）
+- [Q08](#q08) — 4 子空間（SVD 自動給出正交基底）
+- [Q13](#q13) — (P4) 三明治線代核心（SVD = 最強形式）
+- [Q14](#q14) — 為什麼要分解（SVD 對應全部 6 動機）
+- [Q17](#q17) — QR（SVD 的單邊正交化前置工具）
+- [Q18](#q18) — 對稱譜定理（SVD 存在性的核心引擎）
+- [appendix-matrix-world.md](appendix-matrix-world.md) — 偽反矩陣統一公式（SVD 是入口）
+- [appendix-four-subspaces.md](appendix-four-subspaces.md) — 4 子空間與解 $A\mathbf{x} = \mathbf{b}$ 完整結構（SVD 構造）
+
+**歷史原典：**
+- Beltrami, E. (1873), *Sulle funzioni bilineari*, **Giornale di Matematiche**, 11, 98–106 — **SVD 首次發現**
+- Jordan, C. (1874), *Mémoire sur les formes bilinéaires*, **J. Math. Pures Appl.**, 19, 35–54 — SVD 的變分定義獨立發現
+- Sylvester, J. J. (1889), *Sur la réduction biorthogonale d'une forme linéo-linéaire à sa forme canonique*, **C. R. Acad. Sci. Paris**, 108, 651–653 — 矩陣語言版本
+- Schmidt, E. (1907), *Zur Theorie der linearen und nichtlinearen Integralgleichungen*, **Math. Annalen**, 63, 433–476 — 無限維 SVD + 低秩近似觀察
+- Eckart, C. & Young, G. (1936), *The approximation of one matrix by another of lower rank*, **Psychometrika**, 1, 211–218 — Eckart-Young 定理
+- Mirsky, L. (1960), *Symmetric gauge functions and unitarily invariant norms*, **Q. J. Math.**, 11, 50–59 — Eckart-Young 推廣
+- Golub, G. H. & Kahan, W. (1965), *Calculating the singular values and pseudo-inverse of a matrix*, **SIAM J. Numer. Anal.**, 2, 205–224 — 第一個實用 SVD 演算法
+- Golub, G. H. & Reinsch, C. (1970), *Singular value decomposition and least squares solutions*, **Numerische Mathematik**, 14, 403–420 — 工業標準
+
+**現代教科書：**
+- Strang, G. (2020), *Linear Algebra for Everyone*, **Ch.7 「The Singular Value Decomposition」** — SVD 整章 + 「the most important theorem in linear algebra」名言出處
+- Strang, G. (2023), *Introduction to Linear Algebra* (6th ed.), Ch.7 — SVD 完整推導
+- Strang, G. (2019), *Linear Algebra and Learning from Data*, Ch.1 + Ch.2 — SVD 作為資料科學核心工具
+- Trefethen, L. N. & Bau, D. (1997), *Numerical Linear Algebra*, Lec. 4–5, 31–32 — SVD 數值演算法
+- Horn, R. A. & Johnson, C. R. (2013), *Matrix Analysis* (2nd ed.), Ch.7 — SVD 完整代數理論
+- Stewart, G. W. (1993), *On the early history of the singular value decomposition*, **SIAM Review**, 35, 551–566 — SVD 歷史回顧（Beltrami→Eckart-Young→Golub 完整脈絡）
+
+---
+
+## 其餘 3 條（Q20–Q22）— 規劃中
+
+依 S15 路線圖補完：
+
+- **S15** — Q20（特徵值地圖）+ Q21（Matrix World 同心橢圓）+ Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼線代核心）+ 剩餘主章 callout 批次插入（ch06a–ch06f + 3 附錄）+ 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗）
+
+每條 Q&A 採與 Q01–Q19 相同的 3-layer 結構（① 歷史 → ② 推導 → ③ 昇華 + 延伸閱讀），篇幅約 1000–2500 字含舉例 + 推導 + 經典出處引用。
+
+---
+
+> **附錄末更新時間：** S14 (2026-05-13) — Q01–Q19 完成（19/22，86%）— §6 五大分解 + 整體動機 6 條全部完成；剩 Q20–Q22（3 附錄）由 S15 補完

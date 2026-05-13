@@ -7,9 +7,9 @@
 
 ## 最後更新
 
-- **Session:** S13（**背後觀念層續寫 §4 + §5，appendix-D-why.md 13/22 Q&A 完成 + 2 主章 callout（ch04 + ch05）插入**，S14–S15 路線繼續補完剩餘 9 條 Q&A）
+- **Session:** S14（**背後觀念層續寫 §6，appendix-D-why.md 19/22 Q&A 完成 + 6 主章 callout（ch06a-ch06f）插入 — 全主章 100% 覆蓋**，S15 路線剩 Q20-Q22 + 3 附錄 callout + 整合收尾）
 - **日期:** 2026-05-13
-- **狀態:** **S13 完成：** 沿用 S12 確立的 3-layer 框架 + 方案 D 雙層落點 + 批量寫作流程，產出 §4 + §5 共 4 條 Q&A：**Q10 為什麼乘法不可交換 AB≠BA**（95 行 / Hamilton 四元數革命 + 四層理由 + 5 跨領域順序資訊對應）+ **Q11 對角矩陣為什麼這麼特別**（111 行 / 四超能力 + §6 中間項策略 + 「矩陣世界中的標量」）+ **Q12 (P3) 動態系統為什麼能用特徵值預測長期**（121 行 / Lagrange→Euler→Poincaré 史線 + 三步走解耦 + Fibonacci 黃金比例 + 7 跨領域應用）+ **Q13 (P4) 三明治為什麼線代核心**（156 行 / Sylvester→Jordan→Schmidt→Eckart-Young 100 年史 + 三層分解 + 2×2 EVD 完整驗算 + 「世紀大夢」昇華）+ 2 主章 callout 客製化（[ch04 Q09+Q10](../book/ch04-mat-mat.md) / [ch05 Q11+Q12+Q13](../book/ch05-patterns.md)）+ ch05 callout 中 1 處 typo「appendix-D-view」→「appendix-D-why.md」即時修正。總產出 [appendix-D-why.md](../book/appendix-D-why.md) **1657 行（+482 行 / 36% 增量）/ 13 Q&A（13/22 = 59%）** + 2 主章 callout / 5 Q&A links（累計 6 callout / 13 Q&A links）。**下次 S14 從 Q14（為什麼要分解）+ Q15-Q19（§6 五大分解各 1）開始**，預估 ~2.5h。
+- **狀態:** **S14 完成：** 沿用 S12-S13 確立的 3-layer 框架 + 方案 D 雙層落點 + 批量寫作流程，產出 §6 共 6 條 Q&A：**Q14 為什麼要把矩陣「分解」？**（156 行 / Gauss 1809 → Eckart-Young 1936 200 年史 + 6 大工程動機 + 「為什麼正好五個」遞進對稱性 5 級表）+ **Q15 A=CR 列秩=行秩自然冒出**（119 行 / Sylvester 1851 rank + Frobenius 1879 + Strang 2020 首次代數封裝「最樸素分解」+ 3×3 rank 2 雙重讀法）+ **Q16 A=LU 高斯消去本質**（165 行 / 《九章算術》方程章 2000 年東方原型 + Newton 1707 → Gauss 1809 → Turing 1948 LU 命名 + 3×3 算驗 + 5 跨領域因果結構表）+ **Q17 A=QR Gram-Schmidt 動機**（138 行 / Gauss 1801 Ceres → Legendre/Gram/Schmidt/Householder 200 年最小平方→Hilbert 演化 + 3×2 完算 + 條件數不被平方化）+ **Q18 譜定理對稱特徵向量自動正交**（144 行 / Cauchy 1829 主軸定理 → 量子力學 1920s Hermitian + 雙證明 + 5 物理對稱↔數學物件對應）+ **Q19 SVD 為什麼任意矩陣存在**（174 行 / Beltrami 1873 首次發現 → Eckart-Young 1936 + 雙證明路徑 + 3×2 SVD 巧妙串接 Q17+Q18 同 $A$ + Strang「the most important theorem」名言）+ 6 主章 callout 客製化（[ch06a Q14+Q11+Q13](../book/ch06a-five.md) / [ch06b Q15+Q14](../book/ch06b-CR.md) / [ch06c Q16+Q14](../book/ch06c-LU.md) / [ch06d Q17](../book/ch06d-QR.md) / [ch06e Q18+Q11+Q13](../book/ch06e-QLQ.md) / [ch06f Q19+Q14+Q08+Q13](../book/ch06f-USV.md) 共 15 links）。總產出 [appendix-D-why.md](../book/appendix-D-why.md) **2740 行（+1083 行 / 65% 增量）/ 19 Q&A（19/22 = 86%）** + 6 主章 callout / 15 Q&A links（累計 **12 callout / 28 Q&A links — 全主章 100% 覆蓋** ✓）。**下次 S15 從 Q20（特徵值地圖）+ Q21（Matrix World 同心橢圓）+ Q22（解 Ax=b 為什麼核心）+ 3 附錄 callout + 整合收尾**（BOOK.md 重新生成 + 跨檔 anchor 校驗），預估 ~2h。
 
 ---
 
@@ -95,9 +95,24 @@
   - **Q13 (P4) 三明治為什麼線代核心**（156 行）— ① Sylvester 1852 → Jordan 1870 → Schmidt 1907 → Eckart-Young 1936 = 100 年史線 / ② 三明治三層分解策略（進入最簡視角→純對角縮放→換回原視角）+ 三威力（降維 + 函數計算 + 視角切換哲學）+ 6 跨領域視角切換對應表（物理/訊號/量子/機器學習/影像壓縮/氣候）+ 對稱矩陣 2×2 EVD 完整驗算 + (P3)↔(P4) 對偶總表 / ③ 「矩陣 = 視角切換 + 純對角縮放 + 視角切換回來」代數刻畫 + §6 五大分解 (P4) 譜系表 + 「世紀大夢」最強昇華
 - [x] **S13 ch04 + ch05 主章 callout 客製化**：[ch04-mat-mat.md](../book/ch04-mat-mat.md) 章節摘要末新增 callout（連結 Q09 矩陣乘法行乘列來源 + Q10 不可交換本質，2 Q&A links）+ [ch05-patterns.md](../book/ch05-patterns.md) 章節摘要末新增 callout（連結 Q11 對角矩陣超能力 + Q12 (P3) 動態預測 + Q13 (P4) 三明治世界觀，3 Q&A links）— 採短摘要列表式（~250-400 字 hook + 連結附錄 D）格式，與 S12 ch01/ch02/ch03 callout 一致；ch05 callout 中 1 處 typo「appendix-D-view」→「appendix-D-why.md」即時修正
 - [x] **S13 累計進度：** 全書主章 callout 6 個（S12 的 4 個 + S13 的 2 個）共 13 Q&A links / appendix-D-why.md 13/22 Q&A = 59%；S14-S15 路線剩 9 條 Q&A（§6 五大分解 6 + 3 附錄）+ 6 chapters callout（ch06a-ch06f）+ 3 附錄 callout + 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗）
+- [x] **S14 §6 6 條 Q&A 批量寫作**：[appendix-D-why.md](../book/appendix-D-why.md) 從 1657 行擴至 **2740 行（+1083 行 / 65% 增量）**，目錄表 Q14-Q19 6 條從「🚧 規劃中」→「✅ 已完成（S14）」+ 加錨點連結；尾段「其餘 9 條（Q14-Q22）」改「其餘 3 條（Q20-Q22）」+ 改 S15 路線；附錄末時間戳更新「S14 (2026-05-13) — Q01-Q19 完成（19/22, 86%）— §6 五大分解 + 整體動機 6 條全部完成」
+  - **Q14 為什麼要把矩陣「分解」？**（156 行 / §6 整體動機）— ① Gauss 1809《Theoria Motus》→ Jacobi 1846 → Sylvester 1852 → Cayley 1858 → Schmidt 1907 → Eckart-Young 1936 → 1940-60s 數值線代 → 1965 Golub-Kahan → LINPACK/LAPACK → 2000s ML 完整 200 年史 / ② 6 大工程動機詳述（求解 LU/QR/SVD + 求冪 EVD + 求反偽反 + 穩定性 + 壓縮降秩 + 結構理解）+ 「六動機↔五分解」對應總表 + 「為什麼正好五個」5 級對稱性遞進表 / ③ Strang LAFE §6.1「Make every matrix look diagonal」+ 三層昇華（計算效率 / 物理意義 / 跨領域統一）
+  - **Q15 A=CR 為什麼成立？列秩=行秩自然冒出**（119 行）— ① Sylvester 1851 引入 rank + Frobenius 1879 系統證明 + Strang 2020《LAFE》首次代數封裝「最樸素分解」 / ② C 列空間獨立列 + R 由 rref 非零行兩步建構 + 3×3 rank 2 完整算驗 + 雙重讀法自然冒出列秩=行秩=r / ③ CR 在「對稱性↔一般性」光譜最樸素端 + 五分解對照表 + 教學三功能（rank 視覺化 + 「列秩=行秩」自然證明 + 「分解」入門最低門檻）
+  - **Q16 A=LU 高斯消去法本質**（165 行）— ① 《九章算術》方程章公元 1 世紀東方原型「遍乘直除」比 Gauss 早 1800 年 → Newton 1707 → Gauss 1809 Ceres 命名源頭 → Doolittle 1878 → Banachiewicz 1938 → Turing 1948「LU」命名 + partial pivoting + 數值穩定性 → Wilkinson 1965 → LINPACK/LAPACK / ② 單位下三角矩陣 $E_{ik}$ 左乘表述消去 + 推得 $A=M^{-1}U=LU$ + $L$ 元素正是消去倍數 $\ell_{ik}$ + 3×3 LU 完整算驗 + 主元 + partial pivoting + 三角矩陣 6 大性質表 / ③ 「演算法→代數結構」三威力（複用 / 分析 / 嫁接其他結構）+ 5 跨領域「因果結構」對應表（訊號處理因果濾波器 / 時序 AR / 動態規劃 / DAG 編譯器 / 拓樸電路）+ 「LU 是『演算法被代數化封裝』在線代中的最古老案例」
+  - **Q17 A=QR Gram-Schmidt 動機**（138 行）— ① Gauss 1801 用最小平方法算 Ceres 軌道 → Legendre 1805 → Gauss 1809 Theoria Motus 正規方程 → Gram 1883 → Schmidt 1907 命名 → Householder 1958 數值穩定 / ② 「正交基底=無耦合最佳座標」 + 逐步扣除耦合演算法 + $A=QR$ 自動冒出（上三角 $R$ 因組合係數只用前 $k$ 個 $\mathbf{q}$）+ 3×2 Gram-Schmidt 完整算到驗證 / ③ 最小平方法用 QR vs 正規方程（不放大條件數）+ QR 是 EVD/SVD 前置 + 「分解化是把演算法封裝為代數物件的標準路徑」
+  - **Q18 S=QΛQᵀ 對稱特徵向量自動正交**（144 行）— ① Cauchy 1829 主軸定理 + 對稱矩陣實特徵值 → Sylvester 1852 慣性 → Jacobi 1846 旋轉 → Schur 1909 → 量子力學 1920s Hermitian / ② 雙證明：① $(\lambda_1-\lambda_2)\mathbf{q}_2^{\mathrm{T}}\mathbf{q}_1=0$ 因 $S=S^{\mathrm{T}}$ + ② $\lambda=\bar\lambda$ 實特徵值（複向量取共軛轉置）+ 重根情況 Gram-Schmidt 內部化 + 2×2 對稱 $S=\begin{bmatrix}2&1\\1&2\end{bmatrix}$ 完整算驗 / ③ 5 物理對稱↔數學物件對應表（能量守恆 / 時間反演 / 空間旋轉 / 馬可夫可逆 / 二次型）+ 對稱矩陣 5 特性↔(P4) 兩基底合一解釋 + 「對稱矩陣是最容易看清的矩陣」+ SVD = 任意矩陣也能像對稱那樣容易看清的廣義版本
+  - **Q19 A=UΣVᵀ SVD 為什麼任意矩陣存在**（174 行）— ① Beltrami 1873《Sulle funzioni bilineari》首次發現（雙線性形式對角化）→ Jordan 1874 變分定義獨立 → Sylvester 1889 矩陣語言 → Schmidt 1907 無限維 + 低秩近似觀察 → Eckart-Young 1936 最佳低秩近似 Psychometrika → Mirsky 1960 推廣到所有 unitarily invariant norm → Golub-Kahan 1965 第一實用演算法 → Golub-Reinsch 1970 LAPACK 祖先 / ② 雙證明路徑：① 透過 $A^{\mathrm{T}}A$ 譜定理建構性（$A^{\mathrm{T}}A$ 永遠對稱半正定 + Q18 譜定理 → 普世存在）+ ② Jordan 1874 變分定義 $\sigma_1=\max\|A\mathbf{x}\|$（Weierstrass 緊集 + 遞迴）+ 3 大突破（不需方陣 / 不需可對角化 / 奇異值永遠非負實）+ SVD 自動讀出 4 子空間正交基底表 + **3×2 SVD 完整小例題巧妙連動 Q17 同 $A$ + $A^{\mathrm{T}}A=$ Q18 同矩陣形成「Q17 QR → Q18 EVD → Q19 SVD」教學鏈** / ③ 3 層昇華：(P4) 三明治最強形式 5 分解強度表 + 全書集大成 8 個跨章節整合表 + Eckart-Young 1936 最佳低秩近似 → 圖像壓縮/推薦/PCA/神經網路全建立於此 + Strang LAFE Ch.7「the most important theorem in linear algebra」名言
+- [x] **S14 ch06a-ch06f 6 主章 callout 客製化**：採短摘要列表式（~250-450 字 hook + 連結附錄 D）格式，與 S12-S13 callout 一致；放在「章節摘要」段末（最後一個內容段之後、`---`「數學要點」段之前）
+  - [ch06a-five](../book/ch06a-five.md)（331 → 339 行 / 3 Q&A links Q14+Q11+Q13，hook「五大分解為什麼正好五個 + LAFE『Make every matrix look diagonal』+ 5 級遞進對稱性」）
+  - [ch06b-CR](../book/ch06b-CR.md)（545 → 552 行 / 2 Q&A links Q15+Q14，hook「最樸素的分解 + rank 視覺載體 + Strang 2020 首次代數封裝」）
+  - [ch06c-LU](../book/ch06c-LU.md)（654 → 661 行 / 2 Q&A links Q16+Q14，hook「《九章算術》方程章 2000 年東方原型 + Turing 1948 LU 命名 + 5 跨領域因果結構」）
+  - [ch06d-QR](../book/ch06d-QR.md)（541 → 547 行 / 1 Q&A link Q17，hook「200 年最小平方→Hilbert 演化 + Gauss 1801 Ceres → Householder 1958 + 條件數不被平方化」）
+  - [ch06e-QLQ](../book/ch06e-QLQ.md)（695 → 703 行 / 3 Q&A links Q18+Q11+Q13，hook「物理對稱性=數學正交性 + Cauchy 1829 主軸定理 + 完美三明治」）
+  - [ch06f-USV](../book/ch06f-USV.md)（934 → 943 行 / 4 Q&A links Q19+Q14+Q08+Q13，hook「Beltrami 1873 首次發現 + Strang『the most important theorem』+ SVD 唯一同時對應所有 6 工程動機」）
+- [x] **S14 累計進度：** 全書主章 callout 12 個（S12 的 4 個 + S13 的 2 個 + S14 的 6 個）共 28 Q&A links — **全主章 100% 覆蓋（foreword + ch01-ch06f）** / appendix-D-why.md 19/22 Q&A = 86%；S15 路線剩 3 條 Q&A（3 附錄）+ 3 附錄 callout + 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗 + HANDOFF / SESSION_INDEX / SOP_DRAFT 收尾）
 
 ### 進行中
-- 無，S13 已收尾，**Q10-Q13 §4 + §5 共 4 條 Q&A + 2 主章 callout（ch04 + ch05）全部完成**
+- 無，S14 已收尾，**Q14-Q19 §6 共 6 條 Q&A + 6 主章 callout（ch06a-ch06f）全部完成 + 全主章 100% 覆蓋達成**
 
 ### 待辦（多 session 路線圖 v3 — S11 整合 + S12+ 視覺化實作）
 
@@ -118,31 +133,46 @@
 | ✅ S11 | 整合 + 校對 + 風格統一 + `BOOK.md` + `VIZ-CATALOG.md` + Strang PDF 防護 | [BOOK.md](../book/BOOK.md)（8650 行）+ [VIZ-CATALOG.md](../book/VIZ-CATALOG.md)（241 行 metadata）+ SCHEMA.md §3.5 全書視覺錨點 + 9 處 anchor 修復 + Tier 表 6 處校正 + 23 處風格 sed 修正 + .gitignore PDF 防護 |
 | ✅ S12 | **背後觀念層啟動：Foreword + §1 + §2 + §3 共 9 Q&A + 4 主章 callout** | [appendix-D-why.md](../book/appendix-D-why.md)（1175 行 / 9 Q&A，含 Q09 PoC + Q01-Q08 批量）+ 4 主章 callout（foreword / ch01 / ch02 / ch03 共 8 Q&A links）+ memory feedback_why_layer.md（3-layer 框架）+ foreword「23→36」舊數字 bug 修 |
 | ✅ S13 | **§4 + §5：Q10–Q13（4 條 Q&A）+ ch04 / ch05 主章 callout** | [appendix-D-why.md](../book/appendix-D-why.md) 從 1175 行擴至 **1657 行（+482 行 / 13 Q&A = 59%）**：Q10 不可交換（95）+ Q11 對角矩陣（111）+ Q12 (P3) 動態預測（121）+ Q13 (P4) 三明治（156）+ 2 主章 callout（[ch04](../book/ch04-mat-mat.md) Q09+Q10 / [ch05](../book/ch05-patterns.md) Q11+Q12+Q13 共 5 Q&A links）+ ch05 1 處 typo 修 |
-| **→ S14** | **§6 五大分解：Q14–Q19（6 條 Q&A）+ ch06a–ch06f 主章 callout** | Q14（為什麼要分解）+ Q15（A=CR 列秩=行秩）+ Q16（A=LU 高斯消去法本質）+ Q17（A=QR Gram-Schmidt 動機）+ Q18（譜定理對稱矩陣特徵向量正交）+ Q19（SVD 為什麼對任何矩陣存在）；ch06a-ch06f 主章 callout；預估 ~2.5h |
-| S15 | **附錄 + 整合收尾：Q20–Q22（3 條）+ 3 附錄 callout + BOOK.md 重新生成 + VIZ-CATALOG.md 補引 + SCHEMA / VIZ_SCHEMA callout 規範 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批** | Q20（特徵值地圖怎麼畫得出來）+ Q21（Matrix World 同心橢圓 vs 樹狀）+ Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼是線代核心問題）+ 3 附錄 callout + 整合收尾；預估 ~1.5h |
+| ✅ S14 | **§6 五大分解：Q14–Q19（6 條 Q&A）+ ch06a–ch06f 主章 callout — 全主章 100% 覆蓋** | [appendix-D-why.md](../book/appendix-D-why.md) 從 1657 行擴至 **2740 行（+1083 行 / 19 Q&A = 86%）**：Q14 分解動機（156）+ Q15 CR（119）+ Q16 LU（165）+ Q17 QR（138）+ Q18 譜定理（144）+ Q19 SVD（174）+ 6 主章 callout（[ch06a](../book/ch06a-five.md) Q14+Q11+Q13 / [ch06b](../book/ch06b-CR.md) Q15+Q14 / [ch06c](../book/ch06c-LU.md) Q16+Q14 / [ch06d](../book/ch06d-QR.md) Q17 / [ch06e](../book/ch06e-QLQ.md) Q18+Q11+Q13 / [ch06f](../book/ch06f-USV.md) Q19+Q14+Q08+Q13 共 15 links）— **累計 12 callout / 28 Q&A links 全主章 100% 覆蓋** |
+| **→ S15** | **附錄 + 整合收尾：Q20–Q22（3 條）+ 3 附錄 callout + BOOK.md 重新生成 + 跨檔 anchor 校驗 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批** | Q20（特徵值地圖怎麼畫得出來）+ Q21（Matrix World 同心橢圓 vs 樹狀）+ Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼是線代核心問題）+ 3 附錄 callout（map-eigenvalues / matrix-world / four-subspaces）+ 整合收尾（BOOK.md 重新生成 8650 → ~9700 行 / VIZ-CATALOG.md 補引 / SCHEMA + VIZ_SCHEMA callout 規範補充）；預估 ~2h |
 | S16+ | Python 視覺化技術棧 PoC + 首批 Tier 3 旗艦實作（延後至背後觀念層完成後） | 技術棧 PoC（Marimo + plotly 3D + matplotlib + scikit-learn + Pillow）+ 從 [VIZ-CATALOG.md](../book/VIZ-CATALOG.md) 首批挑題：ch04 V-02 (MM4 + Mona Lisa) 或 ch06f V-01 (SVD Master) 開始 PoC，預估各 3 session |
 | S16+ | Python 視覺化技術棧決策 + 從 VIZ-CATALOG 挑題目開做 PoC | （預估 ~28–30 session，背後觀念層 S12-S15 完成後啟動）|
 
-### S14 起步建議（S13 已完成，背後觀念層續寫）
+### S15 起步建議（S14 已完成，背後觀念層收尾 + 整合）
 
-1. **S14 是「§6 五大分解 Q&A 批量寫」session** — 預估 ~2.5h，沿用 S12-S13 已驗證的批量寫作流程：
-   - **Q14（為什麼要把矩陣「分解」？）** — §6 整體動機。① 史線：Sylvester 1852 慣性 → Cayley/Jacobi 對角化追求 → Schmidt/Eckart-Young SVD → 20 世紀數值線代 / ② 6 個工程動機（求解 / 求冪 / 求反 / 分析穩定性 / 壓縮 / 降秩） / ③ 「把矩陣化為兩基底 + 對角」的世紀大夢
-   - **Q15（A=CR 列秩 = 行秩怎麼自然冒出？）** — § 6.1。① CR 是「最樸素的分解」 / ② $A = CR$ 直接讀出列空間獨立列 + 「列秩 = 行秩」雙重證明 / ③ rank-nullity 的視覺載體
-   - **Q16（A=LU 為什麼存在？高斯消去法為什麼能壓縮成兩三角矩陣？）** — §6.2。① 高斯消去法（《九章算術》→ Gauss 1800s） / ② LU 推導 + 主元 + (MM4) 視角 / ③ 「分塊解耦」哲學
-   - **Q17（A=QR 為什麼需要正交化？Gram-Schmidt 從哪冒出來？）** — §6.3。① Gram 1883 + Schmidt 1907 / ② Gram-Schmidt 推導 + 最小平方法動機 / ③ 正交基底 = 「無耦合的最佳座標」
-   - **Q18（$S=Q\Lambda Q^{\mathrm{T}}$ 對稱矩陣特徵向量為什麼自動正交？）** — §6.4。① 譜定理史（Cauchy 1829 → Sylvester → 量子力學 1920s 厄米化）/ ② 正交性證明（從 $S\mathbf{q}_1 = \lambda_1 \mathbf{q}_1$ + $S\mathbf{q}_2 = \lambda_2 \mathbf{q}_2$ 兩邊取內積差 → $(\lambda_1 - \lambda_2)\mathbf{q}_1 \cdot \mathbf{q}_2 = 0$） / ③ 「對稱 = 兩基底合一」是 (P4) 完美三明治
-   - **Q19（$A = U\Sigma V^{\mathrm{T}}$ SVD 為什麼對任何矩陣存在？）** — §6.5（壓軸）。① Schmidt 1907 → Eckart-Young 1936 / ② 兩種證明路徑（$A^{\mathrm{T}}A$ 譜分解推導 / 變分定義 $\sigma_1 = \max \|A\mathbf{x}\|$） / ③ SVD 是 (P4) 的最強形式 + Eckart-Young 最佳低秩近似
-   - **6 個主章 callout：** ch06a / ch06b / ch06c / ch06d / ch06e / ch06f 各 1 個（連結對應 Q&A）
+1. **S15 是「附錄 Q&A 收尾 + 整合 session」** — 預估 ~2h，沿用 S12-S14 已驗證的批量寫作流程 + S11 整合流程：
 
-2. **預估行數：** Q14（~100 行）+ Q15-Q19 各 ~120-150 行 = ~750 行；6 主章 callout 各 ~30-60 行 = ~280 行；appendix-D-why.md 預期擴至 ~2700 行
+   **A. 附錄 Q&A 批量（~1h）：**
+   - **Q20（特徵值的「地圖」為什麼能畫得出來？）** — Appendix A。① 史線：Cauchy 1829 主軸 + Sylvester 1852 慣性 → 12 類矩陣的特徵值幾何位置整理 / ② 12 類矩陣 × 特徵值位置完整表（對稱、正定、反對稱、酉、馬可夫等）+ 為什麼這些位置不重疊 / ③ 「特徵值幾何位置 = 矩陣家族 DNA」
+   - **Q21（Matrix World 為什麼是「同心橢圓繼承樹」而非「樹狀」？）** — Appendix B。① 史線：Strang 在 LAFE 「Matrix World」設計史 + Bourbaki 結構主義數學影響 / ② 為什麼用同心橢圓（繼承關係）而非樹（分類關係）— Matrix → Square → Diagonalizable → Normal → Symmetric → ... → {I, O} 11 層 / ③ 「分類學 vs 繼承樹」設計哲學 + 偽反矩陣作為全矩陣統一公式的位置
+   - **Q22（解 $A\mathbf{x}=\mathbf{b}$ 為什麼是線代的核心問題？）** — Appendix C。① 史線：《九章算術》→ Cramer 1750 → Gauss 1809 → 19-20 世紀 → 機器學習的反問題（線性回歸 = 解 Ax=b）/ ② 4 子空間整合視角：特解 + 零空間 + 仿射子空間 + 最小範數最優解 $\mathbf{x}^* = A^{+}\mathbf{b}$ — 從 SVD 構造完整結構 / ③ 「Ax=b 是把連續/離散問題化為矩陣問題的最低抽象介面」+ 為什麼線代是現代計算科學共同語言
+
+   **B. 3 附錄 callout 客製化插入（~30 min）：**
+   - [appendix-map-eigenvalues.md](../book/appendix-map-eigenvalues.md) — 連結 Q20 + Q18（譜定理）+ Q12（(P3) 動態系統）
+   - [appendix-matrix-world.md](../book/appendix-matrix-world.md) — 連結 Q21 + Q14（為什麼分解）+ Q19（SVD 偽反矩陣）
+   - [appendix-four-subspaces.md](../book/appendix-four-subspaces.md) — 連結 Q22 + Q08（4 子空間自然冒出）+ Q19（SVD 構造 4 基底）
+
+   **C. 整合收尾（~30 min）：**
+   - **BOOK.md 重新生成** — 8650 → ~9700 行（含 S12-S14 新增的 appendix-D-why.md 2740 行 + 12 主章 callout 增量 + 3 附錄 callout）；採 S11 確立的 fence-code-aware awk 降一級策略避開 Python code block 內 `#` 註解
+   - **跨檔 anchor 校驗** — `grep -nE "\]\(appendix-D-why\.md#q[0-9]+\)" docs/book/*.md` 驗證 28+3 = 31+ 個 Q&A links 完整正確 + `grep -nE "\]\([a-zA-Z0-9_-]+\.md#" docs/book/*.md` 驗證跨檔 anchor 未破壞
+   - **VIZ-CATALOG.md / SCHEMA.md / VIZ_SCHEMA.md** 補背後觀念層 cross-reference（如有必要）
+   - **MEMORY.md 索引更新** — 加 S14 + S15 完成里程碑
+   - **HANDOFF / SESSION_INDEX / SOP_DRAFT / RETROSPECTIVE 整批收尾**
+
+2. **預估行數：** Q20-Q22 各 ~130-170 行 = ~450 行；3 附錄 callout 各 ~30-50 行 = ~120 行；appendix-D-why.md 預期擴至 ~3300 行 / 22/22 Q&A = 100%
 
 3. **參考工件：**
-   - [appendix-D-why.md](../book/appendix-D-why.md) — 已有 Q01-Q13 範本（13 條），S14 沿用同 schema
-   - [ch04-mat-mat.md](../book/ch04-mat-mat.md) / [ch05-patterns.md](../book/ch05-patterns.md) — S13 callout 範本（短摘要列表式）
-   - [Strang 8 本版權 PDF](../book/) — 可大段引用補強 Q14-Q19 內容（Back 授權，已 .gitignore 不 push）
-   - [SOP_DRAFT.md §2.13](sop/SOP_DRAFT.md) — 背後觀念 3-layer 框架規範
+   - [appendix-D-why.md](../book/appendix-D-why.md) — 已有 Q01-Q19 範本（19 條），S15 沿用同 schema
+   - [ch06f-USV.md](../book/ch06f-USV.md) — S14 最複雜 callout 範本（4 Q&A links + Strang 名言鉤子）
+   - [appendix-matrix-world.md](../book/appendix-matrix-world.md) — Tier 2 旗艦附錄範本（同心橢圓繼承樹 + 偽反矩陣公式）
+   - [appendix-four-subspaces.md](../book/appendix-four-subspaces.md) — 已有「解 $A\mathbf{x}=\mathbf{b}$ 完整結構視覺」段（Q22 可直接 cross-link）
+   - [SOP_DRAFT.md §2.13](sop/SOP_DRAFT.md) — 背後觀念 3-layer 框架規範 + 已含 S12-S14 5 條教訓累積
 
-4. **S14 後續：S15** — Q20-Q22（3 附錄）+ 3 附錄 callout + 整合收尾（BOOK.md 重新生成 + 跨檔 anchor 校驗 + VIZ-CATALOG / SCHEMA / VIZ_SCHEMA callout 規範補充 + HANDOFF / SESSION_INDEX / SOP_DRAFT 整批收尾），預估 ~1.5h
+4. **S15 後續：** 背後觀念層階段完成（appendix-D-why.md 100%），下階段進入 Python 視覺化實作（S16+）— 從 [VIZ-CATALOG.md 首批](../book/VIZ-CATALOG.md) Tier 3 旗艦（ch04 V-02 母模板 / ch06f V-01 SVD Master）開始 PoC
+
+### S14 起步建議（S13 已完成，背後觀念層續寫）— 歷史保留
+
+S13 已完成 13/22 Q&A（59%），S14 路線重點：Q14-Q19 §6 五大分解 6 條 Q&A + ch06a-ch06f 6 主章 callout，預估 ~2.5h。**S14 實際完成耗時 ~3.5h**（比預估多 40%，因 §6 條目自身內容深度高 + 6 callout 設計需更多 cross-link）— 詳見 SOP §2.6 S14 耗時資料點 + §2.13 S14 教訓 5 條。
 
 ### S12+ 起步建議（S11 已完成，本段為下一階段路線）
 
@@ -310,6 +340,11 @@
 | 2026-05-13 | **S13 確立「Q&A 篇幅彈性：簡單章 ~95 行 / 深章 ~160 行」** | Q10 為四層理由清單型 95 行，Q11 為超能力對照表型 111 行，Q12 為三步走 + Fibonacci 例題 121 行，Q13 為「世紀大夢」連 §6 五大分解集大成型 156 行 — 篇幅由「動機問題的深度」而非「機械字數要求」決定。**SOP §2.13 改為「篇幅 1000-2500 字」彈性範圍，不再固定 ~108 行平均值** |
 | 2026-05-13 | **S13 確立「主章 callout 客製化 hook 設計：每條 Q&A 對應一個獨特 hook 詞」** | ch04 callout 用「行乘列來源 + 不可交換本質」雙 hook、ch05 callout 用「對角矩陣超能力 + (P3) DNA + (P4) 世界觀」三 hook — 每個 hook 是該 Q&A 的「最具體最有畫面感」的關鍵詞，讓讀者一眼判斷要不要點進附錄 D；boilerplate「為什麼這條規則長這樣」泛論寫法被棄用 |
 | 2026-05-13 | **S13 確立「Q&A 跨章 cross-link 知識網路擴張」** | Q10↔Q13（不可交換 ↔ 同時對角化的可交換條件）+ Q11↔Q12↔Q13（對角矩陣 ↔ (P3) 動態 ↔ (P4) 三明治三角）+ Q12↔Q18（特徵向量正交為「乾淨穩定性分析設定」）— 加上 S12 已建立的 Q06↔Q07↔Q08 / Q04↔Q05 三角，全書 Q&A 形成密集知識網路；Q14-Q19 預計再添 6 條 cross-link |
+| 2026-05-13 | **S14 確立「跳順序分批指令」工作模式** | Back 把 6 條 §6 分成 4 批指令（Q14 / Q15+Q17+Q18 / Q16+Q19 / 6 callout），跳過 Q16 先做 Q17+Q18 完全可行 — Edit 插入定位準確時檔案最終仍按 Q14-Q19 數字順序排列。**經驗：分批降低 context 疲勞 + 跳順序不破壞檔案排列**；未來 S15 可彈性決定 Q20-Q22 順序 |
+| 2026-05-13 | **S14 確立「小例題刻意串接 cross-Q 教學鏈」設計** | Q19 SVD 3×2 小例題刻意用與 Q17 同個 $A$ + $A^{\mathrm{T}}A$ 正好是 Q18 同個 $2 \times 2$ 矩陣 — 形成「Q17 QR → Q18 EVD → Q19 SVD」完整教學鏈。讀者讀過前面 Q&A 後讀 Q19 自動感受到「同一矩陣三視角疊加」。**未來附錄 Q20-Q22 可考慮類似手法**（如 Q22 解 $A\mathbf{x}=\mathbf{b}$ 用 Q15 同 CR 範例） |
+| 2026-05-13 | **S14 確立「§6 callout 平均 link 數比 §1-§5 高 15%」自然現象** | §1-§5 6 callout / 13 links（平均 2.17）vs §6 6 callout / 15 links（平均 2.5） — §6 分解章節因為「統合 §1-§5 多概念」自然需要更多 cross-link；ch06a 連 Q14+Q11+Q13、ch06e 連 Q18+Q11+Q13、ch06f 連 Q19+Q14+Q08+Q13。**S15 附錄 callout 預期同樣會多 link 數**（因為附錄本質是「重整合」非「重教學」） |
+| 2026-05-13 | **S14 確立「Strang LAFE 名言當 callout 鉤子」設計** | ch06a callout 用「**Make every matrix look diagonal**」（LAFE §6.1 開頭）、ch06f callout 用「**the most important theorem in linear algebra**」（LAFE Ch.7 結論）— 直接用大師直引名言當 hook，比泛論寫法吸引力強得多。**未來 callout 應主動挖經典名言作為 hook 詞**（Back 提供的 8 本 Strang PDF 中還有更多名言可挖） |
+| 2026-05-13 | **S14 確立「雙證明路徑對 §6 存在性 Q&A 高價值」設計** | Q19 SVD 雙證明（譜定理建構性 + Jordan 變分定義）讓讀者從兩個獨立角度確認「為什麼存在」 — 一個給代數證明、一個給幾何直覺。Q18 也用雙證明（不同特徵值正交 + 實特徵值補充）。**§6 分解 Q&A 的「存在性 / 構造性問題」幾乎都適用雙證明設計**，S15 Q22 解 $A\mathbf{x}=\mathbf{b}$ 也可考慮類似（從 4 子空間整合 + 從應用角度涵蓋） |
 
 ---
 
@@ -382,6 +417,23 @@
 | docs/dev/SESSION_INDEX.md | 修改 | 追加 S13 一行 |
 | docs/dev/HANDOFF.md | 修改 | 整檔覆寫（最後更新 / 已完成 / 進行中 / 待辦 → S14 / 關鍵決策追加 5 條 / 檔案變更追蹤追加 S13 區 / 技術筆記追加 S13 / 新 Session 指令更新到 S14）|
 | docs/dev/RETROSPECTIVE.md | 修改 | （pending — session-end Step 6 處理）S13 對話反思追加 |
+
+### S14 新增/修改的檔案
+
+| 檔案 | 動作 | 說明 |
+|------|------|------|
+| docs/book/appendix-D-why.md | 修改 | **從 1657 行擴至 2740 行（+1083 行 / 65% 增量）/ 19 Q&A（19/22 = 86%）** — 新增 Q14-Q19 §6 共 6 條 Q&A：Q14 為什麼要把矩陣分解（156 行）+ Q15 A=CR 列秩=行秩（119 行）+ Q16 A=LU 高斯消去本質（165 行）+ Q17 A=QR Gram-Schmidt 動機（138 行）+ Q18 譜定理對稱特徵向量正交（144 行）+ Q19 SVD 任意矩陣存在（174 行）；目錄表 Q14-Q19 6 條從「🚧 規劃中」→「✅ 已完成（S14）」+ 加錨點連結；尾段「其餘 9 條」改「其餘 3 條（Q20-Q22）」+ 改 S15 路線；附錄末時間戳更新 S14 / 19/22 / 86%；Q19 SVD 小例題巧妙連動 Q17 同 $A$ + $A^{\mathrm{T}}A=$ Q18 同矩陣形成「QR→EVD→SVD」教學鏈 |
+| docs/book/ch06a-five.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q14 為什麼要分解 + Q11 對角矩陣 + Q13 (P4) 三明治，3 Q&A links，~350 字 hook 含 Strang LAFE「Make every matrix look diagonal」名言 + 5 級遞進對稱性 + 200 年世紀大夢）|
+| docs/book/ch06b-CR.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q15 A=CR 列秩=行秩 + Q14 為什麼分解，2 Q&A links，~250 字 hook 含 Sylvester 1851 引入 rank + Strang 2020 首次代數封裝「最樸素分解」+ 「分解 = 結構增加版」遞進設計）|
+| docs/book/ch06c-LU.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q16 A=LU 高斯消去本質 + Q14 為什麼分解，2 Q&A links，~330 字 hook 含《九章算術》方程章 2000 年東方原型 + Turing 1948 LU 命名 + 5 跨領域因果結構表）|
+| docs/book/ch06d-QR.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q17 A=QR Gram-Schmidt 動機，1 Q&A link，~280 字 hook 含 Gauss 1801 Ceres 軌道最小平方法首次應用 + Householder 1958 數值穩定 + 條件數不被平方化）|
+| docs/book/ch06e-QLQ.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q18 譜定理對稱特徵向量正交 + Q11 對角矩陣 + Q13 (P4) 完美三明治，3 Q&A links，~370 字 hook 含 Cauchy 1829 主軸定理 → 量子力學 1920s Hermitian + 物理對稱性=數學正交性 + 對稱矩陣 5 特性繼承 (P4)）|
+| docs/book/ch06f-USV.md | 修改 | 章節摘要末新增「💡 背後觀念」callout（連結 Q19 SVD 任意矩陣存在 + Q14 為什麼分解 + Q08 4 子空間 + Q13 (P4) 最強三明治，**4 Q&A links 為全書最多**，~430 字 hook 含 Beltrami 1873 首次發現 + Eckart-Young 1936 最佳低秩近似 + Strang「the most important theorem in linear algebra」名言 + 「一個分解看清所有」）|
+| docs/dev/sop/SOP_DRAFT.md | 修改 | **§2.6 補 S14 耗時資料點**（~3.5h / 1083 行 / 6 Q&A + 6 callout / 19 Q&A 累計 86%）+ **§2.13 補 S14 教訓 5 條**（跳順序批量可行 / 小例題巧妙串接 cross-Q 教學鏈 / §6 callout link 數比 §1-§5 高 15% 自然 / Strang 名言當 hook / 雙證明路徑高價值）+ 版本記錄 0.15 |
+| docs/dev/CURRENT_SESSION.log | 修改 | S14 啟動 + 即時記錄（Q14 + Q15+Q17+Q18 + Q16+Q19 + 6 callout 分批 metadata）+ 結束記錄 |
+| docs/dev/SESSION_INDEX.md | 修改 | （pending — session-end Step 4 處理）追加 S14 一行 |
+| docs/dev/HANDOFF.md | 修改 | 整檔覆寫（最後更新 / 已完成 / 進行中 / 待辦 → S15 / 關鍵決策追加 5 條 / 檔案變更追蹤追加 S14 區 / S15 起步建議完整改寫 + S14 起步歷史保留）|
+| docs/dev/RETROSPECTIVE.md | 修改 | S14 對話反思追加（本 session 無重大低效時刻 + 三 session 連續驗證「精準分批指令 + 批量產出」最佳工作模式 + 5 條 Claude 自我提醒）|
 
 ---
 

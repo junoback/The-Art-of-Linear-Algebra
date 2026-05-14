@@ -316,3 +316,22 @@
 [2026-05-13 S17] WASM Round 3 全通 — Back 刷新後 console clean（no STDERR、no Traceback）；plotly 自動下載確認（`Loading from micropip: ['plotly']`）；S17 骨架完成 ✓
 [2026-05-13 S17] S17 三個新的 WASM 陷阱（待 SOP §2.15 補入）— (1) marimo 把 `_` 開頭 cell variable 視為 cell-private 不跨 cell export / (2) plotly `subplot_titles=[""] * k` 空字串不生成 annotation slot / (3) plotly heatmap 的 `z` 參數最好 `np.asarray(M, dtype=float)` 保證 numpy 介面（list of list 部分操作不 work）
 [2026-05-14 S17] Session 結束 — ch04 V-02 母模板架構階段完成（commit `cc957f1`）+ 全套收工（SOP §2.15 補 S17 3 個新 WASM 陷阱 / SESSION_INDEX S17 / HANDOFF S18 起步建議 / RETROSPECTIVE S17 反思）。下次 S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」（VizScript-02 模式 2：64×64 灰階圖像 4 張預計算 SVD + cache + 三圖並列原圖/重建/誤差 + 切換 radio + 相對誤差數字）；S19 補完 Tier 3（飛入動畫 + 4 重排序對比 + 誤差曲線 + Walkthrough 6 步 + 快捷鍵）。Back 選 A→C 路線（收工 + push origin/main）。
+
+# Session: S18
+# Started: 2026-05-14
+# git HEAD: 0c9312b (main, S17 收工 commit "docs(S17): ch04 V-02 母模板架構階段收工 — SOP §2.15 補 3 個新 WASM 陷阱 + HANDOFF S18 起步建議")
+# worktree: 乾淨，只有 1 個 main repo working dir（無 auto-spawn 殘留），與 origin/main 一致
+# 上次（S17）摘要: ch04 V-02 MM4 母模板架構階段完成（440 行 / 8 cell + viz/_common/ + 2 round WASM debug 才通 + SOP §2.15 補 3 個新陷阱合計 6 大）
+# 任務: HANDOFF S18 推薦路線 = ch04 V-02 圖像模式 + Mona Lisa SVD（VizScript-02 模式 2）— 接 S17 骨架加 4 張 64×64 灰階圖像 npy 預計算 SVD + mode radio + 三圖並列 + 動態 r 範圍 + WASM export 驗證；預估 1 session / 5 step ~80 min
+# ---
+[2026-05-14 S18] Session 啟動 — 讀完 HANDOFF / SESSION_INDEX / CURRENT_SESSION.log；git worktree 乾淨（HEAD = 0c9312b 即 S17 收尾 commit，與 origin/main 一致）；S17 ch04 V-02 母模板骨架完成（小矩陣模式 + r slider + 6 heatmap + 秩 1 圖層 strip + WASM clean）；本 session 等 Back 指示再決定方向
+[2026-05-14 S18] Back 選 A — 開始 ch04 V-02 圖像模式 + Mona Lisa SVD（HANDOFF 推薦路線）
+[2026-05-14 S18] S18 設計決策 — 跳過外部 npy + base64 + fetch，改「程式內生成 4 張 64×64 灰階圖像」（procedural portrait / 條紋 / 漸層 / 隨機 standard_normal），WASM 零阻抗；SVD 預計算在 cell 內即時做（64×64 SVD ~5ms × 4 = ~20ms）
+[2026-05-14 S18] viz/ch04_matrix_matrix.py 改寫完成 — 從 S17 骨架（440 行 / 8 cell）擴至 S18（~570 行 / 9 cell）：(1) 加 image gen cell（gen_portrait / gen_stripes / gen_gradient / gen_random + IMAGES dict + SVD_CACHE）(2) 加 mode radio（5 選項：小矩陣 demo + 4 圖像）+ r_image slider（範圍 0..64，與 r_small 分開避免狀態混淆）(3) 控制面板 cell branch on mode（小矩陣顯示 A/B/r_small 三欄；圖像模式只顯示 r_image）(4) 計算 cell branch on is_small（小矩陣維持 S17 邏輯；圖像模式 U_mat @ diag(σ[:r]) @ Vt[:r]）(5) 計算說明 markdown branch on mode（小矩陣顯示 LaTeX 矩陣；圖像顯示 σ 列表 + 累積能量百分比）(6) 主舞台 branch on mode（小矩陣 2×3 共 6 heatmap；圖像 1×3 灰階）(7) strip branch on mode（小矩陣 k=2 layer 縮圖；圖像 64 條 σ 譜柱狀圖）(8) footer S18 進展說明 + 觀察重點表
+[2026-05-14 S18] SVD 性質本機驗證（np.linalg.svd）— portrait σ_1=42.28 σ_2=2.54 eff_rank~5 / stripes σ_1=36.70 σ_2~1e-15 rank 1 精確 / gradient σ_1=36.76 σ_2=1.51 σ_3~1e-15 rank 2 精確 / random σ_1=15.45 σ_2=14.65 σ_64=0.09 滿秩 Marchenko-Pastur
+[2026-05-14 S18] random 修正 — 第一版用 min-max 標準化到 [0,1]，產生強 DC 分量讓 σ_1 ~ 34 主導（r85=1，破壞「不可壓縮」訊息）→ 改為 raw standard_normal mean 0，σ 譜呈 Marchenko-Pastur 緩慢衰退（r85=28, r99=49 才達），符合「隨機 = 不可壓縮」教學意圖；顯示用對稱 zmin/zmax 自動適應
+[2026-05-14 S18] footer 表用實測數字校正 — 有效 rank + 視覺辨識 r 改為實測（portrait ~5 / stripes 1 精確 / gradient 2 精確 / random ~64 滿秩 r28 達 85%），加 DC 注意段（[0,1] 值域圖像 σ_1 由 DC 主導，「能量 99% at r=1」是 Frobenius 觀點但視覺仍需 r≥2，這也是 SVD 壓縮實務取 r>1 的原因）
+[2026-05-14 S18] WASM export 通過 — `.venv/bin/marimo export html-wasm ch04_matrix_matrix.py -o dist/ch04_matrix_matrix` → 27 MB static dir + HTTP 200；marimo check 只噴 2 個 markdown-indentation cosmetic warning 不影響運行；本機 server :8765 啟動 Back 驗證
+[2026-05-14 S18] S18 設計模式新教訓（待 SOP §2.15 補入）— (7) 程式內生成資產 vs 外部 asset 檔（小資產 ≤ 100 KB 在 cell 內生成避開 WASM file-loading 不確定性）/ (8) 圖像 [0,1] 值域 σ_1 由 DC 主導，累積能量百分比與視覺品質不對齊（仍需 r≥2 才看得到結構）/ (9) random 不可 min-max 到 [0,1]（會加 DC），需保留 raw standard_normal 才有 Marchenko-Pastur σ 譜
+[2026-05-14 S18] Back 收工 — 在瀏覽器驗證 5 項清單發出後立即說「收工」，所以 S18 = 首輪交付 + 本機 SVD 對拍通過 + WASM export clean，但 Back-side 5 項視覺驗證未完成；下次 S19 應先請 Back 確認 S18 圖像模式是否視覺 OK，再進入 S19 飛入動畫 / 重排序 / 誤差曲線 / Walkthrough
+[2026-05-14 S18] Session 結束 — viz/ch04_matrix_matrix.py 首輪交付 + SOP §2.15 補 S18 3 條新教訓（合計 9 條陷阱）+ 全套收工（SESSION_INDEX S18 / HANDOFF S19 起步建議 / RETROSPECTIVE S18 反思）。下次 S19 從「Back 視覺確認」開始：(a) 若 OK 進入 S19 補完 Tier 3（飛入動畫 800ms / 4 重排序 / 誤差曲線 / Walkthrough 6 步 / 快捷鍵）(b) 若有 console error 先修

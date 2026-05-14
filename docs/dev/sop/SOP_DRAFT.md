@@ -258,7 +258,7 @@ S12 啟動「背後觀念層」開發階段 — Back 發現全書 13 個主章�
 
 **S11 §2.10 + S15 §2.14 整合收尾雙重驗證 ✓** — 這套流程（跨檔 anchor 校驗 → BOOK.md 重生 → 規範補充 → 全套收工）穩定可用，未來如有「**全書又新增一個 Appendix E**」性質的大規模擴充，可直接套用。
 
-### 2.15 Marimo WASM 部署 6 大非顯而易見陷阱（S16 PoC + S17 補充）
+### 2.15 Marimo WASM 部署 9 大非顯而易見陷阱（S16 PoC + S17 補充 + S18 補充）
 
 **S16 第一個 Python 視覺化 PoC（hello.py + ch01_mv1_poc.py + `marimo export html-wasm` 三階段）發現 3 個本機跑通卻 WASM 失敗的「沉默陷阱」**。每一個都讓我在 S16 多繞 1 個 round-trip 才修對。記入 SOP 讓 S17+ 旗艦實作開工前就避開：**
 
@@ -315,6 +315,33 @@ S17 第一次寫真正多 cell × multi-subplot × multi-heatmap 的 notebook �
 - [ ] heatmap helper 內 `M = np.asarray(M, dtype=float)` 保護
 - [ ] `abs()` → `np.abs()` 用 numpy 介面
 
+---
+
+**S18 補充：3 個圖像資產與 SVD 教學數值陷阱（ch04 V-02 圖像模式開工發現）**
+
+S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」，原 HANDOFF 預估難點是「WASM 怎麼讀本機 npy（base64 vs fetch）」。實作後發現完全可繞過，但同時踩了 SVD 教學數值的兩個 pedagogical 陷阱：
+
+7. **小資產（≤ 100 KB）在 notebook cell 內程式內生成，避開 WASM file-loading 不確定性** — HANDOFF S17 預估「Pyodide 環境如何讀 viz/assets/*.npy 是個未知數，可能要 base64 embed 或 pyodide-http fetch 相對路徑」是真實的不確定性。**S18 完全跳過 — 改在 cell 內 procedural 生成 4 張 64×64 圖像 + 即時 SVD（~5 ms × 4 = ~20 ms）**，notebook 自包含、WASM 零阻抗，根本不需要 asset 檔。
+    - **規則：** 小資產（≤ 100 KB / 簡單可程式生成）一律 in-notebook procedural generation，不寫 asset 檔不嵌入 base64 不靠 fetch。SVD / FFT / 矩陣分解都是 64×64 級別 ms 計算可即時做。
+    - **變通（資產 > 100 KB 或必須真實資料時）：** 才考慮 base64 inline（適中等大小 ≤ 1 MB）或 marimo file mount（適大型資料）。base64 + decode 在 Pyodide 環境 work 但寫 boilerplate；marimo file mount API 較新待 S19+ 驗證。
+    - **副作用：** procedural 圖像不像真實 Mona Lisa，但 SVD pedagogical 性質可控（rank、σ 分布可由設計決定），對教學反而更清晰
+
+8. **圖像值域在 [0, 1] 時 $\sigma_1$ 被 DC 偏移主導，累積能量百分比與視覺品質不對齊** — procedural portrait 圖像 mean ~0.6（亮度中位數），這個「64×64 全填 0.6」的 DC matrix 是 rank 1 且 Frobenius 能量 $= 0.6 \times 64 = 38.4$。實際 SVD 中 $\sigma_1 = 42.28$，扣掉特徵的 $\sigma_2 = 2.54$。**累積能量 99% at r=1 — 但視覺上 r=1 只是均勻灰色圖**，要 r ≥ 2 才看得到臉部結構。
+    - **規則：** 圖像模式呈現「累積能量百分比」時要附 disclaimer：對 [0, 1] 值域圖像，σ_1 主要捕捉平均亮度（DC）而非視覺特徵；「能量 99% at r=1」是 Frobenius 觀點但**視覺品質不等於能量**，人眼對空間特徵敏感不只對能量總和敏感
+    - **變通（教學意圖更明確時）：** 可對圖像減去 mean 後做 SVD（capture features only），但失去與 textbook 標準 SVD demo 一致性；S18 選擇「保留 raw image SVD + 明示 DC effect」中間路線
+    - **教學機會：** 這個現象本身就是 Strang LAFE §6.5 / §7 提到的「Frobenius norm vs perceptual quality」議題，可在 footer + appendix-D-why.md Q19 SVD 段交叉引用
+
+9. **隨機矩陣不可 min-max 標準化到 [0, 1]，會加 DC 分量破壞「不可壓縮」訊息** — S18 第一版 `gen_random` 把 `np.random.standard_normal((64, 64))` 標準化到 [0, 1]（為了與其他圖像顯示一致）→ 注入 DC 分量讓 σ_1 ~ 34、r=1 即 85% 能量。這完全破壞「random = 不可壓縮」的教學意圖。**修法：保留 raw standard_normal（mean ≈ 0），σ 譜呈 Marchenko-Pastur 緩慢衰退，r=28 才達 85% 能量。**
+    - **規則：** SVD pedagogical demo 的 random matrix **必須保留 raw centered 分佈**，不可 min-max 標準化（會加 DC 分量；任何 affine shift / scale 之後 σ_1 都會被注入的 DC 主導）。如需顯示，用對稱 zmin/zmax 而非標準化
+    - **變通：** 顯示用 dynamic zmin = M.min(), zmax = M.max()（main stage cell 已自動做）；colormap 用 sequential gray scale 即可
+    - **延伸：** 任何「想看真實 SVD spectrum」的矩陣都不可被 affine transform 改 mean — 標準化只該在「為了視覺對比」做且不該影響原始 SVD 計算
+
+**S18 對 S19+ 影響：擴充 checklist**：
+- [ ] 資產 ≤ 100 KB 一律 in-notebook procedural；不寫 asset 檔
+- [ ] 圖像模式累積能量百分比附 DC effect disclaimer
+- [ ] random / noise 不做 min-max 標準化（保留 raw centered 分佈才有 Marchenko-Pastur σ 譜）
+- [ ] [0, 1] 值域圖像的 SVD 結果與 textbook 標準一致（σ_1 由 DC 主導），但需在 UI 文字明示
+
 ### 2.7 收工流程（每 session 結束）
 
 依 CLAUDE.md 規範三層防呆：
@@ -350,3 +377,5 @@ S17 第一次寫真正多 cell × multi-subplot × multi-heatmap 的 notebook �
 | **0.15** | 2026-05-13 | **S14 背後觀念層續寫 §6 — Q14-Q19 共 6 條 Q&A + ch06a-ch06f 6 主章 callout**：耗時 ~3.5h / 產出 appendix-D-why.md 從 1657 行擴至 **2740 行（+1083 行 / 65% 增量）/ 19 Q&A（19/22 = 86%）**（Q14 分解動機 156 行 / Q15 A=CR 119 行 / Q16 A=LU 165 行 / Q17 A=QR 138 行 / Q18 譜定理 144 行 / Q19 SVD 174 行）+ 6 主章 callout（ch06a Q14+Q11+Q13 / ch06b Q15+Q14 / ch06c Q16+Q14 / ch06d Q17 / ch06e Q18+Q11+Q13 / ch06f Q19+Q14+Q08+Q13 共 15 links）— **全主章 100% 覆蓋（12 callout / 28 Q&A links）**；**§2.6 補 S14 耗時資料點 + §2.13 補 S14 5 條教訓**（「跳順序批量可行」+「小例題巧妙串接 cross-Q 教學鏈」Q17→Q18→Q19 同 $A$ + 「§6 callout 平均 link 數比 §1-§5 高 15%」+「Strang LAFE 名言當鉤子效果強」+「雙證明路徑對存在性 Q&A 高價值」）|
 | **0.16** | 2026-05-13 | **S15 背後觀念層收尾 + 全書整合 100% — Q20-Q22 + 3 附錄 callout + BOOK.md 重生**：耗時 ~3.5h / 產出 appendix-D-why.md 2740 → **3522 行（+782 / 22 Q&A 100% ✓）**（Q20 特徵值地圖 225 行 / Q21 Matrix World 同心橢圓 246 行 / Q22 Ax=b 線代核心 311 行 = 全書最長 Q&A）+ 3 附錄 callout（map-eig Q20+Q18+Q11 / matrix-world Q21+Q14+Q19 / four-subspaces Q22+Q08+Q19 共 9 links）→ **全書 15 callout / 37 Q&A links / 16 內容 md 100% 覆蓋** ✓ + BOOK.md 8650 → **12305 行（+42%）** + SCHEMA §3.6 規範 + VIZ-CATALOG Appendix D 索引；**新增 §2.14「整合收尾流程二次驗證」**（fence-aware awk 重用 + header 更新比合併費時 + 規範補充綁定收尾整合期 3 條教訓） |
 | **0.17** | 2026-05-13 | **S16 Marimo 技術棧 PoC — Python 視覺化實作起步**：耗時 ~2.5h / 產出 viz/ 目錄（7 檔追蹤 + .venv/dist gitignore）含 uv + Python 3.12 + marimo 0.23.6 + plotly 6.7 + matplotlib 3.10 + sklearn 1.8 + Pillow 12.2 完整技術棧 + hello.py（Stage 1 reactive slider 4 cell）+ ch01_mv1_poc.py（Stage 2 6 slider × plotly 2D × (Mv1)+(Mv2) 雙觀點 7 cell）+ marimo export html-wasm 27 MB static dir（Stage 3 部署驗證）；**新增 §2.15「Marimo WASM 部署 3 大非顯而易見陷阱」**（PEP 723 metadata 是 WASM dep 唯一聲明處 + plotly 必須 mo.ui.plotly(fig) 顯式包裝 + 首次載入 30-60s UX 警告）+ S17+ 旗艦開工 5 條 checklist；下次 S17 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 母模板 或 ch06f V-01 SVD Master）開始 |
+| **0.18** | 2026-05-13 | **S17 ch04 V-02 MM4 母模板架構階段 — 首批 Tier 3 旗艦開工骨架完成**：耗時 ~3h / 產出 viz/ch04_matrix_matrix.py 440 行 / 8 cell（A 6 entry sliders + B 4 entry sliders + r slider + 即時 LaTeX 計算 + 主舞台 2×3 共 6 heatmap + 秩 1 圖層 strip + 三式對拍 healthcheck）+ viz/_common/{__init__, rank1_layer.py}；2 round WASM debug 才通；**§2.15 補 S17 3 個新陷阱（合計 6 大）**：(4) marimo `_` 前綴 cell-private 不跨 cell export / (5) plotly `subplot_titles=[""]*k` 空字串被跳過不生 annotation slot / (6) heatmap z 參數需 `np.asarray(M, dtype=float)` 保護；下次 S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」 |
+| **0.19** | 2026-05-14 | **S18 ch04 V-02 圖像模式 + Mona Lisa SVD 首輪交付**：耗時 ~2h / 產出 viz/ch04_matrix_matrix.py 從 440 行擴至 ~570 行 / 9 cell（加 image gen + SVD_CACHE cell / mode radio 5 選項 / r_image slider 0..64 / 5 個輸出 cell 全部 branch on is_small / 主舞台圖像 1×3 / strip 圖像換 σ 譜柱狀圖）+ WASM export clean 27 MB；本機 SVD 對拍 4 圖性質符合預期（portrait σ_1=42.28 eff_rank 5 / stripes rank 1 精確 / gradient rank 2 精確 / random Marchenko-Pastur r28 達 85%）；**§2.15 補 S18 3 條新陷阱（合計 9 大）**：(7) 小資產 ≤100 KB 在 cell 內 procedural 生成避開 WASM file-loading 不確定性 / (8) [0,1] 值域圖像 σ_1 由 DC 主導，累積能量百分比與視覺品質不對齊（仍需 r≥2 看結構） / (9) random 不可 min-max 到 [0,1]（會加 DC 破壞「不可壓縮」），需保留 raw centered standard_normal；Back 在驗證清單發出後立即收工，下次 S19 應先請 Back 視覺確認再進入飛入動畫 / 重排序 / 誤差曲線 / Walkthrough |

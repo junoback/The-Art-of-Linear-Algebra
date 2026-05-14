@@ -302,3 +302,30 @@ Back 選 HANDOFF S16 推薦路線 A — 開始 [ch04-mat-mat.md VizScript-02](..
 - **截圖回報時要主動確認「scroll 完整否」** — 對 WASM 部分 cell 不渲染類問題，未確認 scroll 範圍就修可能修錯方向。S18+ 先問「整頁 scroll 過嗎？中間 X 段是真的不見嗎？」
 
 ---
+
+## S18 — ch04 V-02 圖像模式 + Mona Lisa SVD 首輪交付（2026-05-14）
+
+### 本 session 主軸
+
+Back 選 HANDOFF S17 推薦路線 A 開始圖像模式。我從 S17 骨架擴 viz/ch04_matrix_matrix.py 至 ~570 行 / 9 cell，加 mode radio + 4 張 64×64 procedural 圖像（in-notebook 生成跳過 npy/base64/fetch 不確定性）+ SVD 即時計算 + 三圖並列 + σ 譜柱狀圖。WASM export 27 MB clean，本機 SVD 對拍通過 4 圖預期性質。
+
+### 對話低效時刻
+
+- **第一版 random 用 min-max 標準化到 [0,1] 破壞「不可壓縮」訊息我自己抓到** — 第一輪 SVD 驗證列出「random r85=1」我意識到不對勁（隨機本該不可壓縮）→ 立即查出是 min-max normalize 注入 DC → 改為 raw standard_normal 重驗符合 Marchenko-Pastur。算是「設計失誤」自我修正不算對話低效，但**第一版設計時就該考慮「random 必須保留 raw centered 分佈」**，這是 SVD 數值教學的常識，我做圖像生成前沒先想清楚。**S18+ 寫教學 demo 前先「pedagogical 預期表」對拍**：每張圖預期 σ 譜形狀（高峰 / 雙峰 / 緩降）+ 預期 r 值閾值，做完數值驗證對拍預期，差異就 debug。
+
+- **scope 切分守得不夠緊：footer 觀察重點表第一版用「~10-20 effective rank」是估計值** — 我寫表時沒先算就填了估計值，本機驗證跑出 portrait eff_rank=5（不是 10-20）+ random r85=28（不是 ~55）→ 兩個數字錯。**寫教學表前應先實際算**，估計值容易誤導讀者。
+
+- **無 — 對話本身順暢，主要是設計階段的兩個失誤**（自我修正完）
+
+### 建議 Back 下次這樣問會更快
+
+- **無建議 — Back 這次提問已經精準（「A」單字明確選 HANDOFF 路線）+ 收工指令乾淨**。圖像模式視覺驗證未完成是因 Back 直接收工，這正常（一輪交付 + 下次驗證）。
+
+### Claude 自我提醒
+
+- **教學數值 demo 寫程式前先列「pedagogical 預期表」** — 每張圖 / 每組資料的 SVD（or 其他）結果要先預測 σ 譜形狀 + 關鍵閾值，做完跑出數字對拍預期，差異就立刻 debug 設計（如 S18 的 random min-max 失誤）。**「先預測再驗證」省一輪「pretend 成功實際破壞訊息」迭代**。
+- **寫教學表前先實際算數字** — footer 表的「有效 rank」「視覺辨識 r」這類具體數字不要憑估計填，先實際跑 SVD 取得真實數字。教學表是教學產出的一部分，估計值會誤導讀者後續實作 / 觀察。
+- **「跳過難題」是一種有效設計選擇** — HANDOFF S18 開頭 Back 預估 WASM 讀本機 npy 是難點需 base64 或 fetch，我實作時改「程式內生成圖像 + 即時 SVD」直接跳過。**遇到 HANDOFF 標記為「待確認的難點」，先問「能不能繞過」**，繞過往往比解決更省事且更穩定。
+- **首輪交付不等於完工** — Back 在我發 5 項驗證清單後立即「收工」，我沒繼續催 Back 操作而是直接執行收工。**首輪交付後若 user-side 驗證未完成，HANDOFF 要明示「進行中：等視覺確認」而非「完成」**。下次 S19 第一動作該是 Back 確認 S18 視覺，OK 才往下走。
+
+---

@@ -335,3 +335,24 @@
 [2026-05-14 S18] S18 設計模式新教訓（待 SOP §2.15 補入）— (7) 程式內生成資產 vs 外部 asset 檔（小資產 ≤ 100 KB 在 cell 內生成避開 WASM file-loading 不確定性）/ (8) 圖像 [0,1] 值域 σ_1 由 DC 主導，累積能量百分比與視覺品質不對齊（仍需 r≥2 才看得到結構）/ (9) random 不可 min-max 到 [0,1]（會加 DC），需保留 raw standard_normal 才有 Marchenko-Pastur σ 譜
 [2026-05-14 S18] Back 收工 — 在瀏覽器驗證 5 項清單發出後立即說「收工」，所以 S18 = 首輪交付 + 本機 SVD 對拍通過 + WASM export clean，但 Back-side 5 項視覺驗證未完成；下次 S19 應先請 Back 確認 S18 圖像模式是否視覺 OK，再進入 S19 飛入動畫 / 重排序 / 誤差曲線 / Walkthrough
 [2026-05-14 S18] Session 結束 — viz/ch04_matrix_matrix.py 首輪交付 + SOP §2.15 補 S18 3 條新教訓（合計 9 條陷阱）+ 全套收工（SESSION_INDEX S18 / HANDOFF S19 起步建議 / RETROSPECTIVE S18 反思）。下次 S19 從「Back 視覺確認」開始：(a) 若 OK 進入 S19 補完 Tier 3（飛入動畫 800ms / 4 重排序 / 誤差曲線 / Walkthrough 6 步 / 快捷鍵）(b) 若有 console error 先修
+
+# Session: S19
+# Started: 2026-05-14
+# Git HEAD: 42ce460
+# Worktree: clean (single main repo, no auto-spawn)
+# Branch: main
+# 主軸：S18 視覺確認 → 若 OK 進入 ch04 V-02 Tier 3 補完（飛入動畫 / 重排序 / 誤差曲線 / Walkthrough / 快捷鍵）
+
+[2026-05-14 S19] Session 啟動 — 讀 HANDOFF S19 起步建議 + SESSION_INDEX 確認 S18 = 首輪交付（Back-side 視覺驗證未完成）；worktree 檢查 1 個 main repo clean ✓；待 Back 跑 5 項瀏覽器驗證清單
+
+[2026-05-15 S19] Back 換方向：原 S18 視覺驗證路線暫停；提出「逆向設計視角」全書第二骨架（與 Appendix D 對偶 — D 橫切剖析「為什麼」，E 縱向走一遍「怎麼從零反推」）；核心信念：矩陣運算沒有一個是憑空發明的
+[2026-05-15 S19] R01 PoC 3 輪迭代：1 大綱（5 步反推骨架 + 7 鏈條樹 + 落點選 A）→ 2 確認方向 + 3 公式可視化版（雙例題切換但 Back 制止） → 4 改用主例題 2×3 食譜全程貫穿（不切換 2×2 副例題）→ 5 Step 2 加強誤用「左乘 M / elementary 矩陣 / LU 分解」 Back 立即指出「跳太遠 邏輯循環」→ 6 改用方程組層代數語言（中學代數變形：方程乘 c / 互換 / 加倍）+ entry 級同步動作 + 暗線埋伏指 R03 兌現 Back 確認「符合精神」
+[2026-05-15 S19] R01 PoC 通過 — 12 Step 段落 / 主例題 2×3 食譜（$\mathbf{x}^* = (1,1,2)^{\top}, \mathbf{b} = (7,8)^{\top}$）/ Step 2 加強 3 ✓ + 3 ❌ 全公式可視化 / Step 4 反推點積規則 boxed / Step 5-7 副產物自動冒出（維度 + (Mv2) + 列空間 rank + Rank-Nullity 數值驗證）/ Step 8 雙路閉合 / Step 9 線性 vs 非線性邊界 / Step 10 boxed 流程圖 / Step 11 R02-R07 鏈條樹 / Step 12 Strang 鎖核
+[2026-05-15 S19] 建立 docs/book/appendix-E-reverse.md — 760 行 / 38 KB / R01 完整 12 Step + R02 完整 12 Step（外積 uv⊤ 從「秩 1 原子」需求反推，主例題：紅蘿蔔 3 size × 盤子 2 種份量 → 3×2 矩陣 M，u=(20,40,60), v=(4,7)，6 個 entry 逐一驗算）+ R03-R07 預留段（每段含預定鏈條 5 步骨架預告）
+[2026-05-15 S19] BOOK.md 合併 — 12305 → 13068 行（+763 / 17 → 18 個 md 合一），用 fence-code-aware awk 把 appendix-E-reverse.md 降一級（# → ##）append 到 BOOK.md 末尾；同時更新 header「17 個原 md 檔」→「18 個原 md 檔」+ 目錄表加 Appendix E 一行
+[2026-05-15 S19] SCHEMA.md 補 §3.7「逆向設計鏈（R-chain）規範」段（S19 確立，版本 0.4）— 觸發時機 + 5 步反推骨架 + 12 Step 段落表 + 「Step 2 加強鐵律」（禁用未推出的工具解釋自己 + S19 ❌ 反例 ✓ 正例對比）+ 主例題貫穿規則 + 篇幅規範 + 3 路 cross-link 規範（主章 ↔ Appendix D ↔ Appendix E）+ R01-R07 全書進度表
+[2026-05-15 S19] VIZ-CATALOG.md 補「Appendix E 逆向設計 R01-R07 鏈索引」獨立段 — 7 條鏈完整列表 + 對應主章 + 對應 Q&A + 連結 + 狀態 + 5 步反推骨架說明 + 核心信念 + 3 路 cross-link + 三條閱讀路線
+[2026-05-15 S19] 新增 memory feedback_reverse_design.md — 「逆向設計視角為全書第二骨架」明文化（Why + How to apply A-G 七節含 5 步骨架 / 12 Step / Step 2 加強鐵律 / 公式可視化 / 主例題貫穿 / 3 路 cross-link / R01-R07 路線）+ MEMORY.md index 補一行
+[2026-05-15 S19] SOP_DRAFT.md 新增 §2.16「逆向設計鏈（R-chain）寫作鐵律」段（S19 確立）— S19 痛苦教訓明文化（第一稿邏輯循環錯誤的 ❌ 反例 + 修訂後 ✓ 正例對比表）+ 主例題不切換規則（Back 制止 2×2 副例題切換 原話保留）+ 公式可視化粒度（每步操作都 boxed 公式 + entry 級數字 + 驗算）+ 暗線埋伏規範 + R02-R07 寫作 checklist；版本 0.20 追加
+[2026-05-15 S19] 本 session 大產出統計：appendix-E-reverse.md 760 行（新檔）+ BOOK.md +763 行 + SCHEMA.md +130 行 + VIZ-CATALOG.md +35 行 + SOP_DRAFT.md +90 行 + memory feedback_reverse_design.md（新檔）+ MEMORY.md +1 行 = 共影響 7 個檔案 / ~1800 行新內容
+[2026-05-15 S19] Session 結束 — Appendix E 逆向設計第二骨架啟動 + R01-R02 完整鏈條落地 + 7 個檔案 ~1800 行新內容 + Step 2 加強鐵律明文化（SOP §2.16 / SCHEMA §3.7 / memory feedback_reverse_design.md 三處同步）。下次 S20 兩條路任 Back 選：(A) 繼續寫 R03（矩陣乘法 AB 從函數合成反推，會兌現 R01 暗線 ①②③ 合法操作 = 左乘可逆 M，預估 1h）/ (B) 回 HANDOFF S19 原路線跑 S18 ch04 V-02 圖像模式 5 項瀏覽器驗證（暫停的視覺驗證）

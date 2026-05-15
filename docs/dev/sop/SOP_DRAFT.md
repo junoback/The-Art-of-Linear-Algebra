@@ -342,6 +342,64 @@ S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」，原 HANDOFF 預估難�
 - [ ] random / noise 不做 min-max 標準化（保留 raw centered 分佈才有 Marchenko-Pastur σ 譜）
 - [ ] [0, 1] 值域圖像的 SVD 結果與 textbook 標準一致（σ_1 由 DC 主導），但需在 UI 文字明示
 
+### 2.16 逆向設計鏈（R-chain）寫作鐵律（S19 確立）
+
+S19 啟動 Appendix E「逆向設計」第二骨架（與 Appendix D 對偶 — D 橫切剖析「為什麼」，E 縱向走一遍「怎麼從零反推」）。R01 PoC 過程暴露一個**寫作邏輯陷阱**，必須明文化避免後續 R02-R07 + 任何後續逆向鏈再犯。
+
+**痛苦教訓：「Step 2 加強」絕對不可用未推出的工具解釋自己**
+
+**S19 第一稿犯的錯（已被 Back 立即指出）：**
+
+寫 R01 Step 2「物件化 + 對 A 的合法操作」加強段時，我用「**左乘可逆矩陣 M / elementary 矩陣 / LU 分解**」描述合法 row 操作 — 這些都是**矩陣乘法**的進階應用。但 R01 的核心目的是**反推矩陣乘法本身**，矩陣乘法要等 Step 4 才被推出來。**先用它解釋等於邏輯循環** — Back 原話：「直接要先懂矩陣乘法才能理解，這與我要用實際例子反推出矩陣運算的想法相違背」。
+
+**修訂後（S19 第二稿，Back 確認「符合精神」）：**
+
+只用 Step 1 已有的「**問題層代數語言**」描述合法操作：
+
+| 變形 | 對 A 的 entry 怎麼動（具體公式） | 對 b 的 entry 怎麼動 |
+|---|---|---|
+| ① 整條方程乘非零常數 c | A 的某 row 全部 entry × c | b 對應 entry × c |
+| ② 兩條方程互換 | A 的兩條 row 整條對調 | b 對應兩 entry 對調 |
+| ③ 方程 i 加方程 j 的 c 倍 | A row i 各 entry += c × (row j 對應 entry) | b entry i += c × b entry j |
+
+這些是**中學代數**的方程組變形，**不需要任何矩陣乘法概念**。「對 A 做合法操作後 = 左乘可逆 M」這個高層代數結構，留到「**暗線埋伏**」段（quote block）告訴讀者「等 R03 矩陣乘法鏈反推出後會兌現」，**不**在 R01 Step 2 展開。
+
+**規範（適用於 R02-R07 + 後續任何逆向鏈）：**
+
+1. **撰寫 R-chain Step 2 加強時，先問自己：「我用的這個工具 / 概念，在這條鏈的 Step 4 之後才會被反推出來嗎？」** 如果是 → 必須**替換**為「只用 Step 1 問題層代數語言」的等價描述
+2. **用「暗線埋伏」承諾後續鏈兌現** — 不要強行壓低層次完整解釋；告訴讀者「這幾條合法操作背後有更高層代數結構，後續鏈會兌現」即可
+3. **R-chain 寫完，倒過來檢查 Step 2 加強用到的每個術語**：能否在 Step 4 之前就成立？如不能 → 改寫
+4. **保留 Step 2 加強的「具體 entry 級公式」要求** — 不可只口頭說「row 1 整條 × c」，必須寫 `(2, 3, 1) → (4, 6, 2)` 級別的具體變化
+
+**S19 補充規則：「主例題貫穿全鏈不可中途切換」**
+
+S19 第二稿時，我為了「2×2 副例題比 2×3 主例題簡單演示合法操作」自行切換到 2×2 副例題寫 Step 2a/2b。Back 立即制止：「請想辦法延續用 Step 1 的例子不要換到 2×2」。
+
+**規則：** R-chain 必須有一個主例題（含具體數字）**貫穿 Step 1-9**，不可中途切換到新例題。如非要切換（譬如 Step 7 演示 rank-deficient 需要不同例題），必須**明確標示**並有強理由。
+
+Back 的隱含邏輯：**例題切換 = 認知斷裂**。讀者好不容易記住食譜 2×3 系統，突然要追蹤新 2×2 系統 — 心智 context 重置成本高，破壞鏈條閱讀體驗。
+
+**S19 補充規則：「公式可視化粒度」**
+
+Back 原話：「R01 鏈需要把每一步你提到的操作都用公式推導可視化」。意思：**每個操作步驟都要 boxed 公式 + 具體數字 + 驗算對拍**，不能只是文字描述。S19 R01 完成版每個操作都有：
+
+- 方程組層代數變形（具體展開含 boxed 公式）
+- A 與 b 的 entry 級同步動作（具體新矩陣 / 向量）
+- 驗證原解 $\mathbf{x}^*$ 是否仍是新系統的解（代入具體驗算）
+- 說明為何合法 / 為何破壞（與閉合需求對照）
+
+R01 整體 ~35 個 `$$\boxed{...}$$` 公式塊 / ~20 個具體驗算 — 這是逆向鏈的標準粒度。
+
+**S19 對 S20+ 影響：R03-R07 寫作 checklist**
+
+- [ ] Step 2 加強只用「Step 1 問題層代數語言」描述合法操作（**不引入任何 Step 4+ 才推出的工具**）
+- [ ] 主例題（含具體數字）貫穿 Step 1-9，不中途切換
+- [ ] 每個操作步驟都有具體 boxed 公式 + entry 級數字 + 驗算對拍
+- [ ] 「暗線埋伏」段（quote block）承諾後續鏈兌現，不在當前鏈展開
+- [ ] Step 11 必須清楚指出「本鏈 → 後續哪幾條鏈」+「前置鏈是誰」
+- [ ] 3 路 cross-link：主章 callout / Appendix D Q&A / R-chain Step 11
+- [ ] R-chain 寫完，倒過來檢查每個術語是否在「該鏈 Step 4 之前」就成立
+
 ### 2.7 收工流程（每 session 結束）
 
 依 CLAUDE.md 規範三層防呆：
@@ -379,3 +437,4 @@ S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」，原 HANDOFF 預估難�
 | **0.17** | 2026-05-13 | **S16 Marimo 技術棧 PoC — Python 視覺化實作起步**：耗時 ~2.5h / 產出 viz/ 目錄（7 檔追蹤 + .venv/dist gitignore）含 uv + Python 3.12 + marimo 0.23.6 + plotly 6.7 + matplotlib 3.10 + sklearn 1.8 + Pillow 12.2 完整技術棧 + hello.py（Stage 1 reactive slider 4 cell）+ ch01_mv1_poc.py（Stage 2 6 slider × plotly 2D × (Mv1)+(Mv2) 雙觀點 7 cell）+ marimo export html-wasm 27 MB static dir（Stage 3 部署驗證）；**新增 §2.15「Marimo WASM 部署 3 大非顯而易見陷阱」**（PEP 723 metadata 是 WASM dep 唯一聲明處 + plotly 必須 mo.ui.plotly(fig) 顯式包裝 + 首次載入 30-60s UX 警告）+ S17+ 旗艦開工 5 條 checklist；下次 S17 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 母模板 或 ch06f V-01 SVD Master）開始 |
 | **0.18** | 2026-05-13 | **S17 ch04 V-02 MM4 母模板架構階段 — 首批 Tier 3 旗艦開工骨架完成**：耗時 ~3h / 產出 viz/ch04_matrix_matrix.py 440 行 / 8 cell（A 6 entry sliders + B 4 entry sliders + r slider + 即時 LaTeX 計算 + 主舞台 2×3 共 6 heatmap + 秩 1 圖層 strip + 三式對拍 healthcheck）+ viz/_common/{__init__, rank1_layer.py}；2 round WASM debug 才通；**§2.15 補 S17 3 個新陷阱（合計 6 大）**：(4) marimo `_` 前綴 cell-private 不跨 cell export / (5) plotly `subplot_titles=[""]*k` 空字串被跳過不生 annotation slot / (6) heatmap z 參數需 `np.asarray(M, dtype=float)` 保護；下次 S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」 |
 | **0.19** | 2026-05-14 | **S18 ch04 V-02 圖像模式 + Mona Lisa SVD 首輪交付**：耗時 ~2h / 產出 viz/ch04_matrix_matrix.py 從 440 行擴至 ~570 行 / 9 cell（加 image gen + SVD_CACHE cell / mode radio 5 選項 / r_image slider 0..64 / 5 個輸出 cell 全部 branch on is_small / 主舞台圖像 1×3 / strip 圖像換 σ 譜柱狀圖）+ WASM export clean 27 MB；本機 SVD 對拍 4 圖性質符合預期（portrait σ_1=42.28 eff_rank 5 / stripes rank 1 精確 / gradient rank 2 精確 / random Marchenko-Pastur r28 達 85%）；**§2.15 補 S18 3 條新陷阱（合計 9 大）**：(7) 小資產 ≤100 KB 在 cell 內 procedural 生成避開 WASM file-loading 不確定性 / (8) [0,1] 值域圖像 σ_1 由 DC 主導，累積能量百分比與視覺品質不對齊（仍需 r≥2 看結構） / (9) random 不可 min-max 到 [0,1]（會加 DC 破壞「不可壓縮」），需保留 raw centered standard_normal；Back 在驗證清單發出後立即收工，下次 S19 應先請 Back 視覺確認再進入飛入動畫 / 重排序 / 誤差曲線 / Walkthrough |
+| **0.20** | 2026-05-15 | **S19 啟動「逆向設計第二骨架」 — Appendix E R01-R02 完成**：S18 ch04 V-02 視覺驗證**暫停**（Back 改方向）；Back 提出「逆向設計視角」全書第二骨架（與 Appendix D 對偶 — D 橫切剖析「為什麼」，E 縱向走一遍「怎麼從零反推」）；耗時 ~4h / 產出 **[appendix-E-reverse.md](../../book/appendix-E-reverse.md) 760 行（R01 ~530 行 + R02 ~230 行 + R03-R07 預留段）**+ [BOOK.md](../../book/BOOK.md) 12305 → **13068 行（+763 / 18 個 md 合一）** + [SCHEMA.md §3.7「逆向設計鏈規範」](../../book/SCHEMA.md) + [VIZ-CATALOG.md Appendix E 索引段](../../book/VIZ-CATALOG.md) + memory feedback_reverse_design.md；R01 PoC 反覆迭代 3 輪確立 5 步反推骨架 + 12 Step 段落 + 「Step 2 加強鐵律」（**不可用未推出的工具解釋自己**）+ 主例題貫穿規則 + 公式可視化粒度；**新增 §2.16「逆向設計鏈寫作鐵律」**（痛苦教訓：第一稿用「左乘 M / elementary 矩陣 / LU 分解」描述合法操作 → 邏輯循環 → Back 制止 → 第二稿改用「整條方程乘非零常數 / 兩條方程互換 / 方程加倍」中學代數語言全程貫穿；補主例題不切換 + 公式可視化粒度 + 暗線埋伏規範 + R02-R07 寫作 checklist）|

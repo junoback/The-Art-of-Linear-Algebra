@@ -274,10 +274,43 @@
 
 ---
 
+## Appendix E 逆向設計 R01-R07 鏈索引（S19 新增）
+
+> **用途：** S19 啟動的「**逆向設計層**」是 VIZ-CATALOG 的第二姐妹索引。與 Appendix D 對偶：D 索引「**為什麼這條規則長這樣**」（橫切剖析），E 索引「**怎麼從零反推出這條規則**」（縱向走鏈條）。三索引組合（VIZ-CATALOG 視覺化 + Appendix D 背後觀念 + Appendix E 逆向設計）涵蓋「實作 + 理論 + 推導」三面向。
+>
+> **總計：** 7 條反推鏈 R01-R07 / R01-R02 完成（S19）/ R03-R07 預留 / [appendix-E-reverse.md](appendix-E-reverse.md) 760 行
+>
+> **5 步反推骨架（每條鏈）：** 實際問題 → 物件化（+ 可逆閉合條件）→ 尋找未知運算 ◯ → 閉合需求反推 ◯ → 副產物自動冒出。每條鏈展開為 12 個 Step 段落，規範見 [SCHEMA.md §3.7](SCHEMA.md#37-逆向設計鏈r-chain規範s19-確立)。
+
+| R# | 反推目標 | 對應主章 | 對應 Q&A | 連結 | 狀態 | session |
+|---|---|---|---|---|---|---|
+| R01 | (Mv1) $A\mathbf{x}$ 點積規則 | §3 | Q06, Q07, Q08 | [→ R01](appendix-E-reverse.md#r01) | ✅ 完成 | S19 |
+| R02 | 外積 $\mathbf{u}\mathbf{v}^{\top}$（秩 1 原子）| §2 | Q05 | [→ R02](appendix-E-reverse.md#r02) | ✅ 完成 | S19 |
+| R03 | 矩陣乘法 $AB$（函數合成）| §4 | Q09, Q10 | [→ R03](appendix-E-reverse.md#r03) | 🚧 預留 | 預計 S20+ |
+| R04 | 列空間 / 零空間 / 4 子空間 | §3 | Q08 | [→ R04](appendix-E-reverse.md#r04) | 🚧 預留 | 預計 S20+ |
+| R05 | A=CR 分解（rank 視覺化）| §6.1 | Q15 | [→ R05](appendix-E-reverse.md#r05) | 🚧 預留 | 預計 S20+ |
+| R06 | 偽反矩陣 $A^{+}$（rank-deficient 最優解）| Appendix C | Q22 | [→ R06](appendix-E-reverse.md#r06) | 🚧 預留 | 預計 S20+ |
+| R07 | (P4) 三明治分解 | §5, §6.4, §6.5 | Q13, Q18, Q19 | [→ R07](appendix-E-reverse.md#r07) | 🚧 預留 | 預計 S20+ |
+
+**核心信念：** 矩陣運算（點積 / 外積 / 矩陣乘法 / 列空間 / 4 子空間 / 五大分解 / 偽反）**沒有一個是憑空發明的**，全部是「實際問題 + 還原需求」反推出來的唯一可能規則。
+
+**3 路 cross-link（規範見 SCHEMA §3.7.6）：**
+- 主章 → R-chain（callout `🔄 逆向設計` link）
+- Appendix D Q&A → R-chain（「跨章節觸發」段 link）
+- R-chain Step 11 → 後續 R-chain / Appendix D（雙向）
+
+**閱讀路線：**
+- **正向接逆向**：先讀主章「怎麼算」+ Appendix D「為什麼」，再讀 Appendix E「從零怎麼反推出來」
+- **直接逆向**：從 R01 連讀至 R07，當作「全書反推路線」整體導讀
+- **主題追蹤**：每條 R-chain Step 11 指出後續鏈，沿著鏈條樹深入
+
+---
+
 ## 變更歷史
 
 | 日期 | Session | 變更 |
 |---|---|---|
 | 2026-05-13 | S11 | 初版生成（從各章節 md 抽取 36 個 VizScript metadata，三批排程明確化）|
 | 2026-05-13 | S15 | 新增「**Appendix D 背後觀念層 22 Q&A 索引**」獨立段（22 條 Q&A 完整列表 + 對應主章 + session + 連結 + 3-layer 框架說明 + 三條閱讀路線）+ 全書文件結構表更新（補 appendix-D-why.md 行 + SCHEMA.md 標註 §3.6 新增）+ SOP_DRAFT 從「11 session」更新為「15 session」 |
+| 2026-05-15 | S19 | 新增「**Appendix E 逆向設計 R01-R07 鏈索引**」獨立段（7 條反推鏈完整列表 + 對應主章 + 對應 Q&A + 連結 + 5 步反推骨架說明 + 3 路 cross-link 規範 + 三條閱讀路線）+ Back 提出「逆向設計視角」全書第二骨架；R01-R02 完成 + R03-R07 預留標題段 |
 

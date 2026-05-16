@@ -399,6 +399,54 @@ R01 整體 ~35 個 `$$\boxed{...}$$` 公式塊 / ~20 個具體驗算 — 這是�
 - [ ] Step 11 必須清楚指出「本鏈 → 後續哪幾條鏈」+「前置鏈是誰」
 - [ ] 3 路 cross-link：主章 callout / Appendix D Q&A / R-chain Step 11
 - [ ] R-chain 寫完，倒過來檢查每個術語是否在「該鏈 Step 4 之前」就成立
+- [ ] **全段套 R-chain 領域具體化 4 原則（S20 確立，見下方 2.16 補）**
+
+#### 2.16 補 (S20)：R-chain 領域具體化 4 原則
+
+S20 Back 親手修 R01 Step 1+Step 2 範例（4 處）展示「具體領域詞 + 輸入 vs 規則分工 + 排版精確 + 公式精準」風格，Claude 推論出 4 條獨立可違反的通用原則套全文。**4 原則都過才算高品質 R-chain 段落**。
+
+**(1) 領域具體詞優於抽象詞**
+
+| ❌ 抽象 | ✓ 具體 |
+|---|---|
+| 結果分量 $b_i$ | 營養素 i 的總量 |
+| 係數 $a_{ij}$ | 食材 j 對營養素 i 的含量 |
+| 給定 $(x_1, \ldots, x_n)$ 算 $(b_1, \ldots, b_m)$ | 給定食材組合份量 $\mathbf{x} = (x_1, \ldots, x_n)^{\top}$（g）算所有營養素總量 $\mathbf{b}$ |
+| 第 i 個方程 | 第 i 個營養素的總量方程 |
+
+**Why：** 讀者腦補成本低、配主例題情境、不會誤解抽象指涉。
+
+**(2) 物件化動機必須鋪墊「輸入 vs 規則」分工**
+
+物件化前先說「哪部分會變（輸入）哪部分固定（規則）」— 為「為什麼某物該被剝離成獨立物件」鋪墊邏輯。
+
+**R01 案例：** $b_i = \sum a_{ij} x_j$ 由兩部分決定 — $\mathbf{x}$ 是這次的**輸入**（會隨需求變動）/ $a_{ij}$ 是**規則本身**（食材成分表查得到，不隨輸入變動）→ 物件化動機是「把不變的規則抽離成獨立物件 A」。
+
+**❌ 反例（只列「a 完全決定 b 怎麼從 x 算」）：** 沒鋪墊「為什麼只抽 a 不抽 x」— 讀者問「為什麼 x 不也物件化？」沒答案。
+
+**✓ 正例（明確分工）：** x 是輸入會變 / a 是規則不變 → 自然只把規則 a 抽出來成 A，x 保持為輸入向量。
+
+**對 R02-R07 的延伸：** R02 兩個輸入 u 和 v 對稱（無「規則 vs 輸入」分工），但仍可套用相同精神 — 「u 收集只跟 i 有關的因子 / v 收集只跟 j 有關的因子 / 兩個互相獨立的輸入維度」這類定位句。R03 A 和 B 都是變換規則 → 鋪墊「組合兩個規則為新規則 C」動機。
+
+**(3) 排版精確**
+
+- LaTeX 變數必須正確包裹 $\mathbf{x}$，不可裸寫 x
+- 變數與單位之間正確空格：「份量 $\mathbf{x}$」（空格）不寫「份量$\mathbf{x}$」
+- 變數與其分量定義不重複：「$\mathbf{x} = (x_1, \ldots, x_n)^{\top}$」一處即可，後面寫「$\mathbf{x}$」而非「$\mathbf{x}$ $(x_1, \ldots, x_n)$」
+- 連接詞精準：用「以及/搭配/加上規則」清楚表達，避免「加上 a」被誤讀為 b = x + a（語意上是加法但實際是「以及」）
+
+**(4) 公式精準**
+
+「從乘積項中剝離」而非「從變數中剝離」：
+
+| ❌ 不精準 | ✓ 精準 |
+|---|---|
+| 把 $a_{ij}$ 從 $x_j$ 中剝離 | 把 $a_{ij}$ 從 $a_{ij}x_j$ 中剝離 |
+| 從點積中提取 row | 從點積 $\mathbf{a}_i \cdot \mathbf{x}$ 中提取 row $\mathbf{a}_i$ |
+
+**Why：** 「從 $x_j$ 剝離 $a_{ij}$」字面是錯的（$a_{ij}$ 不在 $x_j$ 裡），讀者會卡住；「從 $a_{ij}x_j$ 剝離 $a_{ij}$」邏輯正確且自然。
+
+**S20 對 R03-R07 影響：** R03 寫作時 Step 2 物件化段（A, B 兩個變換規則 + x 輸入）必須鋪墊「組合兩個變換規則為新規則 C」動機；領域詞用「旋轉」「縮放」貫穿，避免抽象「線性變換」；entry 級用具體數字驗算；公式表達精準（不可寫「從 B 中剝離 A」要寫「從合成 $A(B\mathbf{x})$ 中提取新規則 C」）。
 
 ### 2.7 收工流程（每 session 結束）
 
@@ -437,4 +485,5 @@ R01 整體 ~35 個 `$$\boxed{...}$$` 公式塊 / ~20 個具體驗算 — 這是�
 | **0.17** | 2026-05-13 | **S16 Marimo 技術棧 PoC — Python 視覺化實作起步**：耗時 ~2.5h / 產出 viz/ 目錄（7 檔追蹤 + .venv/dist gitignore）含 uv + Python 3.12 + marimo 0.23.6 + plotly 6.7 + matplotlib 3.10 + sklearn 1.8 + Pillow 12.2 完整技術棧 + hello.py（Stage 1 reactive slider 4 cell）+ ch01_mv1_poc.py（Stage 2 6 slider × plotly 2D × (Mv1)+(Mv2) 雙觀點 7 cell）+ marimo export html-wasm 27 MB static dir（Stage 3 部署驗證）；**新增 §2.15「Marimo WASM 部署 3 大非顯而易見陷阱」**（PEP 723 metadata 是 WASM dep 唯一聲明處 + plotly 必須 mo.ui.plotly(fig) 顯式包裝 + 首次載入 30-60s UX 警告）+ S17+ 旗艦開工 5 條 checklist；下次 S17 從 VIZ-CATALOG 首批 Tier 3 旗艦（ch04 V-02 母模板 或 ch06f V-01 SVD Master）開始 |
 | **0.18** | 2026-05-13 | **S17 ch04 V-02 MM4 母模板架構階段 — 首批 Tier 3 旗艦開工骨架完成**：耗時 ~3h / 產出 viz/ch04_matrix_matrix.py 440 行 / 8 cell（A 6 entry sliders + B 4 entry sliders + r slider + 即時 LaTeX 計算 + 主舞台 2×3 共 6 heatmap + 秩 1 圖層 strip + 三式對拍 healthcheck）+ viz/_common/{__init__, rank1_layer.py}；2 round WASM debug 才通；**§2.15 補 S17 3 個新陷阱（合計 6 大）**：(4) marimo `_` 前綴 cell-private 不跨 cell export / (5) plotly `subplot_titles=[""]*k` 空字串被跳過不生 annotation slot / (6) heatmap z 參數需 `np.asarray(M, dtype=float)` 保護；下次 S18 從 S17 骨架接「圖像模式 + Mona Lisa SVD」 |
 | **0.19** | 2026-05-14 | **S18 ch04 V-02 圖像模式 + Mona Lisa SVD 首輪交付**：耗時 ~2h / 產出 viz/ch04_matrix_matrix.py 從 440 行擴至 ~570 行 / 9 cell（加 image gen + SVD_CACHE cell / mode radio 5 選項 / r_image slider 0..64 / 5 個輸出 cell 全部 branch on is_small / 主舞台圖像 1×3 / strip 圖像換 σ 譜柱狀圖）+ WASM export clean 27 MB；本機 SVD 對拍 4 圖性質符合預期（portrait σ_1=42.28 eff_rank 5 / stripes rank 1 精確 / gradient rank 2 精確 / random Marchenko-Pastur r28 達 85%）；**§2.15 補 S18 3 條新陷阱（合計 9 大）**：(7) 小資產 ≤100 KB 在 cell 內 procedural 生成避開 WASM file-loading 不確定性 / (8) [0,1] 值域圖像 σ_1 由 DC 主導，累積能量百分比與視覺品質不對齊（仍需 r≥2 看結構） / (9) random 不可 min-max 到 [0,1]（會加 DC 破壞「不可壓縮」），需保留 raw centered standard_normal；Back 在驗證清單發出後立即收工，下次 S19 應先請 Back 視覺確認再進入飛入動畫 / 重排序 / 誤差曲線 / Walkthrough |
+| **0.21** | 2026-05-16 | **S20 R-chain 領域具體化 4 原則明文化（S19 R-chain 寫作鐵律延伸）**：Back 親手修 R01 Step 1+Step 2 範例（4 處：(n)(m) 標題 / 單位 g 食材重量 / 開頭句具體化 / 從 $a_{ij}x_j$ 剝離）展示「具體領域詞 + 輸入 vs 規則分工 + 排版精確 + 公式精準」風格 → Claude 推論出 4 條獨立可違反的通用原則 → 套全文做 4 修點（R01 Step 1 結果需求 + R01 Step 2 開頭句融合 + R01 Step 4 開頭句 + R02 Step 2 物件化動機）；**新增 §2.16 補「R-chain 領域具體化 4 原則」子段**：(1) 領域具體詞優於抽象詞（❌→✓ 對照表 4 條）/ (2) 物件化動機鋪墊「輸入 vs 規則」分工論述（R01 案例 + R02/R03 延伸）/ (3) 排版精確（LaTeX 變數包裹、空格、不重複定義、連接詞精準避免誤讀）/ (4) 公式精準（從乘積項中剝離 ≠ 從變數中剝離，2 條 ❌→✓ 對比）+ R03-R07 寫作 checklist 升級為 8 條（第 8 條「全段套 4 原則」）+ S20 對 R03 寫作的具體影響（旋轉/縮放領域詞貫穿、entry 級具體數字驗算、公式表達精準）|
 | **0.20** | 2026-05-15 | **S19 啟動「逆向設計第二骨架」 — Appendix E R01-R02 完成**：S18 ch04 V-02 視覺驗證**暫停**（Back 改方向）；Back 提出「逆向設計視角」全書第二骨架（與 Appendix D 對偶 — D 橫切剖析「為什麼」，E 縱向走一遍「怎麼從零反推」）；耗時 ~4h / 產出 **[appendix-E-reverse.md](../../book/appendix-E-reverse.md) 760 行（R01 ~530 行 + R02 ~230 行 + R03-R07 預留段）**+ [BOOK.md](../../book/BOOK.md) 12305 → **13068 行（+763 / 18 個 md 合一）** + [SCHEMA.md §3.7「逆向設計鏈規範」](../../book/SCHEMA.md) + [VIZ-CATALOG.md Appendix E 索引段](../../book/VIZ-CATALOG.md) + memory feedback_reverse_design.md；R01 PoC 反覆迭代 3 輪確立 5 步反推骨架 + 12 Step 段落 + 「Step 2 加強鐵律」（**不可用未推出的工具解釋自己**）+ 主例題貫穿規則 + 公式可視化粒度；**新增 §2.16「逆向設計鏈寫作鐵律」**（痛苦教訓：第一稿用「左乘 M / elementary 矩陣 / LU 分解」描述合法操作 → 邏輯循環 → Back 制止 → 第二稿改用「整條方程乘非零常數 / 兩條方程互換 / 方程加倍」中學代數語言全程貫穿；補主例題不切換 + 公式可視化粒度 + 暗線埋伏規範 + R02-R07 寫作 checklist）|

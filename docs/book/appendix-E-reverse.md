@@ -71,7 +71,7 @@
 
 $$b_i = a_{i1}x_1 + a_{i2}x_2 + \cdots + a_{in}x_n, \quad i = 1, \ldots, m$$
 
-#### 主例題（貫穿全鏈）：3 種食材 × 2 種營養指標
+#### 主例題（貫穿全鏈）：3 種食材(n) × 2 種營養指標(m)
 
 | 食材 | 熱量 (kcal/g) | 纖維 (g/g) |
 |---|---|---|
@@ -83,20 +83,22 @@ $$b_i = a_{i1}x_1 + a_{i2}x_2 + \cdots + a_{in}x_n, \quad i = 1, \ldots, m$$
 
 $$\begin{cases} 2x_1 + 3x_2 + x_3 = b_1 \quad \text{(熱量總和)} \\ x_1 - x_2 + 4x_3 = b_2 \quad \text{(纖維總和)} \end{cases}$$
 
-設 $\mathbf{x} = (1, 1, 2)^{\top}$（克數），代入算 $\mathbf{b}$：
+設 $\mathbf{x} = (1, 1, 2)^{\top}$（g，食材重量），代入算 $\mathbf{b}$：
 
 - $b_1 = 2(1) + 3(1) + 1(2) = 7$
 - $b_2 = 1(1) - 1(1) + 4(2) = 8$
 
 所以 $\mathbf{b} = (7, 8)^{\top}$。
 
-**結果需求：** 給定 $(x_1, \ldots, x_n)$，能機械地算出 $(b_1, \ldots, b_m)$。
+**結果需求：** 給定一份食材組合的份量 $\mathbf{x} = (x_1, \ldots, x_n)^{\top}$（g），能**機械地**算出對應的所有營養素總量 $\mathbf{b} = (b_1, \ldots, b_m)^{\top}$。份量 $\mathbf{x}$ 會隨每次需求變動，但「怎麼從份量算營養素」這條規則本身是**固定的**（由食材成分表決定）。
 
 ### Step 2: 第一步 — 物件化（抽離係數與變數）
 
-注意：每個 $b_i$ 用了 n 個係數 $(a_{i1}, \ldots, a_{in})$，這組係數**完全決定**「第 i 個結果分量怎麼從 $\mathbf{x}$ 算出來」。
+注意：營養素 i 的總量 $b_i$ 由**兩部分**決定 — 食材的份量 $\mathbf{x} = (x_1, \ldots, x_n)^{\top}$ 是這次的**輸入**（會隨需求變動），而所有食材對應營養素 i 的含量 $(a_{i1}, \ldots, a_{in})$ 則**完全決定**「營養素 i 的總量怎麼從 $\mathbf{x}$ 算出來」這條規則本身（食材成分表查得到，**不隨輸入變動**）。
 
-把 $\{a_{ij}\}$ 從 $x_j$ 中剝離，獨立排成 m×n 表格：
+「規則固定 / 輸入變動」這個分工正是下一步**物件化**的動機：把不變的規則 $\{a_{ij}\}$ 抽離出來，獨立成一個物件。
+
+把 $\{a_{ij}\}$ 從 $a_{ij}x_j$ 中剝離，獨立排成 m×n 表格：
 
 $$A = \begin{bmatrix} 2 & 3 & 1 \\ 1 & -1 & 4 \end{bmatrix}, \quad \mathbf{x} = \begin{bmatrix} 1 \\ 1 \\ 2 \end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} 7 \\ 8 \end{bmatrix}$$
 
@@ -299,11 +301,11 @@ $$A \mathbin{\bigcirc} \mathbf{x} = \mathbf{b}$$
 
 ### Step 4: 閉合需求逼出 ◯ 的規則（具體 → 一般）
 
-要還原第 i 個方程
+要還原第 i 個營養素的總量方程
 
 $$b_i = a_{i1}x_1 + a_{i2}x_2 + \cdots + a_{in}x_n$$
 
-主例題用具體數字看：
+主例題用熱量 $b_1$ 的具體數字看（A 第 1 row $(2, 3, 1)$ × 份量 $\mathbf{x} = (1, 1, 2)^{\top}$）：
 
 $$b_1 = \underbrace{2}_{a_{11}} \cdot \underbrace{1}_{x_1} + \underbrace{3}_{a_{12}} \cdot \underbrace{1}_{x_2} + \underbrace{1}_{a_{13}} \cdot \underbrace{2}_{x_3} = 2 + 3 + 2 = 7$$
 
@@ -509,11 +511,11 @@ $$m_{ij} = \underbrace{(2 \cdot \text{mass}_i)}_{u_i,\ \text{只跟 i 有關}} \
 
 ### Step 2: 第一步 — 物件化（兩個向量 + 矩陣）
 
-把上述觀察抽象化：
+把上述觀察抽象化 — $\mathbf{u}$ 收集「只跟 i 有關的因子」（單顆熱量 $2 \cdot \text{mass}_i$，隨紅蘿蔔 size 變動），$\mathbf{v}$ 收集「只跟 j 有關的因子」（盤子顆數 $\text{pieces}_j$，隨盤子規格變動）。**兩個向量是互相獨立的兩個輸入維度**：
 
 $$\mathbf{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_m \end{bmatrix} \in \mathbb{R}^m, \quad \mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix} \in \mathbb{R}^n$$
 
-期望產出一個 m×n 矩陣 $M$，其 entry $m_{ij} = u_i v_j$。
+期望產出一個 m×n 矩陣 $M$，其 entry $m_{ij} = u_i v_j$（i, j 兩個獨立索引各自從 $\mathbf{u}, \mathbf{v}$ 取一個分量配對相乘）。
 
 **這就是「rank 1 原子」的構造需求** — 任何能寫成「(只跟 i 有關) × (只跟 j 有關)」的矩陣都是 rank 1。
 
